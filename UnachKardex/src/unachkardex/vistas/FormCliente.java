@@ -1,7 +1,6 @@
 package unachkardex.vistas;
 
 import com.sun.javafx.geom.Area;
-import java.awt.*;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -10,6 +9,7 @@ import javafx.scene.text.*;
 import javafx.scene.effect.*;
 import javafx.scene.paint.*;
 import javafx.scene.control.Button;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.geometry.*;
@@ -29,38 +29,38 @@ public class FormCliente extends Application {
     private Text txtTelefono;
     private Text txtEmail;
 
-    private TextArea cedula;
-    private TextField nombres;
-    private TextField apellidos;
-    private TextField fechaNacimiento;
-    private TextField direccion;
-    private TextField telefono;
-    private TextField email;
+//    private TextArea cedula;
+//    private TextField nombres;
+//    private TextField apellidos;
+//    private TextField fechaNacimiento;
+//    private TextField direccion;
+//    private TextField telefono;
+//    private TextField email;
     Label campo1;
     private VBox temporal;
 
     @Override
     public void start(Stage primaryStage) {
 
-        campo1 = new Label("Cedula");
+//        campo1 = new Label("Cedula");
         //LABELS DE LOS CAMPOS A USAR
         txtCedula = new Text("Cedula");
         txtCedula.setFont(javafx.scene.text.Font.font("Arial Black", 25));
-//        txtCedula.setFill(Paint.valueOf(Color.RED));
+        txtCedula.setFill(Color.AQUA);
         txtNombres = new Text("Nombres");
         txtApellidos = new Text("Apellidos");
         txtFechaNacimiento = new Text("Fecha de Nacimiento");
         txtDireccion = new Text("Direccion");
         txtTelefono = new Text("Telefono");
         txtEmail = new Text("E-mail");
-        
-        cedula=new TextArea("");
-        nombres=new TextField("");
-        apellidos=new TextField("");
-        fechaNacimiento=new TextField("");
-        direccion=new TextField("");
-        telefono=new TextField("");
-        email=new TextField("");
+//        
+//        cedula=new TextArea("");
+//        nombres=new TextField("");
+//        apellidos=new TextField("");
+//        fechaNacimiento=new TextField("");
+//        direccion=new TextField("");
+//        telefono=new TextField("");
+//        email=new TextField("");
 
         //PANEL INTERNO CON CAMPOS A USARSE
         panelInterno1 = new GridPane();
