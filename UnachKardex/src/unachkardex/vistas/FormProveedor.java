@@ -106,7 +106,7 @@ public class FormProveedor extends Application {
         
         Scene scene = new Scene(panelPrincipal, 300, 250);
         
-        primaryStage.setTitle("Hello World!");
+        primaryStage.setTitle("Proveedor");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
