@@ -1,8 +1,10 @@
 package unachkardex.negocio.entidades;
+
 public class Categoria {
-private int codCategoria;
-private String nombre;
-private String descripcion;
+
+    private int codCategoria;
+    private String nombre;
+    private String descripcion;
 
     public Categoria(int codCategoria, String nombre, String descripcion) {
         this.codCategoria = codCategoria;
@@ -37,6 +39,10 @@ private String descripcion;
         this.descripcion = descripcion;
     }
 
+    @Override
 
-    
+    public String toString() {
+        return nombre;
+    }
+
 }
