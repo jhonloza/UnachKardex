@@ -8,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.text.*;
 import javafx.scene.effect.*;
 import javafx.scene.paint.*;
-import javafx.scene.control.Button;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
@@ -19,8 +18,6 @@ import javafx.scene.text.Text;
 
 public class FormCliente extends Application {
 
-    private GridPane panelInterno1;
-    private GridPane panelMedio;
     private Text txtCedula;
     private Text txtNombres;
     private Text txtApellidos;
@@ -29,20 +26,31 @@ public class FormCliente extends Application {
     private Text txtTelefono;
     private Text txtEmail;
 
-//    private TextArea cedula;
-//    private TextField nombres;
-//    private TextField apellidos;
-//    private TextField fechaNacimiento;
-//    private TextField direccion;
-//    private TextField telefono;
-//    private TextField email;
-    Label campo1;
-    private VBox temporal;
+    private TextArea cedula;
+    private TextArea nombres;
+    private TextArea apellidos;
+    private TextArea fechaNacimiento;
+    private TextArea direccion;
+    private TextArea telefono;
+    private TextArea email;
+    
+    private Button btnIngresar;
+    private Button btnEliminar;
+    private Button btnModificar;
+    private Button btnLimpiar;
+    private Button btnCancelar;
+    
+    private HBox pnlced;
+    private GridPane pnlNombApe;
+    private GridPane pnlFechDir;
+    private GridPane pnlcontacto;
+    private GridPane pnlBotones;
+    private VBox pntPrincipal;
+
+    
 
     @Override
     public void start(Stage primaryStage) {
-
-//        campo1 = new Label("Cedula");
         //LABELS DE LOS CAMPOS A USAR
         txtCedula = new Text("Cedula");
         txtCedula.setFont(javafx.scene.text.Font.font("Arial Black", 25));
@@ -53,39 +61,62 @@ public class FormCliente extends Application {
         txtDireccion = new Text("Direccion");
         txtTelefono = new Text("Telefono");
         txtEmail = new Text("E-mail");
-//        
-//        cedula=new TextArea("");
-//        nombres=new TextField("");
-//        apellidos=new TextField("");
-//        fechaNacimiento=new TextField("");
-//        direccion=new TextField("");
-//        telefono=new TextField("");
-//        email=new TextField("");
-
-        //PANEL INTERNO CON CAMPOS A USARSE
-        panelInterno1 = new GridPane();
-        panelInterno1.setVgap(10);
-        panelInterno1.setHgap(10);
-        panelInterno1.add(txtCedula,0,0);
-        panelInterno1.add(txtNombres,0,1);
-        panelInterno1.add(txtApellidos,0,2);
-        panelInterno1.add(txtFechaNacimiento,0,3);
-        panelInterno1.add(txtDireccion,0,4);
-        panelInterno1.add(txtTelefono,0,5);
-        panelInterno1.add(txtEmail,2,5);
-//        
-        panelMedio=new GridPane();
-        panelMedio.setHgap(10);
-        panelMedio.setVgap(5);
-//        panelMedio.setBackground(new Background(images));
-        panelMedio.add(txtCedula, 0, 0);
-        panelMedio.add(panelInterno1, 1, 0);
+        //CAJAS DE TEXTO PARA CAMPOS
+        cedula = new TextArea("");
+        nombres = new TextArea("");
+        apellidos = new TextArea("");
+        fechaNacimiento = new TextArea("");
+        direccion = new TextArea("");
+        telefono = new TextArea("");
+        email = new TextArea("");
+        //BOTONES A USAR
+        btnIngresar = new Button("Ingresar");
+        btnIngresar.setFont(Font.font("Arial Black", 20));
+        btnEliminar = new Button("Eliminar");
+        btnEliminar.setFont(Font.font("Arial Black", 20));
+        btnModificar = new Button("Modificar");
+        btnModificar.setFont(Font.font("Arial Black", 20));
+        btnLimpiar = new Button("Limpiar");
+        btnLimpiar.setFont(Font.font("Arial Black", 20));
+        btnCancelar = new Button("Cancelar");
+        btnCancelar.setFont(Font.font("Arial Black", 20));
+        //INGRESO EN PANELES
+        //SUPERIOR
+        pnlced=new HBox();
+        pnlced.getChildren().addAll(txtCedula, cedula);
+        //nombre
+        pnlNombApe=new GridPane();
+        pnlNombApe.add(txtNombres, 0, 0);
+        pnlNombApe.add(nombres, 1, 0);
+        pnlNombApe.add(txtApellidos, 2, 0);
+        pnlNombApe.add(apellidos, 3, 0);
+        //fecha y direccion
+        pnlFechDir=new GridPane();
+        pnlFechDir.add(txtFechaNacimiento, 0, 0);
+        pnlFechDir.add(fechaNacimiento, 1, 0);
+        pnlFechDir.add(txtDireccion, 0, 1);
+        pnlFechDir.add(direccion, 1, 1);
+        //Contacto        
+        pnlcontacto=new GridPane();
+        pnlcontacto.add(txtTelefono, 0, 0);
+        pnlcontacto.add(telefono, 1, 0);
+        pnlcontacto.add(txtEmail, 2, 0);
+        pnlcontacto.add(email, 3, 0);
+        //botones
+        pnlBotones=new GridPane();
+        pnlBotones.add(btnIngresar, 0, 0);
+        pnlBotones.add(btnLimpiar, 1, 0);
+        pnlBotones.add(btnCancelar, 2, 0);
+        //final
+        pntPrincipal=new VBox(10);
+        btnEliminar=new Button("Temporal");
+        btnEliminar.setFont(Font.font("Arial Black",40));
+        pntPrincipal.getChildren().addAll(btnEliminar,pnlced,pnlNombApe,pnlFechDir,pnlcontacto,pnlBotones);
+        pntPrincipal.setAlignment(Pos.CENTER);
+        pntPrincipal.setPadding(new Insets(25));
+        Scene scene = new Scene(pntPrincipal,480,360);
         
-        
-
-        Scene scene = new Scene(panelMedio);
-
-        primaryStage.setTitle("Hello World!");
+        primaryStage.setTitle("Cliente");
         primaryStage.setScene(scene);
         primaryStage.show();
     }

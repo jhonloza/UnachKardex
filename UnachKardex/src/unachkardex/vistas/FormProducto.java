@@ -49,26 +49,31 @@ public class FormProducto extends Application {
     @Override
     public void start(Stage primaryStage) {
         txtCodigo=new Text("Codigo");
-        txtCodigo.setFont(javafx.scene.text.Font.font("Arial Black",10));
+        txtCodigo.setFont(javafx.scene.text.Font.font("Arial Black",20));
         codigo=new TextArea("");
         txtNombre=new Text("Nombre");
-        txtNombre.setFont(javafx.scene.text.Font.font("Callibri",15));
+        txtNombre.setFont(javafx.scene.text.Font.font("Arial Black",20));
         nombre=new TextArea("");
         txtPrecio=new Text("Precio");
-        txtPrecio.setFont(javafx.scene.text.Font.font("Times New Roman",10));
+        txtPrecio.setFont(javafx.scene.text.Font.font("Arial Black",20));
         precio=new TextArea("");
         
         txtCategoria=new Text("Categoria");
-        txtCategoria.setFont(javafx.scene.text.Font.font("Arabella",10));
+        txtCategoria.setFont(javafx.scene.text.Font.font("Arial Black",20));
         listCategorias=new ComboBox<Categoria>();
         //listCategorias.setItems(lstCateg.toArray());
         descrCategoria=new TextArea("");
         
         btnAceptar=new Button("Aceptar");
+        btnAceptar.setFont(Font.font("Arial Black",20));
         btnModificar=new Button("Modificar");
+        btnModificar.setFont(Font.font("Arial Black",20));
         btnEliminar=new Button("Eliminar");
+        btnEliminar.setFont(Font.font("Arial Black",20));
         btnLimpiar=new Button("Limpiar");
+        btnLimpiar.setFont(Font.font("Arial Black",20));
         btnCancelar=new Button("Cancelar");
+        btnCancelar.setFont(Font.font("Arial Black",20));
         
         pnlProducto=new VBox();
         pnlProducto.getChildren().add(txtCodigo);
@@ -104,8 +109,7 @@ public class FormProducto extends Application {
         
         
         Scene scene = new Scene(pnlPrincipal, 300, 250);
-        
-        primaryStage.setTitle("Hello World!");
+        primaryStage.setTitle("Producto");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
