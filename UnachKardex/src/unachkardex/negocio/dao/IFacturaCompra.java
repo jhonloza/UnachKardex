@@ -9,4 +9,5 @@ public interface IFacturaCompra {
     public FacturaCompra obtener (int codFacturaCompra) throws Exception;
     public ArrayList<FacturaCompra> obtener() throws Exception;
     
+    
 }

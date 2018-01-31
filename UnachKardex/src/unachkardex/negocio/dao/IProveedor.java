@@ -7,4 +7,5 @@ public interface IProveedor {
     public int eliminar(Proveedor proveedor) throws Exception;
     public Proveedor obtener(String ruc) throws Exception;
     public ArrayList<Proveedor> obtener() throws Exception;
+    
 }

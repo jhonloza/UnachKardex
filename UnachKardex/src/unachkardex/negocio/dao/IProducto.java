@@ -8,5 +8,6 @@ public interface IProducto {
     public int eliminar (Producto producto) throws Exception;
     public Producto obtener (int  codProducto) throws Exception;
     public ArrayList<Producto> obtener() throws Exception;
+    
 }
 
