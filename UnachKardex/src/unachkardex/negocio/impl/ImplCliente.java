@@ -22,9 +22,12 @@ public class ImplCliente  implements ICliente{
         lisParametros.add(new Parametro(3, cliente.getApellido()));
         lisParametros.add(new Parametro(4, cliente.getDireccion()));
         lisParametros.add(new Parametro(5, cliente.getTelefono()));
+        
         lisParametros.add(new Parametro(6, cliente.geteMail()));
+        
         if (cliente.getFechaNac() instanceof java.util.Date) {
             lisParametros.add(new Parametro(7, new java.sql.Date(((java.util.Date) cliente.getFechaNac()).getTime())));
+            
         } else {
             lisParametros.add(new Parametro(7, cliente.getFechaNac()));
         }
