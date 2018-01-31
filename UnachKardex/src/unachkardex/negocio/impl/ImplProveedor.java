@@ -13,9 +13,11 @@ public class ImplProveedor implements IProveedor{
         String sqlC = "INSERT INTO Proveedor (ruc, nombre, direccion, telefono, eMail) VALUES (?,?,?,?,?)";
         ArrayList<Parametro> lisParametros = new ArrayList<>();
         lisParametros.add(new Parametro(1, proveedor.getRuc()));
+        
         lisParametros.add(new Parametro(2, proveedor.getNombre()));
         lisParametros.add(new Parametro(3, proveedor.getDireccion()));
         lisParametros.add(new Parametro(4, proveedor.getTelefono()));
+        
         lisParametros.add(new Parametro(5, proveedor.geteMail()));
         Conexion con = null;
         try {
@@ -36,11 +38,13 @@ public class ImplProveedor implements IProveedor{
     public int modificar(Proveedor proveedor) throws Exception {
          int numFilas = 0;
         String sqlC = "UPDATE Proveedor SET ruc=?, nombre=?, direccion=?, telefono=?, eMail=? WHERE ruc=?";
+        
         ArrayList<Parametro> lisParametros = new ArrayList<>();
         lisParametros.add(new Parametro(1, proveedor.getRuc()));
         lisParametros.add(new Parametro(2, proveedor.getNombre()));
         lisParametros.add(new Parametro(3, proveedor.getDireccion()));
         lisParametros.add(new Parametro(4, proveedor.getTelefono()));
+        
         lisParametros.add(new Parametro(5, proveedor.geteMail()));
         lisParametros.add(new Parametro(6, proveedor.getRuc()));
         Conexion con = null;
