@@ -8,9 +8,11 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import java.util.*;
+
 import javafx.scene.text.*;
 import javafx.scene.paint.*;
 import java.lang.reflect.Field;
+
 import java.text.DateFormat;
 import java.text.MessageFormat;
 import javafx.collections.ObservableList;
@@ -26,6 +28,7 @@ public class FormProducto extends Application {
     
     private Text txtCodigo;
     private Text txtCategoria;
+    
     private Text txtNombre;
     private Text txtPrecio;
     
@@ -35,7 +38,9 @@ public class FormProducto extends Application {
     private TextArea descrCategoria;
     
     private ComboBox<Categoria> listCategorias;
+    
     ObservableList<Categoria> lstCateg;
+    
     
     private Button btnAceptar;
     private Button btnModificar;
