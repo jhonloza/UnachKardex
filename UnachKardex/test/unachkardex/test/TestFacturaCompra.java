@@ -60,6 +60,7 @@ public class TestFacturaCompra {
             fac = FacComDao.obtener();
             for (FacturaCompra far : fac ){
                  System.out.println(fa.getCodFacturaCompra()+" "+fa.getFecha()+" "+fa.getProveedor().getRuc());
+                 
             }
         } catch (Exception e) {
             System.out.println("error: " + e.getMessage());
