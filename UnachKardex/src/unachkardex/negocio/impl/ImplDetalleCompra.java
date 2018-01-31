@@ -84,14 +84,14 @@ public class ImplDetalleCompra implements IDetalleCompra{
         @Override
     public DetalleCompra obtener(int codDetalleCompra) throws Exception {
         DetalleCompra detalle = null;
-        String sqlC = "SELECT codDetalleCompra, codProducto, codFacturaCompra, cantidad, precioTotal FROM DetalleCompra Where id=?";
+        String sqlC = "SELECT codDetalleCompra, codProducto, codFacturaCompra, cantidad, precioTotal FROM DetalleCompra Where codDetalleCompra=?";
         ArrayList<Parametro> lisParametros = new ArrayList<>();
         lisParametros.add(new Parametro(1, codDetalleCompra));
         Conexion con = null;
         try {
             con = new Conexion();
             con.conectar();
-//            IProducto productoDao = new ImplProducto();
+           IProducto productoDao = new ImplProducto();
             Producto produc = null;
             IFacturaCompra factCompraDao = new ImplFacturaCompra();
             FacturaCompra factCompra = new FacturaCompra();
@@ -102,7 +102,7 @@ public class ImplDetalleCompra implements IDetalleCompra{
                 produc = new Producto();
                 factCompra = new FacturaCompra();
                 detalle.setCodDetalleCompra(rst.getInt(1));
-//                produc = productoDao.obtener(rst.getInt(2));
+              produc = productoDao.obtener(rst.getInt(2));
                 detalle.getProducto();
                 factCompra = factCompraDao.obtener(rst.getInt(3));
                 detalle.setCantidad(rst.getInt(4));
@@ -126,7 +126,7 @@ public class ImplDetalleCompra implements IDetalleCompra{
         try {
             con = new Conexion();
             con.conectar();
-//            IProducto productoDao = new ImplProducto();
+            IProducto productoDao = new ImplProducto();
             Producto produc = null;
             IFacturaCompra factCompraDao = new ImplFacturaCompra();
             FacturaCompra factCompra = new FacturaCompra();
@@ -136,9 +136,10 @@ public class ImplDetalleCompra implements IDetalleCompra{
                 produc = new Producto();
                 factCompra = new FacturaCompra();
                 detalle.setCodDetalleCompra(rst.getInt(1));
-//                produc = productoDao.obtener(rst.getInt(2));
-                detalle.getProducto();
+                produc = productoDao.obtener(rst.getInt(2));
+                detalle.setProducto(produc);
                 factCompra = factCompraDao.obtener(rst.getInt(3));
+                detalle.setFacturaCompra(factCompra);
                 detalle.setCantidad(rst.getInt(4));
                 detalle.setPrecioTotal(rst.getDouble(5));
                 lstDetalle.add(detalle);
