@@ -7,6 +7,7 @@ import unachkardex.negocio.entidades.*;
 import java.util.ArrayList;
 
 public interface IDetalleCompra {
+    
     public int ingresar(DetalleCompra detalleCompra) throws Exception;
     public int modificar(DetalleCompra detalleCompra) throws Exception;
     public int eliminar(DetalleCompra detalleCompra) throws Exception;
