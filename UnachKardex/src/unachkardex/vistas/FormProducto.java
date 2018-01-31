@@ -14,6 +14,7 @@ import java.lang.reflect.Field;
 import java.text.DateFormat;
 import java.text.MessageFormat;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
@@ -110,9 +111,9 @@ public class FormProducto extends Application {
         pnlPrincipal.setHgap(10);
         pnlPrincipal.add(pnlCentral, 0, 0);
         pnlPrincipal.add(pnlBotones, 0, 1);
+        pnlPrincipal.setPadding(new Insets(25));
         
-        
-        Scene scene = new Scene(pnlPrincipal, 300, 250);
+        Scene scene = new Scene(pnlPrincipal, 600, 400);
         primaryStage.setTitle("Producto");
         primaryStage.setScene(scene);
         primaryStage.show();
