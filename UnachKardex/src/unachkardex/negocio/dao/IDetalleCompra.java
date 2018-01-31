@@ -17,4 +17,5 @@ public interface IDetalleCompra {
     public DetalleCompra obtener(int codDetalleCompra) throws Exception;
     
     public ArrayList<DetalleCompra> obtener() throws Exception;
+    
 }
