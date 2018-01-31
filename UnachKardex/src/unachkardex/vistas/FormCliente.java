@@ -29,6 +29,7 @@ public class FormCliente extends Application {
     private Text txtTelefono;
     private Text txtEmail;
 
+    
     private TextArea cedula;
     private TextArea nombres;
     private TextArea apellidos;
@@ -49,8 +50,6 @@ public class FormCliente extends Application {
     private GridPane pnlcontacto;
     private HBox pnlBotones;
     private VBox pntPrincipal;
-
-    
 
     @Override
     public void start(Stage primaryStage) {
@@ -135,6 +134,7 @@ public class FormCliente extends Application {
         pntPrincipal.setAlignment(Pos.CENTER);
         pntPrincipal.setPadding(new Insets(25));
         Scene scene = new Scene(pntPrincipal,620,420);
+        
         
         primaryStage.setTitle("Cliente");
         primaryStage.setScene(scene);
