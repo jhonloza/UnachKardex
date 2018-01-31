@@ -6,6 +6,7 @@ import unachkardex.negocio.entidades.*;
 import java.util.*;
 import java.sql.*;
 
+
 public class ImplDetalleVenta implements IDetalleVenta {
 
     @Override
