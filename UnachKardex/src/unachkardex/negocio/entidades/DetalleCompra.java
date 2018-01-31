@@ -3,7 +3,7 @@ package unachkardex.negocio.entidades;
 
 
 public class DetalleCompra {
-     private int codDetalleCompra;
+    private int codDetalleCompra;
     private Producto producto;
     private FacturaCompra facturaCompra;
     private int cantidad;
