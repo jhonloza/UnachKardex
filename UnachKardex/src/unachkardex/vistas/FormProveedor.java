@@ -22,10 +22,7 @@ import javafx.scene.layout.*;
 import javafx.scene.control.*;
 
 
-/**
- *
- * @author Davidssito Campos
- */
+
 public class FormProveedor extends Application {
     
     private Text txtRuc;
@@ -49,7 +46,7 @@ public class FormProveedor extends Application {
     private GridPane panelProveedor;
     private HBox panelBotones;
     private VBox panelPrincipal;
-    
+            
     
     @Override
     public void start(Stage primaryStage) {
