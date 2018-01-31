@@ -29,6 +29,7 @@ public class FormProveedor extends Application {
     private Text txtNombres;
     private Text txtDireccion;
     private Text txtTelefono;
+    
     private Text txtEmail;
     
     private TextArea Ruc;
@@ -64,6 +65,7 @@ public class FormProveedor extends Application {
         txtTelefono.setFont(javafx.scene.text.Font.font("Chiller",20));
         Telefono=new TextArea("");
         txtEmail = new Text("Email: ");
+        
         txtEmail.setFont(javafx.scene.text.Font.font("Chiller",20));
         Email=new TextArea("");
         
@@ -73,6 +75,7 @@ public class FormProveedor extends Application {
         btnLimpiar.setFont(javafx.scene.text.Font.font("ALGERIAN",15));
         btnCancelar=new Button("Cancelar");
         btnCancelar.setFont(javafx.scene.text.Font.font("ALGERIAN",15));
+        
         btnModificar=new Button("Modificar");
         btnModificar.setFont(javafx.scene.text.Font.font("ALGERIAN",15));
         btnEliminar=new Button("Eliminar");
@@ -81,6 +84,7 @@ public class FormProveedor extends Application {
         panelProveedor = new GridPane();
         panelProveedor.add(txtRuc, 0, 0);
         panelProveedor.add(Ruc,1,0);
+        
         panelProveedor.add(txtNombres, 0, 1);
         panelProveedor.add(Nombres,1,1);
         panelProveedor.add(txtDireccion, 0, 2);
