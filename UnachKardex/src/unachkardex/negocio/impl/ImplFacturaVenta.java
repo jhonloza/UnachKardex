@@ -8,6 +8,7 @@ import unachkardex.accesodatos.*;
 import java.sql.*;
 import java.util.*;
 
+
 public class ImplFacturaVenta implements IFacturaVenta {
 
     @Override
