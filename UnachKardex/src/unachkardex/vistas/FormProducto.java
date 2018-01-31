@@ -13,6 +13,8 @@ import javafx.scene.paint.*;
 import java.lang.reflect.Field;
 import java.text.DateFormat;
 import java.text.MessageFormat;
+import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
 import unachkardex.negocio.dao.ICategoria;
@@ -31,7 +33,7 @@ public class FormProducto extends Application {
     private TextArea descrCategoria;
     
     private ComboBox<Categoria> listCategorias;
-    ArrayList<Categoria> lstCateg;
+    ObservableList<Categoria> lstCateg;
     
     private Button btnAceptar;
     private Button btnModificar;
@@ -60,8 +62,9 @@ public class FormProducto extends Application {
         
         txtCategoria=new Text("Categoria");
         txtCategoria.setFont(javafx.scene.text.Font.font("Arial Black",20));
+        cargarCategorias();
         listCategorias=new ComboBox<Categoria>();
-        //listCategorias.setItems(lstCateg.toArray());
+        listCategorias.setItems(lstCateg);
         descrCategoria=new TextArea("");
         
         btnAceptar=new Button("Aceptar");
@@ -100,6 +103,7 @@ public class FormProducto extends Application {
         pnlBotones.add(btnAceptar, 0, 0);
         pnlBotones.add(btnLimpiar, 1, 0);
         pnlBotones.add(btnCancelar, 2, 0);
+        pnlBotones.setAlignment(Pos.CENTER);
         
         pnlPrincipal=new GridPane();
         pnlPrincipal.setVgap(10);
@@ -118,11 +122,11 @@ public class FormProducto extends Application {
         launch(args);
     }
     
-    public void CargarCursos() {
+    public void cargarCategorias() {
 
         ICategoria categDao = new ImplCategoria();
         try {
-            lstCateg = categDao.obtener();
+//            lstCateg = categDao.obtener();
         } catch (Exception e) {
 //            JOptionPane.showMessageDialog(this, "ERROR AL CARGAR CURSOS", "ERROR" + e.getMessage(), JOptionPane.INFORMATION_MESSAGE);
         }
