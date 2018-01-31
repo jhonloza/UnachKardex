@@ -92,7 +92,7 @@ public class FormProducto extends Application {
         pnlProducto.getChildren().add(nombre);
         pnlProducto.getChildren().add(txtPrecio);
         pnlProducto.getChildren().add(precio);
-        
+        cargarCategorias();
         pnlCategoria=new VBox();
         pnlCategoria.getChildren().add(txtCategoria);
         pnlCategoria.getChildren().add(listCategorias);
@@ -135,7 +135,7 @@ public class FormProducto extends Application {
 
         ICategoria categDao = new ImplCategoria();
         try {
-//            lstCateg = categDao.obtener();
+          lstCateg = (ObservableList<Categoria>) categDao.obtener();
         } catch (Exception e) {
 //            JOptionPane.showMessageDialog(this, "ERROR AL CARGAR CURSOS", "ERROR" + e.getMessage(), JOptionPane.INFORMATION_MESSAGE);
         }
