@@ -21,6 +21,7 @@ public class ImplFacturaCompra implements IFacturaCompra {
 
         if (facturacompra.getFecha() instanceof java.util.Date) {
             lisParametros.add(new Parametro(2, new java.sql.Date(((java.util.Date) facturacompra.getFecha()).getTime())));
+            
         } else {
             lisParametros.add(new Parametro(2, facturacompra.getFecha()));
         }
