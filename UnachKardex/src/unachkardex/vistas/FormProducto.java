@@ -40,9 +40,9 @@ public class FormProducto extends Application {
     private TextArea precio;
     private TextArea descrCategoria;
 
-    private ComboBox<Categoria> cbxCategoria;
-    private ObservableList<Categoria> obsCateg;
-    private ArrayList<Categoria> listCategories;
+    private ComboBox<String> cbxCategoria;
+    private ObservableList<String> items = FXCollections.observableArrayList();
+    private ArrayList<Categoria> listCategorias;
 
     private Button btnAceptar;
     private Button btnModificar;
@@ -72,8 +72,7 @@ public class FormProducto extends Application {
         txtCategoria.setFont(javafx.scene.text.Font.font("Arial Black", 20));
         
         cargarCategorias();
-        cbxCategoria = new ComboBox<Categoria>();
-        cbxCategoria.getItems();
+        cbxCategoria = new ComboBox<String>(items);
         descrCategoria = new TextArea("");
         
         btnAceptar = new Button("Aceptar");
@@ -132,11 +131,13 @@ public class FormProducto extends Application {
     }
 
     public void cargarCategorias() {
-        listCategories = new ArrayList<>();
+        listCategorias = new ArrayList<>();
         ICategoria categDao = new ImplCategoria();
         try {
-            listCategories=categDao.obtener();
-            obsCateg.addAll(listCategories);
+            listCategorias=categDao.obtener();
+            for(int i=0; i<listCategorias.size();i++){
+                items.add(i, listCategorias.toString());
+            }
 //            cbxCategoria.setItems(value);
         } catch (Exception e) {
 //            JOptionPane.showMessageDialog(this, "ERROR AL CARGAR CURSOS", "ERROR" + e.getMessage(), JOptionPane.INFORMATION_MESSAGE);
