@@ -26,6 +26,7 @@ public class FacturaCompra {
 
     public Date getFecha() {
         return fecha;
+        
     }
 
     public void setFecha(Date fecha) {
@@ -34,6 +35,7 @@ public class FacturaCompra {
 
     public Proveedor getProveedor() {
         return proveedor;
+        
     }
 
     public void setProveedor(Proveedor provedor) {
