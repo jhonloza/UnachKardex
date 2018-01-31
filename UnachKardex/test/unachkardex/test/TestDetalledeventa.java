@@ -42,7 +42,7 @@ public class TestDetalledeventa {
             System.out.println("error: " + e.getMessage());
         }
         assertEquals(dt != null, true);
-//        / revisar esto ..!!!!
+
         ArrayList<DetalleVenta> det = new ArrayList<>();
         try {
             det = deveDao.obtener();
