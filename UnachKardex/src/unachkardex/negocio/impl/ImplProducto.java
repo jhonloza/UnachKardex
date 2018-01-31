@@ -36,6 +36,7 @@ public class ImplProducto implements IProducto{
     @Override
     public Producto obtener(int codProducto) throws Exception {
         
+       
         Producto pro = null;
         String sqlC = "SELECT codProducto, codCategoria, nombre, precio FROM Producto Where codProducto=?";
         ArrayList<Parametro> lisParametros = new ArrayList<>();
@@ -113,8 +114,7 @@ public class ImplProducto implements IProducto{
         }
         return numFilas;
     }
-       
-    
+      
   
      @Override
     public ArrayList<Producto> obtener() throws Exception {
@@ -137,6 +137,7 @@ public class ImplProducto implements IProducto{
                 pro.setPrecio(rst.getDouble(4));
                 lstpro.add(pro);
             }
+            
         }catch (Exception e){
             System.out.println("Error: " + e.getMessage());
         } finally {
