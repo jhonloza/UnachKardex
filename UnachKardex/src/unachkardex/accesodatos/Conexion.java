@@ -9,8 +9,8 @@ public class Conexion {
     Scanner entrada = new Scanner(System.in);
     String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
     String url = "jdbc:sqlserver://localhost:1433;databaseName=Proyecto";
-    String usuario = "jhon";
-    String conraseña = "jhon1";
+    String usuario = "kardex2018";
+    String conraseña = "kardex2018";
     Connection conexion = null;
 
     public void conectar() {
