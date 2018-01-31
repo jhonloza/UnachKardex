@@ -48,9 +48,6 @@ public class FormProveedor extends Application {
     private VBox panelPrincipal;
             
     
-    
-    
-    
     @Override
     public void start(Stage primaryStage) {
         
