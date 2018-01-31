@@ -14,21 +14,25 @@ public class ImplFacturaVenta implements IFacturaVenta {
     @Override
     public int insertar(FacturaVenta facturaventa) throws Exception {
         int numFilas = 0;
+        
         String sqlC = "INSERT INTO FacturaVenta (codFacturaVenta, fecha, cliente) VALUES (?,?,?) ";
         ArrayList<Parametro> lisParametros = new ArrayList<>();
         lisParametros.add(new Parametro(1, facturaventa.getCodFacturaVenta()));
         if (facturaventa.getFecha() instanceof java.util.Date) {
+            
             lisParametros.add(new Parametro(2, new java.sql.Date(((java.util.Date) facturaventa.getFecha()).getTime())));
         } else {
             lisParametros.add(new Parametro(2, facturaventa.getFecha()));
         }
         lisParametros.add(new Parametro(3, facturaventa.getCliente().getCedula()));
+        
 
         Conexion con = null;
         try {
             con = new Conexion();
             con.conectar();
             numFilas = con.ejecutarComando(sqlC, lisParametros);
+            
         } catch (Exception e) {
             System.out.println("error: " + e.getMessage());
         } finally {
