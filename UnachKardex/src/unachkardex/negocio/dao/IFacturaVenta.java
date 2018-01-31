@@ -18,4 +18,5 @@ public interface IFacturaVenta {
     public ArrayList<FacturaVenta> obtener() throws Exception;
     
     
+    
 }
