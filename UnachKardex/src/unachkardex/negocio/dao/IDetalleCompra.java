@@ -15,5 +15,6 @@ public interface IDetalleCompra {
     public int eliminar(DetalleCompra detalleCompra) throws Exception;
     
     public DetalleCompra obtener(int codDetalleCompra) throws Exception;
+    
     public ArrayList<DetalleCompra> obtener() throws Exception;
 }
