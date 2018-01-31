@@ -114,6 +114,7 @@ public class FormCliente extends Application {
         pnlFechDir.add(fechaNacimiento, 1, 0);
         pnlFechDir.add(txtDireccion, 0, 1);
         pnlFechDir.add(direccion, 1, 1);
+        
         //Contacto        
         pnlcontacto=new GridPane();
         pnlcontacto.setHgap(20);
