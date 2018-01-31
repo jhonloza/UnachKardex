@@ -8,6 +8,7 @@ public class Cliente {
     private String apellido;
     private String direccion;
     private String telefono;
+    
     private String eMail;
     private Date fechaNac;
 
@@ -18,6 +19,7 @@ public class Cliente {
         this.cedula = cedula;
         this.nombre = nombre;
         this.apellido = apellido;
+        
         this.direccion = direccion;
         this.telefono = telefono;
         this.eMail = eMail;
