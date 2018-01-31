@@ -21,6 +21,7 @@ import javafx.scene.control.*;
 import unachkardex.negocio.dao.ICategoria;
 import unachkardex.negocio.entidades.Categoria;
 import unachkardex.negocio.impl.ImplCategoria;
+
 public class FormProducto extends Application {
     
     private Text txtCodigo;
@@ -122,6 +123,7 @@ public class FormProducto extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+    
     
     public void cargarCategorias() {
 
