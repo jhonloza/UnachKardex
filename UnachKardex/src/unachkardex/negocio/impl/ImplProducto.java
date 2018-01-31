@@ -129,8 +129,10 @@ public class ImplProducto implements IProducto{
             while(rst.next()){
                 ICategoria clDao = new ImplCategoria();
                 Categoria cl = null;
+                
                 pro = new Producto();
                 pro.setCodProducto(rst.getInt(1));
+                
                 cl = clDao.obtener(rst.getInt(2));
                 pro.setCategoria(cl);
                 pro.setNombre(rst.getString(3));
