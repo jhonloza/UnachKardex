@@ -13,6 +13,9 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.geometry.*;
 import java.util.*;
+import javafx.event.Event;
+import javafx.event.EventDispatchChain;
+import javafx.event.EventDispatcher;
 import javafx.scene.Node;
 import javafx.scene.text.Text;
 
@@ -44,7 +47,7 @@ public class FormCliente extends Application {
     private GridPane pnlNombApe;
     private GridPane pnlFechDir;
     private GridPane pnlcontacto;
-    private GridPane pnlBotones;
+    private HBox pnlBotones;
     private VBox pntPrincipal;
 
     
@@ -53,14 +56,20 @@ public class FormCliente extends Application {
     public void start(Stage primaryStage) {
         //LABELS DE LOS CAMPOS A USAR
         txtCedula = new Text("Cedula");
-        txtCedula.setFont(javafx.scene.text.Font.font("Arial Black", 25));
+        txtCedula.setFont(Font.font("Arial Black", 20));
         txtCedula.setFill(Color.AQUA);
         txtNombres = new Text("Nombres");
+        txtNombres.setFont(Font.font("Arial Black", 20));
         txtApellidos = new Text("Apellidos");
+        txtApellidos.setFont(Font.font("Arial Black", 20));
         txtFechaNacimiento = new Text("Fecha de Nacimiento");
+        txtFechaNacimiento.setFont(Font.font("Arial Black", 20));
         txtDireccion = new Text("Direccion");
+        txtDireccion.setFont(Font.font("Arial Black", 20));
         txtTelefono = new Text("Telefono");
+        txtTelefono.setFont(Font.font("Arial Black", 20));
         txtEmail = new Text("E-mail");
+        txtEmail.setFont(Font.font("Arial Black", 20));
         //CAJAS DE TEXTO PARA CAMPOS
         cedula = new TextArea("");
         nombres = new TextArea("");
@@ -76,37 +85,48 @@ public class FormCliente extends Application {
         btnEliminar.setFont(Font.font("Arial Black", 20));
         btnModificar = new Button("Modificar");
         btnModificar.setFont(Font.font("Arial Black", 20));
+        btnModificar.setEventDispatcher(new EventDispatcher() {
+            @Override
+            public Event dispatchEvent(Event event, EventDispatchChain tail) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
         btnLimpiar = new Button("Limpiar");
         btnLimpiar.setFont(Font.font("Arial Black", 20));
         btnCancelar = new Button("Cancelar");
         btnCancelar.setFont(Font.font("Arial Black", 20));
         //INGRESO EN PANELES
         //SUPERIOR
-        pnlced=new HBox();
+        pnlced=new HBox(20);
         pnlced.getChildren().addAll(txtCedula, cedula);
         //nombre
         pnlNombApe=new GridPane();
+        pnlNombApe.setHgap(20);
+        pnlNombApe.setVgap(20);
         pnlNombApe.add(txtNombres, 0, 0);
         pnlNombApe.add(nombres, 1, 0);
         pnlNombApe.add(txtApellidos, 2, 0);
         pnlNombApe.add(apellidos, 3, 0);
         //fecha y direccion
         pnlFechDir=new GridPane();
+        pnlFechDir.setHgap(20);
+        pnlFechDir.setVgap(10);
         pnlFechDir.add(txtFechaNacimiento, 0, 0);
         pnlFechDir.add(fechaNacimiento, 1, 0);
         pnlFechDir.add(txtDireccion, 0, 1);
         pnlFechDir.add(direccion, 1, 1);
         //Contacto        
         pnlcontacto=new GridPane();
+        pnlcontacto.setHgap(20);
+        pnlcontacto.setVgap(20);
         pnlcontacto.add(txtTelefono, 0, 0);
         pnlcontacto.add(telefono, 1, 0);
         pnlcontacto.add(txtEmail, 2, 0);
         pnlcontacto.add(email, 3, 0);
         //botones
-        pnlBotones=new GridPane();
-        pnlBotones.add(btnIngresar, 0, 0);
-        pnlBotones.add(btnLimpiar, 1, 0);
-        pnlBotones.add(btnCancelar, 2, 0);
+        pnlBotones=new HBox(20);
+        pnlBotones.getChildren().addAll(btnIngresar,btnLimpiar,btnCancelar);
+        pnlBotones.setAlignment(Pos.CENTER);
         //final
         pntPrincipal=new VBox(10);
         btnEliminar=new Button("Temporal");
@@ -114,7 +134,7 @@ public class FormCliente extends Application {
         pntPrincipal.getChildren().addAll(btnEliminar,pnlced,pnlNombApe,pnlFechDir,pnlcontacto,pnlBotones);
         pntPrincipal.setAlignment(Pos.CENTER);
         pntPrincipal.setPadding(new Insets(25));
-        Scene scene = new Scene(pntPrincipal,480,360);
+        Scene scene = new Scene(pntPrincipal,620,420);
         
         primaryStage.setTitle("Cliente");
         primaryStage.setScene(scene);
@@ -124,4 +144,5 @@ public class FormCliente extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+    
 }
