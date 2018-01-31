@@ -6,8 +6,7 @@ import java.util.*;
 public interface ICliente {
 
     public int insertar(Cliente cliente) throws Exception;
-
-    public int modificar(Cliente cliente) throws Exception;
+ public int modificar(Cliente cliente) throws Exception;
 
     public int eliminar(Cliente cliente) throws Exception;
 
