@@ -12,6 +12,7 @@ public interface IFacturaVenta {
     public int modificar (FacturaVenta facturaventa) throws Exception; 
     
     public int eliminar (FacturaVenta facturaventa) throws Exception;
+    
     public FacturaVenta obtener (int codFacturaVenta ) throws Exception;
     public ArrayList<FacturaVenta> obtener() throws Exception;
     
