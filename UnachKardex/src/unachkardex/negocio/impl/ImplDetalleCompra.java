@@ -14,8 +14,10 @@ public class ImplDetalleCompra implements IDetalleCompra{
         String sqlC = "INSERT INTO DetalleCompra (codDetalleCompra, codProducto, codFacturaCompra, cantidad, precioTotal) VALUES (?,?,?,?,?)";
         ArrayList<Parametro> lisParametros = new ArrayList<>();
         lisParametros.add(new Parametro(1, detalleCompra.getCodDetalleCompra()));
+        
         lisParametros.add(new Parametro(2, detalleCompra.getProducto().getCodProducto()));
         lisParametros.add(new Parametro(3, detalleCompra.getFacturaCompra().getCodFacturaCompra()));
+        
         lisParametros.add(new Parametro(4, detalleCompra.getCantidad()));
         lisParametros.add(new Parametro(5, detalleCompra.getPrecioTotal()));
         Conexion con = null;
@@ -35,6 +37,7 @@ public class ImplDetalleCompra implements IDetalleCompra{
     }
     @Override
     public int modificar(DetalleCompra detalleCompra) throws Exception {
+        
         int numFilas = 0;
         String sqlC = "UPDATE DetalleCompra SET codDetalleCompra=?, codProducto=?, codFacturaCompra=?, cantidad=?, precioTotal=? WHERE codDetalleCompra=?";
         ArrayList<Parametro> lisParametros = new ArrayList<>();
@@ -93,6 +96,7 @@ public class ImplDetalleCompra implements IDetalleCompra{
             IFacturaCompra factCompraDao = new ImplFacturaCompra();
             FacturaCompra factCompra = new FacturaCompra();
             ResultSet rst = con.ejecutarQuery(sqlC, lisParametros);
+            
             while (rst.next()) {
                 detalle = new DetalleCompra();
                 produc = new Producto();
