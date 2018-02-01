@@ -13,14 +13,15 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.geometry.*;
 import java.util.*;
-import javafx.scene.image.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.event.Event;
 import javafx.event.EventDispatchChain;
 import javafx.event.EventDispatcher;
 import javafx.scene.Node;
 import javafx.scene.text.Text;
 
-public class FormCliente extends Application {
+public class FormCliente extends Application implements EventHandler<ActionEvent> {
 
     private Text txtCedula;
     private Text txtNombres;
@@ -31,7 +32,8 @@ public class FormCliente extends Application {
     private Text txtEmail;
 
     Image logo;
-    
+    ImageView visorlogo;
+
     private TextArea cedula;
     private TextArea nombres;
     private TextArea apellidos;
@@ -39,13 +41,13 @@ public class FormCliente extends Application {
     private TextArea direccion;
     private TextArea telefono;
     private TextArea email;
-    
+
     private Button btnIngresar;
     private Button btnEliminar;
     private Button btnModificar;
     private Button btnLimpiar;
     private Button btnCancelar;
-    
+
     private HBox pnlced;
     private GridPane pnlNombApe;
     private GridPane pnlFechDir;
@@ -98,10 +100,10 @@ public class FormCliente extends Application {
         btnCancelar.setFont(Font.font("Arial Black", 20));
         //INGRESO EN PANELES
         //SUPERIOR
-        pnlced=new HBox(20);
+        pnlced = new HBox(20);
         pnlced.getChildren().addAll(txtCedula, cedula);
         //nombre
-        pnlNombApe=new GridPane();
+        pnlNombApe = new GridPane();
         pnlNombApe.setHgap(20);
         pnlNombApe.setVgap(20);
         pnlNombApe.add(txtNombres, 0, 0);
@@ -109,16 +111,16 @@ public class FormCliente extends Application {
         pnlNombApe.add(txtApellidos, 2, 0);
         pnlNombApe.add(apellidos, 3, 0);
         //fecha y direccion
-        pnlFechDir=new GridPane();
+        pnlFechDir = new GridPane();
         pnlFechDir.setHgap(20);
         pnlFechDir.setVgap(10);
         pnlFechDir.add(txtFechaNacimiento, 0, 0);
         pnlFechDir.add(fechaNacimiento, 1, 0);
         pnlFechDir.add(txtDireccion, 0, 1);
         pnlFechDir.add(direccion, 1, 1);
-        
+
         //Contacto        
-        pnlcontacto=new GridPane();
+        pnlcontacto = new GridPane();
         pnlcontacto.setHgap(20);
         pnlcontacto.setVgap(20);
         pnlcontacto.add(txtTelefono, 0, 0);
@@ -126,20 +128,25 @@ public class FormCliente extends Application {
         pnlcontacto.add(txtEmail, 2, 0);
         pnlcontacto.add(email, 3, 0);
         //botones
-        pnlBotones=new HBox(20);
-        pnlBotones.getChildren().addAll(btnIngresar,btnLimpiar,btnCancelar);
+        pnlBotones = new HBox(20);
+        pnlBotones.getChildren().addAll(btnIngresar, btnLimpiar, btnCancelar);
         pnlBotones.setAlignment(Pos.CENTER);
         //final
-        pntPrincipal=new VBox(10);
+        pntPrincipal = new VBox(10);
 //        btnEliminar=new Button("Temporal");
 //        btnEliminar.setFont(Font.font("Arial Black",40));
-        logo=new Image("");
-        pntPrincipal.getChildren().addAll(btnEliminar,pnlced,pnlNombApe,pnlFechDir,pnlcontacto,pnlBotones);
+        logo = new Image("/fondo.jpg", 50, 100, false, false);
+        visorlogo = new ImageView();
+        visorlogo.setImage(logo);
+        visorlogo.setFitWidth(100);
+        visorlogo.setPreserveRatio(true);
+        pntPrincipal.getChildren().addAll(visorlogo, pnlced, pnlNombApe, pnlFechDir, pnlcontacto, pnlBotones);
         pntPrincipal.setAlignment(Pos.CENTER);
         pntPrincipal.setPadding(new Insets(25));
-        Scene scene = new Scene(pntPrincipal,620,420);
         
         
+        Scene scene = new Scene(pntPrincipal, 620, 420);
+
         primaryStage.setTitle("Cliente");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -148,5 +155,10 @@ public class FormCliente extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
+    @Override
+    public void handle(ActionEvent event) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
