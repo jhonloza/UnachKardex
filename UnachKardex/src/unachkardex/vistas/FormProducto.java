@@ -8,7 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import java.util.*;
-
+import javafx.stage.Window;
 import javafx.scene.text.*;
 import javafx.scene.paint.*;
 import java.lang.reflect.Field;
@@ -23,6 +23,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
+import javafx.stage.StageStyle;
 import unachkardex.negocio.dao.ICategoria;
 import unachkardex.negocio.entidades.Categoria;
 import unachkardex.negocio.impl.ImplCategoria;
@@ -140,9 +141,9 @@ public class FormProducto extends Application {
             for(Categoria categ:listCategorias){
                 items.add(categ);
             }
-//            cbxCategoria.setItems(value);
         } catch (Exception e) {
-//            JOptionPane.showMessageDialog(this, "ERROR AL CARGAR CURSOS", "ERROR" + e.getMessage(), JOptionPane.INFORMATION_MESSAGE);
+            Stage errorStage=new Stage(StageStyle.TRANSPARENT);
+            Dialogs.showErrorDialog(errorStage, "No se pudo Cargar las Categorias");
         }
 
     }

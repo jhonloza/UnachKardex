@@ -17,15 +17,15 @@ public class TestCategoria {
         ICategoria categoriaDao = new ImplCategoria();
         // TEST INSERTAR
 
-//        int filas = 0;
-//        Categoria categoria = new Categoria(3, "C", "Grande");
-//        try {
-//            filas = categoriaDao.insertar(categoria);
-//            System.out.println("Ingreso de " + filas + " Filas Correctas");
-//        } catch (Exception e) {
-//            System.out.println("Error: " + e.getMessage());
-//        }
-//        assertTrue(filas > 0);
+        int filas = 0;
+        Categoria categoria = new Categoria(4, "cualquier cosa", "ni idea");
+        try {
+            filas = categoriaDao.insertar(categoria);
+            System.out.println("Ingreso de " + filas + " Filas Correctas");
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        assertTrue(filas > 0);
 
         //TEST OBTENER POR CODIGO
         

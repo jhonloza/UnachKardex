@@ -13,6 +13,7 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.geometry.*;
 import java.util.*;
+import javafx.scene.image.*;
 import javafx.event.Event;
 import javafx.event.EventDispatchChain;
 import javafx.event.EventDispatcher;
@@ -29,6 +30,7 @@ public class FormCliente extends Application {
     private Text txtTelefono;
     private Text txtEmail;
 
+    Image logo;
     
     private TextArea cedula;
     private TextArea nombres;
@@ -129,8 +131,9 @@ public class FormCliente extends Application {
         pnlBotones.setAlignment(Pos.CENTER);
         //final
         pntPrincipal=new VBox(10);
-        btnEliminar=new Button("Temporal");
-        btnEliminar.setFont(Font.font("Arial Black",40));
+//        btnEliminar=new Button("Temporal");
+//        btnEliminar.setFont(Font.font("Arial Black",40));
+        logo=new Image("");
         pntPrincipal.getChildren().addAll(btnEliminar,pnlced,pnlNombApe,pnlFechDir,pnlcontacto,pnlBotones);
         pntPrincipal.setAlignment(Pos.CENTER);
         pntPrincipal.setPadding(new Insets(25));
