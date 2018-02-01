@@ -40,8 +40,8 @@ public class FormProducto extends Application {
     private TextArea precio;
     private TextArea descrCategoria;
 
-    private ComboBox<String> cbxCategoria;
-    private ObservableList<String> items = FXCollections.observableArrayList();
+    private ComboBox<Categoria> cbxCategoria;
+    private ObservableList<Categoria> items = FXCollections.observableArrayList();
     private ArrayList<Categoria> listCategorias;
 
     private Button btnAceptar;
@@ -72,7 +72,9 @@ public class FormProducto extends Application {
         txtCategoria.setFont(javafx.scene.text.Font.font("Arial Black", 20));
         
         cargarCategorias();
-        cbxCategoria = new ComboBox<String>(items);
+        cbxCategoria = new ComboBox<Categoria>(items);
+        cbxCategoria.setValue(items.get(0));
+        cbxCategoria.setVisible(true);
         descrCategoria = new TextArea("");
         
         btnAceptar = new Button("Aceptar");
@@ -135,8 +137,8 @@ public class FormProducto extends Application {
         ICategoria categDao = new ImplCategoria();
         try {
             listCategorias=categDao.obtener();
-            for(int i=0; i<listCategorias.size();i++){
-                items.add(i, listCategorias.toString());
+            for(Categoria categ:listCategorias){
+                items.add(categ);
             }
 //            cbxCategoria.setItems(value);
         } catch (Exception e) {

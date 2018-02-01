@@ -17,26 +17,26 @@ public class TestCategoria {
         ICategoria categoriaDao = new ImplCategoria();
         // TEST INSERTAR
 
-        int filas = 0;
-        Categoria categoria = new Categoria(1, "A", "pequeño");
-        try {
-            filas = categoriaDao.insertar(categoria);
-            System.out.println("Ingreso de " + filas + " Filas Correctas");
-        } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
-        }
-        assertTrue(filas > 0);
+//        int filas = 0;
+//        Categoria categoria = new Categoria(3, "C", "Grande");
+//        try {
+//            filas = categoriaDao.insertar(categoria);
+//            System.out.println("Ingreso de " + filas + " Filas Correctas");
+//        } catch (Exception e) {
+//            System.out.println("Error: " + e.getMessage());
+//        }
+//        assertTrue(filas > 0);
 
         //TEST OBTENER POR CODIGO
         
-        Categoria categori = new Categoria();
-        try {
-            categori = categoriaDao.obtener(1);
-            System.out.println(categori.getCodCategoria() + "    " + categori.getNombre() + "    " + categori.getDescripcion());
-        } catch (Exception e) {
-            System.out.println("Error: "+e.getMessage());
-        }
-        assertEquals(categori!=null, true);
+//        Categoria categori = new Categoria();
+//        try {
+//            categori = categoriaDao.obtener(1);
+//            System.out.println(categori.getCodCategoria() + "    " + categori.getNombre() + "    " + categori.getDescripcion());
+//        } catch (Exception e) {
+//            System.out.println("Error: "+e.getMessage());
+//        }
+//        assertEquals(categori!=null, true);
         
         //TEST LISTADO
         
