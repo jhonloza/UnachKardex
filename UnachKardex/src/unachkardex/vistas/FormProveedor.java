@@ -1,122 +1,178 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package unachkardex.vistas;
 
+import com.sun.javafx.geom.Area;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
-import java.util.*;
 import javafx.scene.text.*;
+import javafx.scene.effect.*;
 import javafx.scene.paint.*;
-import java.lang.reflect.Field;
-import java.text.DateFormat;
-import java.text.MessageFormat;
-import javafx.scene.layout.*;
 import javafx.scene.control.*;
-
+import javafx.scene.layout.*;
+import javafx.stage.Stage;
+import javafx.geometry.*;
+import java.util.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.event.Event;
+import javafx.event.EventDispatchChain;
+import javafx.event.EventDispatcher;
+import javafx.scene.Node;
+import javafx.scene.text.Text;
+import unachkardex.negocio.dao.*;
+import unachkardex.negocio.entidades.*;
+import unachkardex.negocio.impl.*;
 
 
 public class FormProveedor extends Application {
     
     private Text txtRuc;
-    private Text txtNombres;
+    private Text txtNombre;
     private Text txtDireccion;
     private Text txtTelefono;
-    
     private Text txtEmail;
-    
-    private TextArea Ruc;
-    private TextArea Nombres;
-    private TextArea Direccion;
-    private TextArea Telefono;
-    private TextArea Email;
-     
-    private Button btnAceptar;
+
+    Image logo;
+    ImageView visorlogo;
+
+    private TextArea ruc;
+    private TextArea nombre;
+    private TextArea direccion;
+    private TextArea telefono;
+    private TextArea email;
+
+    private Button btnIngresar;
+    private Button btnEliminar;
+    private Button btnModificar;
     private Button btnLimpiar;
     private Button btnCancelar;
-    private Button btnModificar;
-    private Button btnEliminar;
-    
-    private GridPane panelProveedor;
-    private HBox panelBotones;
-    private VBox panelPrincipal;
-            
-    
+
+    private HBox pnlced;
+    private GridPane pnlNombApe;
+    private GridPane pnlFechDir;
+   
+    private HBox pnlBotones;
+    private VBox pntPrincipal;
+
     @Override
     public void start(Stage primaryStage) {
-        
-        txtRuc = new Text("Ruc: ");
-        txtRuc.setFont(javafx.scene.text.Font.font("Chiller",20));
-        Ruc =new TextArea(""); 
-        txtNombres = new Text("Nombres: ");
-        txtNombres.setFont(javafx.scene.text.Font.font("Chiller",20));
-        Nombres=new TextArea("");
-        txtDireccion = new Text("Direccion: ");
-        txtDireccion.setFont(javafx.scene.text.Font.font("Chiller",20));
-        Direccion=new TextArea("");
-        txtTelefono = new Text("Telefono: ");
-        txtTelefono.setFont(javafx.scene.text.Font.font("Chiller",20));
-        Telefono=new TextArea("");
-        txtEmail = new Text("Email: ");
-        
-        txtEmail.setFont(javafx.scene.text.Font.font("Chiller",20));
-        Email=new TextArea("");
-        
-        btnAceptar=new Button("Aceptar");
-        btnAceptar.setFont(javafx.scene.text.Font.font("ALGERIAN",15));
-        btnLimpiar=new Button("Limpiar");
-        btnLimpiar.setFont(javafx.scene.text.Font.font("ALGERIAN",15));
-        btnCancelar=new Button("Cancelar");
-        btnCancelar.setFont(javafx.scene.text.Font.font("ALGERIAN",15));
-        
-        btnModificar=new Button("Modificar");
-        btnModificar.setFont(javafx.scene.text.Font.font("ALGERIAN",15));
-        btnEliminar=new Button("Eliminar");
-        btnEliminar.setFont(javafx.scene.text.Font.font("ALGERIAN",15));
 
-        panelProveedor = new GridPane();
-        panelProveedor.add(txtRuc, 0, 0);
-        panelProveedor.add(Ruc,1,0);
+//LABELS DE LOS CAMPOS A USAR
+        txtRuc = new Text("  RUC:  ");
+        txtRuc.setFont(Font.font("Broadway", 20));
+        txtRuc.setFill(Color.BLUEVIOLET);
         
-        panelProveedor.add(txtNombres, 0, 1);
-        panelProveedor.add(Nombres,1,1);
-        panelProveedor.add(txtDireccion, 0, 2);
-        panelProveedor.add(Direccion,1,2);
-        panelProveedor.add(txtTelefono, 0, 3);
-        panelProveedor.add(Telefono,1,3);
-        panelProveedor.add(txtEmail, 0, 4);
-        panelProveedor.add(Email,1,4);
+        txtNombre = new Text("Nombres:");
+        txtNombre.setFont(Font.font("Broadway", 20));
+        txtNombre.setFill(Color.BLUEVIOLET);
+        
+        txtDireccion = new Text("Direccion:");
+        txtDireccion.setFont(Font.font("Broadway", 20));
+        txtDireccion.setFill(Color.BLUEVIOLET);
+        
+        txtTelefono = new Text("Telefono:");
+        txtTelefono.setFont(Font.font("Broadway", 20));
+        txtTelefono.setFill(Color.BLUEVIOLET);
+        txtEmail = new Text("E-mail:");
+        txtEmail.setFont(Font.font("Broadway", 20));
+        txtEmail.setFill(Color.BLUEVIOLET);
         
         
-        panelBotones =new HBox();
-        panelBotones.getChildren().add(btnAceptar);
-        panelBotones.getChildren().add(btnLimpiar);
-        panelBotones.getChildren().add(btnCancelar);
+        //CAJAS DE TEXTO PARA CAMPOS
+        ruc = new TextArea("");
+        nombre = new TextArea("");
+        direccion = new TextArea("");
+        telefono = new TextArea("");
+        email = new TextArea("");
+        
+        //BOTONES A USAR
+        btnIngresar = new Button("Ingresar");
+        btnIngresar.setFont(Font.font("ALGERIAN",FontWeight.BOLD, 20));
+        btnIngresar.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                btnIngresarEventHandler(event);
+            }
+        });
+        
+        
+        btnLimpiar = new Button("Limpiar");
+        btnLimpiar.setFont(Font.font("ALGERIAN",FontWeight.BOLD, 20));
+        btnCancelar = new Button("Cancelar");
+        btnCancelar.setFont(Font.font("ALGERIAN",FontWeight.BOLD, 20));
+        //INGRESO EN PANELES
+        //SUPERIOR
+        pnlced = new HBox(20);
+        pnlced.getChildren().addAll(txtRuc, ruc);
+        //nombre
+        pnlNombApe = new GridPane();
+        pnlNombApe.setHgap(20);
+        pnlNombApe.setVgap(20);
+        pnlNombApe.add(txtNombre, 0, 0);
+        pnlNombApe.add(nombre, 1, 0);
+        pnlNombApe.add(txtDireccion, 2, 0);
+        pnlNombApe.add(direccion, 3, 0);
+        //fecha y direccion
+        pnlFechDir = new GridPane();
+        pnlFechDir.setHgap(20);
+        pnlFechDir.setVgap(10);
+        pnlFechDir.add(txtTelefono, 0, 0);
+        pnlFechDir.add(telefono, 1, 0);
+        pnlFechDir.add(txtEmail, 0, 1);
+        pnlFechDir.add(email, 1, 1);
+
     
-        panelPrincipal=new VBox();
-        panelPrincipal.getChildren().add(panelProveedor);
-        panelPrincipal.getChildren().add(panelBotones);
+        //botones
+        pnlBotones = new HBox(20);
+        pnlBotones.getChildren().addAll(btnIngresar, btnLimpiar, btnCancelar);
+        pnlBotones.setAlignment(Pos.CENTER);
+        //final
+        pntPrincipal = new VBox(10);
+//        btnEliminar=new Button("Temporal");
+//        btnEliminar.setFont(Font.font("Arial Black",40));
+        logo = new Image("file:src\\unachkardex\\multimedia\\proveedorr.jpg");
+        visorlogo = new ImageView();
+        visorlogo.setImage(logo);
+        visorlogo.setFitHeight(200);
+        visorlogo.setPreserveRatio(true);
+        pntPrincipal.getChildren().addAll(visorlogo, pnlced, pnlNombApe, pnlFechDir, pnlBotones);
+        pntPrincipal.setAlignment(Pos.CENTER);
+        pntPrincipal.setPadding(new Insets(25));
         
         
-        Scene scene = new Scene(panelPrincipal, 300, 250);
-        
-        primaryStage.setTitle("Proveedor");
+        Scene scene = new Scene(pntPrincipal, 600, 520);
+
+        primaryStage.setTitle("Proveedor.");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         launch(args);
     }
     
+    public void btnIngresarEventHandler(ActionEvent event){
+        IProveedor proveedorDao=new ImplProveedor();
+        try {
+            Proveedor nuevoProveedor=new Proveedor();
+            nuevoProveedor.setRuc(ruc.getText());
+            nuevoProveedor.setNombre(nombre.getText());
+            nuevoProveedor.setDireccion(direccion.getText());
+            nuevoProveedor.setTelefono(telefono.getText());
+            nuevoProveedor.seteMail(email.getText());
+            
+            if(proveedorDao.ingresar(nuevoProveedor)>0){
+                System.out.println("Ingreso Correcto..");
+            }
+            else{
+                System.out.println("Error de Ingreso..");
+            }
+        } catch (Exception e) {
+            System.out.println("Error de Ingreso"+e.getMessage());
+        }
+    }
+
 }
