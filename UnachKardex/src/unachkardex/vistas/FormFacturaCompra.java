@@ -5,7 +5,7 @@
  */
 package unachkardex.vistas;
 
- import javafx.application.Application;
+import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -28,113 +28,99 @@ import javafx.scene.control.*;
 import unachkardex.negocio.dao.ICategoria;
 import unachkardex.negocio.entidades.Categoria;
 import unachkardex.negocio.entidades.FacturaCompra;
+import unachkardex.negocio.entidades.Proveedor;
 import unachkardex.negocio.impl.ImplCategoria;
-public class FormFacturaCompra extends Application{
-     private Text txtCodigo;
-    private Text txtFacturaCompra;
-    
-    private Text txtNombre;
-    private Text txtPrecio;
-    
-    private TextArea codigo;
-    private TextArea nombre;
-    
-    private TextArea precio;
-    private TextArea descrFactutacompra;
-    
-    private ComboBox<FacturaCompra> listFacturacompra;
-    
-    ObservableList<FacturaCompra> lstFacturaCompra;
-    
-    
-    private Button btnAceptar;
-    private Button btnModificar;
-    private Button btnEliminar;
-    private Button btnLimpiar;
-    private Button btnCancelar;
-    
-        private VBox pnlProducto;
-    private VBox pnlFacturacompra;
-    private GridPane pnlCentral;
-    private GridPane pnlBotones;
-    private GridPane pnlPrincipal;
-     @Override
-    public void start(Stage primaryStage) {
-        txtCodigo=new Text("Codigo");
-        txtCodigo.setFont(javafx.scene.text.Font.font("Arial Black",20));
-        codigo=new TextArea("");
-        txtNombre=new Text("Nombre");
-        txtNombre.setFont(javafx.scene.text.Font.font("Arial Black",20));
-        nombre=new TextArea("");
-        txtPrecio=new Text("Precio");
-        txtPrecio.setFont(javafx.scene.text.Font.font("Arial Black",20));
-        precio=new TextArea("");
-        
-        txtFacturaCompra=new Text("factura_compra");
-        txtFacturaCompra.setFont(javafx.scene.text.Font.font("Arial Black",20));
-        cargarFacturacompra();
-        listFacturacompra=new ComboBox<FacturaCompra>();
-        listFacturacompra.setItems(lstFacturaCompra);
-        descrFactutacompra=new TextArea("");
-        
-        btnAceptar=new Button("Aceptar");
-        btnAceptar.setFont(Font.font("Arial Black",20));
-        btnModificar=new Button("Modificar");
-        btnModificar.setFont(Font.font("Arial Black",20));
-        btnEliminar=new Button("Eliminar");
-        btnEliminar.setFont(Font.font("Arial Black",20));
-        btnLimpiar=new Button("Limpiar");
-        btnLimpiar.setFont(Font.font("Arial Black",20));
-        btnCancelar=new Button("Cancelar");
-        btnCancelar.setFont(Font.font("Arial Black",20));
-        
-        pnlProducto=new VBox();
-        pnlProducto.getChildren().add(txtCodigo);
-        pnlProducto.getChildren().add(codigo);
-        pnlProducto.getChildren().add(txtNombre);
-        pnlProducto.getChildren().add(nombre);
-        pnlProducto.getChildren().add(txtPrecio);
-        pnlProducto.getChildren().add(precio);
-        
-        pnlFacturacompra=new VBox();
-        pnlFacturacompra.getChildren().add(txtFacturaCompra);
-        pnlFacturacompra.getChildren().add(listFacturacompra);
-        pnlFacturacompra.getChildren().add(descrFactutacompra);
-        
-        pnlCentral=new GridPane();
-        pnlCentral.setVgap(10);
-        pnlCentral.setHgap(10);
-        pnlCentral.add(pnlProducto, 0, 0);
-        pnlCentral.add(pnlFacturacompra, 1, 0);
-        
 
-        pnlBotones= new GridPane();
-        pnlBotones.setVgap(10);
-        pnlBotones.setHgap(10);
-        pnlBotones.add(btnAceptar, 0, 0);
-        pnlBotones.add(btnLimpiar, 1, 0);
-        pnlBotones.add(btnCancelar, 2, 0);
-        pnlBotones.setAlignment(Pos.CENTER);
+public class FormFacturaCompra extends Application {
+
+    private VBox pntPrincipal;
+    private HBox pnlcab;
+    private HBox pnlBotones;
+    private HBox pnlproventa;
+
+    private VBox pnlinfofactura;
+
+    private VBox pntproveeedor;
+    private HBox pnlruc;
+    private GridPane pnldetalleprveedor;
+
+    private Text txtruc;
+    private Text txtnombre;
+    private Text txtdireccion;
+    private Text txtTelefono;
+    private Button btnbuscrproveedor;
+    private  TextArea ruc;
+    private  TextArea nombre;
+    private  TextArea direccion;
+    private  TextArea telefono;
+    private  TextArea email;
+
+       private VBox   pntDetafacomp;
+      
+          private Text txtFecha;
+          private Text txtcodproveedor;
+          private TextArea fecha;
+          private TextArea codproveedor;
+          
+          
+          private Button btnlogo;
+    @Override
+    public void start(Stage primaryStage) {
+        //panel proveedor
+        pnlruc=new HBox(5);
+        txtruc=new Text("Ruc");
+        ruc=new TextArea("");
+        btnbuscrproveedor=new Button();
+         pnlruc.getChildren().addAll(txtruc,ruc,btnbuscrproveedor);
+        //info proveedor
+        pnldetalleprveedor= new GridPane();
+        txtnombre=new Text("Nombre");
+        txtdireccion= new Text("Direccion");
+        txtTelefono= new Text("Telefono");
+        nombre=new TextArea("");
+        direccion=new TextArea("");
+        telefono=new TextArea("");
+        pnldetalleprveedor.add(txtnombre, 0, 0);
+        pnldetalleprveedor.add(txtdireccion, 0, 1);
+        pnldetalleprveedor.add(txtTelefono, 0, 2);
+        pnldetalleprveedor.add(nombre, 1, 0);
+        pnldetalleprveedor.add(direccion, 1, 1);
+        pnldetalleprveedor.add(telefono, 1, 2);
+        pnldetalleprveedor.setHgap(10);
+        pnldetalleprveedor.setVgap(10);
+        //panel proveedor
+        email=new TextArea("");
+        pntproveeedor=new VBox(15);
+        pntproveeedor.getChildren().addAll(pnlruc,pnldetalleprveedor,email);
+        pntproveeedor.setPadding(new Insets(20));
         
-        pnlPrincipal=new GridPane();
-        pnlPrincipal.setVgap(10);
-        pnlPrincipal.setHgap(10);
-        pnlPrincipal.add(pnlCentral, 0, 0);
-        pnlPrincipal.add(pnlBotones, 0, 1);
-        pnlPrincipal.setPadding(new Insets(25));
+        //FACTURA
+        // DETALLE  FACTURA
+        txtFecha=new Text("Fecha");
+        fecha=new TextArea("");
+        txtcodproveedor=new Text("Proveedor");
+        codproveedor=new TextArea("");
+        //logo
+        btnlogo=new Button();
+        //
+                
+        pntDetafacomp= new VBox(10);
+         pntDetafacomp.getChildren().addAll(txtruc,ruc,txtFecha,fecha,txtcodproveedor,codproveedor);
+       
         
-        Scene scene = new Scene(pnlPrincipal, 600, 400);
-        primaryStage.setTitle("Producto");
+       
+        
+        Scene scene=new Scene(pntDetafacomp, 480, 240);
+        primaryStage.setTitle("");
         primaryStage.setScene(scene);
+        
         primaryStage.show();
     }
 
-    
     public static void main(String[] args) {
         launch(args);
     }
-    
-    
+
     public void cargarFacturacompra() {
 
 //        IFacturaCompra facturacompraDao = new ImplFactura();
