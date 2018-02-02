@@ -46,8 +46,19 @@ public class FormFacturaVenta extends Application {
     private GridPane pnlresto;
     private GridPane pnlmail;
     private VBox pnlprincipal;
-    
+    private VBox pnlprincipal2;
     private Button btnBuscar;
+    
+    //////////////////////////FACTURA VENTA
+    
+    private Text txtcodigofa;
+    private Text txtfecha;
+    
+    private TextArea codigofa;
+    private TextArea fecha;
+    
+    private GridPane pnlfac;
+    
     
    
 
@@ -107,13 +118,37 @@ public class FormFacturaVenta extends Application {
         pnlmail.add(txtemail, 2, 0);
         pnlmail.add(email, 3, 0);
         
+         
+        ///////////////////////////////FACTURA VENTS////////////////////
+        
+        
+        txtcodigofa = new Text("CODIGO FACTURA:    ");
+        
+        txtfecha = new Text("FECHA:");
+        
+        
+        codigofa = new TextArea("");
+        fecha = new TextArea("");
+        
+        pnlfac = new GridPane();
+        pnlfac.add(txtcodigofa, 0, 0);
+        pnlfac.add(codigofa, 1, 0);
+        pnlfac.add(txtfecha, 0, 1 );
+        pnlfac.add(fecha, 1, 1);
+     //   pnlfac.setAlignment(Pos.CENTER);
+        
+          
+        
+        
         pnlprincipal = new VBox(10);
         
-        pnlprincipal.getChildren().addAll(pnlCel,pnlNomb, pnlresto, pnlmail );
+        pnlprincipal.getChildren().addAll(pnlCel,pnlNomb, pnlresto, pnlmail , pnlfac );
         pnlprincipal.setAlignment(Pos.CENTER);
         pnlprincipal.setPadding(new Insets(25)); 
         //pnlprincipal.setPrefSize(320, 200);
         
+        
+       
         
        Scene scene = new Scene(pnlprincipal, 580, 240);
 
