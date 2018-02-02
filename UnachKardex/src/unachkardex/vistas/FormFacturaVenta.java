@@ -27,104 +27,139 @@ import unachkardex.vistas.*;
 
 public class FormFacturaVenta extends Application {
 
-    private Text txtcodigo;
+    private GridPane pnlCliente;
+    private Text txtcedula;
+    private Text txtnombres;
+    
+    private Text txtdireccion;
+    private Text txttelefono;
+    private Text txtemail;
+
+    private TextArea cedula;
+    private TextArea nombres;  
+    private TextArea direccion;
+    private TextArea telefono;
+    private TextArea email;
+
+    private HBox pnlCel;
+    private GridPane pnlNomb;
+    private GridPane pnlresto;
+    private GridPane pnlmail;
+    private VBox pnlprincipal;
+    private VBox pnlprincipal2;
+    private Button btnBuscar;
+    
+    //////////////////////////FACTURA VENTA
+    
+    private Text txtcodigofa;
     private Text txtfecha;
-    private Text txtcliente;
-    private TextArea codigo;
+    
+    private TextArea codigofa;
     private TextArea fecha;
-    private TextArea desClien;
-    private FormCliente frcli;
-    private ComboBox<Cliente> listClient;
-
-    ObservableList<Cliente> lsClientes;
-
-    private Button btnAceptar;
-    private Button btnModificar;
-    private Button btnEliminar;
-
-    private VBox pnlCliente;
-    private VBox pnlfv;
-
-    private GridPane pnlCentral;
-    private GridPane pnlBotones;
-    private GridPane pnlPrincipal;
+    
+    private GridPane pnlfac;
+    
+    
+   
 
     @Override
 
     public void start(Stage primaryStage) {
-         frcli = new FormCliente();
-        txtcodigo = new Text("CODIGO");
-        txtcodigo.setFont(javafx.scene.text.Font.font("Arial Black", 20));
-        codigo = new TextArea("");
-        txtfecha = new Text("FECHA");
-        txtfecha.setFont(javafx.scene.text.Font.font("Arial Black", 20));
+
+        txtcedula = new Text("CEDULA DEL CLIENTE:                ");
+        //txtcedula.setFont(javafx.scene.text.Font.font("Arial Black", 20));
+        
+        btnBuscar = new Button("BUSCAR");
+        
+        txtnombres = new Text("NOMBRE DEL CLIENTE");
+        //txtnombre.setFont(javafx.scene.text.Font.font("Arial Black", 20));
+        
+       
+        txtdireccion = new Text("DIRECCION DEL CLIENTE");
+        //txtdireccion.setFont(javafx.scene.text.Font.font("Arial Black", 20));
+        
+        txttelefono = new Text("TELEFONO DEL CLIENTE");
+       // txttelefono.setFont(javafx.scene.text.Font.font("Arial Black", 20));
+        
+        txtemail = new Text("MAIL DEL CLIENTE");
+        //txtemail.setFont(javafx.scene.text.Font.font("Arial Black", 20));
+
+        //cajas de texto
+        cedula = new TextArea("");
+        nombres = new TextArea("");
+        direccion = new TextArea("");
+        telefono = new TextArea("");
+        email = new TextArea("");
+///ingreso paneles
+        pnlCel = new HBox(20);
+        pnlCel.getChildren().addAll(txtcedula, cedula ,btnBuscar);
+        pnlCel.setAlignment(Pos.CENTER);
+    // nombres   
+        pnlNomb = new GridPane();
+        pnlNomb.setHgap(20);
+        pnlNomb.setVgap(20);
+        pnlNomb.add(txtnombres, 0, 0);
+        pnlNomb.add(nombres, 1, 0);
+      
+       /////direccion 
+       pnlresto = new GridPane();
+       pnlresto.setHgap(20);
+       pnlresto.setVgap(20);
+        pnlresto.add(txtdireccion, 0, 0);
+        pnlresto.add(direccion, 1, 0);
+        pnlresto.add(txttelefono, 2, 0);
+        pnlresto.add(telefono, 3, 0);
+        pnlresto.setAlignment(Pos.CENTER);
+        
+        //////mail
+        pnlmail = new GridPane();
+        pnlmail.setHgap(20);
+        pnlmail.setVgap(20);
+        pnlmail.add(txtemail, 2, 0);
+        pnlmail.add(email, 3, 0);
+        
+         
+        ///////////////////////////////FACTURA VENTS////////////////////
+        
+        
+        txtcodigofa = new Text("CODIGO FACTURA:    ");
+        
+        txtfecha = new Text("FECHA:");
+        
+        
+        codigofa = new TextArea("");
         fecha = new TextArea("");
+        
+        pnlfac = new GridPane();
+        pnlfac.add(txtcodigofa, 0, 0);
+        pnlfac.add(codigofa, 1, 0);
+        pnlfac.add(txtfecha, 0, 1 );
+        pnlfac.add(fecha, 1, 1);
+     //   pnlfac.setAlignment(Pos.CENTER);
+        
+          
+        
+        
+        pnlprincipal = new VBox(10);
+        
+        pnlprincipal.getChildren().addAll(pnlCel,pnlNomb, pnlresto, pnlmail , pnlfac );
+        pnlprincipal.setAlignment(Pos.CENTER);
+        pnlprincipal.setPadding(new Insets(25)); 
+        //pnlprincipal.setPrefSize(320, 200);
+        
+        
+       
+        
+       Scene scene = new Scene(pnlprincipal, 580, 240);
 
-        txtcliente = new Text("CLIENTE");
-        txtcliente.setFont(javafx.scene.text.Font.font("Arial Black", 20));
-
-        listClient = new ComboBox<Cliente>();
-        cargarClientes();
-        listClient.setItems(lsClientes);
-        desClien = new TextArea("");
-
-        btnAceptar = new Button("Aceptar");
-        btnAceptar.setFont(Font.font("Arial Black", 20));
-        btnModificar = new Button("Modificar");
-        btnModificar.setFont(Font.font("Arial Black", 20));
-        btnEliminar = new Button("Eliminar");
-        btnEliminar.setFont(Font.font("Arial Black", 20));
-
-        pnlfv = new VBox();
-        pnlfv.getChildren().add(txtcodigo);
-        pnlfv.getChildren().add(codigo);
-        pnlfv.getChildren().add(txtfecha);
-        pnlfv.getChildren().add(fecha);
-
-        pnlCliente = new VBox();
-        pnlCliente.getChildren().add(txtcliente);
-        pnlCliente.getChildren().add(listClient);
-        pnlCliente.getChildren().add(desClien);
-
-        pnlCentral = new GridPane();
-        pnlCentral.setVgap(10);
-        pnlCentral.setHgap(10);
-        pnlCentral.add(pnlfv, 0, 2);
-        pnlCentral.add(pnlCliente, 0, 1);
-
-        pnlBotones = new GridPane();
-        pnlBotones.setVgap(10);
-        pnlBotones.setHgap(10);
-        pnlBotones.add(btnAceptar, 0, 0);
-        pnlBotones.setAlignment(Pos.CENTER);
-
-        pnlPrincipal = new GridPane();
-        pnlPrincipal.setVgap(10);
-        pnlPrincipal.setHgap(10);
-        pnlPrincipal.add(pnlCentral, 0, 0);
-        pnlPrincipal.add(pnlBotones, 0, 1);
-        pnlPrincipal.setPadding(new Insets(25));
-
-        Scene scene = new Scene(pnlPrincipal, 600, 400);
-        primaryStage.setTitle("FACTURA DE SALIDA");
+        primaryStage.setTitle("FACTURA VENTA");
         primaryStage.setScene(scene);
         primaryStage.show();
 
     }
-    
+
     public static void main(String[] args) {
         launch(args);
-    }
-    
-     public void cargarClientes() {
-
-        ICliente cliDao = new ImplCliente();
-        try {
-//            lsClientes = cliDao.obtener();
-        } catch (Exception e) {
-//            JOptionPane.showMessageDialog(this, "ERROR AL CARGAR CURSOS", "ERROR" + e.getMessage(), JOptionPane.INFORMATION_MESSAGE);
-        }
-
     }
 
 }
