@@ -101,6 +101,12 @@ public class FormProveedor extends Application {
         
         btnLimpiar = new Button("Limpiar");
         btnLimpiar.setFont(Font.font("ALGERIAN",FontWeight.BOLD, 25));
+        btnLimpiar.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                btnLimpiarEventHandler(event);
+            }
+        });
         btnCancelar = new Button("Cancelar");
         btnCancelar.setFont(Font.font("ALGERIAN",FontWeight.BOLD, 25));
 //INGRESO EN PANELES
@@ -153,7 +159,16 @@ public class FormProveedor extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+    public void btnLimpiarEventHandler(ActionEvent event){
+       
+            ruc.setText(null);
+            nombre.setText("");
+            direccion.setText(null);
+            telefono.setText("");
+            email.setText(null);
+        }
+            
+   
     public void btnIngresarEventHandler(ActionEvent event){
         IProveedor proveedorDao=new ImplProveedor();
         try {
