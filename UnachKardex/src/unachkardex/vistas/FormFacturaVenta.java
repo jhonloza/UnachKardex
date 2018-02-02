@@ -82,6 +82,7 @@ public class FormFacturaVenta extends Application {
 ///ingreso paneles
         pnlCel = new HBox(20);
         pnlCel.getChildren().addAll(txtcedula, cedula ,btnBuscar);
+        pnlCel.setAlignment(Pos.CENTER);
     // nombres   
         pnlNomb = new GridPane();
         pnlNomb.setHgap(20);
@@ -97,7 +98,7 @@ public class FormFacturaVenta extends Application {
         pnlresto.add(direccion, 1, 0);
         pnlresto.add(txttelefono, 2, 0);
         pnlresto.add(telefono, 3, 0);
-        
+        pnlresto.setAlignment(Pos.CENTER);
         
         //////mail
         pnlmail = new GridPane();
@@ -114,7 +115,7 @@ public class FormFacturaVenta extends Application {
         //pnlprincipal.setPrefSize(320, 200);
         
         
-       Scene scene = new Scene(pnlprincipal, 720, 240);
+       Scene scene = new Scene(pnlprincipal, 580, 240);
 
         primaryStage.setTitle("FACTURA VENTA");
         primaryStage.setScene(scene);
