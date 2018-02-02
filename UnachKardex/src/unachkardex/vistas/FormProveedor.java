@@ -50,9 +50,9 @@ public class FormProveedor extends Application {
     private Button btnLimpiar;
     private Button btnCancelar;
 
-    private HBox pnlced;
-    private GridPane pnlNombApe;
-    private GridPane pnlFechDir;
+    private HBox pnlRuc;
+    private GridPane pnlNombDir;
+    private GridPane pnlContactos;
    
     private HBox pnlBotones;
     private VBox pntPrincipal;
@@ -61,8 +61,8 @@ public class FormProveedor extends Application {
     public void start(Stage primaryStage) {
 
 //LABELS DE LOS CAMPOS A USAR
-        txtRuc = new Text("  RUC:  ");
-        txtRuc.setFont(Font.font("Broadway", 20));
+        txtRuc = new Text("RUC:      ");
+        txtRuc.setFont(Font.font("Broadway", 25));
         txtRuc.setFill(Color.BLUEVIOLET);
         
         txtNombre = new Text("Nombres:");
@@ -90,7 +90,7 @@ public class FormProveedor extends Application {
         
         //BOTONES A USAR
         btnIngresar = new Button("Ingresar");
-        btnIngresar.setFont(Font.font("ALGERIAN",FontWeight.BOLD, 20));
+        btnIngresar.setFont(Font.font("ALGERIAN",FontWeight.BLACK, 25));
         btnIngresar.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -100,32 +100,32 @@ public class FormProveedor extends Application {
         
         
         btnLimpiar = new Button("Limpiar");
-        btnLimpiar.setFont(Font.font("ALGERIAN",FontWeight.BOLD, 20));
+        btnLimpiar.setFont(Font.font("ALGERIAN",FontWeight.BOLD, 25));
         btnCancelar = new Button("Cancelar");
-        btnCancelar.setFont(Font.font("ALGERIAN",FontWeight.BOLD, 20));
-        //INGRESO EN PANELES
-        //SUPERIOR
-        pnlced = new HBox(20);
-        pnlced.getChildren().addAll(txtRuc, ruc);
-        //nombre
-        pnlNombApe = new GridPane();
-        pnlNombApe.setHgap(20);
-        pnlNombApe.setVgap(20);
-        pnlNombApe.add(txtNombre, 0, 0);
-        pnlNombApe.add(nombre, 1, 0);
-        pnlNombApe.add(txtDireccion, 2, 0);
-        pnlNombApe.add(direccion, 3, 0);
-        //fecha y direccion
-        pnlFechDir = new GridPane();
-        pnlFechDir.setHgap(20);
-        pnlFechDir.setVgap(10);
-        pnlFechDir.add(txtTelefono, 0, 0);
-        pnlFechDir.add(telefono, 1, 0);
-        pnlFechDir.add(txtEmail, 0, 1);
-        pnlFechDir.add(email, 1, 1);
+        btnCancelar.setFont(Font.font("ALGERIAN",FontWeight.BOLD, 25));
+//INGRESO EN PANELES
+//SUPERIOR
+        pnlRuc = new HBox(20);
+        pnlRuc.getChildren().addAll(txtRuc, ruc);
+//nombre
+        pnlNombDir = new GridPane();
+        pnlNombDir.setHgap(20);
+        pnlNombDir.setVgap(20);
+        pnlNombDir.add(txtNombre, 0, 0);
+        pnlNombDir.add(nombre, 1, 0);
+        pnlNombDir.add(txtDireccion, 2, 0);
+        pnlNombDir.add(direccion, 3, 0);
+//Contactos
+        pnlContactos = new GridPane();
+        pnlContactos.setHgap(20);
+        pnlContactos.setVgap(10);
+        pnlContactos.add(txtTelefono, 0, 0);
+        pnlContactos.add(telefono, 1, 0);
+        pnlContactos.add(txtEmail, 0, 1);
+        pnlContactos.add(email, 1, 1);
 
     
-        //botones
+//botones
         pnlBotones = new HBox(20);
         pnlBotones.getChildren().addAll(btnIngresar, btnLimpiar, btnCancelar);
         pnlBotones.setAlignment(Pos.CENTER);
@@ -138,12 +138,12 @@ public class FormProveedor extends Application {
         visorlogo.setImage(logo);
         visorlogo.setFitHeight(200);
         visorlogo.setPreserveRatio(true);
-        pntPrincipal.getChildren().addAll(visorlogo, pnlced, pnlNombApe, pnlFechDir, pnlBotones);
+        pntPrincipal.getChildren().addAll(visorlogo, pnlRuc, pnlNombDir, pnlContactos, pnlBotones);
         pntPrincipal.setAlignment(Pos.CENTER);
         pntPrincipal.setPadding(new Insets(25));
         
         
-        Scene scene = new Scene(pntPrincipal, 600, 520);
+        Scene scene = new Scene(pntPrincipal, 600, 500);
 
         primaryStage.setTitle("Proveedor.");
         primaryStage.setScene(scene);
