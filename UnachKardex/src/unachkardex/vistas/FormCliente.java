@@ -1,6 +1,8 @@
 package unachkardex.vistas;
 
 import com.sun.javafx.geom.Area;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -20,8 +22,11 @@ import javafx.event.EventDispatchChain;
 import javafx.event.EventDispatcher;
 import javafx.scene.Node;
 import javafx.scene.text.Text;
+import unachkardex.negocio.dao.ICliente;
+import unachkardex.negocio.entidades.Cliente;
+import unachkardex.negocio.impl.ImplCliente;
 
-public class FormCliente extends Application implements EventHandler<ActionEvent> {
+public class FormCliente extends Application {
 
     private Text txtCedula;
     private Text txtNombres;
@@ -60,19 +65,25 @@ public class FormCliente extends Application implements EventHandler<ActionEvent
         //LABELS DE LOS CAMPOS A USAR
         txtCedula = new Text("Cedula");
         txtCedula.setFont(Font.font("Arial Black", 20));
-        txtCedula.setFill(Color.AQUA);
+        txtCedula.setFill(Color.DARKBLUE);
         txtNombres = new Text("Nombres");
         txtNombres.setFont(Font.font("Arial Black", 20));
+        txtNombres.setFill(Color.DARKBLUE);
         txtApellidos = new Text("Apellidos");
         txtApellidos.setFont(Font.font("Arial Black", 20));
+        txtApellidos.setFill(Color.DARKBLUE);
         txtFechaNacimiento = new Text("Fecha de Nacimiento");
         txtFechaNacimiento.setFont(Font.font("Arial Black", 20));
+        txtFechaNacimiento.setFill(Color.DARKBLUE);
         txtDireccion = new Text("Direccion");
         txtDireccion.setFont(Font.font("Arial Black", 20));
+        txtDireccion.setFill(Color.DARKBLUE);
         txtTelefono = new Text("Telefono");
         txtTelefono.setFont(Font.font("Arial Black", 20));
+        txtTelefono.setFill(Color.DARKBLUE);
         txtEmail = new Text("E-mail");
         txtEmail.setFont(Font.font("Arial Black", 20));
+        txtEmail.setFill(Color.DARKBLUE);
         //CAJAS DE TEXTO PARA CAMPOS
         cedula = new TextArea("");
         nombres = new TextArea("");
@@ -84,16 +95,14 @@ public class FormCliente extends Application implements EventHandler<ActionEvent
         //BOTONES A USAR
         btnIngresar = new Button("Ingresar");
         btnIngresar.setFont(Font.font("Arial Black", 20));
-        btnEliminar = new Button("Eliminar");
-        btnEliminar.setFont(Font.font("Arial Black", 20));
-        btnModificar = new Button("Modificar");
-        btnModificar.setFont(Font.font("Arial Black", 20));
-        btnModificar.setEventDispatcher(new EventDispatcher() {
+        btnIngresar.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public Event dispatchEvent(Event event, EventDispatchChain tail) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            public void handle(ActionEvent event) {
+                btnIngresarEventHandler(event);
             }
         });
+        
+        
         btnLimpiar = new Button("Limpiar");
         btnLimpiar.setFont(Font.font("Arial Black", 20));
         btnCancelar = new Button("Cancelar");
@@ -135,17 +144,17 @@ public class FormCliente extends Application implements EventHandler<ActionEvent
         pntPrincipal = new VBox(10);
 //        btnEliminar=new Button("Temporal");
 //        btnEliminar.setFont(Font.font("Arial Black",40));
-        logo = new Image("/fondo.jpg", 50, 100, false, false);
+        logo = new Image("file:src\\unachkardex\\multimedia\\logo.jpg");
         visorlogo = new ImageView();
         visorlogo.setImage(logo);
-        visorlogo.setFitWidth(100);
+        visorlogo.setFitHeight(200);
         visorlogo.setPreserveRatio(true);
         pntPrincipal.getChildren().addAll(visorlogo, pnlced, pnlNombApe, pnlFechDir, pnlcontacto, pnlBotones);
         pntPrincipal.setAlignment(Pos.CENTER);
         pntPrincipal.setPadding(new Insets(25));
         
         
-        Scene scene = new Scene(pntPrincipal, 620, 420);
+        Scene scene = new Scene(pntPrincipal, 600, 520);
 
         primaryStage.setTitle("Cliente");
         primaryStage.setScene(scene);
@@ -155,10 +164,32 @@ public class FormCliente extends Application implements EventHandler<ActionEvent
     public static void main(String[] args) {
         launch(args);
     }
-
-    @Override
-    public void handle(ActionEvent event) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    public void btnIngresarEventHandler(ActionEvent event){
+        ICliente clienteDao=new ImplCliente();
+        try {
+            Cliente nuevoCliente=new Cliente();
+            nuevoCliente.setCedula(cedula.getText());
+            nuevoCliente.setNombre(nombres.getText());
+            nuevoCliente.setApellido(apellidos.getText());
+            nuevoCliente.setDireccion(direccion.getText());
+            nuevoCliente.setTelefono(telefono.getText());
+            nuevoCliente.seteMail(email.getText());
+            DateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                nuevoCliente.setFechaNac(formatoFecha.parse(fechaNacimiento.getText()));
+            } catch (Exception er) {
+                System.out.println("Error al insertar fecha"+er.getMessage());
+            }
+            if(clienteDao.insertar(nuevoCliente)>0){
+                System.out.println("Ingreso Correcto");
+            }
+            else{
+                System.out.println("Error de Ingreso");
+            }
+        } catch (Exception e) {
+            System.out.println("Error de Ingreso"+e.getMessage());
+        }
     }
 
 }

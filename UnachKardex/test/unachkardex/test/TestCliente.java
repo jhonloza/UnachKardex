@@ -22,15 +22,15 @@ public class TestCliente {
 
         ///////TEST INSERTAR
         
-//        int filas = 0;
-//
-//        Cliente cln = new Cliente("0603437047", "Daniel", "Bastian", "10 de agosto", "0973140672", "ao@gmail.com", new java.util.Date());
-//        try {
-//            filas = clDao.insertar(cln);
-//            System.out.println("filas Inseertadas: " + filas + "\n");
-//        } catch (Exception e) {
-//        }
-//        assertTrue(filas > 0);
+        int filas = 0;
+
+        Cliente cln = new Cliente("06034377", "Daniel", "Bastian", "10 de agosto", "0973140672", "ao@gmail.com", new java.util.Date());
+        try {
+            filas = clDao.insertar(cln);
+            System.out.println("filas Inseertadas: " + filas + "\n");
+        } catch (Exception e) {
+        }
+        assertTrue(filas > 0);
 //        
 //        ////TEST OBTENER CODIGO
 //        Cliente cli = new Cliente();
