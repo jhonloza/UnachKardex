@@ -12,35 +12,40 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import java.util.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.Group;
+import javafx.scene.control.cell.PropertyValueFactory;
 import unachkardex.negocio.dao.ICategoria;
 import unachkardex.negocio.entidades.Categoria;
 import unachkardex.negocio.impl.ImplCategoria;
 
 public class FormListCategoria extends Application {
 
-    private TableView tblCategoria;
+    private TableView<Categoria> tblCategoria;
     private Label titulo;
-    private TableColumn cmlCodCategoria;
-    private TableColumn cmlNombreCategoria;
-    private TableColumn cmlDescrCategoria;
+    private TableColumn<Categoria, Integer> cmlCodCategoria;
+    private TableColumn<Categoria, String> cmlNombreCategoria;
+    private TableColumn<Categoria, String> cmlDescrCategoria;
     private VBox pntPrincipal;
 
     @Override
     public void start(Stage primaryStage) {
 
         titulo = new Label("LISTADO DE CATEGORIAS");
-        titulo.setFont(Font.font("ARIAL BLACK", 30));
+        titulo.setFont(Font.font("ARIAL BLACK", 25));
         tblCategoria = new TableView();
-        cmlCodCategoria = new TableColumn("Codigo");
-        cmlNombreCategoria = new TableColumn("Nombre");
-        cmlDescrCategoria = new TableColumn("Descripcion");
-        cargarCategorias();
+        cmlCodCategoria = new TableColumn<>("Codigo");
+        cmlNombreCategoria = new TableColumn<>("Nombre");
+        cmlDescrCategoria = new TableColumn<>("Descripcion");
+        cmlDescrCategoria.setMaxWidth(250);
+        cmlDescrCategoria.setMinWidth(250);
         tblCategoria.getColumns().addAll(cmlCodCategoria, cmlNombreCategoria, cmlDescrCategoria);
-
+        cargarCategorias();
         pntPrincipal = new VBox();
-        pntPrincipal.getChildren().addAll(titulo,tblCategoria);
+        pntPrincipal.getChildren().addAll(titulo, tblCategoria);
         pntPrincipal.setAlignment(Pos.CENTER);
-        Scene scene = new Scene(pntPrincipal, 480, 250);
+        Scene scene = new Scene(pntPrincipal, 425, 250);
 
         primaryStage.setTitle("Listado de Categorias");
         primaryStage.setScene(scene);
@@ -51,18 +56,21 @@ public class FormListCategoria extends Application {
         launch(args);
     }
 
-    public void cargarCategorias(){
-        List<Categoria> listCategorias=new ArrayList<>();
-        ICategoria categDao=new ImplCategoria();
+    public void cargarCategorias() {
+        List<Categoria> listCategorias = new ArrayList<>();
+        ICategoria categDao = new ImplCategoria();
+
         try {
-            listCategorias=categDao.obtener();
+            listCategorias = categDao.obtener();
+            cmlCodCategoria.setCellValueFactory(new PropertyValueFactory<>("Codigo"));
+            cmlNombreCategoria.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+            cmlDescrCategoria.setCellValueFactory(new PropertyValueFactory<>("Descripcion"));
+            tblCategoria.getItems().addAll(listCategorias);
         } catch (Exception e) {
-            System.out.println("Error: "+e.getMessage());
-        }
-        for(Categoria categ:listCategorias){
-            cmlCodCategoria.getColumns().addAll(categ.getCodCategoria());
-            cmlNombreCategoria.getColumns().addAll(categ.getNombre());
-            cmlDescrCategoria.getColumns().addAll(categ.getDescripcion());
+            System.out.println("Error: " + e.getMessage());
+            Group ptnError = new Group();
+            ptnError.getChildren().add(new Label("Error: " + e.getMessage()));
+            Scene error = new Scene(ptnError, 0, 0);
         }
     }
 }
