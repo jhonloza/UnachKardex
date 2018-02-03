@@ -68,6 +68,8 @@ public class FormMenuPrincipal extends Application {
     MenuItem kardexAnual;
     
     //cliente Nuevo
+    
+    private BackgroundImage fondoPrincipal;
 
     @Override
     public void start(Stage primaryStage) {
@@ -134,8 +136,11 @@ public class FormMenuPrincipal extends Application {
 
         menuPrincipal.getMenus().addAll(inicio, cliente, proveedor, FacturaVenta, facturaCompra, kardex);
 
+        fondoPrincipal=new BackgroundImage(fondo, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.ROUND, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+        
         pntPrincipal = new VBox(10);
         pntPrincipal.getChildren().add(menuPrincipal);
+        
         Scene scene = new Scene(pntPrincipal, 1200, 720);
 
         primaryStage.setTitle("Papeleria Academica");
