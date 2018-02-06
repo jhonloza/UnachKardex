@@ -31,17 +31,17 @@ public class TestCliente {
         } catch (Exception e) {
         }
         assertTrue(filas > 0);
-//        
-//        ////TEST OBTENER CODIGO
-//        Cliente cli = new Cliente();
-//
-//        try {
-//            cli = clDao.obtener("0603437047");
-//            System.out.println(cli.getCedula() + " " + cli.getNombre() + " " + cli.getApellido() + " " + cli.getDireccion() + " " + cli.getTelefono() + " " + cli.geteMail() + " " + cli.getFechaNac());
-//        } catch (Exception e) {
-//            System.out.println("Error: "+e.getMessage());
-//        }
-//        assertEquals(cli!=null, true);
+        
+        ////TEST OBTENER CODIGO
+        Cliente cli = new Cliente();
+
+        try {
+            cli = clDao.obtener("0604227215");
+            System.out.println(cli.getCedula() + " " + cli.getNombre() + " " + cli.getApellido() + " " + cli.getDireccion() + " " + cli.getTelefono() + " " + cli.geteMail() + " " + cli.getFechaNac());
+        } catch (Exception e) {
+            System.out.println("Error: "+e.getMessage());
+        }
+        assertEquals(cli!=null, true);
         
         //////// TEST LISTADO 
         
