@@ -16,9 +16,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.control.cell.PropertyValueFactory;
-import unachkardex.negocio.dao.ICategoria;
-import unachkardex.negocio.entidades.Categoria;
-import unachkardex.negocio.impl.ImplCategoria;
+import unachkardex.negocio.dao.*;
+import unachkardex.negocio.entidades.*;
+import unachkardex.negocio.impl.*;
+import unachkardex.accesodatos.*;
 
 public class FormListCategoria extends Application {
 
