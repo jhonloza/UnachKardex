@@ -44,23 +44,23 @@ public class FormFacturaCompra extends Application {
     private HBox pnlruc;
     private GridPane pnldetalleprveedor;
 
-    private Text txtruc;
-    private Text txtnombre;
-    private Text txtdireccion;
-    private Text txtTelefono;
+    private Label txtruc;
+    private Label txtnombre;
+    private Label txtdireccion;
+    private Label txtTelefono;
     private Button btnbuscrproveedor;
-    private  TextArea ruc;
-    private  TextArea nombre;
-    private  TextArea direccion;
-    private  TextArea telefono;
-    private  TextArea email;
+    private  TextField ruc;
+    private  TextField nombre;
+    private  TextField direccion;
+    private  TextField telefono;
+    private  TextField email;
 
        private VBox   pntDetafacomp;
       
-          private Text txtFecha;
-          private Text txtcodproveedor;
-          private TextArea fecha;
-          private TextArea codproveedor;
+          private Label txtFecha;
+          private Label txtcodproveedor;
+          private TextField fecha;
+          private TextField codproveedor;
           
           
           private Button btnlogo;
@@ -68,18 +68,18 @@ public class FormFacturaCompra extends Application {
     public void start(Stage primaryStage) {
         //panel proveedor
         pnlruc=new HBox(5);
-        txtruc=new Text("Ruc");
-        ruc=new TextArea("");
+        txtruc=new Label("Ruc");
+        ruc=new TextField("");
         btnbuscrproveedor=new Button();
          pnlruc.getChildren().addAll(txtruc,ruc,btnbuscrproveedor);
         //info proveedor
         pnldetalleprveedor= new GridPane();
-        txtnombre=new Text("Nombre");
-        txtdireccion= new Text("Direccion");
-        txtTelefono= new Text("Telefono");
-        nombre=new TextArea("");
-        direccion=new TextArea("");
-        telefono=new TextArea("");
+        txtnombre=new Label("Nombre");
+        txtdireccion= new Label("Direccion");
+        txtTelefono= new Label("Telefono");
+        nombre=new TextField("");
+        direccion=new TextField("");
+        telefono=new TextField("");
         pnldetalleprveedor.add(txtnombre, 0, 0);
         pnldetalleprveedor.add(txtdireccion, 0, 1);
         pnldetalleprveedor.add(txtTelefono, 0, 2);
@@ -89,20 +89,20 @@ public class FormFacturaCompra extends Application {
         pnldetalleprveedor.setHgap(10);
         pnldetalleprveedor.setVgap(10);
         //panel proveedor
-        email=new TextArea("");
+        email=new TextField("");
         pntproveeedor=new VBox(15);
         pntproveeedor.getChildren().addAll(pnlruc,pnldetalleprveedor,email);
         pntproveeedor.setPadding(new Insets(20));
         
         //FACTURA
         // DETALLE  FACTURA
-        txtFecha=new Text("Fecha");
-        fecha=new TextArea("");
-        txtcodproveedor=new Text("Proveedor");
-        codproveedor=new TextArea("");
+        txtFecha=new Label("Fecha");
+        fecha=new TextField("");
+        txtcodproveedor=new Label("Proveedor");
+        codproveedor=new TextField("");
         //logo
         btnlogo=new Button();
-        //
+        
                 
         pntDetafacomp= new VBox(10);
          pntDetafacomp.getChildren().addAll(txtruc,ruc,txtFecha,fecha,txtcodproveedor,codproveedor);
