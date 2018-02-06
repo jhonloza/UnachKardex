@@ -125,7 +125,7 @@ public class FormDetalleCompra extends Application {
 
         //botones
         pnlBotones = new HBox(20);
-        pnlBotones.getChildren().addAll(btnIngresar, btnLimpiar, btnCancelar, btnEliminar);
+        pnlBotones.getChildren().addAll(btnIngresar, btnLimpiar, btnCancelar);
         pnlBotones.setAlignment(Pos.CENTER);
         //final
         pntPrincipal = new VBox(20);
@@ -134,13 +134,13 @@ public class FormDetalleCompra extends Application {
         visorlogo.setImage(logo);
         visorlogo.setFitHeight(200);
         visorlogo.setPreserveRatio(true);
-        btnEliminar = new Button("ELIMINAR");
+        //btnEliminar = new Button("ELIMINAR");
         //btnEliminar.setFont(Font.font("Arial Black",20));
         pntPrincipal.getChildren().addAll(visorlogo, pnlced, pnlNombApe, pnlFechDir, pnlcontacto, pnlBotones);
         pntPrincipal.setAlignment(Pos.CENTER);
         pntPrincipal.setPadding(new Insets(25));
-        Scene scene = new Scene(pntPrincipal, 820, 620);
-
+        Scene scene = new Scene(pntPrincipal, 795, 620);
+        primaryStage.setResizable(false);
         primaryStage.setTitle("DDETALLE COMPRA");
         primaryStage.setScene(scene);
         primaryStage.show();

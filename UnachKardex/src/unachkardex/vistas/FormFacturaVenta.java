@@ -157,8 +157,8 @@ public class FormFacturaVenta extends Application {
         pnlprincipal.setPadding(new Insets(25));
         //pnlprincipal.setPrefSize(320, 200);
         
-        Scene scene = new Scene(pnlprincipal, 1200, 240);
-        
+        Scene scene = new Scene(pnlprincipal, 1600, 240);
+        primaryStage.setResizable(false);
         primaryStage.setTitle("FACTURA VENTA");
         primaryStage.setScene(scene);
         primaryStage.show();

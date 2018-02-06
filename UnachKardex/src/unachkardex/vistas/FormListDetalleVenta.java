@@ -1,5 +1,4 @@
 package unachkardex.vistas;
-
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -24,65 +23,61 @@ import unachkardex.accesodatos.*;
 public class FormListDetalleVenta extends Application {
 
     private TableView<DetalleVenta> tblDetalleVenta;
-    private Label titutlo;
-    private TableColumn<DetalleVenta, Integer> cmlCodDV;
+    private Label titulo;
+    private TableColumn<DetalleVenta, Integer> codDetalleVenta;
     private TableColumn<DetalleVenta, Producto> cmlProducto;
-    private TableColumn<DetalleVenta, FacturaVenta> cmlFacV;
+    private TableColumn<DetalleVenta, FacturaVenta> cmlfacturaVenta;
     private TableColumn<DetalleVenta, Integer> cmlCantidad;
-    private TableColumn<DetalleVenta, Double> cmlPrecioT;
+    private TableColumn<DetalleVenta, Double> cmlprecioTotal;
     private VBox pntPrincipal;
 
     @Override
     public void start(Stage primaryStage) {
-
-        titutlo = new Label("LISTADO DETALLE VENTA");
+        titulo = new Label("LISTADO DE DETALLE VENTA");
+        titulo.setFont(Font.font("CHILLER", 30));
         tblDetalleVenta = new TableView();
-        cmlCodDV = new TableColumn<>("CODIGO DETALLE VENTA");
-        cmlProducto = new TableColumn<>("PRODUCTO");
-        cmlFacV = new TableColumn<>("FACTURA VENTA");
-        cmlCantidad = new TableColumn<>("CANTIDAD");
-        cmlPrecioT = new TableColumn<>("PRECIO TOTAL");
-
-        tblDetalleVenta.getColumns().addAll(cmlCodDV, cmlProducto, cmlFacV, cmlCantidad, cmlPrecioT);
+        
+        codDetalleVenta = new TableColumn<>("Codigo Detalle_Venta");
+        cmlProducto= new TableColumn<>("Producto");
+        cmlfacturaVenta = new TableColumn<>("Codigo Factura_Venta");
+        cmlCantidad = new TableColumn<>("Cantidad");
+        cmlprecioTotal = new TableColumn<>("Precio_Total");
+       
+        codDetalleVenta.getColumns().addAll(codDetalleVenta, cmlProducto, cmlfacturaVenta,cmlCantidad,cmlprecioTotal);
         cargarDetalleVenta();
         pntPrincipal = new VBox();
-        pntPrincipal.getChildren().addAll(titutlo, tblDetalleVenta);
+        pntPrincipal.getChildren().addAll(titulo, tblDetalleVenta);
         pntPrincipal.setAlignment(Pos.CENTER);
+        Scene scene = new Scene(pntPrincipal, 425, 250);
 
-        Scene scene = new Scene(pntPrincipal, 820, 650);
-
-        primaryStage.setTitle("Listado Detalles Ventas");
+        primaryStage.setTitle("Listado de Detalle Venta");
         primaryStage.setScene(scene);
         primaryStage.show();
-
     }
 
     public static void main(String[] args) {
         launch(args);
     }
-    
-    public void cargarDetalleVenta(){
-     List<DetalleVenta> listDV = new ArrayList<>();
-     IDetalleVenta dvDao = new ImplDetalleVenta();
-     
-     
+
+    public void cargarDetalleVenta() {
+        List<DetalleVenta> listDV = new ArrayList<>();
+        IDetalleVenta dcDao = new ImplDetalleVenta();
+
         try {
-            listDV = dvDao.obtener();
-            cmlCodDV.setCellValueFactory(new PropertyValueFactory<>("codDetalleVenta"));
-            cmlProducto.setCellValueFactory(new PropertyValueFactory<>("codProducto"));
-            cmlFacV.setCellValueFactory(new PropertyValueFactory<>("codFacturaVenta"));
+            listDV = dcDao.obtener();
+           
+            codDetalleVenta.setCellValueFactory(new PropertyValueFactory<>("codDetalleVenta"));
+            cmlProducto.setCellValueFactory(new PropertyValueFactory<>("producto"));
+            cmlfacturaVenta.setCellValueFactory(new PropertyValueFactory<>("facturaCompra"));
             cmlCantidad.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
-            cmlPrecioT.setCellValueFactory(new PropertyValueFactory<>("precioTotal"));
+            cmlprecioTotal.setCellValueFactory(new PropertyValueFactory<>("precioTotal"));
             
             tblDetalleVenta.getItems().addAll(listDV);
-            
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
             Group ptnError = new Group();
             ptnError.getChildren().add(new Label("Error: " + e.getMessage()));
             Scene error = new Scene(ptnError, 0, 0);
-            
         }
-        
     }
 }

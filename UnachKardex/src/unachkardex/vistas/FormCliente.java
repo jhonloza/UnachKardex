@@ -155,8 +155,8 @@ public class FormCliente extends Application {
         pntPrincipal.setPadding(new Insets(25));
         
         
-        Scene scene = new Scene(pntPrincipal, 600, 520);
-
+        Scene scene = new Scene(pntPrincipal, 710, 520);
+        primaryStage.setResizable(false);
         primaryStage.setTitle("Cliente");
         primaryStage.setScene(scene);
         primaryStage.show();
