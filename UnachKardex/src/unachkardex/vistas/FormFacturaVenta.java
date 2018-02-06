@@ -20,6 +20,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
+
 import unachkardex.negocio.dao.*;
 import unachkardex.negocio.entidades.*;
 import unachkardex.negocio.impl.*;
@@ -28,18 +29,18 @@ import unachkardex.vistas.*;
 public class FormFacturaVenta extends Application {
     
     private VBox pnlCliente;
-    private Text txtcedula;
-    private Text txtnombres;
+    private Label txtcedula;
+    private Label txtnombres;
     
-    private Text txtdireccion;
-    private Text txttelefono;
-    private Text txtemail;
+    private Label txtdireccion;
+    private Label txttelefono;
+    private Label txtemail;
     
-    private TextArea cedula;
-    private TextArea nombres;    
-    private TextArea direccion;
-    private TextArea telefono;
-    private TextArea email;
+    private TextField cedula;
+    private TextField nombres;    
+    private TextField direccion;
+    private TextField telefono;
+    private TextField email;
     
     private HBox pnlCel;
     private GridPane pnlNomb;
@@ -50,11 +51,11 @@ public class FormFacturaVenta extends Application {
     private Button btnBuscar;
 
     //////////////////////////FACTURA VENTA
-    private Text txtcodigofa;
-    private Text txtfecha;
+    private Label txtcodigofa;
+    private Label txtfecha;
     
-    private TextArea codigofa;
-    private TextArea fecha;
+    private TextField codigofa;
+    private TextField fecha;
     
     private VBox pnlfac;
 
@@ -69,29 +70,29 @@ public class FormFacturaVenta extends Application {
     
     public void start(Stage primaryStage) {
         
-        txtcedula = new Text("CEDULA DEL CLIENTE:                ");
+        txtcedula = new Label("CEDULA DEL CLIENTE:                ");
         //txtcedula.setFont(javafx.scene.text.Font.font("Arial Black", 20));
         
         btnBuscar = new Button("BUSCAR");
         
-        txtnombres = new Text("NOMBRE DEL CLIENTE");
+        txtnombres = new Label("NOMBRE DEL CLIENTE");
         //txtnombre.setFont(javafx.scene.text.Font.font("Arial Black", 20));
         
-        txtdireccion = new Text("DIRECCION DEL CLIENTE");
+        txtdireccion = new Label("DIRECCION DEL CLIENTE");
         //txtdireccion.setFont(javafx.scene.text.Font.font("Arial Black", 20));
         
-        txttelefono = new Text("TELEFONO DEL CLIENTE");
+        txttelefono = new Label("TELEFONO DEL CLIENTE");
         // txttelefono.setFont(javafx.scene.text.Font.font("Arial Black", 20));
         
-        txtemail = new Text("MAIL DEL CLIENTE");
+        txtemail = new Label("MAIL DEL CLIENTE");
         //txtemail.setFont(javafx.scene.text.Font.font("Arial Black", 20));
 
         //cajas de texto
-        cedula = new TextArea("");
-        nombres = new TextArea("");
-        direccion = new TextArea("");
-        telefono = new TextArea("");
-        email = new TextArea("");
+        cedula = new TextField("");
+        nombres = new TextField("");
+        direccion = new TextField("");
+        telefono = new TextField("");
+        email = new TextField("");
 ///ingreso paneles
         pnlCel = new HBox(20);
         pnlCel.getChildren().addAll(txtcedula, cedula, btnBuscar);
@@ -124,13 +125,13 @@ public class FormFacturaVenta extends Application {
         pnlCliente.getChildren().addAll(pnlCel, pnlNomb, pnlresto, pnlmail);
 
         ///////////////////////////////FACTURA VENTS////////////////////
-        txtcodigofa = new Text("          CODIGO FACTURA          ");
+        txtcodigofa = new Label("          CODIGO FACTURA          ");
         
-        txtfecha = new Text("FECHA");
+        txtfecha = new Label("FECHA");
         
-        codigofa = new TextArea("");
+        codigofa = new TextField("");
         codigofa.selectRange(750, 5);
-        fecha = new TextArea("");
+        fecha = new TextField("");
         fecha.selectRange(750, 5);
         pnlfac = new VBox();
         pnlfac.getChildren().addAll(txtcodigofa,codigofa,txtfecha, fecha);
