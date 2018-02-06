@@ -140,11 +140,14 @@ public class FormMenuPrincipal extends Application {
         
         pntPrincipal = new VBox(10);
         pntPrincipal.getChildren().add(menuPrincipal);
+        pntPrincipal.setBackground(new Background(fondoPrincipal));
         
         Scene scene = new Scene(pntPrincipal, 1200, 720);
 
         primaryStage.setTitle("Papeleria Academica");
-        scene.setFill(Color.BLACK);
+        
+        primaryStage.setMaximized(true);
+        primaryStage.setResizable(false);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
