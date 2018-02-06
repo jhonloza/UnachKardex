@@ -26,7 +26,7 @@ public class FormListProducto extends Application {
     private TableView<Producto> tblProducto;
     private Label titulo;
     private TableColumn<Producto, Integer> cmlCodProducto;
-    private TableColumn<Producto, Categoria> cmlCategoria;
+    private TableColumn<Producto, Categoria> cmlcodCategoria;
     private TableColumn<Producto, String> cmlNombre;
     private TableColumn<Producto, Double> cmprecio;
     private VBox pntPrincipal;
@@ -39,17 +39,17 @@ public class FormListProducto extends Application {
         titulo.setFont(Font.font("ALGERIAN", 25));
         tblProducto = new TableView();
         cmlCodProducto = new TableColumn<>("CODIGO DE PRODUCTO");
-        cmlCategoria = new TableColumn<>("CATEGORIA");
+        cmlcodCategoria = new TableColumn<>("CATEGORIA");
         cmlNombre = new TableColumn<>("Nombre");
         cmprecio = new TableColumn<>("PRECIO");
-        tblProducto.getColumns().addAll(cmlCodProducto, cmlCategoria, cmlNombre, cmprecio);
+        tblProducto.getColumns().addAll(cmlCodProducto, cmlcodCategoria, cmlNombre, cmprecio);
         cargarProducto();
         pntPrincipal = new VBox();
         pntPrincipal.getChildren().addAll(titulo, tblProducto);
         pntPrincipal.setAlignment(Pos.CENTER);
         Scene scene = new Scene(pntPrincipal, 425, 250);
 
-        primaryStage.setTitle("Listado de Proveedores.");
+        primaryStage.setTitle("Listado de Producto.");
         primaryStage.setScene(scene);
         primaryStage.show();
         
@@ -65,10 +65,10 @@ public class FormListProducto extends Application {
 
         try {
             listProducto = proDao.obtener();
-            cmlCodProducto.setCellValueFactory(new PropertyValueFactory<>("CODIGO DE PRODUCTO"));
-            cmlCategoria.setCellValueFactory(new PropertyValueFactory<>("CATEGORIA"));
-            cmlNombre.setCellValueFactory(new PropertyValueFactory<>("NOMBRE"));
-            cmprecio.setCellValueFactory(new PropertyValueFactory<>("PRECIO"));
+            cmlCodProducto.setCellValueFactory(new PropertyValueFactory<>("codProducto"));
+            cmlcodCategoria.setCellValueFactory(new PropertyValueFactory<>("codCategoria"));
+            cmlNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+            cmprecio.setCellValueFactory(new PropertyValueFactory<>("precio"));
             tblProducto.getItems().addAll(listProducto);
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
