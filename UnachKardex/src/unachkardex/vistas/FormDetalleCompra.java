@@ -128,13 +128,13 @@ public class FormDetalleCompra extends Application {
         pnlcontacto.add(email, 3, 0);
         //botones
         pnlBotones=new HBox(20);
-        pnlBotones.getChildren().addAll(btnIngresar,btnLimpiar,btnCancelar);
+        pnlBotones.getChildren().addAll(btnIngresar,btnLimpiar,btnCancelar,btnEliminar);
         pnlBotones.setAlignment(Pos.CENTER);
         //final
         pntPrincipal=new VBox(10);
-        btnEliminar=new Button("Temporal");
-        btnEliminar.setFont(Font.font("Arial Black",40));
-        pntPrincipal.getChildren().addAll(btnEliminar,pnlced,pnlNombApe,pnlFechDir,pnlcontacto,pnlBotones);
+        btnEliminar=new Button("ELIMINAR");
+        //btnEliminar.setFont(Font.font("Arial Black",20));
+        pntPrincipal.getChildren().addAll(pnlced,pnlNombApe,pnlFechDir,pnlcontacto,pnlBotones);
         pntPrincipal.setAlignment(Pos.CENTER);
         pntPrincipal.setPadding(new Insets(25));
         Scene scene = new Scene(pntPrincipal,620,420);
