@@ -120,29 +120,27 @@ public class ImplDetalleVenta implements IDetalleVenta {
 
     @Override
     public ArrayList<DetalleVenta> obtener() throws Exception {
-        DetalleVenta dec = null;
-        ArrayList<DetalleVenta> lstDetalle = new ArrayList<>();
+        ArrayList<DetalleVenta> lstDetalle=new ArrayList<>();
         DetalleVenta detalle = null;
         String sqlC = "SELECT codDetalleVenta, codProducto, codFacturaVenta, cantidad, precioTotal FROM DetalleVenta";
         Conexion con = null;
         try {
             con = new Conexion();
             con.conectar();
-
+            IProducto productoDao = new ImplProducto();
+            Producto produc = null;
+            IFacturaVenta factVenDao = new ImplFacturaVenta();
+            FacturaVenta factVenta = new FacturaVenta();
             ResultSet rst = con.ejecutarQuery(sqlC, null);
             while (rst.next()) {
-                IProducto productoDao = new ImplProducto();
-                Producto produc = null;
-                IFacturaVenta factVentaDao = new ImplFacturaVenta();
-                FacturaVenta fc = null;
-                dec = new DetalleVenta();               
+                detalle = new DetalleVenta();
                 produc = new Producto();
-                fc = new FacturaVenta();
-                dec.setCodDetalleVenta(rst.getInt(1));
+                factVenta = new FacturaVenta();
+                detalle.setCodDetalleVenta(rst.getInt(1));
                 produc = productoDao.obtener(rst.getInt(2));
-                dec.setProducto(produc);
-                fc = factVentaDao.obtener(rst.getInt(3));
-                dec.setFacturaVenta(fc);
+                detalle.setProducto(produc);
+                factVenta = factVenDao.obtener(rst.getInt(3));
+                detalle.setFacturaVenta(factVenta);
                 detalle.setCantidad(rst.getInt(4));
                 detalle.setPrecioTotal(rst.getDouble(5));
                 lstDetalle.add(detalle);

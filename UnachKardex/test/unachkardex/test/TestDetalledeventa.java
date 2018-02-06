@@ -33,16 +33,16 @@ public class TestDetalledeventa {
 //        assertTrue(filas > 0);
 //
 //        //////////////////////////////// obtener por codigo 
-//        DetalleVenta dt = new DetalleVenta();
-//
-//        try {
-//            dt = deveDao.obtener(2);
-//            System.out.println(dt.getCodDetalleVenta() + " " + dt.getProducto().getCodProducto() + " " + dt.getFacturaVenta().getCodFacturaVenta() + " " + dt.getCantidad() + " " + dt.getPrecioTotal());
-//        } catch (Exception e) {
-//            System.out.println("error: " + e.getMessage());
-//        }
-//        assertEquals(dt != null, true);
+        DetalleVenta dt = new DetalleVenta();
 
+        try {
+            dt = deveDao.obtener(1);
+            System.out.println(dt.getCodDetalleVenta() + " " + dt.getProducto().getCodProducto() + " " + dt.getFacturaVenta().getCodFacturaVenta() + " " + dt.getCantidad() + " " + dt.getPrecioTotal());
+        } catch (Exception e) {
+            System.out.println("error: " + e.getMessage());
+        }
+        assertEquals(dt != null, true);
+// OBTENES LISTADO
         ArrayList<DetalleVenta> det = new ArrayList<>();
         try {
             det = deveDao.obtener();
