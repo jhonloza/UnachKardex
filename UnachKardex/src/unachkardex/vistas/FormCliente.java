@@ -28,24 +28,24 @@ import unachkardex.negocio.impl.ImplCliente;
 
 public class FormCliente extends Application {
 
-    private Text txtCedula;
-    private Text txtNombres;
-    private Text txtApellidos;
-    private Text txtFechaNacimiento;
-    private Text txtDireccion;
-    private Text txtTelefono;
-    private Text txtEmail;
+    private Label txtCedula;
+    private Label txtNombres;
+    private Label txtApellidos;
+    private Label txtFechaNacimiento;
+    private Label txtDireccion;
+    private Label txtTelefono;
+    private Label txtEmail;
 
     Image logo;
     ImageView visorlogo;
 
-    private TextArea cedula;
-    private TextArea nombres;
-    private TextArea apellidos;
-    private TextArea fechaNacimiento;
-    private TextArea direccion;
-    private TextArea telefono;
-    private TextArea email;
+    private TextField cedula;
+    private TextField nombres;
+    private TextField apellidos;
+    private TextField fechaNacimiento;
+    private TextField direccion;
+    private TextField telefono;
+    private TextField email;
 
     private Button btnIngresar;
     private Button btnEliminar;
@@ -63,35 +63,36 @@ public class FormCliente extends Application {
     @Override
     public void start(Stage primaryStage) {
         //LABELS DE LOS CAMPOS A USAR
-        txtCedula = new Text("Cedula");
+        txtCedula = new Label("Cedula: ");
         txtCedula.setFont(Font.font("Arial Black", 20));
-        txtCedula.setFill(Color.DARKBLUE);
-        txtNombres = new Text("Nombres");
+        //txtCedula.setFill(Color.DARKBLUE);
+        txtNombres = new Label("Nombres: ");
         txtNombres.setFont(Font.font("Arial Black", 20));
-        txtNombres.setFill(Color.DARKBLUE);
-        txtApellidos = new Text("Apellidos");
+        //txtNombres.setFill(Color.DARKBLUE);
+        txtApellidos = new Label("Apellidos: ");
         txtApellidos.setFont(Font.font("Arial Black", 20));
-        txtApellidos.setFill(Color.DARKBLUE);
-        txtFechaNacimiento = new Text("Fecha de Nacimiento");
+        //txtApellidos.setFill(Color.DARKBLUE);
+        txtFechaNacimiento = new Label("Fecha de Nacimiento: ");
         txtFechaNacimiento.setFont(Font.font("Arial Black", 20));
-        txtFechaNacimiento.setFill(Color.DARKBLUE);
-        txtDireccion = new Text("Direccion");
+        //txtFechaNacimiento.setFill(Color.DARKBLUE);
+        txtDireccion = new Label("Direccion: ");
         txtDireccion.setFont(Font.font("Arial Black", 20));
-        txtDireccion.setFill(Color.DARKBLUE);
-        txtTelefono = new Text("Telefono");
+        //txtDireccion.setFill(Color.DARKBLUE);
+        txtTelefono = new Label("Telefono: ");
         txtTelefono.setFont(Font.font("Arial Black", 20));
-        txtTelefono.setFill(Color.DARKBLUE);
-        txtEmail = new Text("E-mail");
+        //txtTelefono.setFill(Color.DARKBLUE);
+        txtEmail = new Label("E-mail: ");
         txtEmail.setFont(Font.font("Arial Black", 20));
-        txtEmail.setFill(Color.DARKBLUE);
+        //txtEmail.setFill(Color.DARKBLUE);
+        
         //CAJAS DE TEXTO PARA CAMPOS
-        cedula = new TextArea("");
-        nombres = new TextArea("");
-        apellidos = new TextArea("");
-        fechaNacimiento = new TextArea("");
-        direccion = new TextArea("");
-        telefono = new TextArea("");
-        email = new TextArea("");
+        cedula = new TextField("");
+        nombres = new TextField("");
+        apellidos = new TextField("");
+        fechaNacimiento = new TextField("");
+        direccion = new TextField("");
+        telefono = new TextField("");
+        email = new TextField("");
         //BOTONES A USAR
         btnIngresar = new Button("Ingresar");
         btnIngresar.setFont(Font.font("Arial Black", 20));
