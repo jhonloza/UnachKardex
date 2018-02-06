@@ -27,22 +27,22 @@
 //
 //public class FormDetalleCompra extends Poveedor {
 //
-//    private Text txtCedula;
-//    private Text txtNombres;
-//    private Text txtApellidos;
-//    private Text txtFechaNacimiento;
-//    private Text txtDireccion;
-//    private Text txtTelefono;
-//    private Text txtEmail;
+//    private Label txtCedula;
+//    private Label txtNombres;
+//    private Label txtApellidos;
+//    private Label txtFechaNacimiento;
+//    private Label txtDireccion;
+//    private Label txtTelefono;
+//    private Label txtEmail;
 //
 //    
-//    private TextArea cedula;
-//    private TextArea nombres;
-//    private TextArea apellidos;
-//    private TextArea fechaNacimiento;
-//    private TextArea direccion;
-//    private TextArea telefono;
-//    private TextArea email;
+//    private TextField cedula;
+//    private TextField nombres;
+//    private TextField apellidos;
+//    private TextField fechaNacimiento;
+//    private TextField direccion;
+//    private TextField telefono;
+//    private TextField email;
 //    
 //    private Button btnIngresar;
 //    private Button btnEliminar;
@@ -60,29 +60,29 @@
 //    @Override
 //    public void start(Stage primaryStage) {
 //        //LABELS DE LOS CAMPOS A USAR
-//        txtCedula = new Text("Cedula");
+//        txtCedula = new Label("Cedula");
 //        txtCedula.setFont(Font.font("Arial Black", 20));
 //        txtCedula.setFill(Color.AQUA);
 //        txtNombres = new Text("Nombres");
 //        txtNombres.setFont(Font.font("Arial Black", 20));
-//        txtApellidos = new Text("Apellidos");
+//        txtApellidos = new Label("Apellidos");
 //        txtApellidos.setFont(Font.font("Arial Black", 20));
-//        txtFechaNacimiento = new Text("Fecha de Nacimiento");
+//        txtFechaNacimiento = new Label("Fecha de Nacimiento");
 //        txtFechaNacimiento.setFont(Font.font("Arial Black", 20));
-//        txtDireccion = new Text("Direccion");
+//        txtDireccion = new Label("Direccion");
 //        txtDireccion.setFont(Font.font("Arial Black", 20));
-//        txtTelefono = new Text("Telefono");
+//        txtTelefono = new Label("Telefono");
 //        txtTelefono.setFont(Font.font("Arial Black", 20));
-//        txtEmail = new Text("E-mail");
+//        txtEmail = new Label("E-mail");
 //        txtEmail.setFont(Font.font("Arial Black", 20));
 //        //CAJAS DE TEXTO PARA CAMPOS
-//        cedula = new TextArea("");
-//        nombres = new TextArea("");
-//        apellidos = new TextArea("");
-//        fechaNacimiento = new TextArea("");
-//        direccion = new TextArea("");
-//        telefono = new TextArea("");
-//        email = new TextArea("");
+//        cedula = new TextField("");
+//        nombres = new TextField("");
+//        apellidos = new TextField("");
+//        fechaNacimiento = new TextField("");
+//        direccion = new TextField("");
+//        telefono = new TextField("");
+//        email = new TextField("");
 //        //BOTONES A USAR
 //        btnIngresar = new Button("Ingresar");
 //        btnIngresar.setFont(Font.font("Arial Black", 20));
