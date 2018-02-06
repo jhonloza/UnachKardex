@@ -42,9 +42,5 @@ public class FacturaVenta {
         this.cliente = cliente;
     }
 
-   
-    
-    
-    
-    
+  
 }
