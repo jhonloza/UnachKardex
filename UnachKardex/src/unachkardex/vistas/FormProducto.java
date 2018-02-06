@@ -30,16 +30,16 @@ import unachkardex.negocio.impl.ImplCategoria;
 
 public class FormProducto extends Application {
 
-    private Text txtCodigo;
-    private Text txtCategoria;
+    private Label txtCodigo;
+    private Label txtCategoria;
 
-    private Text txtNombre;
-    private Text txtPrecio;
+    private Label txtNombre;
+    private Label txtPrecio;
 
-    private TextArea codigo;
-    private TextArea nombre;
-    private TextArea precio;
-    private TextArea descrCategoria;
+    private TextField codigo;
+    private TextField nombre;
+    private TextField precio;
+    private TextField descrCategoria;
 
     private ComboBox<Categoria> cbxCategoria;
     private ObservableList<Categoria> items = FXCollections.observableArrayList();
@@ -59,24 +59,24 @@ public class FormProducto extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        txtCodigo = new Text("Codigo");
+        txtCodigo = new Label("Codigo");
         txtCodigo.setFont(javafx.scene.text.Font.font("Arial Black", 20));
-        codigo = new TextArea("");
-        txtNombre = new Text("Nombre");
+        codigo = new TextField("");
+        txtNombre = new Label("Nombre");
         txtNombre.setFont(javafx.scene.text.Font.font("Arial Black", 20));
-        nombre = new TextArea("");
-        txtPrecio = new Text("Precio");
+        nombre = new TextField("");
+        txtPrecio = new Label("Precio");
         txtPrecio.setFont(javafx.scene.text.Font.font("Arial Black", 20));
-        precio = new TextArea("");
+        precio = new TextField("");
 
-        txtCategoria = new Text("Categoria");
+        txtCategoria = new Label("Categoria");
         txtCategoria.setFont(javafx.scene.text.Font.font("Arial Black", 20));
         
         cargarCategorias();
         cbxCategoria = new ComboBox<Categoria>(items);
         cbxCategoria.setValue(items.get(0));
         cbxCategoria.setVisible(true);
-        descrCategoria = new TextArea("");
+        descrCategoria = new TextField("");
         
         btnAceptar = new Button("Aceptar");
         btnAceptar.setFont(Font.font("Arial Black", 20));
