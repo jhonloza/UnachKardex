@@ -137,7 +137,8 @@ public class FormProveedor extends Application {
         pntPrincipal=new VBox(10);
         pntPrincipal.getChildren().addAll(pnlSup,pnlInt,pnlBotones);
         pntPrincipal.setPadding(new Insets(10));
-        Scene scene = new Scene(pntPrincipal, 400, 320);
+        Scene scene = new Scene(pntPrincipal, 400, 360);
+        primaryStage.setResizable(false);
         primaryStage.setTitle("Proveedor");
         primaryStage.setScene(scene);
         primaryStage.show();
