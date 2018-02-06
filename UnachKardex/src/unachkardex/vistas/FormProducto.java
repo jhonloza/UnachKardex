@@ -24,9 +24,12 @@ import javafx.geometry.Pos;
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
 import javafx.stage.StageStyle;
-import unachkardex.negocio.dao.ICategoria;
-import unachkardex.negocio.entidades.Categoria;
-import unachkardex.negocio.impl.ImplCategoria;
+import unachkardex.negocio.dao.*;
+
+import unachkardex.negocio.entidades.*;
+
+import unachkardex.negocio.impl.*;
+
 
 public class FormProducto extends Application {
 
@@ -80,6 +83,12 @@ public class FormProducto extends Application {
         
         btnAceptar = new Button("Aceptar");
         btnAceptar.setFont(Font.font("Arial Black", 20));
+        btnAceptar.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                btnAceptarEventHandler(event);
+            }
+        });
         btnModificar = new Button("Modificar");
         btnModificar.setFont(Font.font("Arial Black", 20));
         btnEliminar = new Button("Eliminar");
@@ -131,6 +140,27 @@ public class FormProducto extends Application {
 
     public static void main(String[] args) {
         launch(args);
+    }
+    
+     public void btnAceptarEventHandler(ActionEvent event) {
+        IProducto proDao = new ImplProducto();
+        try {
+            Producto nuevoPro = new Producto();
+            nuevoPro.setCodProducto(Integer.parseInt(codigo.getText()));
+          // nuevoPro.setCategoria((Categoria) cbxCategoria.getSelectionModel().getSelectedIndex());
+            
+            nuevoPro.setNombre(nombre.getText());
+            nuevoPro.setPrecio(Double.parseDouble(precio.getText()));
+            
+
+            if (proDao.insertar(nuevoPro) > 0) {
+                System.out.println("Ingreso Correcto..");
+            } else {
+                System.out.println("Error de Ingreso..");
+            }
+        } catch (Exception e) {
+            System.out.println("Error de Ingreso" + e.getMessage());
+        }
     }
 
     public void cargarCategorias() {
