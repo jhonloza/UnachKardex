@@ -25,47 +25,47 @@ import javafx.scene.text.Text;
 
 public class FormMenuPrincipal extends Application {
 
-    Image fondo;
-    ImageView visorFondo;
+    private Image fondo;
+    private ImageView visorFondo;
 
-    VBox pntPrincipal;
-    MenuBar menuPrincipal;
-    Menu inicio;
-    Menu cliente;
-    Menu proveedor;
-    Menu FacturaVenta;
-    Menu facturaCompra;
-    Menu kardex;
+    private VBox pntPrincipal;
+    private MenuBar menuPrincipal;
+    private Menu inicio;
+    private Menu cliente;
+    private Menu proveedor;
+    private Menu FacturaVenta;
+    private Menu facturaCompra;
+    private Menu kardex;
     //inicio
-    MenuItem login;
-    MenuItem Salir;
+    private MenuItem login;
+    private MenuItem Salir;
     //cliente
-    MenuItem newCliente;
-    MenuItem modCliente;
-    MenuItem delCliente;
-    MenuItem infCliente;
-    MenuItem listCliente;
+    private MenuItem newCliente;
+    private MenuItem modCliente;
+    private MenuItem delCliente;
+    private MenuItem infCliente;
+    private MenuItem listCliente;
     //proveedor
-    MenuItem newProveedor;
-    MenuItem modProveedor;
-    MenuItem delProveedor;
-    MenuItem infProveedor;
-    MenuItem listProveedor;
+    private MenuItem newProveedor;
+    private MenuItem modProveedor;
+    private MenuItem delProveedor;
+    private MenuItem infProveedor;
+    private MenuItem listProveedor;
     //FacturaVenta
-    MenuItem newFacVenta;
-    MenuItem modFacVenta;
-    MenuItem delFacVenta;
-    MenuItem infFacVenta;
-    MenuItem listFacVenta;
+    private MenuItem newFacVenta;
+    private MenuItem modFacVenta;
+    private MenuItem delFacVenta;
+    private MenuItem infFacVenta;
+    private MenuItem listFacVenta;
     //facturCompra
-    MenuItem newFacCompra;
-    MenuItem modFacCompra;
-    MenuItem delFacCompra;
-    MenuItem infFacCompra;
-    MenuItem listFacCompra;
+    private MenuItem newFacCompra;
+    private MenuItem modFacCompra;
+    private MenuItem delFacCompra;
+    private MenuItem infFacCompra;
+    private MenuItem listFacCompra;
     //kardex
-    MenuItem kardexMensual;
-    MenuItem kardexAnual;
+    private MenuItem kardexMensual;
+    private MenuItem kardexAnual;
     
     //cliente Nuevo
     
@@ -140,11 +140,14 @@ public class FormMenuPrincipal extends Application {
         
         pntPrincipal = new VBox(10);
         pntPrincipal.getChildren().add(menuPrincipal);
+        pntPrincipal.setBackground(new Background(fondoPrincipal));
         
         Scene scene = new Scene(pntPrincipal, 1200, 720);
 
         primaryStage.setTitle("Papeleria Academica");
-        scene.setFill(Color.BLACK);
+        
+        primaryStage.setMaximized(true);
+        primaryStage.setResizable(false);
         primaryStage.setScene(scene);
         primaryStage.show();
     }

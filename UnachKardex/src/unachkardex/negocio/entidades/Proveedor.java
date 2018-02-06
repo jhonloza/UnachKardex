@@ -58,5 +58,9 @@ public class Proveedor {
     public void seteMail(String eMail) {
         this.eMail = eMail;
     }
+    @Override
+    public String toString() {
+        return nombre; 
+    }
     
 }

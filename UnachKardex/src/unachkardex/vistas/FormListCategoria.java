@@ -63,9 +63,9 @@ public class FormListCategoria extends Application {
 
         try {
             listCategorias = categDao.obtener();
-            cmlCodCategoria.setCellValueFactory(new PropertyValueFactory<>("Codigo"));
+            cmlCodCategoria.setCellValueFactory(new PropertyValueFactory<>("codCategoria"));
             cmlNombreCategoria.setCellValueFactory(new PropertyValueFactory<>("nombre"));
-            cmlDescrCategoria.setCellValueFactory(new PropertyValueFactory<>("Descripcion"));
+            cmlDescrCategoria.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
             tblCategoria.getItems().addAll(listCategorias);
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
