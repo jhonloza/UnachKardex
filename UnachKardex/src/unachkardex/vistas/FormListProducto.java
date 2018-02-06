@@ -38,10 +38,10 @@ public class FormListProducto extends Application {
         titulo = new Label("LISTADO DE PRODUCTOS");
         titulo.setFont(Font.font("ALGERIAN", 25));
         tblProducto = new TableView();
-        cmlCodProducto = new TableColumn<>("CODIGO DE PRODUCTO");
-        cmlcodCategoria = new TableColumn<>("CATEGORIA");
+        cmlCodProducto = new TableColumn<>("Codigo Producto");
+        cmlcodCategoria = new TableColumn<>("Categoria");
         cmlNombre = new TableColumn<>("Nombre");
-        cmprecio = new TableColumn<>("PRECIO");
+        cmprecio = new TableColumn<>("Precio");
         tblProducto.getColumns().addAll(cmlCodProducto, cmlcodCategoria, cmlNombre, cmprecio);
         cargarProducto();
         pntPrincipal = new VBox();
@@ -66,7 +66,7 @@ public class FormListProducto extends Application {
         try {
             listProducto = proDao.obtener();
             cmlCodProducto.setCellValueFactory(new PropertyValueFactory<>("codProducto"));
-            cmlcodCategoria.setCellValueFactory(new PropertyValueFactory<>("codCategoria"));
+            cmlcodCategoria.setCellValueFactory(new PropertyValueFactory<>("categoria"));
             cmlNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
             cmprecio.setCellValueFactory(new PropertyValueFactory<>("precio"));
             tblProducto.getItems().addAll(listProducto);
