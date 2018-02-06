@@ -103,7 +103,7 @@ public class ImplCliente  implements ICliente{
     @Override
     public Cliente obtener(String cedula) throws Exception {
         Cliente nCliente = null;
-        String sqlC = "SELECT cedula, nombre, apellido, direccion, telefono, Email, fechaNac FROM Cliente WHERE cedula=?";
+        String sqlC = "SELECT cedula, nombre, apellido, direccion, telefono, eMail, fechaNac FROM Cliente WHERE cedula=?";
         ArrayList<Parametro> lisParametros = new ArrayList<>();
         lisParametros.add(new Parametro(1, cedula));
         Conexion con = null;
