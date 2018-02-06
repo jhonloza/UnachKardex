@@ -23,22 +23,22 @@ import javafx.scene.text.Text;
 
 public class FormDetalleCompra extends Application {
 
-    private Label txtCedula;
-    private Label txtNombres;
-    private Label txtApellidos;
-    private Label txtFechaNacimiento;
-    private Label txtDireccion;
-    private Label txtTelefono;
-    private Label txtEmail;
+    private Label txtCodigoDC;
+    private Label txtProducto;
+    private Label txtFacturaC;
+  
+    private Label txtCantidad;
+    private Label txtPrecioTotal;
+   
 
     
-    private TextField cedula;
-    private TextField nombres;
-    private TextField apellidos;
-    private TextField fechaNacimiento;
-    private TextField direccion;
-    private TextField telefono;
-    private TextField email;
+    private TextField codigodc;
+    private TextField producto;
+    private TextField facturac;
+    
+    private TextField cantidad;
+    private TextField preciototal;
+  
     
     private Button btnIngresar;
     private Button btnEliminar;
@@ -57,29 +57,27 @@ public class FormDetalleCompra extends Application {
     
     public void start(Stage primaryStage) {
         //LABELS DE LOS CAMPOS A USAR
-        txtCedula = new Label("Cedula");
-        txtCedula.setFont(Font.font("Arial Black", 20));
-       // txtCedula.setFill(Color.AQUA);
-        txtNombres = new Label("Nombres");
-        txtNombres.setFont(Font.font("Arial Black", 20));
-        txtApellidos = new Label("Apellidos");
-        txtApellidos.setFont(Font.font("Arial Black", 20));
-        txtFechaNacimiento = new Label("Fecha de Nacimiento");
-        txtFechaNacimiento.setFont(Font.font("Arial Black", 20));
-        txtDireccion = new Label("Direccion");
-        txtDireccion.setFont(Font.font("Arial Black", 20));
-        txtTelefono = new Label("Telefono");
-        txtTelefono.setFont(Font.font("Arial Black", 20));
-        txtEmail = new Label("E-mail");
-        txtEmail.setFont(Font.font("Arial Black", 20));
+        txtCodigoDC = new Label("Codigo Detalle C");
+        txtCodigoDC.setFont(Font.font("Arial Blaomprack", 20));
+       // txtCodigoDC.setFill(Color.AQUA);
+        txtProducto = new Label("Producto");
+        txtProducto.setFont(Font.font("Arial Black", 20));
+        txtFacturaC = new Label("Factura Compra");
+        txtFacturaC.setFont(Font.font("Arial Black", 20));
+        
+        txtCantidad = new Label("Cantidad");
+        txtCantidad.setFont(Font.font("Arial Black", 20));
+        txtPrecioTotal = new Label("Precio Total");
+        txtPrecioTotal.setFont(Font.font("Arial Black", 20));
+       
         //CAJAS DE TEXTO PARA CAMPOS
-        cedula = new TextField("");
-        nombres = new TextField("");
-        apellidos = new TextField("");
-        fechaNacimiento = new TextField("");
-        direccion = new TextField("");
-        telefono = new TextField("");
-        email = new TextField("");
+        codigodc = new TextField("");
+        producto = new TextField("");
+        facturac = new TextField("");
+        
+        cantidad = new TextField("");
+        preciototal = new TextField("");
+        
         //BOTONES A USAR
         btnIngresar = new Button("Ingresar");
         btnIngresar.setFont(Font.font("Arial Black", 20));
@@ -100,32 +98,30 @@ public class FormDetalleCompra extends Application {
         //INGRESO EN PANELES
         //SUPERIOR
         pnlced=new HBox(20);
-        pnlced.getChildren().addAll(txtCedula, cedula);
+        pnlced.getChildren().addAll(txtCodigoDC, codigodc);
         //nombre
         pnlNombApe=new GridPane(); 
         pnlNombApe.setHgap(20);
         pnlNombApe.setVgap(20);
-        pnlNombApe.add(txtNombres, 0, 0);
-        pnlNombApe.add(nombres, 1, 0);
-        pnlNombApe.add(txtApellidos, 2, 0);
-        pnlNombApe.add(apellidos, 3, 0);
-        //fecha y direccion
+        pnlNombApe.add(txtProducto, 0, 0);
+        pnlNombApe.add(producto, 1, 0);
+        pnlNombApe.add(txtFacturaC, 2, 0);
+        pnlNombApe.add(facturac, 3, 0);
+        //fecha y cantidad
         pnlFechDir=new GridPane();
         pnlFechDir.setHgap(20);
         pnlFechDir.setVgap(10);
-        pnlFechDir.add(txtFechaNacimiento, 0, 0);
-        pnlFechDir.add(fechaNacimiento, 1, 0);
-        pnlFechDir.add(txtDireccion, 0, 1);
-        pnlFechDir.add(direccion, 1, 1);
+       
+        pnlFechDir.add(txtCantidad, 0, 1);
+        pnlFechDir.add(cantidad, 1, 1);
         
         //Contacto        
         pnlcontacto=new GridPane();
         pnlcontacto.setHgap(20);
         pnlcontacto.setVgap(20);
-        pnlcontacto.add(txtTelefono, 0, 0);
-        pnlcontacto.add(telefono, 1, 0);
-        pnlcontacto.add(txtEmail, 2, 0);
-        pnlcontacto.add(email, 3, 0);
+        pnlcontacto.add(txtPrecioTotal, 0, 0);
+        pnlcontacto.add(preciototal, 1, 0);
+        
         //botones
         pnlBotones=new HBox(20);
         pnlBotones.getChildren().addAll(btnIngresar,btnLimpiar,btnCancelar,btnEliminar);
