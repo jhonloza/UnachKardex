@@ -27,11 +27,11 @@ public class FormListProveedor extends Application {
     
     private TableView<Proveedor> tblProveedor;
     private Label titulo;
-    private TableColumn<Proveedor, Integer> cmlRuc;
+    private TableColumn<Proveedor, String> cmlRuc;
     private TableColumn<Proveedor, String> cmlNombre;
     private TableColumn<Proveedor, String> cmlDireccion;
     private TableColumn<Proveedor, String> cmlTelefono;
-    private TableColumn<Proveedor, String> cmlEmail;
+    private TableColumn<Proveedor, String> cmleMail;
     private VBox pntPrincipal;
     
     @Override
@@ -46,10 +46,10 @@ public class FormListProveedor extends Application {
         cmlDireccion.setMaxWidth(250);
         cmlDireccion.setMinWidth(250);
         cmlTelefono = new TableColumn<>("Telefono");
-        cmlEmail = new TableColumn<>("eMail");
-        cmlEmail.setMaxWidth(250);
-        cmlEmail.setMinWidth(250);
-        tblProveedor.getColumns().addAll(cmlRuc, cmlNombre, cmlDireccion,cmlTelefono,cmlEmail);
+        cmleMail = new TableColumn<>("Email");
+        cmleMail.setMaxWidth(250);
+        cmleMail.setMinWidth(250);
+        tblProveedor.getColumns().addAll(cmlRuc, cmlNombre, cmlDireccion,cmlTelefono,cmleMail);
         cargarProveedor();
         pntPrincipal = new VBox();
         pntPrincipal.getChildren().addAll(titulo, tblProveedor);
@@ -71,12 +71,13 @@ public class FormListProveedor extends Application {
 
         try {
             listProveedor = proDao.obtener();
-            cmlRuc.setCellValueFactory(new PropertyValueFactory<>("Ruc"));
-            cmlNombre.setCellValueFactory(new PropertyValueFactory<>("Nombre"));
-            cmlDireccion.setCellValueFactory(new PropertyValueFactory<>("Direccion"));
-            cmlTelefono.setCellValueFactory(new PropertyValueFactory<>("Telefono"));
-            cmlEmail.setCellValueFactory(new PropertyValueFactory<>("eMail"));
+            cmlRuc.setCellValueFactory(new PropertyValueFactory<>("ruc"));
+            cmlNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+            cmlDireccion.setCellValueFactory(new PropertyValueFactory<>("direccion"));
+            cmlTelefono.setCellValueFactory(new PropertyValueFactory<>("telefono"));
+            cmleMail.setCellValueFactory(new PropertyValueFactory<>("eMail"));
             tblProveedor.getItems().addAll(listProveedor);
+            
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
             Group ptnError = new Group();
