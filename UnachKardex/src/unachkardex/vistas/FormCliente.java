@@ -20,13 +20,14 @@ import javafx.scene.image.ImageView;
 import javafx.event.Event;
 import javafx.event.EventDispatchChain;
 import javafx.event.EventDispatcher;
+import javafx.scene.*;
 import javafx.scene.Node;
 import javafx.scene.text.Text;
 import unachkardex.negocio.dao.ICliente;
 import unachkardex.negocio.entidades.Cliente;
 import unachkardex.negocio.impl.ImplCliente;
 
-public class FormCliente extends Application {
+public class FormCliente extends Region {
 
     private Label txtCedula;
     private Label txtNombres;
@@ -60,8 +61,8 @@ public class FormCliente extends Application {
     private HBox pnlBotones;
     private VBox pntPrincipal;
 
-    @Override
-    public void start(Stage primaryStage) {
+    public void FormCliente() throws Exception {
+        
         //LABELS DE LOS CAMPOS A USAR
         txtCedula = new Label("Cedula: ");
         txtCedula.setFont(Font.font("Arial Black", 20));
@@ -143,8 +144,6 @@ public class FormCliente extends Application {
         pnlBotones.setAlignment(Pos.CENTER);
         //final
         pntPrincipal = new VBox(10);
-//        btnEliminar=new Button("Temporal");
-//        btnEliminar.setFont(Font.font("Arial Black",40));
         logo = new Image("file:src\\unachkardex\\multimedia\\logo.jpg");
         visorlogo = new ImageView();
         visorlogo.setImage(logo);
@@ -153,18 +152,14 @@ public class FormCliente extends Application {
         pntPrincipal.getChildren().addAll(visorlogo, pnlced, pnlNombApe, pnlFechDir, pnlcontacto, pnlBotones);
         pntPrincipal.setAlignment(Pos.CENTER);
         pntPrincipal.setPadding(new Insets(25));
-        
-        
         Scene scene = new Scene(pntPrincipal, 710, 520);
-        primaryStage.setResizable(false);
-        primaryStage.setTitle("Cliente");
-        primaryStage.setScene(scene);
-        primaryStage.show();
     }
 
-    public static void main(String[] args) {
-        launch(args);
+    private class Delta {
+
+        double x, y;
     }
+
     
     public void btnIngresarEventHandler(ActionEvent event){
         ICliente clienteDao=new ImplCliente();

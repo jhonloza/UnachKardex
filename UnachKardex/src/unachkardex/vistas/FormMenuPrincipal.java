@@ -15,6 +15,8 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.geometry.*;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.event.Event;
@@ -28,7 +30,7 @@ public class FormMenuPrincipal extends Application {
     private Image fondo;
     private ImageView visorFondo;
 
-    private VBox pntPrincipal;
+    private BorderPane pntPrincipal;
     private MenuBar menuPrincipal;
     private Menu inicio;
     private Menu cliente;
@@ -66,9 +68,8 @@ public class FormMenuPrincipal extends Application {
     //kardex
     private MenuItem kardexMensual;
     private MenuItem kardexAnual;
-    
+
     //cliente Nuevo
-    
     private BackgroundImage fondoPrincipal;
 
     @Override
@@ -96,7 +97,12 @@ public class FormMenuPrincipal extends Application {
         newCliente.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                nClienteEventHandler(event);
+                try {
+                    Pane clienteNuevo=new Pane();
+                    pntPrincipal.setCenter(nClienteEventHandler(event));
+                } catch (Exception ex) {
+                    Logger.getLogger(FormMenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
         modCliente = new MenuItem("Modificar Cliente");
@@ -136,16 +142,17 @@ public class FormMenuPrincipal extends Application {
 
         menuPrincipal.getMenus().addAll(inicio, cliente, proveedor, FacturaVenta, facturaCompra, kardex);
 
-        fondoPrincipal=new BackgroundImage(fondo, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.ROUND, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
-        
-        pntPrincipal = new VBox(10);
-        pntPrincipal.getChildren().add(menuPrincipal);
+        fondoPrincipal = new BackgroundImage(fondo, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.ROUND, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+
+        pntPrincipal = new BorderPane();
+        pntPrincipal.setTop(menuPrincipal);
+
         pntPrincipal.setBackground(new Background(fondoPrincipal));
-        
+
         Scene scene = new Scene(pntPrincipal, 1200, 720);
 
         primaryStage.setTitle("Papeleria Academica");
-        
+
         primaryStage.setMaximized(true);
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);
@@ -156,11 +163,14 @@ public class FormMenuPrincipal extends Application {
         launch(args);
     }
 
-    public void mnSalirEventHandler(ActionEvent event){
+    public void mnSalirEventHandler(ActionEvent event) {
         System.exit(0);
     }
-    public void nClienteEventHandler(ActionEvent event){
-        FormCliente nCliente=new FormCliente();
-//        pntPrincipal.getChildren().add(nCliente);
+
+    public FormCliente nClienteEventHandler(ActionEvent event) throws Exception {
+        FormCliente nuevoCliente = new FormCliente();
+        Stage clienteStage = new Stage();
+//        nuevoCliente.start(clienteStage);
+        return nuevoCliente;
     }
 }
