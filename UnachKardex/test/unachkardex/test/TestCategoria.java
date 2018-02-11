@@ -18,7 +18,7 @@ public class TestCategoria {
         // TEST INSERTAR
 
         int filas = 0;
-        Categoria categoria = new Categoria(4, "cualquier cosa", "ni idea");
+        Categoria categoria = new Categoria(5, "cualquier cosa", "ni idea");
         try {
             filas = categoriaDao.insertar(categoria);
             System.out.println("Ingreso de " + filas + " Filas Correctas");
@@ -29,14 +29,14 @@ public class TestCategoria {
 
         //TEST OBTENER POR CODIGO
         
-//        Categoria categori = new Categoria();
-//        try {
-//            categori = categoriaDao.obtener(1);
-//            System.out.println(categori.getCodCategoria() + "    " + categori.getNombre() + "    " + categori.getDescripcion());
-//        } catch (Exception e) {
-//            System.out.println("Error: "+e.getMessage());
-//        }
-//        assertEquals(categori!=null, true);
+        Categoria categori = new Categoria();
+        try {
+            categori = categoriaDao.obtener(1);
+            System.out.println(categori.getCodCategoria() + "    " + categori.getNombre() + "    " + categori.getDescripcion());
+        } catch (Exception e) {
+            System.out.println("Error: "+e.getMessage());
+        }
+        assertEquals(categori!=null, true);
         
         //TEST LISTADO
         

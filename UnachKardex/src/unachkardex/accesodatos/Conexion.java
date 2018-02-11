@@ -2,11 +2,8 @@ package unachkardex.accesodatos;
 
 import java.sql.*;
 import java.util.*;
-import java.util.Date;
 
 public class Conexion {
-
-    Scanner entrada = new Scanner(System.in);
     String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
     String url = "jdbc:sqlserver://localhost:1433;databaseName=Proyecto";
     String usuario = "kardex2018";
