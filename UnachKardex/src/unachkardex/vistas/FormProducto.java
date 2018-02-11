@@ -1,38 +1,35 @@
 package unachkardex.vistas;
 
-import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
+import javafx.application.*;
+import javafx.event.*;
+import javafx.scene.*;
+import javafx.scene.layout.*;
 import java.util.*;
-import javafx.stage.Window;
 import javafx.scene.text.*;
 import javafx.scene.paint.*;
-import java.lang.reflect.Field;
-
-import java.text.DateFormat;
-import java.text.MessageFormat;
-import javafx.beans.InvalidationListener;
-import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
+import java.lang.reflect.*;
+import java.text.*;
+import javafx.beans.*;
 import javafx.collections.*;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.layout.*;
+import javafx.geometry.*;
 import javafx.scene.control.*;
-import javafx.stage.StageStyle;
+import javafx.stage.*;
 import unachkardex.negocio.dao.*;
-
 import unachkardex.negocio.entidades.*;
-
 import unachkardex.negocio.impl.*;
+import unachkardex.accesodatos.*;
+import javafx.scene.image.*;
+import unachkardex.negocio.dao.*;
+import unachkardex.negocio.entidades.*;
+import unachkardex.negocio.impl.*;
+import unachkardex.accesodatos.*;
 
 
 public class FormProducto extends Application {
 
+    private Image icono;
+    private ImageView visor;
+    
     private Label txtCodigo;
     private Label txtCategoria;
 
