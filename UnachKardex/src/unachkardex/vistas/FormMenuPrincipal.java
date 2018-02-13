@@ -63,8 +63,10 @@ public class FormMenuPrincipal extends Application{
         private MenuItem kardexMensual;
         private MenuItem kardexAnual;
     private BorderPane pntPrincipal;
+    private Pane escritorio;
     @Override
     public void start(Stage primaryStage) throws Exception {
+        escritorio=new Pane();
         kardexMensual=new MenuItem("Kardex Mensual");
         kardexAnual=new MenuItem("Kardex Anual");
           kardex=new Menu("Kardex");
@@ -120,7 +122,8 @@ public class FormMenuPrincipal extends Application{
         
         pntPrincipal=new BorderPane();
         pntPrincipal.setTop(BarraMenu);
-        pntPrincipal.setBackground(new Background(new BackgroundImage(new Image("file:src\\unachkardex\\multimedia\\FondoMain.jpg"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1280, 720, false, false, false, false))));
+        pntPrincipal.setCenter(escritorio);
+        escritorio.setBackground(new Background(new BackgroundImage(new Image("file:src\\unachkardex\\multimedia\\FondoMain.jpg"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1280, 720, false, false, false, false))));
         Scene scnPrincipal=new Scene(pntPrincipal, 1280, 720);
         primaryStage.setTitle("Sistema de facturacion");
         primaryStage.setMaxHeight(720);
@@ -166,7 +169,7 @@ public class FormMenuPrincipal extends Application{
                 Pane categoriaNueva=new Pane();
                 categoriaNueva.getChildren().add(nCategEventHandler(event));
                 categoriaNueva.setPadding(new Insets(5));
-                pntPrincipal.setCenter(categoriaNueva);
+                escritorio.getChildren().add(categoriaNueva);
             }
         });
 //        modificarCategoria
