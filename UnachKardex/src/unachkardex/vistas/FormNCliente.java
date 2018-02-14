@@ -1,33 +1,26 @@
 package unachkardex.vistas;
 
-import com.sun.javafx.geom.Area;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.text.*;
-import javafx.scene.effect.*;
-import javafx.scene.paint.*;
-import javafx.scene.control.*;
-import javafx.scene.layout.*;
-import javafx.stage.Stage;
-import javafx.geometry.*;
-import java.util.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.event.Event;
-import javafx.event.EventDispatchChain;
-import javafx.event.EventDispatcher;
+import javafx.application.*;
+import javafx.event.*;
 import javafx.scene.*;
-import javafx.scene.Node;
-import javafx.scene.text.Text;
-import unachkardex.negocio.dao.ICliente;
-import unachkardex.negocio.entidades.Cliente;
-import unachkardex.negocio.impl.ImplCliente;
+import javafx.scene.layout.*;
+import java.util.*;
+import javafx.scene.text.*;
+import javafx.scene.paint.*;
+import java.lang.reflect.*;
+import java.text.*;
+import javafx.beans.*;
+import javafx.collections.*;
+import javafx.geometry.*;
+import javafx.scene.control.*;
+import javafx.stage.*;
+import javafx.scene.image.*;
+import unachkardex.negocio.dao.*;
+import unachkardex.negocio.entidades.*;
+import unachkardex.negocio.impl.*;
+import unachkardex.accesodatos.*;
 
-public class FormCliente extends Region {
+public class FormNCliente{
 
     private Label txtCedula;
     private Label txtNombres;
@@ -36,10 +29,10 @@ public class FormCliente extends Region {
     private Label txtDireccion;
     private Label txtTelefono;
     private Label txtEmail;
-
-    Image logo;
-    ImageView visorlogo;
-
+    private Image pFondo;
+    private BackgroundImage fondo;
+    private Image logo;
+    private ImageView visorlogo;
     private TextField cedula;
     private TextField nombres;
     private TextField apellidos;
@@ -47,22 +40,18 @@ public class FormCliente extends Region {
     private TextField direccion;
     private TextField telefono;
     private TextField email;
-
     private Button btnIngresar;
-    private Button btnEliminar;
-    private Button btnModificar;
     private Button btnLimpiar;
-    private Button btnCancelar;
-
     private HBox pnlced;
     private GridPane pnlNombApe;
     private GridPane pnlFechDir;
     private GridPane pnlcontacto;
     private HBox pnlBotones;
     private VBox pntPrincipal;
-
-    public void FormCliente() throws Exception {
-        
+    
+    public FormNCliente(){
+        pFondo=new Image("file:src\\unachkardex\\multimedia\\FondoSubVentanas.jpg");
+        fondo=new BackgroundImage(pFondo, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         //LABELS DE LOS CAMPOS A USAR
         txtCedula = new Label("Cedula: ");
         txtCedula.setFont(Font.font("Arial Black", 20));
@@ -103,12 +92,8 @@ public class FormCliente extends Region {
                 btnIngresarEventHandler(event);
             }
         });
-        
-        
         btnLimpiar = new Button("Limpiar");
         btnLimpiar.setFont(Font.font("Arial Black", 20));
-        btnCancelar = new Button("Cancelar");
-        btnCancelar.setFont(Font.font("Arial Black", 20));
         //INGRESO EN PANELES
         //SUPERIOR
         pnlced = new HBox(20);
@@ -129,7 +114,6 @@ public class FormCliente extends Region {
         pnlFechDir.add(fechaNacimiento, 1, 0);
         pnlFechDir.add(txtDireccion, 0, 1);
         pnlFechDir.add(direccion, 1, 1);
-
         //Contacto        
         pnlcontacto = new GridPane();
         pnlcontacto.setHgap(20);
@@ -140,7 +124,7 @@ public class FormCliente extends Region {
         pnlcontacto.add(email, 3, 0);
         //botones
         pnlBotones = new HBox(20);
-        pnlBotones.getChildren().addAll(btnIngresar, btnLimpiar, btnCancelar);
+        pnlBotones.getChildren().addAll(btnIngresar, btnLimpiar);
         pnlBotones.setAlignment(Pos.CENTER);
         //final
         pntPrincipal = new VBox(10);
@@ -151,15 +135,11 @@ public class FormCliente extends Region {
         visorlogo.setPreserveRatio(true);
         pntPrincipal.getChildren().addAll(visorlogo, pnlced, pnlNombApe, pnlFechDir, pnlcontacto, pnlBotones);
         pntPrincipal.setAlignment(Pos.CENTER);
-        pntPrincipal.setPadding(new Insets(25));
-        Scene scene = new Scene(pntPrincipal, 710, 520);
+        pntPrincipal.setPadding(new Insets(10));
+        pntPrincipal.setBackground(new Background(fondo));
+        pntPrincipal.setStyle("-fx-padding: 10; -fx-border-color: mediumblue; -fx-border-width: 2px");
     }
-
-    private class Delta {
-
-        double x, y;
-    }
-
+    
     
     public void btnIngresarEventHandler(ActionEvent event){
         ICliente clienteDao=new ImplCliente();
@@ -187,5 +167,10 @@ public class FormCliente extends Region {
             System.out.println("Error de Ingreso"+e.getMessage());
         }
     }
+
+    public Node getPntPrincipal() {
+        return pntPrincipal;
+    }
+    
 
 }

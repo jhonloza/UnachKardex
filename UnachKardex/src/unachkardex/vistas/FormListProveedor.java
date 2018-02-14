@@ -1,30 +1,28 @@
 package unachkardex.vistas;
 
-import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.*;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.stage.Stage;
+import javafx.application.*;
+import javafx.event.*;
+import javafx.scene.*;
+import javafx.scene.layout.*;
 import java.util.*;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.Group;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.*;
+import javafx.scene.paint.*;
+import java.lang.reflect.*;
+import java.text.*;
+import javafx.beans.*;
+import javafx.collections.*;
+import javafx.geometry.*;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.*;
+import javafx.stage.*;
+import javafx.scene.image.*;
 import unachkardex.negocio.dao.*;
 import unachkardex.negocio.entidades.*;
 import unachkardex.negocio.impl.*;
 import unachkardex.accesodatos.*;
 
+public class FormListProveedor {
 
-public class FormListProveedor extends Application {
-   
-    
     private TableView<Proveedor> tblProveedor;
     private Label titulo;
     private TableColumn<Proveedor, String> cmlRuc;
@@ -33,10 +31,9 @@ public class FormListProveedor extends Application {
     private TableColumn<Proveedor, String> cmlTelefono;
     private TableColumn<Proveedor, String> cmleMail;
     private VBox pntPrincipal;
-    
-    @Override
-    public void start(Stage primaryStage) {
-        
+
+    public FormListProveedor() {
+
         titulo = new Label("LISTADO DE PROVEEDORES");
         titulo.setFont(Font.font("ALGERIAN", 25));
         tblProveedor = new TableView();
@@ -49,20 +46,14 @@ public class FormListProveedor extends Application {
         cmleMail = new TableColumn<>("Email");
         cmleMail.setMaxWidth(250);
         cmleMail.setMinWidth(250);
-        tblProveedor.getColumns().addAll(cmlRuc, cmlNombre, cmlDireccion,cmlTelefono,cmleMail);
+        tblProveedor.getColumns().addAll(cmlRuc, cmlNombre, cmlDireccion, cmlTelefono, cmleMail);
         cargarProveedor();
         pntPrincipal = new VBox();
         pntPrincipal.getChildren().addAll(titulo, tblProveedor);
         pntPrincipal.setAlignment(Pos.CENTER);
-        Scene scene = new Scene(pntPrincipal, 425, 250);
-
-        primaryStage.setTitle("Listado de Proveedores.");
-        primaryStage.setScene(scene);
-        primaryStage.show();
     }
-
-    public static void main(String[] args) {
-        launch(args);
+    public Node getPantallaP() {
+        return pntPrincipal;
     }
 
     public void cargarProveedor() {
@@ -77,7 +68,7 @@ public class FormListProveedor extends Application {
             cmlTelefono.setCellValueFactory(new PropertyValueFactory<>("telefono"));
             cmleMail.setCellValueFactory(new PropertyValueFactory<>("eMail"));
             tblProveedor.getItems().addAll(listProveedor);
-            
+
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
             Group ptnError = new Group();

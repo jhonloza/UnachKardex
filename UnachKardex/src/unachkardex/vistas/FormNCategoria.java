@@ -14,11 +14,12 @@ import javafx.collections.*;
 import javafx.geometry.*;
 import javafx.scene.control.*;
 import javafx.stage.*;
+import javafx.scene.image.*;
 import unachkardex.negocio.dao.*;
 import unachkardex.negocio.entidades.*;
 import unachkardex.negocio.impl.*;
 import unachkardex.accesodatos.*;
-import javafx.scene.image.*;
+
 
 public class FormNCategoria{
 

@@ -1,92 +1,67 @@
 package unachkardex.vistas;
 
-import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
+import javafx.application.*;
+import javafx.event.*;
+import javafx.scene.*;
+import javafx.scene.layout.*;
 import java.util.*;
-import javafx.scene.image.*;
 import javafx.scene.text.*;
 import javafx.scene.paint.*;
-import java.lang.reflect.Field;
-
-import java.text.DateFormat;
-import java.text.MessageFormat;
-import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.layout.*;
+import java.lang.reflect.*;
+import java.text.*;
+import javafx.beans.*;
+import javafx.collections.*;
+import javafx.geometry.*;
 import javafx.scene.control.*;
-
+import javafx.stage.*;
+import javafx.scene.image.*;
 import unachkardex.negocio.dao.*;
 import unachkardex.negocio.entidades.*;
 import unachkardex.negocio.impl.*;
-import unachkardex.vistas.*;
+import unachkardex.accesodatos.*;
 
-public class FormFacturaVenta extends Application {
-    
+public class FormNFacturaVenta{
+    private Image pFondo;
+    private BackgroundImage fondo;
     private VBox pnlCliente;
     private Label txtcedula;
     private Label txtnombres;
-    
     private Label txtdireccion;
     private Label txttelefono;
     private Label txtemail;
-    
     private TextField cedula;
     private TextField nombres;    
     private TextField direccion;
     private TextField telefono;
     private TextField email;
-    
     private HBox pnlCel;
     private GridPane pnlNomb;
     private GridPane pnlresto;
     private GridPane pnlmail;
-    private VBox pnlprincipal;
-    private VBox pnlprincipal2;
+    private VBox pntPrincipal;
+    private VBox pntPrincipal2;
     private Button btnBuscar;
-
     //////////////////////////FACTURA VENTA
     private Label txtcodigofa;
     private Label txtfecha;
-    
     private TextField codigofa;
     private TextField fecha;
-    
     private VBox pnlfac;
-
     /// logo ////
     Image logo;
     ImageView mostrarLogo;
-    
     //////// Cabecera /////////
     private HBox pnlCabecera;
     
-    @Override
-    
-    public void start(Stage primaryStage) {
-        
-        txtcedula = new Label("CEDULA DEL CLIENTE:                ");
-        //txtcedula.setFont(javafx.scene.text.Font.font("Arial Black", 20));
-        
+    public FormNFacturaVenta() {
+        pFondo=new Image("file:src\\unachkardex\\multimedia\\FondoSubVentanas.jpg");
+        fondo=new BackgroundImage(pFondo, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+        txtcedula = new Label("CEDULA DEL CLIENTE:");
         btnBuscar = new Button("BUSCAR");
-        
         txtnombres = new Label("NOMBRE DEL CLIENTE");
-        //txtnombre.setFont(javafx.scene.text.Font.font("Arial Black", 20));
-        
         txtdireccion = new Label("DIRECCION DEL CLIENTE");
-        //txtdireccion.setFont(javafx.scene.text.Font.font("Arial Black", 20));
-        
         txttelefono = new Label("TELEFONO DEL CLIENTE");
-        // txttelefono.setFont(javafx.scene.text.Font.font("Arial Black", 20));
-        
         txtemail = new Label("MAIL DEL CLIENTE");
-        //txtemail.setFont(javafx.scene.text.Font.font("Arial Black", 20));
-
         //cajas de texto
         cedula = new TextField("");
         nombres = new TextField("");
@@ -103,7 +78,6 @@ public class FormFacturaVenta extends Application {
         pnlNomb.setVgap(20);
         pnlNomb.add(txtnombres, 0, 0);
         pnlNomb.add(nombres, 1, 0);
-
         /////direccion 
         pnlresto = new GridPane();
         pnlresto.setHgap(20);
@@ -113,22 +87,17 @@ public class FormFacturaVenta extends Application {
         pnlresto.add(txttelefono, 2, 0);
         pnlresto.add(telefono, 3, 0);
         pnlresto.setAlignment(Pos.CENTER);
-
         //////mail
         pnlmail = new GridPane();
         pnlmail.setHgap(20);
         pnlmail.setVgap(20);
         pnlmail.add(txtemail, 2, 0);
         pnlmail.add(email, 3, 0);
-        
         pnlCliente = new VBox(10);
         pnlCliente.getChildren().addAll(pnlCel, pnlNomb, pnlresto, pnlmail);
-
         ///////////////////////////////FACTURA VENTS////////////////////
         txtcodigofa = new Label("          CODIGO FACTURA          ");
-        
         txtfecha = new Label("FECHA");
-        
         codigofa = new TextField("");
         codigofa.selectRange(750, 5);
         fecha = new TextField("");
@@ -137,36 +106,27 @@ public class FormFacturaVenta extends Application {
         pnlfac.getChildren().addAll(txtcodigofa,codigofa,txtfecha, fecha);
         pnlfac.setAlignment(Pos.CENTER);
         pnlfac.setPadding(new Insets(15));
-
         ////////// logo //////////
         logo = new Image("file:src\\unachkardex\\multimedia\\logo.jpg");
         mostrarLogo = new ImageView(logo);
         mostrarLogo.setFitHeight(160);
         mostrarLogo.setFitWidth(480);
         mostrarLogo.setPreserveRatio(false);
-        
         ////////////// CABECERA /////////////
         pnlCabecera=new HBox(10);
         pnlCabecera.getChildren().addAll(pnlCliente,mostrarLogo,pnlfac);
         pnlCabecera.setPadding(new Insets(15));
-        
-        pnlprincipal = new VBox(10);
-        
-        pnlprincipal.getChildren().addAll(pnlCabecera);
-        pnlprincipal.setAlignment(Pos.CENTER);
-        pnlprincipal.setPadding(new Insets(25));
-        //pnlprincipal.setPrefSize(320, 200);
-        
-        Scene scene = new Scene(pnlprincipal, 1600, 240);
-        primaryStage.setResizable(false);
-        primaryStage.setTitle("FACTURA VENTA");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        pntPrincipal = new VBox(10);
+        pntPrincipal.getChildren().addAll(pnlCabecera);
+        pntPrincipal.setAlignment(Pos.CENTER);
+        pntPrincipal.setPadding(new Insets(10));
+        pntPrincipal.setBackground(new Background(fondo));
+        pntPrincipal.setStyle("-fx-padding: 10; -fx-border-color: mediumblue; -fx-border-width: 2px");
         
     }
     
-    public static void main(String[] args) {
-        launch(args);
+    public Node getPantallaP() {
+        return pntPrincipal;
     }
     
     

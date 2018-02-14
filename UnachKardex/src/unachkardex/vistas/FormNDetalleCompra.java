@@ -1,28 +1,26 @@
 package unachkardex.vistas;
 
-import com.sun.javafx.geom.Area;
-import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.text.*;
-import javafx.scene.effect.*;
-import javafx.scene.paint.*;
-import javafx.scene.control.*;
+import javafx.application.*;
+import javafx.event.*;
+import javafx.scene.*;
 import javafx.scene.layout.*;
-import javafx.stage.Stage;
-import javafx.geometry.*;
 import java.util.*;
-import static javafx.application.Application.launch;
-import javafx.event.Event;
-import javafx.event.EventDispatchChain;
-import javafx.event.EventDispatcher;
-import javafx.scene.Node;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.text.Text;
+import javafx.scene.text.*;
+import javafx.scene.paint.*;
+import java.lang.reflect.*;
+import java.text.*;
+import javafx.beans.*;
+import javafx.collections.*;
+import javafx.geometry.*;
+import javafx.scene.control.*;
+import javafx.stage.*;
+import javafx.scene.image.*;
+import unachkardex.negocio.dao.*;
+import unachkardex.negocio.entidades.*;
+import unachkardex.negocio.impl.*;
+import unachkardex.accesodatos.*;
 
-public class FormDetalleCompra extends Application {
+public class FormNDetalleCompra{
 
     private Label txtCodigoDC;
     private Label txtProducto;
@@ -31,8 +29,10 @@ public class FormDetalleCompra extends Application {
     private Label txtCantidad;
     private Label txtPrecioTotal;
 
-    Image logo;
-    ImageView visorlogo;
+    private Image pFondo;
+    private BackgroundImage fondo;
+    private Image logo;
+    private ImageView visorlogo;
 
     private TextField codigodc;
     private TextField producto;
@@ -42,10 +42,7 @@ public class FormDetalleCompra extends Application {
     private TextField preciototal;
 
     private Button btnIngresar;
-    private Button btnEliminar;
-    private Button btnModificar;
     private Button btnLimpiar;
-    private Button btnCancelar;
 
     private HBox pnlced;
     private GridPane pnlNombApe;
@@ -54,9 +51,7 @@ public class FormDetalleCompra extends Application {
     private HBox pnlBotones;
     private VBox pntPrincipal;
 
-    @Override
-
-    public void start(Stage primaryStage) {
+    public FormNDetalleCompra() {
         //LABELS DE LOS CAMPOS A USAR
         txtCodigoDC = new Label("Codigo Detalle C");
         txtCodigoDC.setFont(Font.font("Arial Blaomprack", 20));
@@ -82,20 +77,8 @@ public class FormDetalleCompra extends Application {
         //BOTONES A USAR
         btnIngresar = new Button("Ingresar");
         btnIngresar.setFont(Font.font("Arial Black", 20));
-        btnEliminar = new Button("Eliminar");
-        btnEliminar.setFont(Font.font("Arial Black", 20));
-        btnModificar = new Button("Modificar");
-        btnModificar.setFont(Font.font("Arial Black", 20));
-        btnModificar.setEventDispatcher(new EventDispatcher() {
-            @Override
-            public Event dispatchEvent(Event event, EventDispatchChain tail) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-        });
         btnLimpiar = new Button("Limpiar");
         btnLimpiar.setFont(Font.font("Arial Black", 20));
-        btnCancelar = new Button("Cancelar");
-        btnCancelar.setFont(Font.font("Arial Black", 20));
         //INGRESO EN PANELES
         //SUPERIOR
         pnlced = new HBox(20);
@@ -125,7 +108,7 @@ public class FormDetalleCompra extends Application {
 
         //botones
         pnlBotones = new HBox(20);
-        pnlBotones.getChildren().addAll(btnIngresar, btnLimpiar, btnCancelar);
+        pnlBotones.getChildren().addAll(btnIngresar, btnLimpiar);
         pnlBotones.setAlignment(Pos.CENTER);
         //final
         pntPrincipal = new VBox(20);
@@ -134,20 +117,15 @@ public class FormDetalleCompra extends Application {
         visorlogo.setImage(logo);
         visorlogo.setFitHeight(200);
         visorlogo.setPreserveRatio(true);
-        //btnEliminar = new Button("ELIMINAR");
-        //btnEliminar.setFont(Font.font("Arial Black",20));
         pntPrincipal.getChildren().addAll(visorlogo, pnlced, pnlNombApe, pnlFechDir, pnlcontacto, pnlBotones);
         pntPrincipal.setAlignment(Pos.CENTER);
-        pntPrincipal.setPadding(new Insets(25));
-        Scene scene = new Scene(pntPrincipal, 795, 620);
-        primaryStage.setResizable(false);
-        primaryStage.setTitle("DDETALLE COMPRA");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        pntPrincipal.setPadding(new Insets(10));
+        pntPrincipal.setBackground(new Background(fondo));
+        pntPrincipal.setStyle("-fx-padding: 10; -fx-border-color: mediumblue; -fx-border-width: 2px");
     }
 
-    public static void main(String[] args) {
-        launch(args);
+    public Node getPantallaP() {
+        return pntPrincipal;
     }
 
 }
