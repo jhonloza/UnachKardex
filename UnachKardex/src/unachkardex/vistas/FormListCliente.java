@@ -22,6 +22,8 @@ import unachkardex.negocio.impl.*;
 import unachkardex.accesodatos.*;
 
 public class FormListCliente{
+    private Image pFondo;
+    private BackgroundImage fondo;
     private TableView<Cliente> tblCliente;
     private Label titulo;
     private TableColumn<Cliente, Integer> cmlCedula;
@@ -34,6 +36,8 @@ public class FormListCliente{
     private VBox pntPrincipal;
     
     public FormListCliente() {
+        pFondo=new Image("file:src\\unachkardex\\multimedia\\FondoSubVentanas.jpg");
+        fondo=new BackgroundImage(pFondo, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
          titulo = new Label("LISTADO DE CLIENTES");
         titulo.setFont(Font.font("Berlin Sans FB Demi", 30));
         tblCliente = new TableView();
@@ -53,6 +57,9 @@ public class FormListCliente{
         pntPrincipal = new VBox();
         pntPrincipal.getChildren().addAll(titulo, tblCliente);
         pntPrincipal.setAlignment(Pos.CENTER);
+        pntPrincipal.setPadding(new Insets(10));
+        pntPrincipal.setBackground(new Background(fondo));
+        pntPrincipal.setStyle("-fx-padding: 10; -fx-border-color: mediumblue; -fx-border-width: 2px");
     }
 
     public Node getPantallaP() {

@@ -28,10 +28,13 @@ public class FormListFacturaVenta{
     private TableColumn<FacturaVenta, Integer> cmlcodFacturaVenta;
     private TableColumn<FacturaVenta, String> cmlFecha;
     private TableColumn<FacturaVenta, Cliente> cmlCliente;
-    
+    private Image pFondo;
+    private BackgroundImage fondo;
     private VBox pntPrincipal;
     
     public FormListFacturaVenta() {
+        pFondo=new Image("file:src\\unachkardex\\multimedia\\FondoSubVentanas.jpg");
+        fondo=new BackgroundImage(pFondo, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
          titulo = new Label("LISTADO DE FACTURA VENTA");
         titulo.setFont(Font.font("Berlin Sans FB Demi", 30));
         tblFacturaVenta = new TableView();
@@ -44,6 +47,9 @@ public class FormListFacturaVenta{
         pntPrincipal = new VBox();
         pntPrincipal.getChildren().addAll(titulo, tblFacturaVenta);
         pntPrincipal.setAlignment(Pos.CENTER);
+        pntPrincipal.setPadding(new Insets(10));
+        pntPrincipal.setBackground(new Background(fondo));
+        pntPrincipal.setStyle("-fx-padding: 10; -fx-border-color: mediumblue; -fx-border-width: 2px");
     }
 
     public Node getPantallaP() {

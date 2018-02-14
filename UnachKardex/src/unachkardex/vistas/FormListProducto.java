@@ -29,11 +29,14 @@ public class FormListProducto{
     private TableColumn<Producto, String> cmlNombre;
     private TableColumn<Producto, Double> cmprecio;
     private VBox pntPrincipal;
-
+private Image pFondo;
+    private BackgroundImage fondo;
     
 
     public FormListProducto () {
 
+        pFondo=new Image("file:src\\unachkardex\\multimedia\\FondoSubVentanas.jpg");
+        fondo=new BackgroundImage(pFondo, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         titulo = new Label("LISTADO DE PRODUCTOS");
         titulo.setFont(Font.font("Berlin Sans FB Demi", 30));
         tblProducto = new TableView();
@@ -46,6 +49,9 @@ public class FormListProducto{
         pntPrincipal = new VBox();
         pntPrincipal.getChildren().addAll(titulo, tblProducto);
         pntPrincipal.setAlignment(Pos.CENTER);
+        pntPrincipal.setPadding(new Insets(10));
+        pntPrincipal.setBackground(new Background(fondo));
+        pntPrincipal.setStyle("-fx-padding: 10; -fx-border-color: mediumblue; -fx-border-width: 2px");
 
     }
     public Node getPantallaP() {

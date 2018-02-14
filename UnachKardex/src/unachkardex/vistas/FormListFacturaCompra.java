@@ -27,10 +27,13 @@ public class FormListFacturaCompra{
     private TableColumn<FacturaCompra, Integer> cmlcodFacturaCompra;
     private TableColumn<FacturaCompra, String> cmlFecha;
     private TableColumn<FacturaCompra, Proveedor> cmlProveedor;
-    
+    private Image pFondo;
+    private BackgroundImage fondo;
     private VBox pntPrincipal;
     
     public FormListFacturaCompra() {
+        pFondo=new Image("file:src\\unachkardex\\multimedia\\FondoSubVentanas.jpg");
+        fondo=new BackgroundImage(pFondo, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
          titulo = new Label("LISTADO DE FACTURA COMPRA");
         titulo.setFont(Font.font("Berlin Sans FB Demi", 30));
         tblFacturaCompra = new TableView();
@@ -43,6 +46,9 @@ public class FormListFacturaCompra{
         pntPrincipal = new VBox();
         pntPrincipal.getChildren().addAll(titulo, tblFacturaCompra);
         pntPrincipal.setAlignment(Pos.CENTER);
+        pntPrincipal.setPadding(new Insets(10));
+        pntPrincipal.setBackground(new Background(fondo));
+        pntPrincipal.setStyle("-fx-padding: 10; -fx-border-color: mediumblue; -fx-border-width: 2px");
         
     }
 
