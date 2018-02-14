@@ -154,12 +154,24 @@ public class FormNProveedor{
             nuevoProveedor.seteMail(email.getText());
 
             if (proveedorDao.ingresar(nuevoProveedor) > 0) {
-                System.out.println("Ingreso Correcto..");
+                Alert alerta=new Alert(Alert.AlertType.CONFIRMATION);
+                alerta.setTitle("INFORMACION DEL SISTEMA");
+                alerta.setHeaderText(null);
+                alerta.setContentText("Ingtreso Correcto!!");
+                alerta.showAndWait();
             } else {
-                System.out.println("Error de Ingreso..");
+                Alert alerta=new Alert(Alert.AlertType.ERROR);
+                alerta.setTitle("INFORMACION DEL SISTEMA");
+                alerta.setHeaderText(null);
+                alerta.setContentText("Ingtreso Fallido!! ");
+                alerta.showAndWait();
             }
         } catch (Exception e) {
-            System.out.println("Error de Ingreso" + e.getMessage());
+            Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("INFORMACION DEL SISTEMA");
+            alerta.setHeaderText(null);
+            alerta.setContentText("Error: " + e.getMessage());
+            alerta.showAndWait();
         }
     }
 

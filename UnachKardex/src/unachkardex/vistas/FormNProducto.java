@@ -122,12 +122,24 @@ public class FormNProducto{
             nuevoPro.setPrecio(Double.parseDouble(precio.getText()));
 
             if (proDao.insertar(nuevoPro) > 0) {
-                System.out.println("Ingreso Correcto..");
+                Alert alerta=new Alert(Alert.AlertType.CONFIRMATION);
+                alerta.setTitle("INFORMACION DEL SISTEMA");
+                alerta.setHeaderText(null);
+                alerta.setContentText("Ingtreso Correcto!!");
+                alerta.showAndWait();
             } else {
-                System.out.println("Error de Ingreso..");
+                Alert alerta=new Alert(Alert.AlertType.ERROR);
+                alerta.setTitle("INFORMACION DEL SISTEMA");
+                alerta.setHeaderText(null);
+                alerta.setContentText("Ingtreso Fallido!! ");
+                alerta.showAndWait();
             }
         } catch (Exception e) {
-            System.out.println("Error de Ingreso" + e.getMessage());
+            Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("INFORMACION DEL SISTEMA");
+            alerta.setHeaderText(null);
+            alerta.setContentText("Error: " + e.getMessage());
+            alerta.showAndWait();
         }
     }
 
@@ -140,8 +152,11 @@ public class FormNProducto{
                 items.add(categ);
             }
         } catch (Exception e) {
-            Stage errorStage = new Stage(StageStyle.TRANSPARENT);
-            Dialogs.showErrorDialog(errorStage, "No se pudo Cargar las Categorias");
+            Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("INFORMACION DEL SISTEMA");
+            alerta.setHeaderText(null);
+            alerta.setContentText("Error al cargar Categorias: " + e.getMessage());
+            alerta.showAndWait();
         }
 
     }

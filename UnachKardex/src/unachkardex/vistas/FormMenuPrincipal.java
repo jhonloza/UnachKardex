@@ -130,10 +130,9 @@ public class FormMenuPrincipal extends Application {
         escritorio.setBackground(new Background(new BackgroundImage(new Image("file:src\\unachkardex\\multimedia\\FondoMain.jpg"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1280, 720, false, false, false, false))));
         Scene scnPrincipal = new Scene(pntPrincipal, 1280, 720);
         primaryStage.setTitle("Sistema de facturacion");
-        primaryStage.setMaxHeight(720);
-        primaryStage.setMaxWidth(1280);
         primaryStage.setMinHeight(720);
         primaryStage.setMinWidth(1280);
+        primaryStage.setMaximized(true);
 
         primaryStage.setScene(scnPrincipal);
         primaryStage.show();

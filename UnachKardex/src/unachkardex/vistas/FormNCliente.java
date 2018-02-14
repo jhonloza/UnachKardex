@@ -21,7 +21,7 @@ import unachkardex.negocio.impl.*;
 import unachkardex.accesodatos.*;
 
 public class FormNCliente{
-
+    
     private Label txtCedula;
     private Label txtNombres;
     private Label txtApellidos;
@@ -155,16 +155,32 @@ public class FormNCliente{
             try {
                 nuevoCliente.setFechaNac(formatoFecha.parse(fechaNacimiento.getText()));
             } catch (Exception er) {
-                System.out.println("Error al insertar fecha"+er.getMessage());
+                Alert alerta=new Alert(Alert.AlertType.ERROR);
+                alerta.setTitle("ERROR");
+                alerta.setHeaderText(null);
+                alerta.setContentText("Error de Fecha");
+                alerta.showAndWait();
             }
             if(clienteDao.insertar(nuevoCliente)>0){
-                System.out.println("Ingreso Correcto");
+                Alert alerta=new Alert(Alert.AlertType.CONFIRMATION);
+                alerta.setTitle("INFORMACION DEL SISTEMA");
+                alerta.setHeaderText(null);
+                alerta.setContentText("Ingtreso Correcto!!");
+                alerta.showAndWait();
             }
             else{
-                System.out.println("Error de Ingreso");
+                Alert alerta=new Alert(Alert.AlertType.ERROR);
+                alerta.setTitle("INFORMACION DEL SISTEMA");
+                alerta.setHeaderText(null);
+                alerta.setContentText("Ingtreso Fallido!! ");
+                alerta.showAndWait();
             }
         } catch (Exception e) {
-            System.out.println("Error de Ingreso"+e.getMessage());
+            Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("INFORMACION DEL SISTEMA");
+            alerta.setHeaderText(null);
+            alerta.setContentText("Error: " + e.getMessage());
+            alerta.showAndWait();
         }
     }
 
