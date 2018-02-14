@@ -32,7 +32,7 @@ public class FormListFacturaCompra{
     
     public FormListFacturaCompra() {
          titulo = new Label("LISTADO DE FACTURA COMPRA");
-        titulo.setFont(Font.font("CHILLER", 30));
+        titulo.setFont(Font.font("Berlin Sans FB Demi", 30));
         tblFacturaCompra = new TableView();
         cmlcodFacturaCompra = new TableColumn<>("Codigo Fac_Com");
         cmlFecha= new TableColumn<>("Fecha");

@@ -35,7 +35,7 @@ public class FormListProducto{
     public FormListProducto () {
 
         titulo = new Label("LISTADO DE PRODUCTOS");
-        titulo.setFont(Font.font("ALGERIAN", 25));
+        titulo.setFont(Font.font("Berlin Sans FB Demi", 30));
         tblProducto = new TableView();
         cmlCodProducto = new TableColumn<>("Codigo Producto");
         cmlcodCategoria = new TableColumn<>("Categoria");

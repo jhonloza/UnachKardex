@@ -33,7 +33,7 @@ public class FormListDetalleCompra extends Application {
     @Override
     public void start(Stage primaryStage) {
         titulo = new Label("LISTADO DE DETALLE COMPRA");
-        titulo.setFont(Font.font("CHILLER", 30));
+        titulo.setFont(Font.font("Berlin Sans FB Demi", 30));
         tblDetalleCompra = new TableView();
         
         cmlcodDetalleCompra = new TableColumn<>("Codigo Detalle_Compra");
@@ -52,10 +52,6 @@ public class FormListDetalleCompra extends Application {
         primaryStage.setTitle("Listado de Detalle Compra");
         primaryStage.setScene(scene);
         primaryStage.show();
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 
     public void cargarDetalleCompra() {

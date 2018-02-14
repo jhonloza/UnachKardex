@@ -34,7 +34,7 @@ public class FormListDetalleVenta extends Application {
     @Override
     public void start(Stage primaryStage) {
         titulo = new Label("LISTADO DE DETALLE VENTA");
-        titulo.setFont(Font.font("CHILLER", 30));
+        titulo.setFont(Font.font("Berlin Sans FB Demi", 30));
         tblDetalleVenta = new TableView();
         
         codDetalleVenta = new TableColumn<>("Codigo Detalle_Venta");
@@ -55,9 +55,6 @@ public class FormListDetalleVenta extends Application {
         primaryStage.show();
     }
 
-    public static void main(String[] args) {
-        launch(args);
-    }
 
     public void cargarDetalleVenta() {
         List<DetalleVenta> listDV = new ArrayList<>();

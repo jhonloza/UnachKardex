@@ -54,25 +54,25 @@ public class FormNCliente{
         fondo=new BackgroundImage(pFondo, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         //LABELS DE LOS CAMPOS A USAR
         txtCedula = new Label("Cedula: ");
-        txtCedula.setFont(Font.font("Arial Black", 20));
+        txtCedula.setFont(Font.font("Berlin Sans FB Demi", 20));
         //txtCedula.setFill(Color.DARKBLUE);
         txtNombres = new Label("Nombres: ");
-        txtNombres.setFont(Font.font("Arial Black", 20));
+        txtNombres.setFont(Font.font("Berlin Sans FB Demi", 20));
         //txtNombres.setFill(Color.DARKBLUE);
         txtApellidos = new Label("Apellidos: ");
-        txtApellidos.setFont(Font.font("Arial Black", 20));
+        txtApellidos.setFont(Font.font("Berlin Sans FB Demi", 20));
         //txtApellidos.setFill(Color.DARKBLUE);
         txtFechaNacimiento = new Label("Fecha de Nacimiento: ");
-        txtFechaNacimiento.setFont(Font.font("Arial Black", 20));
+        txtFechaNacimiento.setFont(Font.font("Berlin Sans FB Demi", 20));
         //txtFechaNacimiento.setFill(Color.DARKBLUE);
         txtDireccion = new Label("Direccion: ");
-        txtDireccion.setFont(Font.font("Arial Black", 20));
+        txtDireccion.setFont(Font.font("Berlin Sans FB Demi", 20));
         //txtDireccion.setFill(Color.DARKBLUE);
         txtTelefono = new Label("Telefono: ");
-        txtTelefono.setFont(Font.font("Arial Black", 20));
+        txtTelefono.setFont(Font.font("Berlin Sans FB Demi", 20));
         //txtTelefono.setFill(Color.DARKBLUE);
         txtEmail = new Label("E-mail: ");
-        txtEmail.setFont(Font.font("Arial Black", 20));
+        txtEmail.setFont(Font.font("Berlin Sans FB Demi", 20));
         //txtEmail.setFill(Color.DARKBLUE);
         
         //CAJAS DE TEXTO PARA CAMPOS
@@ -85,7 +85,7 @@ public class FormNCliente{
         email = new TextField("");
         //BOTONES A USAR
         btnIngresar = new Button("Ingresar");
-        btnIngresar.setFont(Font.font("Arial Black", 20));
+        btnIngresar.setFont(Font.font("Berlin Sans FB Demi", 20));
         btnIngresar.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -93,7 +93,7 @@ public class FormNCliente{
             }
         });
         btnLimpiar = new Button("Limpiar");
-        btnLimpiar.setFont(Font.font("Arial Black", 20));
+        btnLimpiar.setFont(Font.font("Berlin Sans FB Demi", 20));
         //INGRESO EN PANELES
         //SUPERIOR
         pnlced = new HBox(20);

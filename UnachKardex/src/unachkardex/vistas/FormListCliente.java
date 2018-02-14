@@ -35,7 +35,7 @@ public class FormListCliente{
     
     public FormListCliente() {
          titulo = new Label("LISTADO DE CLIENTES");
-        titulo.setFont(Font.font("BROADWAY", 30));
+        titulo.setFont(Font.font("Berlin Sans FB Demi", 30));
         tblCliente = new TableView();
         cmlCedula = new TableColumn<>("Codigo");
         cmlNombre= new TableColumn<>("Nombre");

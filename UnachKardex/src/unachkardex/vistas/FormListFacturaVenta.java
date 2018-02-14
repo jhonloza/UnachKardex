@@ -33,7 +33,7 @@ public class FormListFacturaVenta{
     
     public FormListFacturaVenta() {
          titulo = new Label("LISTADO DE FACTURA VENTA");
-        titulo.setFont(Font.font("CHILLER", 30));
+        titulo.setFont(Font.font("Berlin Sans FB Demi", 30));
         tblFacturaVenta = new TableView();
         cmlcodFacturaVenta = new TableColumn<>("Codigo Fac_Vent");
         cmlFecha= new TableColumn<>("Fecha");

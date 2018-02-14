@@ -34,7 +34,7 @@ public class FormListCategoria{
     public FormListCategoria() {
 
         titulo = new Label("LISTADO DE CATEGORIAS");
-        titulo.setFont(Font.font("ARIAL BLACK", 25));
+        titulo.setFont(Font.font("Berlin Sans FB Demi", 30));
         tblCategoria = new TableView();
         cmlCodCategoria = new TableColumn<>("Codigo");
         cmlNombreCategoria = new TableColumn<>("Nombre");

@@ -49,23 +49,23 @@ public class FormNProducto{
         pFondo=new Image("file:src\\unachkardex\\multimedia\\FondoSubVentanas.jpg");
         fondo=new BackgroundImage(pFondo, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         txtCodigo = new Label("Codigo");
-        txtCodigo.setFont(javafx.scene.text.Font.font("Arial Black", 20));
+        txtCodigo.setFont(Font.font("Berlin Sans FB Demi", 20));
         codigo = new TextField("");
         txtNombre = new Label("Nombre");
-        txtNombre.setFont(javafx.scene.text.Font.font("Arial Black", 20));
+        txtNombre.setFont(Font.font("Berlin Sans FB Demi", 20));
         nombre = new TextField("");
         txtPrecio = new Label("Precio");
-        txtPrecio.setFont(javafx.scene.text.Font.font("Arial Black", 20));
+        txtPrecio.setFont(Font.font("Berlin Sans FB Demi", 20));
         precio = new TextField("");
         txtCategoria = new Label("Categoria");
-        txtCategoria.setFont(javafx.scene.text.Font.font("Arial Black", 20));
+        txtCategoria.setFont(Font.font("Berlin Sans FB Demi", 20));
         cargarCategorias();
         cbxCategoria = new ComboBox<Categoria>(items);
         cbxCategoria.setValue(items.get(0));
         cbxCategoria.setVisible(true);
         descrCategoria = new TextField("");
         btnAceptar = new Button("Aceptar");
-        btnAceptar.setFont(Font.font("Arial Black", 20));
+        btnAceptar.setFont(Font.font("Berlin Sans FB Demi", 20));
         btnAceptar.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -73,7 +73,7 @@ public class FormNProducto{
             }
         });
         btnLimpiar = new Button("Limpiar");
-        btnLimpiar.setFont(Font.font("Arial Black", 20));
+        btnLimpiar.setFont(Font.font("Berlin Sans FB Demi", 20));
         pnlProducto = new VBox(20);
         pnlProducto.getChildren().add(txtCodigo);
         pnlProducto.getChildren().add(codigo);

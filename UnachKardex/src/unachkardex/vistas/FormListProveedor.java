@@ -35,7 +35,7 @@ public class FormListProveedor {
     public FormListProveedor() {
 
         titulo = new Label("LISTADO DE PROVEEDORES");
-        titulo.setFont(Font.font("ALGERIAN", 25));
+        titulo.setFont(Font.font("Berlin Sans FB Demi", 30));
         tblProveedor = new TableView();
         cmlRuc = new TableColumn<>("Ruc");
         cmlNombre = new TableColumn<>("Nombre");
