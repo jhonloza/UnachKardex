@@ -20,6 +20,8 @@ import unachkardex.negocio.impl.*;
 import unachkardex.accesodatos.*;
 import javafx.scene.image.*;
 
+
+
 public class FormMenuPrincipal extends Application {
 
     private MenuBar BarraMenu;
