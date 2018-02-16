@@ -27,27 +27,29 @@ public class FormNDetalleVenta extends Application {
     private Label cantidad;
     private Label precioU;
     private Label precioT;
+    private Label accion;
     private VBox cod;
-    private ObservableList<TextField> lstCodigo=FXCollections.observableArrayList();
-    private ArrayList<TextField> listaCodigo;
-    private TextField tfcodigo;
+    private ObservableList<TextField> lstCodigo = FXCollections.observableArrayList();
+    private ArrayList<Integer> listaCodigo;
+    private TextField tfCodigo;
     private VBox nom;
-    private ObservableList<TextField> lstNombre=FXCollections.observableArrayList();
-    private ArrayList<TextField> listaNombre;
+    private ObservableList<TextField> lstNombre = FXCollections.observableArrayList();
+    private ArrayList<String> listaNombre;
     private TextField tfNombre;
     private VBox cant;
-    private ObservableList<TextField> lstCantidad=FXCollections.observableArrayList();
-    private ArrayList<TextField> listaCantidad;
+    private ObservableList<TextField> lstCantidad = FXCollections.observableArrayList();
+    private ArrayList<Integer> listaCantidad;
     private TextField tfCantidad;
     private VBox pUnit;
-    private ObservableList<TextField> lstPrecioU=FXCollections.observableArrayList();
-    private ArrayList<TextField> listaPrecioU;
+    private ObservableList<TextField> lstPrecioU = FXCollections.observableArrayList();
+    private ArrayList<Double> listaPrecioU;
     private TextField tfPrecioU;
     private VBox pTot;
-    private ObservableList<TextField> lstPrecioT=FXCollections.observableArrayList();
-    private ArrayList<TextField> listaPrecioT;
+    private ObservableList<TextField> lstPrecioT = FXCollections.observableArrayList();
+    private ArrayList<Double> listaPrecioT;
     private TextField tfprecioT;
     private Button btnAccion;
+
     private Image pFondo;
     private BackgroundImage fondo;
     private HBox pnlItems;
@@ -57,6 +59,7 @@ public class FormNDetalleVenta extends Application {
     @Override
 
     public void start(Stage primaryStage) {
+
         //barra Items
         codigo = new Label("Codigo");
         codigo.setMaxSize(100, 25);
@@ -83,74 +86,77 @@ public class FormNDetalleVenta extends Application {
         precioT.setMinSize(100, 25);
         precioT.setStyle("-fx-border-color: mediumblue; -fx-border-width: 2px");
         precioT.setAlignment(Pos.CENTER);
-        pnlItems = new HBox(1);
-        pnlItems.setMaxSize(755, 30);
-        pnlItems.setMinSize(755, 30);
-        pnlItems.getChildren().addAll(codigo, nombre, cantidad, precioU, precioT);
+        accion = new Label("Precio T");
+        accion.setMaxSize(25, 25);
+        accion.setMinSize(25, 25);
+        accion.setStyle("-fx-border-color: mediumblue; -fx-border-width: 2px");
+        accion.setAlignment(Pos.CENTER);
+        pnlItems = new HBox(2);
+        pnlItems.setMaxSize(780, 30);
+        pnlItems.setMinSize(780, 30);
+        pnlItems.getChildren().addAll(codigo, nombre, cantidad, precioU, precioT, accion);
         pnlItems.setAlignment(Pos.CENTER);
-        do{
-        //listado de items
-        //codigo
-        listaCodigo=new ArrayList<>();
-        tfcodigo=new TextField();
-        tfcodigo.setMaxSize(100, 25);
-        tfcodigo.setMinSize(100, 25);
-        listaCodigo.add(tfcodigo);
-        lstCodigo.setAll(listaCodigo);
-        cod=new VBox();
-        cod.getChildren().addAll(lstCodigo);
-        //nombre
-        listaNombre=new ArrayList<>();
-        tfNombre=new TextField();
-        tfNombre.setMaxSize(348, 25);
-        tfNombre.setMinSize(348, 25);
-        listaNombre.add(tfNombre);
-        lstNombre.setAll(listaNombre);
-        nom=new VBox();
-        nom.getChildren().addAll(lstNombre);
-        //cantidad
-        listaCantidad=new ArrayList<>();
-        tfCantidad=new TextField();
-        tfCantidad.setMaxSize(100, 25);
-        tfCantidad.setMinSize(100, 25);
-        listaCantidad.add(tfCantidad);
-        lstCantidad.setAll(listaCantidad);
-        cant=new VBox();
-        cant.getChildren().addAll(lstCantidad);
-        //pu
-        listaPrecioU=new ArrayList<>();
-        tfPrecioU=new TextField();
-        tfPrecioU.setMaxSize(100, 25);
-        tfPrecioU.setMinSize(100, 25);
-        listaPrecioU.add(tfPrecioU);
-        lstPrecioU.setAll(listaPrecioU);
-        pUnit=new VBox();
-        pUnit.getChildren().addAll(lstPrecioU);
-        //pt
-        listaPrecioT=new ArrayList<>();
-        tfprecioT=new TextField();
-        tfprecioT.setMaxSize(100, 25);
-        tfprecioT.setMinSize(100, 25);
-        listaPrecioT.add(tfprecioT);
-        lstPrecioT.setAll(listaPrecioT);
-        pTot=new VBox();
-        pTot.getChildren().addAll(lstPrecioT);
-        btnAccion=new Button();
-        btnAccion.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                btnIngresoProductoEventHandler(event);
-            }
-        });
-        }while(tfcodigo.getText()!=null && tfNombre.getText()!=null && tfCantidad.getText()!=null && tfPrecioU.getText()!=null && tfprecioT.getText()!=null);
-        //ingreso final
-        items=new HBox(1);
-        items.getChildren().addAll(cod,nom,cant,pUnit,pTot);
-        items.setMaxSize(755, 350);
-        items.setMinSize(755, 350);
-        items.setStyle("-fx-border-color: mediumblue; -fx-border-width: 2px");
+//        do {
+
+            //listado de items
+            //codigo
+            listaCodigo = new ArrayList<>();
+            tfCodigo = new TextField();
+            tfCodigo.setMaxSize(100, 25);
+            tfCodigo.setMinSize(100, 25);
+            tfCodigo.setStyle("-fx-border-color: mediumblue; -fx-border-width: 2px");
+            lstCodigo.add(tfCodigo);
+            cod = new VBox();
+            cod.getChildren().addAll(lstCodigo);
+            //nombre
+            listaNombre = new ArrayList<>();
+            tfNombre = new TextField();
+            tfNombre.setMaxSize(350, 25);
+            tfNombre.setMinSize(350, 25);
+            tfNombre.setStyle("-fx-border-color: mediumblue; -fx-border-width: 2px");
+            lstNombre.add(tfNombre);
+            nom = new VBox();
+            nom.getChildren().addAll(lstNombre);
+            //cantidad
+            listaCantidad = new ArrayList<>();
+            tfCantidad = new TextField();
+            tfCantidad.setMaxSize(100, 25);
+            tfCantidad.setMinSize(100, 25);
+            tfCantidad.setStyle("-fx-border-color: mediumblue; -fx-border-width: 2px");
+            lstCantidad.add(tfCantidad);
+            cant = new VBox();
+            cant.getChildren().addAll(lstCantidad);
+            //pu
+            listaPrecioU = new ArrayList<>();
+            tfPrecioU = new TextField();
+            tfPrecioU.setMaxSize(100, 25);
+            tfPrecioU.setMinSize(100, 25);
+            tfPrecioU.setStyle("-fx-border-color: mediumblue; -fx-border-width: 2px");
+            lstPrecioU.add(tfPrecioU);
+            pUnit = new VBox();
+            pUnit.getChildren().addAll(lstPrecioU);
+            //pt
+            listaPrecioT = new ArrayList<>();
+            tfprecioT = new TextField();
+            tfprecioT.setMaxSize(100, 25);
+            tfprecioT.setMinSize(100, 25);
+            tfprecioT.setStyle("-fx-border-color: mediumblue; -fx-border-width: 2px");
+            lstPrecioT.add(tfprecioT);
+            pTot = new VBox();
+            pTot.getChildren().addAll(lstPrecioT);
+            //btnaccion
+            btnAccion = new Button("...");
+            btnAccion.setMaxSize(25, 25);
+            btnAccion.setMinSize(25, 25);
+            //ingreso final
+            items = new HBox(1);
+            items.getChildren().addAll(cod, nom, cant, pUnit, pTot, btnAccion);
+            items.setMaxSize(780, 350);
+            items.setMinSize(780, 350);
+            items.setStyle("-fx-border-color: mediumblue; -fx-border-width: 2px");
+//        } while ();
         pntPrincipal = new VBox(1);
-        pntPrincipal.getChildren().addAll(pnlItems,items);
+        pntPrincipal.getChildren().addAll(pnlItems, items);
         pntPrincipal.setBackground(new Background(fondo));
         pntPrincipal.setStyle("-fx-padding: 2; -fx-border-color: mediumblue; -fx-border-width: 2px");
         Scene scnPrincipal = new Scene(pntPrincipal, 840, 600);
@@ -158,6 +164,13 @@ public class FormNDetalleVenta extends Application {
         primaryStage.setMaximized(false);
         primaryStage.setScene(scnPrincipal);
         primaryStage.show();
+
+        btnAccion.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                btnAccionEventHandler(event);
+            }
+        });
     }
 
     public static void main(String[] args) {
@@ -167,11 +180,16 @@ public class FormNDetalleVenta extends Application {
     public Node getPantallaP() {
         return pntPrincipal;
     }
-    
-    public boolean btnIngresoProductoEventHandler(ActionEvent event){
-        boolean retorno=false;
-        
-        return retorno;
+
+    public void btnAccionEventHandler(ActionEvent event) {
+        double v1 = Double.parseDouble(tfCantidad.getText());
+        double v2 = Double.parseDouble(tfPrecioU.getText());
+        tfprecioT.setText(String.valueOf(v1 * v2));
+        listaCodigo.add(Integer.parseInt(tfCodigo.getText()));
+        listaNombre.add(tfNombre.getText());
+        listaCantidad.add(Integer.parseInt(tfCantidad.getText()));
+        listaPrecioU.add(Double.parseDouble(tfPrecioU.getText()));
+        listaPrecioT.add(Double.parseDouble(tfprecioT.getText()));
     }
 
 }
