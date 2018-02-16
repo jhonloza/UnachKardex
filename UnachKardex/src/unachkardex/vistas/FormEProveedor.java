@@ -1,4 +1,3 @@
-
 package unachkardex.vistas;
 import javafx.application.*;
 import javafx.event.*;
@@ -41,6 +40,7 @@ public class FormEProveedor extends Application{
 
     private Button btnEliminar;
     private Button btnLimpiar;
+    private Button btnBuscar;
 
     private VBox pnlRucNom;
     private VBox pnlRN;
@@ -105,13 +105,16 @@ public class FormEProveedor extends Application{
         pnlIItProv = new VBox(10);
         pnlIItProv.getChildren().addAll(direccion, telefono, email);
         pnlIItProv.setAlignment(Pos.CENTER);
+        btnBuscar=new Button();
+        btnBuscar.setMaxSize(100, 25);
+        btnBuscar.setMinSize(100, 25);
         //LOGO
         logo = new Image("file:src\\unachkardex\\multimedia\\iconoProveedor.png");
         visorlogo = new ImageView(logo);
         visorlogo.setFitHeight(100);
         visorlogo.setFitWidth(100);
         //BOTONES A USAR
-        btnEliminar = new Button("Ingresar");
+        btnEliminar = new Button("Eliminar");
         btnEliminar.setFont(Font.font("Berlin Sans FB Demi", 15));
         btnEliminar.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -127,8 +130,17 @@ public class FormEProveedor extends Application{
                 btnLimpiarEventHandler(event);
             }
         });
+        btnBuscar = new Button("Buscar");
+        btnBuscar.setFont(Font.font("Berlin Sans FB Demi", 15));
+        btnBuscar.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                btnBuscarEventHandler(event);
+            }
+        });
+        
         pnlIcInfo = new HBox(10);
-        pnlIcInfo.getChildren().addAll(pnlRucNom, pnlRN);
+        pnlIcInfo.getChildren().addAll(pnlRucNom, pnlRN,btnBuscar);
         pnlIcInfo.setAlignment(Pos.CENTER);
         pnlTitulo = new VBox(10);
         pnlTitulo.getChildren().addAll(titulo, pnlIcInfo);
@@ -164,6 +176,11 @@ public class FormEProveedor extends Application{
 
     public void btnEliminarEventHandler(ActionEvent event) {
     }
+    
+     public void btnBuscarEventHandler(ActionEvent event) {
+         
+    }
+    
     public static void main(String[] args) {
         launch(args);
     }
