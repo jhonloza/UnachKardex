@@ -47,6 +47,7 @@ public class FormNDetalleVenta extends Application {
     private ObservableList<TextField> lstPrecioT=FXCollections.observableArrayList();
     private ArrayList<TextField> listaPrecioT;
     private TextField tfprecioT;
+    private Button btnAccion;
     private Image pFondo;
     private BackgroundImage fondo;
     private HBox pnlItems;
@@ -134,8 +135,13 @@ public class FormNDetalleVenta extends Application {
         lstPrecioT.setAll(listaPrecioT);
         pTot=new VBox();
         pTot.getChildren().addAll(lstPrecioT);
-        
-        Map<String, String> In=new HashMap<String, String>();
+        btnAccion=new Button();
+        btnAccion.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                btnIngresoProductoEventHandler(event);
+            }
+        });
         }while(tfcodigo.getText()!=null && tfNombre.getText()!=null && tfCantidad.getText()!=null && tfPrecioU.getText()!=null && tfprecioT.getText()!=null);
         //ingreso final
         items=new HBox(1);
@@ -160,6 +166,12 @@ public class FormNDetalleVenta extends Application {
 
     public Node getPantallaP() {
         return pntPrincipal;
+    }
+    
+    public boolean btnIngresoProductoEventHandler(ActionEvent event){
+        boolean retorno=false;
+        
+        return retorno;
     }
 
 }
