@@ -34,6 +34,7 @@ public class FormNProducto {
     private TextField nombre;
     private TextField precio;
     private Label descrCategoria;
+    private ArrayList<Producto> listaProductos;
     private ComboBox<Categoria> cbxCategoria;
     private ObservableList<Categoria> items = FXCollections.observableArrayList();
     private ArrayList<Categoria> listCategorias;
@@ -51,6 +52,8 @@ public class FormNProducto {
         txtCodigo = new Label("Codigo");
         txtCodigo.setFont(Font.font("Berlin Sans FB Demi", 20));
         codigo = new TextField("");
+        codigo = new TextField();
+        codigo.setText(String.valueOf(cargarProd()+1));
         txtNombre = new Label("Nombre");
         txtNombre.setFont(Font.font("Berlin Sans FB Demi", 20));
         nombre = new TextField("");
@@ -61,18 +64,19 @@ public class FormNProducto {
         txtCategoria.setFont(Font.font("Berlin Sans FB Demi", 20));
         cargarCategorias();
         cbxCategoria = new ComboBox<Categoria>(items);
-        cbxCategoria.setValue(items.get(0));
         cbxCategoria.setVisible(true);
-        cbxCategoria.setEditable(true);
         cbxCategoria.setOnHiding(new EventHandler<Event>() {
             @Override
             public void handle(Event event) {
                 descrCategoria.setText(cbxCategoria.getSelectionModel().getSelectedItem().getDescripcion());
+                descrCategoria.setWrapText(true);
             }
         });
         descrCategoria = new Label();
-        descrCategoria.setMaxSize(150, 100);
-        descrCategoria.setMinSize(150, 100);
+        descrCategoria.setMaxSize(200, 200);
+        descrCategoria.setMinSize(200, 200);
+        descrCategoria.setFont(Font.font("Berlin Sans FB Demi", 14));
+        descrCategoria.setTextFill(Color.AZURE);
         descrCategoria.setStyle("-fx-border-color: mediumblue; -fx-border-width: 2px");
         btnAceptar = new Button("Aceptar");
         btnAceptar.setFont(Font.font("Berlin Sans FB Demi", 20));
@@ -84,6 +88,12 @@ public class FormNProducto {
         });
         btnLimpiar = new Button("Limpiar");
         btnLimpiar.setFont(Font.font("Berlin Sans FB Demi", 20));
+        btnLimpiar.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                btnLimpiarEventHandler(event);
+            }
+        });
         pnlProducto = new VBox(20);
         pnlProducto.getChildren().add(txtCodigo);
         pnlProducto.getChildren().add(codigo);
@@ -121,6 +131,12 @@ public class FormNProducto {
         return pntPrincipal;
     }
 
+    private void btnLimpiarEventHandler(ActionEvent event){
+        codigo.setText(String.valueOf(cargarProd()+1));
+        nombre.setText("");
+        precio.setText("");
+    }
+    
     public void btnAceptarEventHandler(ActionEvent event) {
         IProducto proDao = new ImplProducto();
         try {
@@ -151,6 +167,23 @@ public class FormNProducto {
         }
     }
 
+    private int cargarProd() {
+        int numCateg = 0;
+        listaProductos = new ArrayList<>();
+        IProducto prodDao = new ImplProducto();
+        try {
+            listaProductos = prodDao.obtener();
+            numCateg=listaProductos.size();
+        } catch (Exception e) {
+            Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("INFORMACION DEL SISTEMA");
+            alerta.setHeaderText(null);
+            alerta.setContentText("Error: " + e.getMessage());
+            alerta.showAndWait();
+        }
+        return numCateg;
+    }
+    
     public void cargarCategorias() {
         listCategorias = new ArrayList<>();
         ICategoria categDao = new ImplCategoria();

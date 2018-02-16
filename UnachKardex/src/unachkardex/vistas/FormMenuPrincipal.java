@@ -133,7 +133,6 @@ public class FormMenuPrincipal extends Application {
         primaryStage.setMinHeight(720);
         primaryStage.setMinWidth(1280);
         primaryStage.setMaximized(true);
-
         primaryStage.setScene(scnPrincipal);
         primaryStage.show();
         salir.setOnAction(new EventHandler<ActionEvent>() {

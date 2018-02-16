@@ -87,6 +87,7 @@ public class FormNDetalleVenta extends Application {
         pnlItems.setMinSize(755, 30);
         pnlItems.getChildren().addAll(codigo, nombre, cantidad, precioU, precioT);
         pnlItems.setAlignment(Pos.CENTER);
+        do{
         //listado de items
         //codigo
         listaCodigo=new ArrayList<>();
@@ -133,6 +134,9 @@ public class FormNDetalleVenta extends Application {
         lstPrecioT.setAll(listaPrecioT);
         pTot=new VBox();
         pTot.getChildren().addAll(lstPrecioT);
+        
+        Map<String, String> In=new HashMap<String, String>();
+        }while(tfcodigo.getText()!=null && tfNombre.getText()!=null && tfCantidad.getText()!=null && tfPrecioU.getText()!=null && tfprecioT.getText()!=null);
         //ingreso final
         items=new HBox(1);
         items.getChildren().addAll(cod,nom,cant,pUnit,pTot);
