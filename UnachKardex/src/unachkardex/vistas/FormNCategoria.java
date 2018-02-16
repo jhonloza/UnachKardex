@@ -20,8 +20,7 @@ import unachkardex.negocio.entidades.*;
 import unachkardex.negocio.impl.*;
 import unachkardex.accesodatos.*;
 
-
-public class FormNCategoria{
+public class FormNCategoria {
 
     //Presentacion
     private Image pFondo;
@@ -37,6 +36,7 @@ public class FormNCategoria{
     private TextField codigo;
     private TextField nombre;
     private TextField descripcion;
+    private ArrayList<Categoria> listaCategorias;
     private HBox pnlC1;
     private HBox pnlC2;
     private HBox pnlC3;
@@ -51,8 +51,8 @@ public class FormNCategoria{
     private VBox pntPrincipal;
 
     public FormNCategoria() {
-        pFondo=new Image("file:src\\unachkardex\\multimedia\\FondoSubVentanas.jpg");
-        fondo=new BackgroundImage(pFondo, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+        pFondo = new Image("file:src\\unachkardex\\multimedia\\FondoSubVentanas.jpg");
+        fondo = new BackgroundImage(pFondo, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         //Presentacion
         icono = new Image("file:src\\unachkardex\\multimedia\\iconoProveedor.png");
         visor = new ImageView(icono);
@@ -72,6 +72,7 @@ public class FormNCategoria{
         txtDescripcion = new Label("Descripcion: ");
         txtDescripcion.setFont(Font.font("Berlin Sans FB Demi", 20));
         codigo = new TextField();
+        codigo.setText(String.valueOf(cargarCateg()+1));
         nombre = new TextField();
         descripcion = new TextField();
         pnlC1 = new HBox(5);
@@ -123,6 +124,23 @@ public class FormNCategoria{
         return pntPrincipal;
     }
 
+    private int cargarCateg() {
+        int numCateg = 0;
+        listaCategorias = new ArrayList<>();
+        ICategoria categoriaDao = new ImplCategoria();
+        try {
+            listaCategorias = categoriaDao.obtener();
+            numCateg=listaCategorias.size();
+        } catch (Exception e) {
+            Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("INFORMACION DEL SISTEMA");
+            alerta.setHeaderText(null);
+            alerta.setContentText("Error: " + e.getMessage());
+            alerta.showAndWait();
+        }
+        return numCateg;
+    }
+
     public void bIngresarEventHandler(ActionEvent event) {
         ICategoria categDao = new ImplCategoria();
         Categoria nCategoria = new Categoria();
@@ -131,24 +149,24 @@ public class FormNCategoria{
             nCategoria.setNombre(nombre.getText());
             nCategoria.setDescripcion(descripcion.getText());
             if (categDao.insertar(nCategoria) > 0) {
-                Alert alerta=new Alert(Alert.AlertType.CONFIRMATION);
+                Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
                 alerta.setTitle("INFORMACION DEL SISTEMA");
                 alerta.setHeaderText(null);
                 alerta.setContentText("Ingtreso Correcto!!");
                 alerta.showAndWait();
             } else {
-                Alert alerta=new Alert(Alert.AlertType.ERROR);
+                Alert alerta = new Alert(Alert.AlertType.ERROR);
                 alerta.setTitle("INFORMACION DEL SISTEMA");
                 alerta.setHeaderText(null);
                 alerta.setContentText("Ingreso Incorrecto!!");
                 alerta.showAndWait();
             }
         } catch (Exception e) {
-            Alert alerta=new Alert(Alert.AlertType.ERROR);
-                alerta.setTitle("INFORMACION DEL SISTEMA");
-                alerta.setHeaderText(null);
-                alerta.setContentText("Error: "+e.getMessage());
-                alerta.showAndWait();
+            Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("INFORMACION DEL SISTEMA");
+            alerta.setHeaderText(null);
+            alerta.setContentText("Error: " + e.getMessage());
+            alerta.showAndWait();
         }
     }
 

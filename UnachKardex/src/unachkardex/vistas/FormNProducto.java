@@ -20,7 +20,7 @@ import unachkardex.negocio.entidades.*;
 import unachkardex.negocio.impl.*;
 import unachkardex.accesodatos.*;
 
-public class FormNProducto{
+public class FormNProducto {
 
     private Image pFondo;
     private BackgroundImage fondo;
@@ -33,7 +33,7 @@ public class FormNProducto{
     private TextField codigo;
     private TextField nombre;
     private TextField precio;
-    private TextField descrCategoria;
+    private Label descrCategoria;
     private ComboBox<Categoria> cbxCategoria;
     private ObservableList<Categoria> items = FXCollections.observableArrayList();
     private ArrayList<Categoria> listCategorias;
@@ -46,8 +46,8 @@ public class FormNProducto{
     private GridPane pntPrincipal;
 
     public FormNProducto() {
-        pFondo=new Image("file:src\\unachkardex\\multimedia\\FondoSubVentanas.jpg");
-        fondo=new BackgroundImage(pFondo, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+        pFondo = new Image("file:src\\unachkardex\\multimedia\\FondoSubVentanas.jpg");
+        fondo = new BackgroundImage(pFondo, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         txtCodigo = new Label("Codigo");
         txtCodigo.setFont(Font.font("Berlin Sans FB Demi", 20));
         codigo = new TextField("");
@@ -63,7 +63,17 @@ public class FormNProducto{
         cbxCategoria = new ComboBox<Categoria>(items);
         cbxCategoria.setValue(items.get(0));
         cbxCategoria.setVisible(true);
-        descrCategoria = new TextField("");
+        cbxCategoria.setEditable(true);
+        cbxCategoria.setOnHiding(new EventHandler<Event>() {
+            @Override
+            public void handle(Event event) {
+                descrCategoria.setText(cbxCategoria.getSelectionModel().getSelectedItem().getDescripcion());
+            }
+        });
+        descrCategoria = new Label();
+        descrCategoria.setMaxSize(150, 100);
+        descrCategoria.setMinSize(150, 100);
+        descrCategoria.setStyle("-fx-border-color: mediumblue; -fx-border-width: 2px");
         btnAceptar = new Button("Aceptar");
         btnAceptar.setFont(Font.font("Berlin Sans FB Demi", 20));
         btnAceptar.setOnAction(new EventHandler<ActionEvent>() {
@@ -116,19 +126,17 @@ public class FormNProducto{
         try {
             Producto nuevoPro = new Producto();
             nuevoPro.setCodProducto(Integer.parseInt(codigo.getText()));
-            // nuevoPro.setCategoria((Categoria) cbxCategoria.getSelectionModel().getSelectedIndex());
-
+            nuevoPro.setCategoria((Categoria) cbxCategoria.getSelectionModel().getSelectedItem());
             nuevoPro.setNombre(nombre.getText());
             nuevoPro.setPrecio(Double.parseDouble(precio.getText()));
-
             if (proDao.insertar(nuevoPro) > 0) {
-                Alert alerta=new Alert(Alert.AlertType.CONFIRMATION);
+                Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
                 alerta.setTitle("INFORMACION DEL SISTEMA");
                 alerta.setHeaderText(null);
                 alerta.setContentText("Ingtreso Correcto!!");
                 alerta.showAndWait();
             } else {
-                Alert alerta=new Alert(Alert.AlertType.ERROR);
+                Alert alerta = new Alert(Alert.AlertType.ERROR);
                 alerta.setTitle("INFORMACION DEL SISTEMA");
                 alerta.setHeaderText(null);
                 alerta.setContentText("Ingtreso Fallido!! ");
