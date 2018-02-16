@@ -21,6 +21,8 @@ import unachkardex.negocio.entidades.*;
 import unachkardex.negocio.impl.*;
 import unachkardex.accesodatos.*;
 
+
+
 public class FormListCategoria{
 
     private TableView<Categoria> tblCategoria;
