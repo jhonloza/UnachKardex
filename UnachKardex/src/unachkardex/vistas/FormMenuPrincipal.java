@@ -376,7 +376,7 @@ public class FormMenuPrincipal extends Application {
 
     public VentanaInterna nProveedorEventHandler(ActionEvent event) {
         BorderPane ProveedorNuevo = new BorderPane();
-        Label titulo = new Label("Nueva Categoria");
+        Label titulo = new Label("Nueva Proveedor");
         titulo.setFont(Font.font("Berlin Sans FB Demi", 20));
         titulo.setTextFill(Color.AZURE);
         Button cerrar = new Button("X");
