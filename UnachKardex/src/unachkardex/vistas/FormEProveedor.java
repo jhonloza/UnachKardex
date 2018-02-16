@@ -84,23 +84,31 @@ public class FormEProveedor extends Application{
         nombre = new Label("");
         nombre.setMaxSize(150, 25);
         nombre.setMinSize(150, 25);
+        nombre.setFont(Font.font("Berlin Sans FB Demi", 15));
+        nombre.setTextFill(Color.CYAN);
         nombre.setStyle("-fx-border-color: mediumblue; -fx-border-width: 2px");
         pnlRN = new VBox(10);
         pnlRN.getChildren().addAll(ruc, nombre);
         pnlRN.setAlignment(Pos.CENTER);
         direccion = new Label("");
-        direccion.setMaxSize(150, 25);
-        direccion.setMinSize(150, 25);
+        direccion.setMaxSize(200, 25);
+        direccion.setMinSize(200, 25);
+        direccion.setFont(Font.font("Berlin Sans FB Demi", 15));
+        direccion.setTextFill(Color.CYAN);
         direccion.setStyle("-fx-border-color: mediumblue; -fx-border-width: 2px");
         telefono = new Label("");
         telefono = new Label("");
-        telefono.setMaxSize(150, 25);
-        telefono.setMinSize(150, 25);
+        telefono.setMaxSize(200, 25);
+        telefono.setMinSize(200, 25);
+        telefono.setFont(Font.font("Berlin Sans FB Demi", 15));
+        telefono.setTextFill(Color.CYAN);
         telefono.setStyle("-fx-border-color: mediumblue; -fx-border-width: 2px");
         email = new Label("");
         email = new Label("");
-        email.setMaxSize(150, 25);
-        email.setMinSize(150, 25);
+        email.setMaxSize(200, 25);
+        email.setMinSize(200, 25);
+        email.setFont(Font.font("Berlin Sans FB Demi", 15));
+        email.setTextFill(Color.CYAN);
         email.setStyle("-fx-border-color: mediumblue; -fx-border-width: 2px");
         pnlIItProv = new VBox(10);
         pnlIItProv.getChildren().addAll(direccion, telefono, email);
@@ -172,6 +180,10 @@ public class FormEProveedor extends Application{
     
     public void btnLimpiarEventHandler(ActionEvent event) {
         ruc.setText("");
+        nombre.setText("");
+        direccion.setText("");
+        telefono.setText("");
+        email.setText("");
     }
 
     public void btnEliminarEventHandler(ActionEvent event) {
