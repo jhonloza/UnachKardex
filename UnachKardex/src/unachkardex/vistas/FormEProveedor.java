@@ -178,7 +178,17 @@ public class FormEProveedor extends Application{
     }
     
      public void btnBuscarEventHandler(ActionEvent event) {
-         
+         IProveedor proveedorDao=new ImplProveedor();
+          Proveedor prove=new Proveedor();
+        try {
+            prove=proveedorDao.obtener(ruc.getText());
+            nombre.setText(prove.getNombre());
+            direccion.setText(prove.getDireccion());
+            telefono.setText(prove.getTelefono());
+            email.setText(prove.geteMail());
+            } catch (Exception e) {
+           
+        }
     }
     
     public static void main(String[] args) {
