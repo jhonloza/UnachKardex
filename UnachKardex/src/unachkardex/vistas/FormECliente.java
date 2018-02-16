@@ -33,7 +33,7 @@ public class FormECliente extends Application {
     private BackgroundImage fondo;
     private Image logo;
     private ImageView visorlogo;
-    private Label cedula;
+    private TextField cedula;
     private Label nombres;
     private Label apellidos;
     private Label fechaNacimiento;
@@ -79,7 +79,7 @@ public class FormECliente extends Application {
 
         //CAJAS DE TEXTO PARA CAMPOS
   
-        cedula = new Label("");
+        cedula = new TextField("");
         cedula.setMaxSize(150, 25);
         cedula.setMinSize(150, 25);
         cedula.setStyle("-fx-border-color: mediumblue; -fx-border-width: 2px");
@@ -186,7 +186,18 @@ public class FormECliente extends Application {
         cedula.setText("");
     }
 
-    public void btnEliminarEventHandler(ActionEvent event) {
+    public void btnEliminarEventHandler(ActionEvent event)
+    {
+        int filas=0;
+        Cliente ncliente = new Cliente();
+        ICliente clienteDao=new ImplCliente();
+          Cliente cli =new Cliente();
+         try {
+             filas=clienteDao.eliminar(ncliente);
+             System.out.println("se elimino: "+filas+" productos");
+         } catch (Exception e) {
+             System.out.println("Error de eliminacion: "+e.getMessage());
+         }
         
         
     }
