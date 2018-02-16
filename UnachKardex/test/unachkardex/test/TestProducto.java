@@ -21,14 +21,37 @@ public class TestProducto {
 
 //        int filas = 0;
 //        Categoria ncategoria = new Categoria(1, "ABC", "Cuadernoss");
-//        Producto produc = new Producto(2,ncategoria,  "Academico", 1.75);
+//        Producto produc = new Producto(1,ncategoria,  "Academico", 1.75);
 //        try {
 //            filas = productoDao.insertar(produc);
 //            System.out.println("filas Insertadas:" + filas);
 //        } catch (Exception e) {
 //        }
 //        assertTrue(filas > 0);
-        
+        //TEST ELIMINAR
+//        int filas=0;
+//        Categoria ncategoria = new Categoria(1, "ABC", "Cuadernoss");
+//        Producto produc = new Producto(2,ncategoria,  "Academico", 1.75);
+//         try {
+//             filas=productoDao.eliminar(produc);
+//             System.out.println("se elimino: "+filas+" productos");
+//         } catch (Exception e) {
+//             System.out.println("Error de eliminacion: "+e.getMessage());
+//         }
+//         assertTrue(filas>0);
+        //TEST MODIFICAR
+        int filas=0;
+        Categoria ncategoria = new Categoria(1, "ABC", "Cuadernoss");
+        Producto produc = new Producto(1,ncategoria,  "tu Madre", 17.5);
+         try {
+             filas=productoDao.modificar(produc);
+             System.out.println("se elimino: "+filas+" productos");
+         } catch (Exception e) {
+             System.out.println("Error de eliminacion: "+e.getMessage());
+         }
+         assertTrue(filas>0);
+         
+         
 ////TEST OBTENER POR CODIGO
 
 //        Producto producto = new Producto();
@@ -41,15 +64,15 @@ public class TestProducto {
         
 //TEST LISTADO
 
-        ArrayList<Producto> productos = new ArrayList<>();
-        try {
-            productos = productoDao.obtener();
-            for (Producto nProductos : productos) {
-                System.out.println(nProductos.getCodProducto()+"\t\t\t"+ nProductos.getCategoria().getCodCategoria()+"\t\t\t"+nProductos.getNombre()+"\t\t\t"+nProductos.getPrecio());
-            }
-        } catch (Exception e) {
-        }
-        assertTrue(productos.size() > 0);
+//        ArrayList<Producto> productos = new ArrayList<>();
+//        try {
+//            productos = productoDao.obtener();
+//            for (Producto nProductos : productos) {
+//                System.out.println(nProductos.getCodProducto()+"\t\t\t"+ nProductos.getCategoria().getCodCategoria()+"\t\t\t"+nProductos.getNombre()+"\t\t\t"+nProductos.getPrecio());
+//            }
+//        } catch (Exception e) {
+//        }
+//        assertTrue(productos.size() > 0);
     }
 
 }

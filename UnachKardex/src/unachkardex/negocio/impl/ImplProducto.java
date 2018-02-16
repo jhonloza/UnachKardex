@@ -6,11 +6,11 @@ import unachkardex.negocio.entidades.*;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-public class ImplProducto implements IProducto{
-    
+public class ImplProducto implements IProducto {
+
     @Override
     public int insertar(Producto producto) throws Exception {
-         int numFilas = 0;
+        int numFilas = 0;
         String sqlC = "INSERT INTO Producto (codProducto, codCategoria, nombre , precio) VALUES (?,?,?,?)";
         ArrayList<Parametro> lisParametros = new ArrayList<>();
         lisParametros.add(new Parametro(1, producto.getCodProducto()));
@@ -35,8 +35,7 @@ public class ImplProducto implements IProducto{
 
     @Override
     public Producto obtener(int codProducto) throws Exception {
-        
-       
+
         Producto pro = null;
         String sqlC = "SELECT codProducto, codCategoria, nombre, precio FROM Producto Where codProducto=?";
         ArrayList<Parametro> lisParametros = new ArrayList<>();
@@ -68,8 +67,7 @@ public class ImplProducto implements IProducto{
 
     }
 
-
-@Override
+    @Override
     public int modificar(Producto producto) throws Exception {
         int numFilas = 0;
         String sqlC = "UPDATE Producto SET codProducto=?, codCategoria=?, nombre=?, precio=? WHERE codProducto=?";
@@ -78,7 +76,7 @@ public class ImplProducto implements IProducto{
         lisParametros.add(new Parametro(2, producto.getCategoria().getCodCategoria()));
         lisParametros.add(new Parametro(3, producto.getNombre()));
         lisParametros.add(new Parametro(4, producto.getPrecio()));
-    
+        lisParametros.add(new Parametro(5, producto.getCodProducto()));
         Conexion con = null;
         try {
             con = new Conexion();
@@ -93,11 +91,11 @@ public class ImplProducto implements IProducto{
         }
         return numFilas;
     }
-    
-@Override
+
+    @Override
     public int eliminar(Producto producto) throws Exception {
         int numFilas = 0;
-        String sqlC = "DELETE FROM DetalleCompra WHERE codDetalleCompra=?";
+        String sqlC = "DELETE FROM Producto WHERE codProducto=?";
         ArrayList<Parametro> lisParametros = new ArrayList<>();
         lisParametros.add(new Parametro(1, producto.getCodProducto()));
         Conexion con = null;
@@ -114,40 +112,39 @@ public class ImplProducto implements IProducto{
         }
         return numFilas;
     }
-      
-  
-     @Override
+
+    @Override
     public ArrayList<Producto> obtener() throws Exception {
         Producto pro = null;
         String sqlC = "select codProducto, codCategoria, nombre, precio from Producto";
         ArrayList<Producto> lstpro = new ArrayList<>();
         Conexion con = null;
-        try{
+        try {
             con = new Conexion();
             con.conectar();
             ResultSet rst = con.ejecutarQuery(sqlC, null);
-            while(rst.next()){
+            while (rst.next()) {
                 ICategoria clDao = new ImplCategoria();
                 Categoria cl = null;
-                
+
                 pro = new Producto();
                 pro.setCodProducto(rst.getInt(1));
-                
+
                 cl = clDao.obtener(rst.getInt(2));
                 pro.setCategoria(cl);
                 pro.setNombre(rst.getString(3));
                 pro.setPrecio(rst.getDouble(4));
                 lstpro.add(pro);
             }
-            
-        }catch (Exception e){
+
+        } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         } finally {
-            
+
             if (con != null) {
                 con.desconectar();
             }
         }
-        return  lstpro;
+        return lstpro;
     }
 }
