@@ -187,7 +187,20 @@ public class FormEProveedor extends Application{
     }
 
     public void btnEliminarEventHandler(ActionEvent event) {
+    int filas=0;
+    IProveedor proveedorDao=new ImplProveedor();
+    Proveedor prove=new Proveedor();
+        try {
+            filas=proveedorDao.eliminar(prove);
+            nombre.setText(prove.getNombre());
+            direccion.setText(prove.getDireccion());
+            telefono.setText(prove.getTelefono());
+            email.setText(prove.geteMail());
+            } catch (Exception e) {
+           
+        }
     }
+        
     
      public void btnBuscarEventHandler(ActionEvent event) {
          IProveedor proveedorDao=new ImplProveedor();
