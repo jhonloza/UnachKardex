@@ -171,7 +171,11 @@ public class FormBProveedor {
             telefono.setText(prove.getTelefono());
             email.setText(prove.geteMail());
             } catch (Exception e) {
-           
+            Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("INFORMACION DEL SISTEMA");
+            alerta.setHeaderText(null);
+            alerta.setContentText("No se encontro Registros: " + e.getMessage());
+            alerta.showAndWait();
         }
     }
      
