@@ -1,5 +1,4 @@
 package unachkardex.vistas;
-
 import javafx.application.*;
 import javafx.event.*;
 import javafx.scene.*;
@@ -9,6 +8,7 @@ import javafx.scene.text.*;
 import javafx.scene.paint.*;
 import java.lang.reflect.*;
 import java.text.*;
+import static javafx.application.Application.launch;
 import javafx.beans.*;
 import javafx.collections.*;
 import javafx.geometry.*;
@@ -20,9 +20,9 @@ import unachkardex.negocio.entidades.*;
 import unachkardex.negocio.impl.*;
 import unachkardex.accesodatos.*;
 
-public class FormEProveedor {
-
-    private Label titulo;
+public class FormMProveedor {
+    
+  private Label titulo;
     private Label txtRuc;
     private Label txtNombre;
     private Label txtDireccion;
@@ -35,12 +35,12 @@ public class FormEProveedor {
     private ImageView visorlogo;
 
     private TextField ruc;
-    private Label nombre;
-    private Label direccion;
-    private Label telefono;
-    private Label email;
+    private TextField nombre;
+    private TextField direccion;
+    private TextField telefono;
+    private TextField email;
 
-    private Button btnEliminar;
+    private Button btnModificar;
     private Button btnLimpiar;
     private Button btnBuscar;
 
@@ -54,11 +54,11 @@ public class FormEProveedor {
     private HBox pnlInt;
     private HBox pnlBotones;
     private VBox pntPrincipal;
-
     private Proveedor prove;
 
-   public FormEProveedor() {
-        pFondo = new Image("file:src\\unachkardex\\multimedia\\FondoSubVentanas.jpg");
+
+   public FormMProveedor() {
+         pFondo = new Image("file:src\\unachkardex\\multimedia\\FondoSubVentanas.jpg");
         fondo = new BackgroundImage(pFondo, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
 
         //Sup izq
@@ -82,53 +82,54 @@ public class FormEProveedor {
         pnlTItProv.setAlignment(Pos.CENTER_RIGHT);
         //CAJAS DE TEXTO PARA CAMPOS
         ruc = new TextField("");
-        nombre = new Label("");
-        nombre.setMaxSize(150, 25);
-        nombre.setMinSize(150, 25);
+        ruc.setMaxSize(200, 30);
+        ruc.setMinSize(200, 30);
+        ruc.setFont(Font.font("Berlin Sans FB Demi", 15));
+        ruc.setStyle("-fx-border-color: mediumblue; -fx-border-width: 2px");
+        
+        nombre = new TextField("");
+        nombre.setMaxSize(200, 30);
+        nombre.setMinSize(200, 30);
         nombre.setFont(Font.font("Berlin Sans FB Demi", 15));
-        nombre.setTextFill(Color.CYAN);
         nombre.setStyle("-fx-border-color: mediumblue; -fx-border-width: 2px");
         pnlRN = new VBox(10);
         pnlRN.getChildren().addAll(ruc, nombre);
         pnlRN.setAlignment(Pos.CENTER);
-        direccion = new Label("");
-        direccion.setMaxSize(200, 25);
-        direccion.setMinSize(200, 25);
+        direccion = new TextField("");
+        direccion.setMaxSize(200, 30);
+        direccion.setMinSize(200, 30);
         direccion.setFont(Font.font("Berlin Sans FB Demi", 15));
-        direccion.setTextFill(Color.CYAN);
         direccion.setStyle("-fx-border-color: mediumblue; -fx-border-width: 2px");
-        telefono = new Label("");
-        telefono = new Label("");
-        telefono.setMaxSize(200, 25);
-        telefono.setMinSize(200, 25);
+        
+        telefono = new TextField("");
+        telefono.setMaxSize(200, 30);
+        telefono.setMinSize(200, 30);
         telefono.setFont(Font.font("Berlin Sans FB Demi", 15));
-        telefono.setTextFill(Color.CYAN);
         telefono.setStyle("-fx-border-color: mediumblue; -fx-border-width: 2px");
-        email = new Label("");
-        email = new Label("");
-        email.setMaxSize(200, 25);
-        email.setMinSize(200, 25);
+        
+        email = new TextField("");
+        email.setMaxSize(200, 30);
+        email.setMinSize(200, 30);
         email.setFont(Font.font("Berlin Sans FB Demi", 15));
-        email.setTextFill(Color.CYAN);
         email.setStyle("-fx-border-color: mediumblue; -fx-border-width: 2px");
         pnlIItProv = new VBox(10);
         pnlIItProv.getChildren().addAll(direccion, telefono, email);
         pnlIItProv.setAlignment(Pos.CENTER);
-        btnBuscar = new Button();
-        btnBuscar.setMaxSize(100, 25);
-        btnBuscar.setMinSize(100, 25);
+        btnBuscar=new Button();
+        btnBuscar.setMaxSize(100, 30);
+        btnBuscar.setMinSize(100, 30);
         //LOGO
         logo = new Image("file:src\\unachkardex\\multimedia\\iconoProveedor.png");
         visorlogo = new ImageView(logo);
         visorlogo.setFitHeight(100);
         visorlogo.setFitWidth(100);
         //BOTONES A USAR
-        btnEliminar = new Button("Eliminar");
-        btnEliminar.setFont(Font.font("Berlin Sans FB Demi", 15));
-        btnEliminar.setOnAction(new EventHandler<ActionEvent>() {
+        btnModificar = new Button("Modificar");
+        btnModificar.setFont(Font.font("Berlin Sans FB Demi", 15));
+        btnModificar.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                btnEliminarEventHandler(event);
+                btnModificarEventHandler(event);
             }
         });
         btnLimpiar = new Button("Limpiar");
@@ -147,9 +148,9 @@ public class FormEProveedor {
                 btnBuscarEventHandler(event);
             }
         });
-
+        
         pnlIcInfo = new HBox(10);
-        pnlIcInfo.getChildren().addAll(pnlRucNom, pnlRN, btnBuscar);
+        pnlIcInfo.getChildren().addAll(pnlRucNom, pnlRN,btnBuscar);
         pnlIcInfo.setAlignment(Pos.CENTER);
         pnlTitulo = new VBox(10);
         pnlTitulo.getChildren().addAll(titulo, pnlIcInfo);
@@ -161,7 +162,7 @@ public class FormEProveedor {
         pnlInt.getChildren().addAll(pnlTItProv, pnlIItProv);
         pnlInt.setPadding(new Insets(10));
         pnlBotones = new HBox(10);
-        pnlBotones.getChildren().addAll(btnEliminar, btnLimpiar);
+        pnlBotones.getChildren().addAll(btnModificar, btnLimpiar);
         pnlBotones.setAlignment(Pos.CENTER);
         pnlBotones.setPadding(new Insets(10));
         pntPrincipal = new VBox(10);
@@ -169,9 +170,8 @@ public class FormEProveedor {
         pntPrincipal.setPadding(new Insets(10));
         pntPrincipal.setBackground(new Background(fondo));
         pntPrincipal.setStyle("-fx-padding: 10; -fx-border-color: mediumblue; -fx-border-width: 2px");
-       
     }
-
+    
     public void btnLimpiarEventHandler(ActionEvent event) {
         ruc.setText("");
         nombre.setText("");
@@ -180,57 +180,60 @@ public class FormEProveedor {
         email.setText("");
     }
 
-    public void btnEliminarEventHandler(ActionEvent event) {
-        IProveedor proveedorDao = new ImplProveedor();
-        try {
-            Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
-            confirmacion.setTitle("INFORMACION DEL SISTEMA");
-            confirmacion.setHeaderText(null);
-            confirmacion.setContentText("Desea Eliminar este Proveedor?");
-            confirmacion.showAndWait();
-            if (confirmacion.getResult() == ButtonType.OK) {
-
-                if (proveedorDao.eliminar(prove) > 0) {
-                    confirmacion.setTitle("INFORMACION DEL SISTEMA");
-                    confirmacion.setHeaderText(null);
-                    confirmacion.setContentText("Se a Eliminado Correctamente!!");
-                    confirmacion.showAndWait();
-                }else{
-                    confirmacion.setTitle("INFORMACION DEL SISTEMA");
-                    confirmacion.setHeaderText(null);
-                    confirmacion.setContentText("No se pudo Eliminar!!");
-                    confirmacion.showAndWait();
-                }
+    public void btnModificarEventHandler(ActionEvent event) {
+        IProveedor proveedorDao=new ImplProveedor();
+        
+         try {
+        
+            prove.setNombre(nombre.getText());
+            prove.setDireccion(direccion.getText());
+            prove.setTelefono(telefono.getText());
+            prove.seteMail(email.getText());
+            if(proveedorDao.modificar(prove)>0){
+                Alert alerta=new Alert(Alert.AlertType.CONFIRMATION);
+                alerta.setTitle("INFORMACION DEL SISTEMA");
+                alerta.setHeaderText(null);
+                alerta.setContentText("Modificacion Correcto!!");
+                alerta.showAndWait();
             }
-        } catch (Exception e) {
+            else{
+                 Alert alerta=new Alert(Alert.AlertType.ERROR);
+                alerta.setTitle("INFORMACION DEL SISTEMA");
+                alerta.setHeaderText(null);
+                alerta.setContentText("Modificacion Fallido!! ");
+                alerta.showAndWait();
+                
+            }
+            
+         } catch (Exception e) {
             Alert alerta = new Alert(Alert.AlertType.ERROR);
-            alerta.setTitle("INFORMACION DEL SISTEMA");
+            alerta.setTitle("ERROR");
             alerta.setHeaderText(null);
-            alerta.setContentText("No se pudo Eliminar: " + e.getMessage());
+            alerta.setContentText("No se Pudo Modificar: " + e.getMessage());
             alerta.showAndWait();
-        }
+             
+         }
     }
-
-    public void btnBuscarEventHandler(ActionEvent event) {
-        IProveedor proveedorDao = new ImplProveedor();
-        prove = new Proveedor();
+    
+     public void btnBuscarEventHandler(ActionEvent event) {
+         IProveedor proveedorDao=new ImplProveedor();
+          prove=new Proveedor();
         try {
-            prove = proveedorDao.obtener(ruc.getText());
+            prove=proveedorDao.obtener(ruc.getText());
             nombre.setText(prove.getNombre());
             direccion.setText(prove.getDireccion());
             telefono.setText(prove.getTelefono());
             email.setText(prove.geteMail());
-        } catch (Exception e) {
-            
-         Alert alerta = new Alert(Alert.AlertType.ERROR);
-            alerta.setTitle("INFORMACION DEL SISTEMA");
+            } catch (Exception e) {
+             Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("ERROR");
             alerta.setHeaderText(null);
             alerta.setContentText("No se encontro Registros: " + e.getMessage());
             alerta.showAndWait();
+           
         }
     }
-
-    public VBox getPntPrincipal() {
+    public Node getPntPrincipal() {
         return pntPrincipal;
     }
     

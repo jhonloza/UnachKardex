@@ -19,7 +19,7 @@ import unachkardex.negocio.entidades.*;
 import unachkardex.negocio.impl.*;
 import unachkardex.accesodatos.*;
 
-public class FormBProveedor extends Application {
+public class FormBProveedor {
     
     private Label titulo;
     private Label txtRuc;
@@ -39,8 +39,8 @@ public class FormBProveedor extends Application {
     private Label telefono;
     private Label email;
 
-    
     private Button btnBuscar;
+    private Button btnLimpiar;
 
     private VBox pnlRucNom;
     private VBox pnlRN;
@@ -53,10 +53,7 @@ public class FormBProveedor extends Application {
     private HBox pnlBotones;
     private VBox pntPrincipal;
 
-
-
-    @Override
-    public void start(Stage primaryStage) throws Exception {
+    public FormBProveedor() {
          pFondo = new Image("file:src\\unachkardex\\multimedia\\FondoSubVentanas.jpg");
         fondo = new BackgroundImage(pFondo, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
 
@@ -131,6 +128,14 @@ public class FormBProveedor extends Application {
                 btnBuscarEventHandler(event);
             }
         });
+        btnLimpiar = new Button("Limpiar");
+        btnLimpiar.setFont(Font.font("Berlin Sans FB Demi", 15));
+        btnLimpiar.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                btnLimpiarEventHandler(event);
+            }
+        });
         
         pnlIcInfo = new HBox(10);
         pnlIcInfo.getChildren().addAll(pnlRucNom, pnlRN,btnBuscar);
@@ -145,7 +150,7 @@ public class FormBProveedor extends Application {
         pnlInt.getChildren().addAll(pnlTItProv, pnlIItProv);
         pnlInt.setPadding(new Insets(10));
         pnlBotones = new HBox(10);
-        pnlBotones.getChildren().addAll(btnBuscar);
+        pnlBotones.getChildren().addAll(btnBuscar,btnLimpiar);
         pnlBotones.setAlignment(Pos.CENTER);
         pnlBotones.setPadding(new Insets(10));
         pntPrincipal = new VBox(10);
@@ -153,14 +158,7 @@ public class FormBProveedor extends Application {
         pntPrincipal.setPadding(new Insets(10));
         pntPrincipal.setBackground(new Background(fondo));
         pntPrincipal.setStyle("-fx-padding: 10; -fx-border-color: mediumblue; -fx-border-width: 2px");
-        Scene scene=new Scene(pntPrincipal, 640, 480);
-        primaryStage.setTitle("Buscar Proveedor");
-        primaryStage.setScene(scene);
-        primaryStage.setMaxHeight(480);
-        primaryStage.setMinHeight(480);
-        primaryStage.setMaxWidth(640);
-        primaryStage.setMaxWidth(640);
-        primaryStage.show();
+        
     }
     
     public void btnLimpiarEventHandler(ActionEvent event) {
@@ -182,11 +180,15 @@ public class FormBProveedor extends Application {
             telefono.setText(prove.getTelefono());
             email.setText(prove.geteMail());
             } catch (Exception e) {
-           
+            Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("INFORMACION DEL SISTEMA");
+            alerta.setHeaderText(null);
+            alerta.setContentText("No se encontro Registros: " + e.getMessage());
+            alerta.showAndWait();
         }
     }
-    
-    public static void main(String[] args) {
-        launch(args);
+     
+    public VBox getPntPrincipal() {
+        return pntPrincipal;
     }
 }
