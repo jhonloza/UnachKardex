@@ -87,7 +87,6 @@ public class FormNFacturaVenta {
     private HBox pnlF2;
     private HBox pnlF3;
     private VBox pnlFact;
-
     /// logo ////
     private Image logo;
     private ImageView mostrarLogo;
@@ -103,8 +102,11 @@ public class FormNFacturaVenta {
     private HBox pnlFin1;
     private HBox pnlFin2;
     private HBox pnlFin3;
+    private HBox pnlbotones;
+    private Button btnvender;
+    private Button btnlimpiar;
     private VBox pnlFinal;
-
+    
     private BorderPane pntPrincipal;
 
     public FormNFacturaVenta() {
@@ -289,8 +291,15 @@ public class FormNFacturaVenta {
         pnlFin3 = new HBox(5);
         pnlFin3.getChildren().addAll(txtTotalFinal, totalFinal);
         pnlFin3.setAlignment(Pos.CENTER_RIGHT);
+        btnlimpiar=new Button("Limpiar");
+        btnlimpiar.setFont(Font.font("Berlin Sans FB Demi", 15));
+        btnvender=new Button("Vender");
+        btnvender.setFont(Font.font("Berlin Sans FB Demi", 15));
+        pnlbotones=new HBox(10);
+        pnlbotones.getChildren().addAll(btnlimpiar, btnvender);
+        pnlbotones.setAlignment(Pos.CENTER_RIGHT);
         pnlFinal = new VBox(15);
-        pnlFinal.getChildren().addAll(pnlFin1, pnlFin2, pnlFin3);
+        pnlFinal.getChildren().addAll(pnlFin1, pnlFin2, pnlFin3, pnlbotones);
         pnlFinal.setMaxSize(730, 150);
         pnlFinal.setMinSize(730, 150);
 
@@ -425,12 +434,18 @@ public class FormNFacturaVenta {
         listaCantidad.add(Integer.parseInt(tfCodigo.getText()));
         listaPrecioU.add(Double.parseDouble(tfCodigo.getText()));
         listaPrecioT.add(Double.parseDouble(tfCodigo.getText()));
-        for (int i = 0; i < listaCodigo.size(); i++) {
-            System.out.println(listaCodigo.get(i) + "\t" + listaNombre.get(i) + "\t" + listaCantidad.get(i) + "\t" + listaPrecioU.get(i) + "\t" + listaPrecioT.get(i));
-        }
+//        for (int i = 0; i < listaCodigo.size(); i++) {
+//            System.out.println(listaCodigo.get(i) + "\t" + listaNombre.get(i) + "\t" + listaCantidad.get(i) + "\t" + listaPrecioU.get(i) + "\t" + listaPrecioT.get(i));
+//        }
+    for(int e:listaCodigo){
+        System.out.println("codigo:  "+e);
+    }
 //        System.out.println(listaCodigo.size());
         generarFilaVenta();
         vItems.getChildren().add(items);
     }
 
+    public void btnVender(ActionEvent event){
+        
+    }
 }
