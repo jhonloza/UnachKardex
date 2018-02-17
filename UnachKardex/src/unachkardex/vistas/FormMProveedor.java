@@ -20,7 +20,7 @@ import unachkardex.negocio.entidades.*;
 import unachkardex.negocio.impl.*;
 import unachkardex.accesodatos.*;
 
-public class FormMProveedor extends Application {
+public class FormMProveedor {
     
   private Label titulo;
     private Label txtRuc;
@@ -57,8 +57,7 @@ public class FormMProveedor extends Application {
     private Proveedor prove;
 
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
+   public FormMProveedor() {
          pFondo = new Image("file:src\\unachkardex\\multimedia\\FondoSubVentanas.jpg");
         fondo = new BackgroundImage(pFondo, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
 
@@ -171,14 +170,6 @@ public class FormMProveedor extends Application {
         pntPrincipal.setPadding(new Insets(10));
         pntPrincipal.setBackground(new Background(fondo));
         pntPrincipal.setStyle("-fx-padding: 10; -fx-border-color: mediumblue; -fx-border-width: 2px");
-        Scene scene=new Scene(pntPrincipal, 640, 480);
-        primaryStage.setTitle("Modificar Proveedor.");
-        primaryStage.setScene(scene);
-        primaryStage.setMaxHeight(480);
-        primaryStage.setMinHeight(480);
-        primaryStage.setMaxWidth(640);
-        primaryStage.setMaxWidth(640);
-        primaryStage.show();
     }
     
     public void btnLimpiarEventHandler(ActionEvent event) {
@@ -237,8 +228,8 @@ public class FormMProveedor extends Application {
            
         }
     }
-    
-    public static void main(String[] args) {
-        launch(args);
+    public Node getPntPrincipal() {
+        return pntPrincipal;
     }
+    
 }
