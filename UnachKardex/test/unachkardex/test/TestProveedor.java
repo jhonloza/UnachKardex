@@ -30,14 +30,26 @@ public class TestProveedor {
 ////        assertTrue(filas>0);
         
         //TEST ELIMINAR
+//        int filas=0;
+//        
+//        Proveedor prov = new Proveedor("1234321234001","Ana","La esperanza","1234321234","gmailcom");
+//         try {
+//             filas=proveedorDao.eliminar(prov);
+//             System.out.println("se elimino: "+filas+" proveedores");
+//         } catch (Exception e) {
+//             System.out.println("Error de eliminacion: "+e.getMessage());
+//         }
+//         assertTrue(filas>0);
+
+//TEST MODIFICAR
         int filas=0;
         
-        Proveedor prov = new Proveedor("1234321234001","Ana","La esperanza","1234321234","gmailcom");
+        Proveedor prove = new Proveedor("1800000000001","Inpapel","Parque Industrial","0986532501","inpapel@gmail.com");
          try {
-             filas=proveedorDao.eliminar(prov);
-             System.out.println("se elimino: "+filas+" proveedores");
+             filas=proveedorDao.modificar(prove);
+             System.out.println("Se Modifico: "+filas+" Proveedores");
          } catch (Exception e) {
-             System.out.println("Error de eliminacion: "+e.getMessage());
+             System.out.println("Error de modificacion: "+e.getMessage());
          }
          assertTrue(filas>0);
         
