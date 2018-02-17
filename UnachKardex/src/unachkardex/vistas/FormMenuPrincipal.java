@@ -199,6 +199,15 @@ public class FormMenuPrincipal extends Application {
             }
         });
 //        eliminarProveedor
+        eliminarProveedor.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Pane proveedorEliminar = new Pane();
+                proveedorEliminar.getChildren().add(eProveedorEventHandler(event));
+                proveedorEliminar.setPadding(new Insets(5));
+                escritorio.getChildren().add(proveedorEliminar);
+            }
+        });
 //        buscarProveedor
         buscarProveedor.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -443,6 +452,30 @@ public class FormMenuPrincipal extends Application {
         return mProveedor;
     }
 //        eliminarProveedor
+        public VentanaInterna eProveedorEventHandler(ActionEvent event) {
+        BorderPane ProveedorEliminar = new BorderPane();
+        Label titulo = new Label("Eliminar Proveedor");
+        titulo.setFont(Font.font("Berlin Sans FB Demi", 20));
+        titulo.setTextFill(Color.AZURE);
+        Button cerrar = new Button("X");
+        cerrar.setFont(Font.font("Arial Black", 18));
+        cerrar.setTextFill(Color.CYAN);
+        //Barra de Titulo subVentana
+        BarraDeTitulo bTitulo = new BarraDeTitulo(titulo, cerrar);
+        ProveedorEliminar.setTop(bTitulo.getBarra());
+        //Interior de la subVentana
+        FormEProveedor EliminarProv = new FormEProveedor();
+        ProveedorEliminar.setCenter(EliminarProv.getPntPrincipal());
+        //Creacion de Ventana interna
+        VentanaInterna eProveedor = new VentanaInterna();
+        eProveedor.setRoot(ProveedorEliminar);
+        eProveedor.makeDragable(bTitulo.getBarra());
+        eProveedor.makeDragable(titulo);
+        eProveedor.makeResizable(20);
+        eProveedor.makeFocusable();
+        eProveedor.setCloseButton(cerrar);
+        return eProveedor;
+    }
 //        buscarProveedor
         public VentanaInterna bProveedorEventHandler(ActionEvent event) {
         BorderPane ProveedorBuscar = new BorderPane();
