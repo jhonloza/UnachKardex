@@ -40,6 +40,7 @@ public class FormBProveedor {
     private Label email;
 
     private Button btnBuscar;
+    private Button btnLimpiar;
 
     private VBox pnlRucNom;
     private VBox pnlRN;
@@ -127,6 +128,14 @@ public class FormBProveedor {
                 btnBuscarEventHandler(event);
             }
         });
+        btnLimpiar = new Button("Limpiar");
+        btnLimpiar.setFont(Font.font("Berlin Sans FB Demi", 15));
+        btnLimpiar.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                btnLimpiarEventHandler(event);
+            }
+        });
         
         pnlIcInfo = new HBox(10);
         pnlIcInfo.getChildren().addAll(pnlRucNom, pnlRN,btnBuscar);
@@ -141,7 +150,7 @@ public class FormBProveedor {
         pnlInt.getChildren().addAll(pnlTItProv, pnlIItProv);
         pnlInt.setPadding(new Insets(10));
         pnlBotones = new HBox(10);
-        pnlBotones.getChildren().addAll(btnBuscar);
+        pnlBotones.getChildren().addAll(btnBuscar,btnLimpiar);
         pnlBotones.setAlignment(Pos.CENTER);
         pnlBotones.setPadding(new Insets(10));
         pntPrincipal = new VBox(10);
