@@ -207,9 +207,9 @@ public class FormMProveedor {
             
          } catch (Exception e) {
             Alert alerta = new Alert(Alert.AlertType.ERROR);
-            alerta.setTitle("INFORMACION DEL SISTEMA");
+            alerta.setTitle("ERROR");
             alerta.setHeaderText(null);
-            alerta.setContentText("Error: " + e.getMessage());
+            alerta.setContentText("No se Pudo Modificar: " + e.getMessage());
             alerta.showAndWait();
              
          }
@@ -225,6 +225,11 @@ public class FormMProveedor {
             telefono.setText(prove.getTelefono());
             email.setText(prove.geteMail());
             } catch (Exception e) {
+             Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("ERROR");
+            alerta.setHeaderText(null);
+            alerta.setContentText("No se encontro Registros: " + e.getMessage());
+            alerta.showAndWait();
            
         }
     }
