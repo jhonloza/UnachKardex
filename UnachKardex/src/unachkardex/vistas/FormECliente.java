@@ -20,7 +20,7 @@ import unachkardex.negocio.entidades.*;
 import unachkardex.negocio.impl.*;
 import unachkardex.accesodatos.*;
 
-public class FormECliente extends Application {
+public class FormECliente extends Application{
 
     private Label txtCedula;
     private Label txtNombres;
@@ -50,6 +50,8 @@ public class FormECliente extends Application {
     private HBox pnlBotones;
     private VBox pntPrincipal;
 
+   
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         pFondo = new Image("file:src\\unachkardex\\multimedia\\FondoSubVentanas.jpg");
@@ -78,7 +80,6 @@ public class FormECliente extends Application {
         //txtEmail.setFill(Color.DARKBLUE);
 
         //CAJAS DE TEXTO PARA CAMPOS
-  
         cedula = new TextField("");
         cedula.setMaxSize(150, 25);
         cedula.setMinSize(150, 25);
@@ -113,7 +114,7 @@ public class FormECliente extends Application {
         btnEliminar.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-              btnEliminarEventHandler(event);
+                btnEliminarEventHandler(event);
             }
         });
         btnLimpiar = new Button("Limpiar");
@@ -126,11 +127,11 @@ public class FormECliente extends Application {
                 btnBuscarEventHandler(event);
             }
         });
-        
+
         //INGRESO EN PANELES
         //SUPERIOR
         pnlced = new HBox(20);
-        pnlced.getChildren().addAll(txtCedula, cedula,btnBuscar);
+        pnlced.getChildren().addAll(txtCedula, cedula, btnBuscar);
         //nombre
         pnlNombApe = new GridPane();
         pnlNombApe.setHgap(20);
@@ -186,25 +187,22 @@ public class FormECliente extends Application {
         cedula.setText("");
     }
 
-    public void btnEliminarEventHandler(ActionEvent event)
-    {
-        int filas=0;
+    public void btnEliminarEventHandler(ActionEvent event) {
+        int filas = 0;
         Cliente ncliente = new Cliente();
-        ICliente clienteDao=new ImplCliente();
-         try {
-             filas=clienteDao.eliminar(ncliente);
-             System.out.println("se elimino: "+filas+" Cliente");
-         } catch (Exception e) {
-             System.out.println("Error de eliminacion: "+e.getMessage());
-         }
-         
-        
-        
+        ICliente clienteDao = new ImplCliente();
+        try {
+            filas = clienteDao.eliminar(ncliente);
+            System.out.println("se elimino: " + filas + " Cliente");
+        } catch (Exception e) {
+            System.out.println("Error de eliminacion: " + e.getMessage());
+        }
+
     }
 
     public void btnBuscarEventHandler(ActionEvent event) {
-         ICliente clienteDao=new ImplCliente();
-          Cliente cli =new Cliente();
+        ICliente clienteDao = new ImplCliente();
+        Cliente cli = new Cliente();
         try {
             cli = clienteDao.obtener(cedula.getText());
             nombres.setText(cli.getNombre());
@@ -213,12 +211,14 @@ public class FormECliente extends Application {
             telefono.setText(cli.getTelefono());
             email.setText(cli.geteMail());
             fechaNacimiento.setText(String.valueOf(cli.getFechaNac()));
-            } catch (Exception e) {
-           
+        } catch (Exception e) {
+
         }
     }
 
+    
     public static void main(String[] args) {
         launch(args);
     }
+
 }
