@@ -1,4 +1,5 @@
 package unachkardex.vistas;
+
 import javafx.application.*;
 import javafx.event.*;
 import javafx.scene.*;
@@ -19,7 +20,8 @@ import unachkardex.negocio.entidades.*;
 import unachkardex.negocio.impl.*;
 import unachkardex.accesodatos.*;
 
-public class FormEProveedor extends Application{
+public class FormEProveedor extends Application {
+
     private Label titulo;
     private Label txtRuc;
     private Label txtNombre;
@@ -53,11 +55,11 @@ public class FormEProveedor extends Application{
     private HBox pnlBotones;
     private VBox pntPrincipal;
 
-
+    private Proveedor prove;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-         pFondo = new Image("file:src\\unachkardex\\multimedia\\FondoSubVentanas.jpg");
+        pFondo = new Image("file:src\\unachkardex\\multimedia\\FondoSubVentanas.jpg");
         fondo = new BackgroundImage(pFondo, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
 
         //Sup izq
@@ -113,7 +115,7 @@ public class FormEProveedor extends Application{
         pnlIItProv = new VBox(10);
         pnlIItProv.getChildren().addAll(direccion, telefono, email);
         pnlIItProv.setAlignment(Pos.CENTER);
-        btnBuscar=new Button();
+        btnBuscar = new Button();
         btnBuscar.setMaxSize(100, 25);
         btnBuscar.setMinSize(100, 25);
         //LOGO
@@ -146,9 +148,9 @@ public class FormEProveedor extends Application{
                 btnBuscarEventHandler(event);
             }
         });
-        
+
         pnlIcInfo = new HBox(10);
-        pnlIcInfo.getChildren().addAll(pnlRucNom, pnlRN,btnBuscar);
+        pnlIcInfo.getChildren().addAll(pnlRucNom, pnlRN, btnBuscar);
         pnlIcInfo.setAlignment(Pos.CENTER);
         pnlTitulo = new VBox(10);
         pnlTitulo.getChildren().addAll(titulo, pnlIcInfo);
@@ -168,7 +170,7 @@ public class FormEProveedor extends Application{
         pntPrincipal.setPadding(new Insets(10));
         pntPrincipal.setBackground(new Background(fondo));
         pntPrincipal.setStyle("-fx-padding: 10; -fx-border-color: mediumblue; -fx-border-width: 2px");
-        Scene scene=new Scene(pntPrincipal, 640, 480);
+        Scene scene = new Scene(pntPrincipal, 640, 480);
         primaryStage.setTitle("Eliminar Proveedor");
         primaryStage.setScene(scene);
         primaryStage.setMaxHeight(480);
@@ -177,7 +179,7 @@ public class FormEProveedor extends Application{
         primaryStage.setMaxWidth(640);
         primaryStage.show();
     }
-    
+
     public void btnLimpiarEventHandler(ActionEvent event) {
         ruc.setText("");
         nombre.setText("");
@@ -187,35 +189,55 @@ public class FormEProveedor extends Application{
     }
 
     public void btnEliminarEventHandler(ActionEvent event) {
-    int filas=0;
-    IProveedor proveedorDao=new ImplProveedor();
-    Proveedor prove=new Proveedor();
+        IProveedor proveedorDao = new ImplProveedor();
         try {
-            filas=proveedorDao.eliminar(prove);
+            Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmacion.setTitle("INFORMACION DEL SISTEMA");
+            confirmacion.setHeaderText(null);
+            confirmacion.setContentText("Desea Eliminar este Proveedor?");
+            confirmacion.showAndWait();
+            if (confirmacion.getResult() == ButtonType.OK) {
+
+                if (proveedorDao.eliminar(prove) > 0) {
+                    confirmacion.setTitle("INFORMACION DEL SISTEMA");
+                    confirmacion.setHeaderText(null);
+                    confirmacion.setContentText("Se a Eliminado Correctamente!!");
+                    confirmacion.showAndWait();
+                }else{
+                    confirmacion.setTitle("INFORMACION DEL SISTEMA");
+                    confirmacion.setHeaderText(null);
+                    confirmacion.setContentText("No se pudo Eliminar!!");
+                    confirmacion.showAndWait();
+                }
+            }
+        } catch (Exception e) {
+            Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("INFORMACION DEL SISTEMA");
+            alerta.setHeaderText(null);
+            alerta.setContentText("No se pudo Eliminar: " + e.getMessage());
+            alerta.showAndWait();
+        }
+    }
+
+    public void btnBuscarEventHandler(ActionEvent event) {
+        IProveedor proveedorDao = new ImplProveedor();
+        prove = new Proveedor();
+        try {
+            prove = proveedorDao.obtener(ruc.getText());
             nombre.setText(prove.getNombre());
             direccion.setText(prove.getDireccion());
             telefono.setText(prove.getTelefono());
             email.setText(prove.geteMail());
-            } catch (Exception e) {
-           
+        } catch (Exception e) {
+            
+         Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("INFORMACION DEL SISTEMA");
+            alerta.setHeaderText(null);
+            alerta.setContentText("No se encontro Registros: " + e.getMessage());
+            alerta.showAndWait();
         }
     }
-        
-    
-     public void btnBuscarEventHandler(ActionEvent event) {
-         IProveedor proveedorDao=new ImplProveedor();
-          Proveedor prove=new Proveedor();
-        try {
-            prove=proveedorDao.obtener(ruc.getText());
-            nombre.setText(prove.getNombre());
-            direccion.setText(prove.getDireccion());
-            telefono.setText(prove.getTelefono());
-            email.setText(prove.geteMail());
-            } catch (Exception e) {
-           
-        }
-    }
-    
+
     public static void main(String[] args) {
         launch(args);
     }
