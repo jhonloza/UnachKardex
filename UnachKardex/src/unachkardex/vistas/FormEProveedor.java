@@ -20,7 +20,7 @@ import unachkardex.negocio.entidades.*;
 import unachkardex.negocio.impl.*;
 import unachkardex.accesodatos.*;
 
-public class FormEProveedor extends Application {
+public class FormEProveedor {
 
     private Label titulo;
     private Label txtRuc;
@@ -57,8 +57,7 @@ public class FormEProveedor extends Application {
 
     private Proveedor prove;
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
+   public FormEProveedor() {
         pFondo = new Image("file:src\\unachkardex\\multimedia\\FondoSubVentanas.jpg");
         fondo = new BackgroundImage(pFondo, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
 
@@ -170,14 +169,7 @@ public class FormEProveedor extends Application {
         pntPrincipal.setPadding(new Insets(10));
         pntPrincipal.setBackground(new Background(fondo));
         pntPrincipal.setStyle("-fx-padding: 10; -fx-border-color: mediumblue; -fx-border-width: 2px");
-        Scene scene = new Scene(pntPrincipal, 640, 480);
-        primaryStage.setTitle("Eliminar Proveedor");
-        primaryStage.setScene(scene);
-        primaryStage.setMaxHeight(480);
-        primaryStage.setMinHeight(480);
-        primaryStage.setMaxWidth(640);
-        primaryStage.setMaxWidth(640);
-        primaryStage.show();
+       
     }
 
     public void btnLimpiarEventHandler(ActionEvent event) {
@@ -238,7 +230,8 @@ public class FormEProveedor extends Application {
         }
     }
 
-    public static void main(String[] args) {
-        launch(args);
+    public VBox getPntPrincipal() {
+        return pntPrincipal;
     }
+    
 }
