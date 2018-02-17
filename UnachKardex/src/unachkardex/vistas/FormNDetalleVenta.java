@@ -20,7 +20,7 @@ import unachkardex.negocio.entidades.*;
 import unachkardex.negocio.impl.*;
 import unachkardex.accesodatos.*;
 
-public class FormNDetalleVenta /*extends Application*/ {
+public class FormNDetalleVenta extends Application {
 
     private Label codigo;
     private Label nombre;
@@ -56,9 +56,9 @@ public class FormNDetalleVenta /*extends Application*/ {
     private HBox items;
     private VBox pntPrincipal;
 
-//    @Override
+    @Override
 
-    public FormNDetalleVenta() /*void start(Stage primaryStage)*/ {
+    public /*FormNDetalleVenta()*/ void start(Stage primaryStage){
 
         //barra Items
         codigo = new Label("Codigo");
@@ -109,11 +109,11 @@ public class FormNDetalleVenta /*extends Application*/ {
         pntPrincipal.setStyle("-fx-padding: 2; -fx-border-color: mediumblue; -fx-border-width: 2px");
         pntPrincipal.setMaxSize(800, 600);
         pntPrincipal.setMinSize(800, 600);
-        /*Scene scnPrincipal = new Scene(pntPrincipal, 790, 600);
+        Scene scnPrincipal = new Scene(pntPrincipal, 790, 600);
         primaryStage.setTitle("Sistema de facturacion");
         primaryStage.setMaximized(false);
         primaryStage.setScene(scnPrincipal);
-        primaryStage.show();*/
+        primaryStage.show();
         
         btnAccion.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -122,10 +122,10 @@ public class FormNDetalleVenta /*extends Application*/ {
             }
         });
     }
-/*
+
     public static void main(String[] args) {
         launch(args);
-    }*/
+    }
 
     public Node getPantallaP() {
         return pntPrincipal;
