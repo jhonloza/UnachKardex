@@ -189,8 +189,26 @@ public class FormMenuPrincipal extends Application {
             }
         });
 //        modificarProveedor
+         modificarProveedor.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Pane proveedorModificar = new Pane();
+                proveedorModificar.getChildren().add(mProveedorEventHandler(event));
+                proveedorModificar.setPadding(new Insets(5));
+                escritorio.getChildren().add(proveedorModificar);
+            }
+        });
 //        eliminarProveedor
 //        buscarProveedor
+        buscarProveedor.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Pane buscarProveedores = new Pane();
+                buscarProveedores.getChildren().add(bProveedorEventHandler(event));
+                buscarProveedores.setPadding(new Insets(5));
+                escritorio.getChildren().add(buscarProveedores);
+            }
+        });
 //        listadoProveedor
         listadoProveedor.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -400,8 +418,56 @@ public class FormMenuPrincipal extends Application {
         return nProveedor;
     }
 //        modificarProveedor
+        public VentanaInterna mProveedorEventHandler(ActionEvent event) {
+        BorderPane ProveedorModificar = new BorderPane();
+        Label titulo = new Label("Modifica Proveedor");
+        titulo.setFont(Font.font("Berlin Sans FB Demi", 20));
+        titulo.setTextFill(Color.AZURE);
+        Button cerrar = new Button("X");
+        cerrar.setFont(Font.font("Arial Black", 18));
+        cerrar.setTextFill(Color.CYAN);
+        //Barra de Titulo subVentana
+        BarraDeTitulo bTitulo = new BarraDeTitulo(titulo, cerrar);
+        ProveedorModificar.setTop(bTitulo.getBarra());
+        //Interior de la subVentana
+        FormMProveedor ModificarProv = new FormMProveedor();
+        ProveedorModificar.setCenter(ModificarProv.getPntPrincipal());
+        //Creacion de Ventana interna
+        VentanaInterna mProveedor = new VentanaInterna();
+        mProveedor.setRoot(ProveedorModificar);
+        mProveedor.makeDragable(bTitulo.getBarra());
+        mProveedor.makeDragable(titulo);
+        mProveedor.makeResizable(20);
+        mProveedor.makeFocusable();
+        mProveedor.setCloseButton(cerrar);
+        return mProveedor;
+    }
 //        eliminarProveedor
 //        buscarProveedor
+        public VentanaInterna bProveedorEventHandler(ActionEvent event) {
+        BorderPane ProveedorBuscar = new BorderPane();
+        Label titulo = new Label("Buscar Proveedor");
+        titulo.setFont(Font.font("Berlin Sans FB Demi", 20));
+        titulo.setTextFill(Color.AZURE);
+        Button cerrar = new Button("X");
+        cerrar.setFont(Font.font("Arial Black", 18));
+        cerrar.setTextFill(Color.CYAN);
+        //Barra de Titulo subVentana
+        BarraDeTitulo bTitulo = new BarraDeTitulo(titulo, cerrar);
+        ProveedorBuscar.setTop(bTitulo.getBarra());
+        //Interior de la subVentana
+        FormBProveedor BuscarProv = new FormBProveedor();
+        ProveedorBuscar.setCenter(BuscarProv.getPntPrincipal());
+        //Creacion de Ventana interna
+        VentanaInterna bProveedor = new VentanaInterna();
+        bProveedor.setRoot(ProveedorBuscar);
+        bProveedor.makeDragable(bTitulo.getBarra());
+        bProveedor.makeDragable(titulo);
+        bProveedor.makeResizable(20);
+        bProveedor.makeFocusable();
+        bProveedor.setCloseButton(cerrar);
+        return bProveedor;
+    }
 //        listadoProveedor
     public VentanaInterna lstProveedorEventHandler(ActionEvent event) {
         BorderPane listadoProveedores = new BorderPane();
