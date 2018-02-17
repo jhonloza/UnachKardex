@@ -191,13 +191,13 @@ public class FormECliente extends Application {
         int filas=0;
         Cliente ncliente = new Cliente();
         ICliente clienteDao=new ImplCliente();
-          Cliente cli =new Cliente();
          try {
              filas=clienteDao.eliminar(ncliente);
-             System.out.println("se elimino: "+filas+" productos");
+             System.out.println("se elimino: "+filas+" Cliente");
          } catch (Exception e) {
              System.out.println("Error de eliminacion: "+e.getMessage());
          }
+         
         
         
     }
