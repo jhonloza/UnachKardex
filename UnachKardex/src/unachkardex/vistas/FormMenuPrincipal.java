@@ -20,10 +20,8 @@ import unachkardex.negocio.impl.*;
 import unachkardex.accesodatos.*;
 import javafx.scene.image.*;
 
-
-
 public class FormMenuPrincipal extends Application {
-
+    
     private MenuBar BarraMenu;
     private Menu Inicio;
     private MenuItem iniciarSesion;
@@ -69,7 +67,7 @@ public class FormMenuPrincipal extends Application {
     private MenuItem kardexAnual;
     private BorderPane pntPrincipal;
     private Pane escritorio;
-
+    
     @Override
     public void start(Stage primaryStage) throws Exception {
         escritorio = new Pane();
@@ -125,7 +123,7 @@ public class FormMenuPrincipal extends Application {
         Inicio.getItems().addAll(iniciarSesion, salir);
         BarraMenu = new MenuBar();
         BarraMenu.getMenus().addAll(Inicio, Cliente, Proveedor, Producto, Categoria, Venta, Compra, kardex);
-
+        
         pntPrincipal = new BorderPane();
         pntPrincipal.setTop(BarraMenu);
         pntPrincipal.setCenter(escritorio);
@@ -189,7 +187,7 @@ public class FormMenuPrincipal extends Application {
             }
         });
 //        modificarProveedor
-         modificarProveedor.setOnAction(new EventHandler<ActionEvent>() {
+        modificarProveedor.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 Pane proveedorModificar = new Pane();
@@ -241,6 +239,15 @@ public class FormMenuPrincipal extends Application {
         });
 //        modificarProducto
 //        eliminarProducto
+        eliminarProducto.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Pane elimProductos = new Pane();
+                elimProductos.getChildren().add(eliProductoEventHandler(event));
+                elimProductos.setPadding(new Insets(5));
+                escritorio.getChildren().add(elimProductos);
+            }
+        });
 //        buscarProducto
 //        listadoProducto
         listadoProducto.setOnAction(new EventHandler<ActionEvent>() {
@@ -328,11 +335,11 @@ public class FormMenuPrincipal extends Application {
 //        kardexMensual
 //        kardexAnual
     }
-
+    
     public static void main(String[] args) {
         launch(args);
     }
-
+    
     public void btnSalirEventHandler(ActionEvent event) {
         System.exit(0);
     }
@@ -375,6 +382,7 @@ public class FormMenuPrincipal extends Application {
 //        eliminarCliente
 //        buscarCliente
 //        listadoClientes
+
     public VentanaInterna lstClienteEventHandler(ActionEvent event) {
         BorderPane listadoClientes = new BorderPane();
         Label titulo = new Label("Nuevo Cliente");
@@ -427,7 +435,8 @@ public class FormMenuPrincipal extends Application {
         return nProveedor;
     }
 //        modificarProveedor
-        public VentanaInterna mProveedorEventHandler(ActionEvent event) {
+
+    public VentanaInterna mProveedorEventHandler(ActionEvent event) {
         BorderPane ProveedorModificar = new BorderPane();
         Label titulo = new Label("Modifica Proveedor");
         titulo.setFont(Font.font("Berlin Sans FB Demi", 20));
@@ -452,7 +461,8 @@ public class FormMenuPrincipal extends Application {
         return mProveedor;
     }
 //        eliminarProveedor
-        public VentanaInterna eProveedorEventHandler(ActionEvent event) {
+
+    public VentanaInterna eProveedorEventHandler(ActionEvent event) {
         BorderPane ProveedorEliminar = new BorderPane();
         Label titulo = new Label("Eliminar Proveedor");
         titulo.setFont(Font.font("Berlin Sans FB Demi", 20));
@@ -477,7 +487,8 @@ public class FormMenuPrincipal extends Application {
         return eProveedor;
     }
 //        buscarProveedor
-        public VentanaInterna bProveedorEventHandler(ActionEvent event) {
+
+    public VentanaInterna bProveedorEventHandler(ActionEvent event) {
         BorderPane ProveedorBuscar = new BorderPane();
         Label titulo = new Label("Buscar Proveedor");
         titulo.setFont(Font.font("Berlin Sans FB Demi", 20));
@@ -502,6 +513,7 @@ public class FormMenuPrincipal extends Application {
         return bProveedor;
     }
 //        listadoProveedor
+
     public VentanaInterna lstProveedorEventHandler(ActionEvent event) {
         BorderPane listadoProveedores = new BorderPane();
         Label titulo = new Label("Nueva Categoria");
@@ -555,8 +567,34 @@ public class FormMenuPrincipal extends Application {
     }
 //        modificarProducto
 //        eliminarProducto
+
+    public VentanaInterna eliProductoEventHandler(ActionEvent event) {
+        BorderPane elimProductos = new BorderPane();
+        Label titulo = new Label("Nueva Categoria");
+        titulo.setFont(Font.font("Berlin Sans FB Demi", 20));
+        titulo.setTextFill(Color.AZURE);
+        Button cerrar = new Button("X");
+        cerrar.setFont(Font.font("Arial Black", 18));
+        cerrar.setTextFill(Color.CYAN);
+        //Barra de Titulo subVentana
+        BarraDeTitulo bTitulo = new BarraDeTitulo(titulo, cerrar);
+        elimProductos.setTop(bTitulo.getBarra());
+        //Interior de la subVentana
+        FormEProducto productosList = new FormEProducto();
+        elimProductos.setCenter(productosList.getPantallaP());
+        //Creacion de Ventana interna
+        VentanaInterna eliProductos = new VentanaInterna();
+        eliProductos.setRoot(elimProductos);
+        eliProductos.makeDragable(bTitulo.getBarra());
+        eliProductos.makeDragable(titulo);
+        eliProductos.makeResizable(20);
+        eliProductos.makeFocusable();
+        eliProductos.setCloseButton(cerrar);
+        return eliProductos;
+    }
 //        buscarProducto
 //        listadoProducto
+
     public VentanaInterna lstProductoEventHandler(ActionEvent event) {
         BorderPane listadoProductos = new BorderPane();
         Label titulo = new Label("Nueva Categoria");
@@ -612,6 +650,7 @@ public class FormMenuPrincipal extends Application {
 //        eliminarCategoria
 //        buscarCategoria
 //        listadoCategoria
+
     public VentanaInterna lstCategEventHandler(ActionEvent event) {
         BorderPane listadoCategorias = new BorderPane();
         Label titulo = new Label("Nueva Categoria");
@@ -667,6 +706,7 @@ public class FormMenuPrincipal extends Application {
 //        eliminarVenta
 //        buscarVenta
 //        listadoVenta
+
     public VentanaInterna lstVentaEventHandler(ActionEvent event) {
         BorderPane listadoVentas = new BorderPane();
         Label titulo = new Label("Nueva Categoria");
@@ -722,6 +762,7 @@ public class FormMenuPrincipal extends Application {
 //        eliminarCompra
 //        buscarCompra
 //        listadoCompra
+
     public VentanaInterna lstCompraEventHandler(ActionEvent event) {
         BorderPane lstCompras = new BorderPane();
         Label titulo = new Label("Nueva Categoria");
