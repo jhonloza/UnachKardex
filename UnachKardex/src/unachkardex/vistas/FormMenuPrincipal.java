@@ -103,7 +103,7 @@ public class FormMenuPrincipal extends Application {
         listadoProducto = new MenuItem("Listado de Productos");
         Producto = new Menu("Producto");
         Producto.getItems().addAll(nuevoProducto, modificarProducto, eliminarProducto, new SeparatorMenuItem(), buscarProducto, listadoProducto);
-        nuevoProveedor = new MenuItem("Nueva Proveedor");
+        nuevoProveedor = new MenuItem("Nuevo Proveedor");
         modificarProveedor = new MenuItem("Modificar Proveedor");
         eliminarProveedor = new MenuItem("Eilminar Proveedor");
         buscarProveedor = new MenuItem("Buscar Proveedor");
@@ -412,7 +412,7 @@ public class FormMenuPrincipal extends Application {
 
     public VentanaInterna nProveedorEventHandler(ActionEvent event) {
         BorderPane ProveedorNuevo = new BorderPane();
-        Label titulo = new Label("Nueva Proveedor");
+        Label titulo = new Label("Nuevo Proveedor");
         titulo.setFont(Font.font("Berlin Sans FB Demi", 20));
         titulo.setTextFill(Color.AZURE);
         Button cerrar = new Button("X");
