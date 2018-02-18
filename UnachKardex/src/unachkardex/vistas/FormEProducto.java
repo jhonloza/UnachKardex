@@ -192,12 +192,12 @@ public class FormEProducto {
 
     public void btnBuscarEventHandler(ActionEvent event) {
         IProducto proDao = new ImplProducto();
-        Producto prove = new Producto();
+        Producto prod = new Producto();
         try {
-            prove = proDao.obtener(Integer.parseInt(codigo.getText()));
-            descrCategoria.setText(String.valueOf(prove.getCategoria()));
-            nombre.setText(prove.getNombre());
-            precio.setText(String.valueOf(prove.getPrecio()));
+            prod = proDao.obtener(Integer.parseInt(codigo.getText()));
+            descrCategoria.setText(String.valueOf(prod.getCategoria()));
+            nombre.setText(prod.getNombre());
+            precio.setText(String.valueOf(prod.getPrecio()));
         } catch (Exception e) {
 
         }
