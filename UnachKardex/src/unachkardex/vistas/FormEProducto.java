@@ -167,7 +167,7 @@ public class FormEProducto {
             confirmacion.setContentText("Desea Eliminar este Producto?");
             confirmacion.showAndWait();
             if (confirmacion.getResult() == ButtonType.OK) {
-
+                System.out.println("Hola!!!");
                 if (prodiDao.eliminar(prod) > 0) {
                     confirmacion.setTitle("INFORMACION DEL SISTEMA");
                     confirmacion.setHeaderText(null);
@@ -192,14 +192,19 @@ public class FormEProducto {
 
     public void btnBuscarEventHandler(ActionEvent event) {
         IProducto proDao = new ImplProducto();
-        Producto prod = new Producto();
+        prod = new Producto();
         try {
             prod = proDao.obtener(Integer.parseInt(codigo.getText()));
             descrCategoria.setText(String.valueOf(prod.getCategoria()));
             nombre.setText(prod.getNombre());
             precio.setText(String.valueOf(prod.getPrecio()));
+            System.out.println(prod.getCodProducto()+"   "+prod.getNombre()+"   "+prod.getPrecio()+"   "+prod.getCategoria().getNombre());
         } catch (Exception e) {
-
+            Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("INFORMACION DEL SISTEMA");
+            alerta.setHeaderText(null);
+            alerta.setContentText("No se encuentra el Producto "+codigo.getText());
+            alerta.showAndWait();
         }
     }
     public Node getPantallaP() {
