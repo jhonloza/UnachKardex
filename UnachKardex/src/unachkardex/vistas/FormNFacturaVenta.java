@@ -534,7 +534,7 @@ public class FormNFacturaVenta {
                 else{
                     System.out.println("Ingreso de Detalle V Fallido!");
                 }
-                nKardex=new Kardex(cargarKardex()+1+i, productoTemp, nFactura.getFecha(), tipoTransaccion, listaCantidad.get(i)*(-1), listaPrecioU.get(i));
+                nKardex=new Kardex(cargarKardex()+1+i, productoTemp, nFactura.getFecha(), tipoTransaccion, listaCantidad.get(i)*(-1), listaPrecioT.get(i));
                 if(kardexDao.insertar(nKardex)>0){
                     System.out.println("Ingreso de Kardex Correcto!");
                 }
