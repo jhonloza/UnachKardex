@@ -41,7 +41,7 @@ public class FormNFacturaVenta {
     private HBox pnlC2;
     private HBox pnlC3;
     private HBox pnlC4;
-
+    private ArrayList<FacturaVenta> listaFacturas;
     //DETALLE VENTA
     private Group pnlMedio;
     private VBox detaVenta;
@@ -106,10 +106,15 @@ public class FormNFacturaVenta {
     private Button btnvender;
     private Button btnlimpiar;
     private VBox pnlFinal;
-    
+    private double totalA;
+    private double totalF;
+    private double ivaUsado;
+    private ArrayList<DetalleVenta> listaVentas;
     private BorderPane pntPrincipal;
 
     public FormNFacturaVenta() {
+        totalA=0;
+        totalF=0;
         //PANEL SUPERIOR CLIENTE
         pFondo = new Image("file:src\\unachkardex\\multimedia\\FondoSubVentanas.jpg");
         fondo = new BackgroundImage(pFondo, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
@@ -178,7 +183,7 @@ public class FormNFacturaVenta {
         tituloFac.setMaxSize(100, 25);
         tituloFac.setMaxSize(100, 25);
         txtCodFactura.setFont(Font.font("Berlin Sans FB Demi", 15));
-        tfCodFactura = new TextField("");
+        tfCodFactura = new TextField(String.valueOf(cargarFactura()+1));
         tfCodFactura.setMaxSize(100, 25);
         tfCodFactura.setMinSize(100, 25);
         txtFechaFact = new Label("Fecha de Emision: ");
@@ -272,7 +277,7 @@ public class FormNFacturaVenta {
         TotalAntes.setStyle("-fx-border-color: mediumblue; -fx-border-width: 2px");
         txtIva = new Label("IVA: ");
         txtIva.setFont(Font.font("Berlin Sans FB Demi", 15));
-        iva = new TextField();
+        iva = new TextField("12");
         iva.setMaxSize(100, 25);
         iva.setMinSize(100, 25);
         txtTotalFinal = new Label("Total Final: ");
@@ -316,6 +321,12 @@ public class FormNFacturaVenta {
             @Override
             public void handle(ActionEvent event) {
                 insertarVentaPEventHandler(event);
+            }
+        });
+        btnvender.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                btnVenderEventHandler(event);
             }
         });
     }
@@ -430,22 +441,97 @@ public class FormNFacturaVenta {
 
     public void insertarVentaPEventHandler(ActionEvent event) {
         listaCodigo.add(Integer.parseInt(tfCodigo.getText()));
-        listaNombre.add(tfCodigo.getText());
-        listaCantidad.add(Integer.parseInt(tfCodigo.getText()));
-        listaPrecioU.add(Double.parseDouble(tfCodigo.getText()));
-        listaPrecioT.add(Double.parseDouble(tfCodigo.getText()));
-//        for (int i = 0; i < listaCodigo.size(); i++) {
-//            System.out.println(listaCodigo.get(i) + "\t" + listaNombre.get(i) + "\t" + listaCantidad.get(i) + "\t" + listaPrecioU.get(i) + "\t" + listaPrecioT.get(i));
-//        }
-    for(int e:listaCodigo){
-        System.out.println("codigo:  "+e);
-    }
-//        System.out.println(listaCodigo.size());
+        listaNombre.add(tfNombre.getText());
+        listaCantidad.add(Integer.parseInt(tfCantidad.getText()));
+        listaPrecioU.add(Double.parseDouble(tfPrecioU.getText()));
+        listaPrecioT.add(Double.parseDouble(tfprecioT.getText()));
+        ivaUsado=Double.parseDouble(iva.getText())/100;
+        totalA=totalA+Double.parseDouble(tfprecioT.getText());
+        TotalAntes.setText(String.valueOf(totalA));
+        totalF=totalA+(ivaUsado*totalA);
+        totalFinal.setText(String.valueOf(totalF));
+//    for(int e:listaCodigo){
+//        System.out.println("codigo:  "+e);
+//    }
         generarFilaVenta();
         vItems.getChildren().add(items);
     }
+    
+    private int cargarFactura() {
+        int numCateg = 0;
+        listaFacturas = new ArrayList<>();
+        IFacturaVenta factDao = new ImplFacturaVenta();
+        try {
+            listaFacturas = factDao.obtener();
+            numCateg=listaFacturas.size();
+        } catch (Exception e) {
+            Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("INFORMACION DEL SISTEMA");
+            alerta.setHeaderText(null);
+            alerta.setContentText("Error: " + e.getMessage());
+            alerta.showAndWait();
+        }
+        return numCateg;
+    }
 
-    public void btnVender(ActionEvent event){
-        
+    private int cargarDetFact() {
+        int numCateg = 0;
+        listaVentas = new ArrayList<>();
+        IDetalleVenta ventaDao = new ImplDetalleVenta();
+        try {
+            listaVentas = ventaDao.obtener();
+            numCateg=listaFacturas.size();
+        } catch (Exception e) {
+            Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("INFORMACION DEL SISTEMA");
+            alerta.setHeaderText(null);
+            alerta.setContentText("Error: " + e.getMessage());
+            alerta.showAndWait();
+        }
+        return numCateg;
+    }
+    
+    public void btnVenderEventHandler(ActionEvent event){
+        ICliente clienteDao = new ImplCliente();
+        Cliente nCliente = new Cliente();
+        DateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            nCliente = clienteDao.obtener(cedula.getText());
+        } catch (Exception e) {
+            
+        }
+        IFacturaVenta factDao=new ImplFacturaVenta();
+        FacturaVenta nFactura=new FacturaVenta();
+        IProducto producDao=new ImplProducto();
+        Producto productoTemp=new Producto();
+        IDetalleVenta ventaDao=new ImplDetalleVenta();
+        DetalleVenta nVenta=null;
+        try {
+            nFactura.setCodFacturaVenta(Integer.parseInt(tfCodFactura.getText()));
+            try {
+                nFactura.setFecha(formatoFecha.parse(tfFechaFact.getText()));
+            } catch (Exception e) {
+            }
+            nFactura.setCliente(nCliente);
+            if(factDao.insertar(nFactura)>0){
+                System.out.println("Factura Nueva Creada");
+            }
+            else
+            {
+                System.out.println("Error de creacion de factura");
+            }
+            for(int i=0; i<listaCodigo.size();i++){
+                productoTemp=producDao.obtener(listaCodigo.get(i));
+                nVenta=new DetalleVenta(cargarDetFact()+1+i, productoTemp, nFactura, listaCantidad.get(i), listaPrecioU.get(i));
+                if(ventaDao.ingresar(nVenta)>0){
+                    System.out.println("Ingreso Correcto!");
+                }
+                else{
+                    System.out.println("Ingreso Fallido!");
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error: "+e.getMessage());
+        }
     }
 }
