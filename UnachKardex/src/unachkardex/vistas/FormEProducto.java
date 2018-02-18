@@ -47,6 +47,8 @@ public class FormEProducto {
     private GridPane pnlCentral;
     private GridPane pnlBotones;
     private GridPane pntPrincipal;
+    
+    private Producto prod;
 
     public FormEProducto() {
     
@@ -157,17 +159,33 @@ public class FormEProducto {
     }
 
     public void btnEliminarEventHandler(ActionEvent event) {
-        int filas = 0;
-        IProducto procDao = new ImplProducto();
-        Producto npro = new Producto();
-
+        IProducto prodiDao = new ImplProducto();
         try {
-            filas = procDao.eliminar(npro);
-            descrCategoria.setText(String.valueOf(npro.getCategoria()));
-            nombre.setText(npro.getNombre());
-            precio.setText(String.valueOf(npro.getPrecio()));
+            Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmacion.setTitle("INFORMACION DEL SISTEMA");
+            confirmacion.setHeaderText(null);
+            confirmacion.setContentText("Desea Eliminar este Producto?");
+            confirmacion.showAndWait();
+            if (confirmacion.getResult() == ButtonType.OK) {
+
+                if (prodiDao.eliminar(prod) > 0) {
+                    confirmacion.setTitle("INFORMACION DEL SISTEMA");
+                    confirmacion.setHeaderText(null);
+                    confirmacion.setContentText("Se a Eliminado Correctamente!!");
+                    confirmacion.showAndWait();
+                }else{
+                    confirmacion.setTitle("INFORMACION DEL SISTEMA");
+                    confirmacion.setHeaderText(null);
+                    confirmacion.setContentText("No se pudo Eliminar!!");
+                    confirmacion.showAndWait();
+                }
+            }
         } catch (Exception e) {
-            System.out.println("Error de eliminacion: " + e.getMessage());
+            Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("INFORMACION DEL SISTEMA");
+            alerta.setHeaderText(null);
+            alerta.setContentText("No se pudo Eliminar: " + e.getMessage());
+            alerta.showAndWait();
         }
 
     }

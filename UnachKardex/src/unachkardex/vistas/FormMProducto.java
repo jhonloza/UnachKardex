@@ -69,7 +69,7 @@ public class FormMProducto extends Application {
         precio = new TextField("");
         txtCategoria = new Label("Categoria");
         txtCategoria.setFont(Font.font("Berlin Sans FB Demi", 20));
-//        cargarCategorias();
+        cargarCategorias();
         cbxCategoria = new ComboBox<Categoria>(items);
         cbxCategoria.setVisible(true);
         cbxCategoria.setOnHiding(new EventHandler<Event>() {
@@ -80,8 +80,8 @@ public class FormMProducto extends Application {
             }
         });
         descrCategoria = new Label();
-        descrCategoria.setMaxSize(200, 200);
-        descrCategoria.setMinSize(200, 200);
+        descrCategoria.setMaxSize(200, 50);
+        descrCategoria.setMinSize(200, 50);
         descrCategoria.setFont(Font.font("Berlin Sans FB Demi", 14));
         descrCategoria.setTextFill(Color.AZURE);
         descrCategoria.setStyle("-fx-border-color: mediumblue; -fx-border-width: 2px");
@@ -215,70 +215,26 @@ public class FormMProducto extends Application {
 
         }
     }
-//    public void btnAceptarEventHandler(ActionEvent event) {
-//        IProducto proDao = new ImplProducto();
-//        try {
-//            Producto nuevoPro = new Producto();
-//            nuevoPro.setCodProducto(Integer.parseInt(codigo.getText()));
-//            nuevoPro.setCategoria((Categoria) cbxCategoria.getSelectionModel().getSelectedItem());
-//            nuevoPro.setNombre(nombre.getText());
-//            nuevoPro.setPrecio(Double.parseDouble(precio.getText()));
-//            if (proDao.insertar(nuevoPro) > 0) {
-//                Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
-//                alerta.setTitle("INFORMACION DEL SISTEMA");
-//                alerta.setHeaderText(null);
-//                alerta.setContentText("Ingtreso Correcto!!");
-//                alerta.showAndWait();
-//            } else {
-//                Alert alerta = new Alert(Alert.AlertType.ERROR);
-//                alerta.setTitle("INFORMACION DEL SISTEMA");
-//                alerta.setHeaderText(null);
-//                alerta.setContentText("Ingtreso Fallido!! ");
-//                alerta.showAndWait();
-//            }
-//        } catch (Exception e) {
-//            Alert alerta = new Alert(Alert.AlertType.ERROR);
-//            alerta.setTitle("INFORMACION DEL SISTEMA");
-//            alerta.setHeaderText(null);
-//            alerta.setContentText("Error: " + e.getMessage());
-//            alerta.showAndWait();
-//        }
-//    }
-//
-//    private int cargarProd() {
-//        int numCateg = 0;
-//        listaProductos = new ArrayList<>();
-//        IProducto prodDao = new ImplProducto();
-//        try {
-//            listaProductos = prodDao.obtener();
-//            numCateg = listaProductos.size();
-//        } catch (Exception e) {
-//            Alert alerta = new Alert(Alert.AlertType.ERROR);
-//            alerta.setTitle("INFORMACION DEL SISTEMA");
-//            alerta.setHeaderText(null);
-//            alerta.setContentText("Error: " + e.getMessage());
-//            alerta.showAndWait();
-//        }
-//        return numCateg;
-//    }
-//
-//    public void cargarCategorias() {
-//        listCategorias = new ArrayList<>();
-//        ICategoria categDao = new ImplCategoria();
-//        try {
-//            listCategorias = categDao.obtener();
-//            for (Categoria categ : listCategorias) {
-//                items.add(categ);
-//            }
-//        } catch (Exception e) {
-//            Alert alerta = new Alert(Alert.AlertType.ERROR);
-//            alerta.setTitle("INFORMACION DEL SISTEMA");
-//            alerta.setHeaderText(null);
-//            alerta.setContentText("Error al cargar Categorias: " + e.getMessage());
-//            alerta.showAndWait();
-//        }
     public static void main(String[] args) {
         launch(args);
+    }
+    
+    public void cargarCategorias() {
+        listCategorias = new ArrayList<>();
+        ICategoria categDao = new ImplCategoria();
+        try {
+            listCategorias = categDao.obtener();
+            for (Categoria categ : listCategorias) {
+                items.add(categ);
+            }
+        } catch (Exception e) {
+            Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("INFORMACION DEL SISTEMA");
+            alerta.setHeaderText(null);
+            alerta.setContentText("Error al cargar Categorias: " + e.getMessage());
+            alerta.showAndWait();
+        }
+        
     }
 
 }
