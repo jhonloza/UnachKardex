@@ -192,7 +192,7 @@ public class FormBCliente {
         }
     }
 
-    public static void main(String[] args) {
-        launch(args);
+     public VBox getPntPrincipal() {
+        return pntPrincipal;
     }
 }
