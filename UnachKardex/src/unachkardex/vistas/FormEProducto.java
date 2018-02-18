@@ -173,7 +173,7 @@ public class FormEProducto {
                     confirmacion.setHeaderText(null);
                     confirmacion.setContentText("Se a Eliminado Correctamente!!");
                     confirmacion.showAndWait();
-                }else{
+                    }else{
                     confirmacion.setTitle("INFORMACION DEL SISTEMA");
                     confirmacion.setHeaderText(null);
                     confirmacion.setContentText("No se pudo Eliminar!!");
