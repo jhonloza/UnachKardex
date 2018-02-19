@@ -50,7 +50,7 @@ public class ImplCliente  implements ICliente{
     @Override
     public int modificar(Cliente cliente) throws Exception {
         int numFilas = 0;
-        String sqlC = "UPDATE cliente SET cedua=?, nombre=?, apellido=?, direccion=?, telefono=?, eMail=?, fechaNac=? WHERE cedula=?";
+        String sqlC = "UPDATE cliente SET cedula=?, nombre=?, apellido=?, direccion=?, telefono=?, eMail=?, fechaNac=? WHERE cedula=?";
         ArrayList<Parametro> lisParametros = new ArrayList<>();
         lisParametros.add(new Parametro(1, cliente.getCedula()));
         lisParametros.add(new Parametro(2, cliente.getNombre()));

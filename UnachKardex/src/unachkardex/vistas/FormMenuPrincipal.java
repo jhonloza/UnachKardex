@@ -163,6 +163,14 @@ public class FormMenuPrincipal extends Application {
             }
         });
 //        modificarCliente
+        modificarCliente.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+            Pane ModificarCliente = new Pane();
+            ModificarCliente.getChildren().add(mClienteEventHandler(event));
+            escritorio.getChildren().add(ModificarCliente);
+            }
+        });
 //        eliminarCliente
        eliminarCliente.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -410,6 +418,30 @@ public class FormMenuPrincipal extends Application {
         return nCliente;
     }
 //        modificarCliente
+    public VentanaInterna mClienteEventHandler (ActionEvent event){
+        BorderPane ClienteModificar = new BorderPane();
+        Label titulo = new Label("Modificar Cliente");
+        titulo.setFont(Font.font("Berlin Sans FB Demi", 20));
+        titulo.setTextFill(Color.AZURE);
+        Button cerrar = new Button("X");
+        cerrar.setFont(Font.font("Arial Black", 18));
+        cerrar.setTextFill(Color.CYAN);
+         //Barra de Titulo subVentana
+        BarraDeTitulo bTitulo = new BarraDeTitulo(titulo, cerrar);
+        ClienteModificar.setTop(bTitulo.getBarra());
+        //Interior de la subVentana
+        FormMCliente Modicli = new FormMCliente();
+        ClienteModificar.setCenter(Modicli.getPntPrincipal());
+        //Creacion de Ventana interna
+        VentanaInterna Mocliente = new VentanaInterna();
+        Mocliente.setRoot(ClienteModificar);
+        Mocliente.makeDragable(bTitulo.getBarra());
+        Mocliente.makeDragable(titulo);
+        Mocliente.makeResizable(20);
+        Mocliente.makeFocusable();
+        Mocliente.setCloseButton(cerrar);
+        return Mocliente;
+    }
 //        eliminarCliente
     public VentanaInterna eClienteEventHandler (ActionEvent event){
         BorderPane ClienteEliminar = new BorderPane();
