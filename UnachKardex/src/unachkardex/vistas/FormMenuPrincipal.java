@@ -268,14 +268,26 @@ public class FormMenuPrincipal extends Application {
             }
         });
 //        buscarProducto
+        buscarProducto.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+              public void handle(ActionEvent event) {
+                Pane elimProductos = new Pane();
+                elimProductos.getChildren().add(bsaProductoEventHandler(event));
+                elimProductos.setPadding(new Insets(5));
+                escritorio.getChildren().add(elimProductos);
+            }
+        });   
+            
+        
+         
 //        listadoProducto
         listadoProducto.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Pane listProductos = new Pane();
-                listProductos.getChildren().add(lstProductoEventHandler(event));
-                listProductos.setPadding(new Insets(5));
-                escritorio.getChildren().add(listProductos);
+                Pane bcarProductos = new Pane();
+                bcarProductos.getChildren().add(lstProductoEventHandler(event));
+                bcarProductos.setPadding(new Insets(5));
+                escritorio.getChildren().add(bcarProductos);
             }
         });
 //       Menu Categoria
@@ -662,6 +674,30 @@ public class FormMenuPrincipal extends Application {
         return eliProductos;
     }
 //        buscarProducto
+    public VentanaInterna bsaProductoEventHandler (ActionEvent event){
+        BorderPane busquedaProductos = new BorderPane();
+        Label titulo = new Label("Nueva Categoria");
+        titulo.setFont(Font.font("Berlin Sans FB Demi", 20));
+        titulo.setTextFill(Color.AZURE);
+        Button cerrar = new Button("X");
+        cerrar.setFont(Font.font("Arial Black", 18));
+        cerrar.setTextFill(Color.CYAN);
+        //Barra de Titulo subVentana
+        BarraDeTitulo bTitulo = new BarraDeTitulo(titulo, cerrar);
+        busquedaProductos.setTop(bTitulo.getBarra());
+        //Interior de la subVentana
+        FormBProducto productosBsc = new FormBProducto();
+        busquedaProductos.setCenter(productosBsc.getPntPrincipalP());
+        //Creacion de Ventana interna
+        VentanaInterna busProductos = new VentanaInterna();
+        busProductos.setRoot(busquedaProductos);
+        busProductos.makeDragable(bTitulo.getBarra());
+        busProductos.makeDragable(titulo);
+        busProductos.makeResizable(20);
+        busProductos.makeFocusable();
+        busProductos.setCloseButton(cerrar);
+        return busProductos;
+    }
 //        listadoProducto
 
     public VentanaInterna lstProductoEventHandler(ActionEvent event) {
