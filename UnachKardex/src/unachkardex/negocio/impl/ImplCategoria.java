@@ -43,6 +43,7 @@ public class ImplCategoria implements ICategoria{
         lisParametros.add(new Parametro(1, categoria.getCodCategoria()));
         lisParametros.add(new Parametro(2, categoria.getNombre()));
         lisParametros.add(new Parametro(3, categoria.getDescripcion()));
+        lisParametros.add(new Parametro(4, categoria.getCodCategoria()));
         Conexion con = null;
         try {
             con = new Conexion();
