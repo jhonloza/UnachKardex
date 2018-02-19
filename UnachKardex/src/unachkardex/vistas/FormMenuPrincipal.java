@@ -164,6 +164,16 @@ public class FormMenuPrincipal extends Application {
         });
 //        modificarCliente
 //        eliminarCliente
+       eliminarCliente.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+               Pane ClienteEliminar = new Pane();
+               ClienteEliminar.getChildren().add(eClienteEventHandler(event));
+               ClienteEliminar.setPadding(new Insets(5));
+               escritorio.getChildren().add(ClienteEliminar);
+            }
+        });
+
 //        buscarCliente
             buscarCliente .setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -389,6 +399,30 @@ public class FormMenuPrincipal extends Application {
     }
 //        modificarCliente
 //        eliminarCliente
+    public VentanaInterna eClienteEventHandler (ActionEvent event){
+        BorderPane ClienteEliminar = new BorderPane();
+        Label titulo = new Label("Eliminar Cliente");
+        titulo.setFont(Font.font("Berlin Sans FB Demi", 20));
+        titulo.setTextFill(Color.AZURE);
+        Button cerrar = new Button("X");
+        cerrar.setFont(Font.font("Arial Black", 18));
+        cerrar.setTextFill(Color.CYAN);
+         //Barra de Titulo subVentana
+        BarraDeTitulo bTitulo = new BarraDeTitulo(titulo, cerrar);
+        ClienteEliminar.setTop(bTitulo.getBarra());
+        //Interior de la subVentana
+        FormECliente Buscarcli = new FormECliente();
+        ClienteEliminar.setCenter(Buscarcli.getPntPrincipalP());
+        //Creacion de Ventana interna
+        VentanaInterna bcliente = new VentanaInterna();
+        bcliente.setRoot(ClienteEliminar);
+        bcliente.makeDragable(bTitulo.getBarra());
+        bcliente.makeDragable(titulo);
+        bcliente.makeResizable(20);
+        bcliente.makeFocusable();
+        bcliente.setCloseButton(cerrar);
+        return bcliente;
+    }
 //        buscarCliente
      public VentanaInterna bClienteEventHandler(ActionEvent event) {
         BorderPane ClienteBuscar = new BorderPane();
