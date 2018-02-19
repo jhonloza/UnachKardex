@@ -42,6 +42,7 @@ public class FormNFacturaCompra {
     private HBox pnlC3;
     private HBox pnlC4;
     private ArrayList<FacturaVenta> listaFacturas;
+    private Proveedor prove;
     //DETALLE VENTA
     private Group pnlMedio;
     private VBox detaVenta;
@@ -105,7 +106,7 @@ public class FormNFacturaCompra {
     private HBox pnlFin2;
     private HBox pnlFin3;
     private HBox pnlbotones;
-    private Button btnvender;
+    private Button btnComprar;
     private Button btnlimpiar;
     private VBox pnlFinal;
     private double totalA;
@@ -123,7 +124,7 @@ public class FormNFacturaCompra {
         //PANEL SUPERIOR CLIENTE
         pFondo = new Image("file:src\\unachkardex\\multimedia\\FondoSubVentanas.jpg");
         fondo = new BackgroundImage(pFondo, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
-        txtcedula = new Label("Cedula/Ruc CLiente:   ");
+        txtcedula = new Label("Cedula/Ruc Proveedor:   ");
         txtcedula.setFont(Font.font("Berlin Sans FB Demi", 15));
         btnBuscar = new Button("Buscar");
         txtnombres = new Label("Nombre: ");
@@ -171,7 +172,6 @@ public class FormNFacturaCompra {
         pnlCliente = new VBox(5);
         pnlCliente.getChildren().addAll(pnlC1, pnlC2, pnlC3, pnlC4);
         consumidorFinal();
-
         ///////////Logo///////////
         logo = new Image("file:src\\unachkardex\\multimedia\\logo.jpg");
         mostrarLogo = new ImageView(logo);
@@ -305,10 +305,10 @@ public class FormNFacturaCompra {
         pnlFin3.setAlignment(Pos.CENTER_RIGHT);
         btnlimpiar = new Button("Limpiar");
         btnlimpiar.setFont(Font.font("Berlin Sans FB Demi", 15));
-        btnvender = new Button("Vender");
-        btnvender.setFont(Font.font("Berlin Sans FB Demi", 15));
+        btnComprar = new Button("Comprar");
+        btnComprar.setFont(Font.font("Berlin Sans FB Demi", 15));
         pnlbotones = new HBox(10);
-        pnlbotones.getChildren().addAll(btnlimpiar, btnvender);
+        pnlbotones.getChildren().addAll(btnlimpiar, btnComprar);
         pnlbotones.setAlignment(Pos.CENTER_RIGHT);
         pnlFinal = new VBox(15);
         pnlFinal.getChildren().addAll(pnlFin1, pnlFin2, pnlFin3, pnlbotones);
@@ -330,7 +330,7 @@ public class FormNFacturaCompra {
                 insertarCompraPEventHandler(event);
             }
         });
-        btnvender.setOnAction(new EventHandler<ActionEvent>() {
+        btnComprar.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 btnComprarEventHandler(event);
@@ -345,7 +345,7 @@ public class FormNFacturaCompra {
         btnBuscar.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                 btnBuscarEventHandler(event);
+                btnBuscarEventHandler(event);
             }
         });
 
@@ -552,7 +552,7 @@ public class FormNFacturaCompra {
             }
             for (int i = 0; i < listaCodigo.size(); i++) {
                 productoTemp = producDao.obtener(listaCodigo.get(i));
-                nCompra = new DetalleCompra(cargarDetFact() + 1 + i, productoTemp, nFactura, listaCantidad.get(i), listaPrecioU.get(i));
+                nCompra = new DetalleCompra(cargarDetFact() + 1 + i, productoTemp, nFactura, listaCantidad.get(i), listaPrecioT.get(i));
                 if (compraDao.ingresar(nCompra) > 0) {
                     System.out.println("Ingreso de Detalle V Correcto!");
                 } else {
@@ -618,8 +618,22 @@ public class FormNFacturaCompra {
             Scene error = new Scene(ptnError, 0, 0);
         }
     }
-    
-    public void btnBuscarEventHandler(ActionEvent event){
-        
+
+    public void btnBuscarEventHandler(ActionEvent event) {
+        IProveedor proveedorDao = new ImplProveedor();
+        prove = new Proveedor();
+        try {
+            prove = proveedorDao.obtener(cedula.getText());
+            nombres.setText(prove.getNombre());
+            direccion.setText(prove.getDireccion());
+            telefono.setText(prove.getTelefono());
+            email.setText(prove.geteMail());
+        } catch (Exception e) {
+            Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("INFORMACION DEL SISTEMA");
+            alerta.setHeaderText(null);
+            alerta.setContentText("No se encontro Registros: " + e.getMessage());
+            alerta.showAndWait();
+        }
     }
 }

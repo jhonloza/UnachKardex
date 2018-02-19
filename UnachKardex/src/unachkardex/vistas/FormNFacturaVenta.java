@@ -25,6 +25,7 @@ public class FormNFacturaVenta {
 
     private Image pFondo;
     private BackgroundImage fondo;
+    private Cliente cli;
     private Label txtcedula;
     private Label txtnombres;
     private Label txtdireccion;
@@ -338,6 +339,12 @@ public class FormNFacturaVenta {
                 btnLimpiarEventHandler(event);
             }
         });
+        btnBuscar.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                btnBuscarClienteEventHandler(event);
+            }
+        });
     }
 
     public Node getPantallaP() {
@@ -587,5 +594,18 @@ public class FormNFacturaVenta {
             alerta.showAndWait();
         }
         return numCateg;
+    }
+    
+    private void btnBuscarClienteEventHandler(ActionEvent event){
+        ICliente clienteDao=new ImplCliente();
+         cli =new Cliente();
+        try {
+            cli = clienteDao.obtener(cedula.getText());
+            nombres.setText(cli.getNombre()+" "+cli.getApellido());
+            direccion.setText(cli.getDireccion());
+            telefono.setText(cli.getTelefono());
+            email.setText(cli.geteMail());
+            } catch (Exception e) {
+        }
     }
 }
