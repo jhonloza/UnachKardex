@@ -1,4 +1,5 @@
 package unachkardex.vistas;
+
 import javafx.application.*;
 import javafx.event.*;
 import javafx.scene.*;
@@ -21,8 +22,8 @@ import unachkardex.negocio.impl.*;
 import unachkardex.accesodatos.*;
 
 public class FormMProveedor {
-    
-  private Label titulo;
+
+    private Label titulo;
     private Label txtRuc;
     private Label txtNombre;
     private Label txtDireccion;
@@ -56,9 +57,8 @@ public class FormMProveedor {
     private VBox pntPrincipal;
     private Proveedor prove;
 
-
-   public FormMProveedor() {
-         pFondo = new Image("file:src\\unachkardex\\multimedia\\FondoSubVentanas.jpg");
+    public FormMProveedor() {
+        pFondo = new Image("file:src\\unachkardex\\multimedia\\FondoSubVentanas.jpg");
         fondo = new BackgroundImage(pFondo, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
 
         //Sup izq
@@ -86,7 +86,7 @@ public class FormMProveedor {
         ruc.setMinSize(200, 30);
         ruc.setFont(Font.font("Berlin Sans FB Demi", 15));
         ruc.setStyle("-fx-border-color: mediumblue; -fx-border-width: 2px");
-        
+
         nombre = new TextField("");
         nombre.setMaxSize(200, 30);
         nombre.setMinSize(200, 30);
@@ -100,13 +100,13 @@ public class FormMProveedor {
         direccion.setMinSize(200, 30);
         direccion.setFont(Font.font("Berlin Sans FB Demi", 15));
         direccion.setStyle("-fx-border-color: mediumblue; -fx-border-width: 2px");
-        
+
         telefono = new TextField("");
         telefono.setMaxSize(200, 30);
         telefono.setMinSize(200, 30);
         telefono.setFont(Font.font("Berlin Sans FB Demi", 15));
         telefono.setStyle("-fx-border-color: mediumblue; -fx-border-width: 2px");
-        
+
         email = new TextField("");
         email.setMaxSize(200, 30);
         email.setMinSize(200, 30);
@@ -115,7 +115,7 @@ public class FormMProveedor {
         pnlIItProv = new VBox(10);
         pnlIItProv.getChildren().addAll(direccion, telefono, email);
         pnlIItProv.setAlignment(Pos.CENTER);
-        btnBuscar=new Button();
+        btnBuscar = new Button();
         btnBuscar.setMaxSize(100, 30);
         btnBuscar.setMinSize(100, 30);
         //LOGO
@@ -148,9 +148,9 @@ public class FormMProveedor {
                 btnBuscarEventHandler(event);
             }
         });
-        
+
         pnlIcInfo = new HBox(10);
-        pnlIcInfo.getChildren().addAll(pnlRucNom, pnlRN,btnBuscar);
+        pnlIcInfo.getChildren().addAll(pnlRucNom, pnlRN, btnBuscar);
         pnlIcInfo.setAlignment(Pos.CENTER);
         pnlTitulo = new VBox(10);
         pnlTitulo.getChildren().addAll(titulo, pnlIcInfo);
@@ -171,7 +171,7 @@ public class FormMProveedor {
         pntPrincipal.setBackground(new Background(fondo));
         pntPrincipal.setStyle("-fx-padding: 10; -fx-border-color: mediumblue; -fx-border-width: 2px");
     }
-    
+
     public void btnLimpiarEventHandler(ActionEvent event) {
         ruc.setText("");
         nombre.setText("");
@@ -181,60 +181,60 @@ public class FormMProveedor {
     }
 
     public void btnModificarEventHandler(ActionEvent event) {
-        IProveedor proveedorDao=new ImplProveedor();
-        
-         try {
-        
+        IProveedor proveedorDao = new ImplProveedor();
+
+        try {
+
             prove.setNombre(nombre.getText());
             prove.setDireccion(direccion.getText());
             prove.setTelefono(telefono.getText());
             prove.seteMail(email.getText());
-            if(proveedorDao.modificar(prove)>0){
-                Alert alerta=new Alert(Alert.AlertType.CONFIRMATION);
+            if (proveedorDao.modificar(prove) > 0) {
+                Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
                 alerta.setTitle("INFORMACION DEL SISTEMA");
                 alerta.setHeaderText(null);
                 alerta.setContentText("Modificacion Correcto!!");
                 alerta.showAndWait();
-            }
-            else{
-                 Alert alerta=new Alert(Alert.AlertType.ERROR);
+            } else {
+                Alert alerta = new Alert(Alert.AlertType.ERROR);
                 alerta.setTitle("INFORMACION DEL SISTEMA");
                 alerta.setHeaderText(null);
                 alerta.setContentText("Modificacion Fallido!! ");
                 alerta.showAndWait();
-                
+
             }
-            
-         } catch (Exception e) {
+
+        } catch (Exception e) {
             Alert alerta = new Alert(Alert.AlertType.ERROR);
             alerta.setTitle("ERROR");
             alerta.setHeaderText(null);
             alerta.setContentText("No se Pudo Modificar: " + e.getMessage());
             alerta.showAndWait();
-             
-         }
+
+        }
     }
-    
-     public void btnBuscarEventHandler(ActionEvent event) {
-         IProveedor proveedorDao=new ImplProveedor();
-          prove=new Proveedor();
+
+    public void btnBuscarEventHandler(ActionEvent event) {
+        IProveedor proveedorDao = new ImplProveedor();
+        prove = new Proveedor();
         try {
-            prove=proveedorDao.obtener(ruc.getText());
+            prove = proveedorDao.obtener(ruc.getText());
             nombre.setText(prove.getNombre());
             direccion.setText(prove.getDireccion());
             telefono.setText(prove.getTelefono());
             email.setText(prove.geteMail());
-            } catch (Exception e) {
-             Alert alerta = new Alert(Alert.AlertType.ERROR);
+        } catch (Exception e) {
+            Alert alerta = new Alert(Alert.AlertType.ERROR);
             alerta.setTitle("ERROR");
             alerta.setHeaderText(null);
             alerta.setContentText("No se encontro Registros: " + e.getMessage());
             alerta.showAndWait();
-           
+
         }
     }
+
     public Node getPntPrincipal() {
         return pntPrincipal;
     }
-    
+
 }

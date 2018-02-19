@@ -21,7 +21,7 @@ import unachkardex.negocio.entidades.*;
 import unachkardex.negocio.impl.*;
 import unachkardex.accesodatos.*;
 
-public class FormBCliente extends Application {
+public class FormBCliente {
 
     private Label txtCedula;
     private Label txtNombres;
@@ -51,8 +51,8 @@ public class FormBCliente extends Application {
     private HBox pnlBotones;
     private VBox pntPrincipal;
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
+    public FormBCliente() {
+    
         pFondo = new Image("file:src\\unachkardex\\multimedia\\FondoSubVentanas.jpg");
         fondo = new BackgroundImage(pFondo, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         //LABELS DE LOS CAMPOS A USAR
@@ -163,14 +163,7 @@ public class FormBCliente extends Application {
         pntPrincipal.setPadding(new Insets(10));
         pntPrincipal.setBackground(new Background(fondo));
         pntPrincipal.setStyle("-fx-padding: 10; -fx-border-color: mediumblue; -fx-border-width: 2px");
-        Scene scene = new Scene(pntPrincipal, 640, 480);
-        primaryStage.setTitle("Eliminar Proveedor");
-        primaryStage.setScene(scene);
-        primaryStage.setMaxHeight(480);
-        primaryStage.setMinHeight(480);
-        primaryStage.setMaxWidth(640);
-        primaryStage.setMaxWidth(640);
-        primaryStage.show();
+        
 
     }    
         
@@ -192,7 +185,7 @@ public class FormBCliente extends Application {
         }
     }
 
-    public static void main(String[] args) {
-        launch(args);
+     public Node getPntPrincipalP() {
+        return pntPrincipal;
     }
 }

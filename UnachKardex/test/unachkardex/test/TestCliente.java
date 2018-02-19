@@ -34,7 +34,7 @@ public class TestCliente {
         //ELIMINAR 
         
         int filas=0;
-        Cliente ncliente = new Cliente("1700000000001", "Andres", "Orozco","Quito","099292921063","",new java.util.Date());
+        Cliente ncliente = new Cliente("1750000000001", "Sebastian", "Salgado","AV 10 DE AGOSTO","0983665471","",new java.util.Date());
           ICliente clienteDao=new ImplCliente();
          try {
              filas=clienteDao.eliminar(ncliente);

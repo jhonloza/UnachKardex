@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package unachkardex.vistas;
 
 import javafx.application.*;
@@ -26,7 +21,7 @@ import unachkardex.negocio.entidades.*;
 import unachkardex.negocio.impl.*;
 import unachkardex.accesodatos.*;
 
-public class FormMCliente extends Application {
+public class FormMCliente {
 
     private Label txtCedula;
     private Label txtNombres;
@@ -40,12 +35,12 @@ public class FormMCliente extends Application {
     private Image logo;
     private ImageView visorlogo;
     private TextField cedula;
-    private Label nombres;
-    private Label apellidos;
-    private Label fechaNacimiento;
-    private Label direccion;
-    private Label telefono;
-    private Label email;
+    private TextField nombres;
+    private TextField apellidos;
+    private TextField fechaNacimiento;
+    private TextField direccion;
+    private TextField telefono;
+    private TextField email;
     private Button btnModificar;
     private Button btnLimpiar;
     private Button btnBuscar;
@@ -56,8 +51,11 @@ public class FormMCliente extends Application {
     private HBox pnlBotones;
     private VBox pntPrincipal;
     private Cliente cli;
-    @Override
-    public void start(Stage primaryStage) throws Exception {
+
+    public FormMCliente() {
+    
+
+    
         pFondo = new Image("file:src\\unachkardex\\multimedia\\FondoSubVentanas.jpg");
         fondo = new BackgroundImage(pFondo, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         //LABELS DE LOS CAMPOS A USAR
@@ -84,32 +82,31 @@ public class FormMCliente extends Application {
         //txtEmail.setFill(Color.DARKBLUE);
 
         //CAJAS DE TEXTO PARA CAMPOS
-  
         cedula = new TextField("");
         cedula.setMaxSize(150, 25);
         cedula.setMinSize(150, 25);
         cedula.setStyle("-fx-border-color: mediumblue; -fx-border-width: 2px");
-        nombres = new Label("");
+        nombres = new TextField("");
         nombres.setMaxSize(150, 25);
         nombres.setMinSize(150, 25);
         nombres.setStyle("-fx-border-color: mediumblue; -fx-border-width: 2px");
-        apellidos = new Label("");
+        apellidos = new TextField("");
         apellidos.setMaxSize(150, 25);
         apellidos.setMinSize(150, 25);
         apellidos.setStyle("-fx-border-color: mediumblue; -fx-border-width: 2px");
-        fechaNacimiento = new Label("");
+        fechaNacimiento = new TextField("");
         fechaNacimiento.setMaxSize(150, 25);
         fechaNacimiento.setMinSize(150, 25);
         fechaNacimiento.setStyle("-fx-border-color: mediumblue; -fx-border-width: 2px");
-        direccion = new Label("");
+        direccion = new TextField("");
         direccion.setMaxSize(150, 25);
         direccion.setMinSize(150, 25);
         direccion.setStyle("-fx-border-color: mediumblue; -fx-border-width: 2px");
-        telefono = new Label("");
+        telefono = new TextField("");
         telefono.setMaxSize(150, 25);
         telefono.setMinSize(150, 25);
         telefono.setStyle("-fx-border-color: mediumblue; -fx-border-width: 2px");
-        email = new Label("");
+        email = new TextField("");
         email.setMaxSize(150, 25);
         email.setMinSize(150, 25);
         email.setStyle("-fx-border-color: mediumblue; -fx-border-width: 2px");
@@ -119,7 +116,7 @@ public class FormMCliente extends Application {
         btnModificar.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-              btnModificarEventHandler(event);
+                btnModificarEventHandler(event);
             }
         });
         btnLimpiar = new Button("Limpiar");
@@ -138,11 +135,11 @@ public class FormMCliente extends Application {
                 btnBuscarEventHandler(event);
             }
         });
-        
+
         //INGRESO EN PANELES
         //SUPERIOR
         pnlced = new HBox(20);
-        pnlced.getChildren().addAll(txtCedula, cedula,btnBuscar);
+        pnlced.getChildren().addAll(txtCedula, cedula, btnBuscar);
         //nombre
         pnlNombApe = new GridPane();
         pnlNombApe.setHgap(20);
@@ -183,14 +180,7 @@ public class FormMCliente extends Application {
         pntPrincipal.setPadding(new Insets(10));
         pntPrincipal.setBackground(new Background(fondo));
         pntPrincipal.setStyle("-fx-padding: 10; -fx-border-color: mediumblue; -fx-border-width: 2px");
-        Scene scene = new Scene(pntPrincipal, 640, 480);
-        primaryStage.setTitle("Eliminar Proveedor");
-        primaryStage.setScene(scene);
-        primaryStage.setMaxHeight(480);
-        primaryStage.setMinHeight(480);
-        primaryStage.setMaxWidth(640);
-        primaryStage.setMaxWidth(640);
-        primaryStage.show();
+       
 
     }
 
@@ -202,52 +192,57 @@ public class FormMCliente extends Application {
         telefono.setText("");
         email.setText("");
         fechaNacimiento.setText("");
-        
+
     }
 
     public void btnModificarEventHandler(ActionEvent event) {
-        ICliente clienteDao=new ImplCliente();
-        
-         try {
-        
+        ICliente clienteDao = new ImplCliente();
+
+        try {
+
             cli.setNombre(nombres.getText());
             cli.setApellido(apellidos.getText());
             cli.setDireccion(direccion.getText());
             cli.setTelefono(telefono.getText());
             cli.seteMail(email.getText());
-            //cli.setFechaNac(fechaNacimiento.getText());
-            if(clienteDao.modificar(cli)>0){
-                Alert alerta=new Alert(Alert.AlertType.CONFIRMATION);
+             DateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                cli.setFechaNac(formatoFecha.parse(fechaNacimiento.getText()));
+            } catch (Exception er) {
+                Alert alerta=new Alert(Alert.AlertType.ERROR);
+                alerta.setTitle("ERROR");
+                alerta.setHeaderText(null);
+                alerta.setContentText("Error de Fecha");
+                alerta.showAndWait();
+            }
+            if (clienteDao.modificar(cli) > 0) {
+                Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
                 alerta.setTitle("INFORMACION DEL SISTEMA");
                 alerta.setHeaderText(null);
                 alerta.setContentText("Modificacion Correcto!!");
                 alerta.showAndWait();
-            }
-            else{
-                 Alert alerta=new Alert(Alert.AlertType.ERROR);
+            } else {
+                Alert alerta = new Alert(Alert.AlertType.ERROR);
                 alerta.setTitle("INFORMACION DEL SISTEMA");
                 alerta.setHeaderText(null);
                 alerta.setContentText("Modificacion Fallido!! ");
                 alerta.showAndWait();
-                
+
             }
-            
-         } catch (Exception e) {
+
+        } catch (Exception e) {
             Alert alerta = new Alert(Alert.AlertType.ERROR);
             alerta.setTitle("INFORMACION DEL SISTEMA");
             alerta.setHeaderText(null);
             alerta.setContentText("Error: " + e.getMessage());
             alerta.showAndWait();
-             
-         }
+
+        }
     }
-    
-          
-    
 
     public void btnBuscarEventHandler(ActionEvent event) {
-         ICliente clienteDao=new ImplCliente();
-          Cliente cli =new Cliente();
+        ICliente clienteDao = new ImplCliente();
+        cli = new Cliente();
         try {
             cli = clienteDao.obtener(cedula.getText());
             nombres.setText(cli.getNombre());
@@ -256,12 +251,18 @@ public class FormMCliente extends Application {
             telefono.setText(cli.getTelefono());
             email.setText(cli.geteMail());
             fechaNacimiento.setText(String.valueOf(cli.getFechaNac()));
-            } catch (Exception e) {
-           
+        } catch (Exception e) {
+            Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("ERROR");
+            alerta.setHeaderText(null);
+            alerta.setContentText("No se encontro Registros: " + e.getMessage());
+            alerta.showAndWait();
         }
     }
 
-    public static void main(String[] args) {
-        launch(args);
+    public Node getPntPrincipal() {
+        return pntPrincipal;
     }
+
+   
 }
