@@ -165,6 +165,15 @@ public class FormMenuPrincipal extends Application {
 //        modificarCliente
 //        eliminarCliente
 //        buscarCliente
+            buscarCliente .setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Pane buscarClientes = new Pane();
+                buscarClientes.getChildren().add(bClienteEventHandler(event));
+                buscarClientes.setPadding(new Insets(5));
+                escritorio.getChildren().add(buscarClientes);
+                  }
+        });
 //        listadoClientes
         listadoClientes.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -381,6 +390,32 @@ public class FormMenuPrincipal extends Application {
 //        modificarCliente
 //        eliminarCliente
 //        buscarCliente
+     public VentanaInterna bClienteEventHandler(ActionEvent event) {
+        BorderPane ClienteBuscar = new BorderPane();
+        Label titulo = new Label("Buscar Cliente");
+        titulo.setFont(Font.font("Berlin Sans FB Demi", 20));
+        titulo.setTextFill(Color.AZURE);
+        Button cerrar = new Button("X");
+        cerrar.setFont(Font.font("Arial Black", 18));
+        cerrar.setTextFill(Color.CYAN);
+        //Barra de Titulo subVentana
+        BarraDeTitulo bTitulo = new BarraDeTitulo(titulo, cerrar);
+        ClienteBuscar.setTop(bTitulo.getBarra());
+        //Interior de la subVentana
+        FormBCliente Buscarcli = new FormBCliente();
+        ClienteBuscar.setCenter(Buscarcli.getPntPrincipal());
+        //Creacion de Ventana interna
+        VentanaInterna bcliente = new VentanaInterna();
+        bcliente.setRoot(ClienteBuscar);
+        bcliente.makeDragable(bTitulo.getBarra());
+        bcliente.makeDragable(titulo);
+        bcliente.makeResizable(20);
+        bcliente.makeFocusable();
+        bcliente.setCloseButton(cerrar);
+        return bcliente;
+    
+     }
+    
 //        listadoClientes
 
     public VentanaInterna lstClienteEventHandler(ActionEvent event) {
