@@ -308,6 +308,15 @@ public class FormMenuPrincipal extends Application {
             }
         });
 //        modificarCategoria
+        modificarCategoria.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+           Pane modificarCategorias = new Pane();
+                modificarCategorias.getChildren().add(mCategEventHandler(event));
+                modificarCategorias.setPadding(new Insets(5));
+                escritorio.getChildren().add(modificarCategorias);
+            }
+        });
 //        eliminarCategoria
         eliminarCategoria.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -803,6 +812,30 @@ public class FormMenuPrincipal extends Application {
         return nCateg;
     }
 //        modificarCategoria
+    public VentanaInterna mCategEventHandler(ActionEvent event) {
+        BorderPane modiCategorias = new BorderPane();
+        Label titulo = new Label("Nueva Categoria");
+        titulo.setFont(Font.font("Berlin Sans FB Demi", 20));
+        titulo.setTextFill(Color.AZURE);
+        Button cerrar = new Button("X");
+        cerrar.setFont(Font.font("Arial Black", 18));
+        cerrar.setTextFill(Color.CYAN);
+        //Barra de Titulo subVentana
+        BarraDeTitulo bTitulo = new BarraDeTitulo(titulo, cerrar);
+        modiCategorias.setTop(bTitulo.getBarra());
+        //Interior de la subVentana
+        FormMCategorias categoriaModificar = new FormMCategorias();
+        modiCategorias.setCenter(categoriaModificar.getPntPrincipal());
+        //Creacion de Ventana interna
+        VentanaInterna modifCategorias = new VentanaInterna();
+        modifCategorias.setRoot(modiCategorias);
+        modifCategorias.makeDragable(bTitulo.getBarra());
+        modifCategorias.makeDragable(titulo);
+        modifCategorias.makeResizable(20);
+        modifCategorias.makeFocusable();
+        modifCategorias.setCloseButton(cerrar);
+        return modifCategorias;
+    }
 //        eliminarCategoria
 
     public VentanaInterna eCategEventHandler(ActionEvent event) {

@@ -20,7 +20,7 @@ import unachkardex.negocio.entidades.*;
 import unachkardex.negocio.impl.*;
 import unachkardex.accesodatos.*;
 
-public class FormMCategorias extends Application {
+public class FormMCategorias {
 
     //Presentacion
     private Image pFondo;
@@ -53,9 +53,7 @@ public class FormMCategorias extends Application {
 
     private Categoria cate;
 
-    @Override
-    public void start(Stage primaryStage) {
-        //public FormECategorias() {
+    public FormMCategorias() {
 
         pFondo = new Image("file:src\\unachkardex\\multimedia\\FondoSubVentanas.jpg");
         fondo = new BackgroundImage(pFondo, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
@@ -114,14 +112,6 @@ public class FormMCategorias extends Application {
         pntPrincipal.setBackground(new Background(fondo));
         pntPrincipal.setStyle("-fx-padding: 10; -fx-border-color: mediumblue; -fx-border-width: 2px");
 
-        Scene scene = new Scene(pntPrincipal, 640, 480);
-        primaryStage.setTitle("Eliminar Proveedor");
-        primaryStage.setScene(scene);
-        primaryStage.setMaxHeight(480);
-        primaryStage.setMinHeight(480);
-        primaryStage.setMaxWidth(640);
-        primaryStage.setMaxWidth(640);
-        primaryStage.show();
         btnBuscar.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -158,13 +148,13 @@ public class FormMCategorias extends Application {
             cate.setDescripcion(descripcion.getText());
 
             if (catDao.modificar(cate) > 0) {
-                Alert alerta=new Alert(Alert.AlertType.CONFIRMATION);
+                Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
                 alerta.setTitle("INFORMACION DEL SISTEMA");
                 alerta.setHeaderText(null);
                 alerta.setContentText("Modificacion Correcto!!");
                 alerta.showAndWait();
             } else {
-                Alert alerta=new Alert(Alert.AlertType.ERROR);
+                Alert alerta = new Alert(Alert.AlertType.ERROR);
                 alerta.setTitle("INFORMACION DEL SISTEMA");
                 alerta.setHeaderText(null);
                 alerta.setContentText("Modificacion Fallido!! ");
@@ -198,11 +188,7 @@ public class FormMCategorias extends Application {
         }
     }
 
-    public static void main(String[] args) {
-        launch(args);
+    public Node getPntPrincipal() {
+        return pntPrincipal;
     }
-
-//    public Node getPntPrincipal() {
-//        return pntPrincipal;
-//    }
 }
