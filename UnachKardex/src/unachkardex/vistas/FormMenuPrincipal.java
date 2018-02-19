@@ -311,6 +311,15 @@ public class FormMenuPrincipal extends Application {
         });
 //        modificarCategoria
 //        eliminarCategoria
+       eliminarCategoria.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+            Pane eliminarCategorias = new Pane();
+                eliminarCategorias.getChildren().add(eCategEventHandler(event));
+                eliminarCategorias.setPadding(new Insets(5));
+                escritorio.getChildren().add(eliminarCategorias);
+            }
+        });
 //        buscarCategoria
 //        listadoCategoria
         listadoCategoria.setOnAction(new EventHandler<ActionEvent>() {
@@ -785,6 +794,30 @@ public class FormMenuPrincipal extends Application {
     }
 //        modificarCategoria
 //        eliminarCategoria
+     public VentanaInterna eCategEventHandler(ActionEvent event) {
+        BorderPane eliCategorias = new BorderPane();
+        Label titulo = new Label("Nueva Categoria");
+        titulo.setFont(Font.font("Berlin Sans FB Demi", 20));
+        titulo.setTextFill(Color.AZURE);
+        Button cerrar = new Button("X");
+        cerrar.setFont(Font.font("Arial Black", 18));
+        cerrar.setTextFill(Color.CYAN);
+        //Barra de Titulo subVentana
+        BarraDeTitulo bTitulo = new BarraDeTitulo(titulo, cerrar);
+        eliCategorias.setTop(bTitulo.getBarra());
+        //Interior de la subVentana
+        FormECategoria categoriaEliminar = new FormECategoria();
+        eliCategorias.setCenter(categoriaEliminar.getPntPrincipal());
+        //Creacion de Ventana interna
+        VentanaInterna elimCategorias = new VentanaInterna();
+        elimCategorias.setRoot(eliCategorias);
+        elimCategorias.makeDragable(bTitulo.getBarra());
+        elimCategorias.makeDragable(titulo);
+        elimCategorias.makeResizable(20);
+        elimCategorias.makeFocusable();
+        elimCategorias.setCloseButton(cerrar);
+        return elimCategorias;
+    }
 //        buscarCategoria
 //        listadoCategoria
 
