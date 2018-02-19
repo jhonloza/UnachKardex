@@ -21,7 +21,7 @@ import unachkardex.accesodatos.*;
 import javafx.scene.image.*;
 
 public class FormMenuPrincipal extends Application {
-    
+
     private MenuBar BarraMenu;
     private Menu Inicio;
     private MenuItem iniciarSesion;
@@ -67,7 +67,7 @@ public class FormMenuPrincipal extends Application {
     private MenuItem kardexAnual;
     private BorderPane pntPrincipal;
     private Pane escritorio;
-    
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         escritorio = new Pane();
@@ -123,7 +123,7 @@ public class FormMenuPrincipal extends Application {
         Inicio.getItems().addAll(iniciarSesion, salir);
         BarraMenu = new MenuBar();
         BarraMenu.getMenus().addAll(Inicio, Cliente, Proveedor, Producto, Categoria, Venta, Compra, kardex);
-        
+
         pntPrincipal = new BorderPane();
         pntPrincipal.setTop(BarraMenu);
         pntPrincipal.setCenter(escritorio);
@@ -166,31 +166,31 @@ public class FormMenuPrincipal extends Application {
         modificarCliente.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-            Pane ModificarCliente = new Pane();
-            ModificarCliente.getChildren().add(mClienteEventHandler(event));
-            escritorio.getChildren().add(ModificarCliente);
+                Pane ModificarCliente = new Pane();
+                ModificarCliente.getChildren().add(mClienteEventHandler(event));
+                escritorio.getChildren().add(ModificarCliente);
             }
         });
 //        eliminarCliente
-       eliminarCliente.setOnAction(new EventHandler<ActionEvent>() {
+        eliminarCliente.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-               Pane ClienteEliminar = new Pane();
-               ClienteEliminar.getChildren().add(eClienteEventHandler(event));
-               ClienteEliminar.setPadding(new Insets(5));
-               escritorio.getChildren().add(ClienteEliminar);
+                Pane ClienteEliminar = new Pane();
+                ClienteEliminar.getChildren().add(eClienteEventHandler(event));
+                ClienteEliminar.setPadding(new Insets(5));
+                escritorio.getChildren().add(ClienteEliminar);
             }
         });
 
 //        buscarCliente
-            buscarCliente .setOnAction(new EventHandler<ActionEvent>() {
+        buscarCliente.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 Pane buscarClientes = new Pane();
                 buscarClientes.getChildren().add(bClienteEventHandler(event));
                 buscarClientes.setPadding(new Insets(5));
                 escritorio.getChildren().add(buscarClientes);
-                  }
+            }
         });
 //        listadoClientes
         listadoClientes.setOnAction(new EventHandler<ActionEvent>() {
@@ -276,18 +276,16 @@ public class FormMenuPrincipal extends Application {
             }
         });
 //        buscarProducto
-        buscarProducto.setOnAction(new EventHandler<ActionEvent>(){
+        buscarProducto.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-              public void handle(ActionEvent event) {
+            public void handle(ActionEvent event) {
                 Pane elimProductos = new Pane();
                 elimProductos.getChildren().add(bsaProductoEventHandler(event));
                 elimProductos.setPadding(new Insets(5));
                 escritorio.getChildren().add(elimProductos);
             }
-        });   
-            
-        
-         
+        });
+
 //        listadoProducto
         listadoProducto.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -311,16 +309,25 @@ public class FormMenuPrincipal extends Application {
         });
 //        modificarCategoria
 //        eliminarCategoria
-       eliminarCategoria.setOnAction(new EventHandler<ActionEvent>() {
+        eliminarCategoria.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-            Pane eliminarCategorias = new Pane();
+                Pane eliminarCategorias = new Pane();
                 eliminarCategorias.getChildren().add(eCategEventHandler(event));
                 eliminarCategorias.setPadding(new Insets(5));
                 escritorio.getChildren().add(eliminarCategorias);
             }
         });
 //        buscarCategoria
+        buscarCategoria.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Pane buscarCategorias = new Pane();
+                buscarCategorias.getChildren().add(bCategEventHandler(event));
+                buscarCategorias.setPadding(new Insets(5));
+                escritorio.getChildren().add(buscarCategorias);
+            }
+        });
 //        listadoCategoria
         listadoCategoria.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -383,11 +390,11 @@ public class FormMenuPrincipal extends Application {
 //        kardexMensual
 //        kardexAnual
     }
-    
+
     public static void main(String[] args) {
         launch(args);
     }
-    
+
     public void btnSalirEventHandler(ActionEvent event) {
         System.exit(0);
     }
@@ -427,7 +434,8 @@ public class FormMenuPrincipal extends Application {
         return nCliente;
     }
 //        modificarCliente
-    public VentanaInterna mClienteEventHandler (ActionEvent event){
+
+    public VentanaInterna mClienteEventHandler(ActionEvent event) {
         BorderPane ClienteModificar = new BorderPane();
         Label titulo = new Label("Modificar Cliente");
         titulo.setFont(Font.font("Berlin Sans FB Demi", 20));
@@ -435,7 +443,7 @@ public class FormMenuPrincipal extends Application {
         Button cerrar = new Button("X");
         cerrar.setFont(Font.font("Arial Black", 18));
         cerrar.setTextFill(Color.CYAN);
-         //Barra de Titulo subVentana
+        //Barra de Titulo subVentana
         BarraDeTitulo bTitulo = new BarraDeTitulo(titulo, cerrar);
         ClienteModificar.setTop(bTitulo.getBarra());
         //Interior de la subVentana
@@ -452,7 +460,8 @@ public class FormMenuPrincipal extends Application {
         return Mocliente;
     }
 //        eliminarCliente
-    public VentanaInterna eClienteEventHandler (ActionEvent event){
+
+    public VentanaInterna eClienteEventHandler(ActionEvent event) {
         BorderPane ClienteEliminar = new BorderPane();
         Label titulo = new Label("Eliminar Cliente");
         titulo.setFont(Font.font("Berlin Sans FB Demi", 20));
@@ -460,7 +469,7 @@ public class FormMenuPrincipal extends Application {
         Button cerrar = new Button("X");
         cerrar.setFont(Font.font("Arial Black", 18));
         cerrar.setTextFill(Color.CYAN);
-         //Barra de Titulo subVentana
+        //Barra de Titulo subVentana
         BarraDeTitulo bTitulo = new BarraDeTitulo(titulo, cerrar);
         ClienteEliminar.setTop(bTitulo.getBarra());
         //Interior de la subVentana
@@ -477,7 +486,8 @@ public class FormMenuPrincipal extends Application {
         return bcliente;
     }
 //        buscarCliente
-     public VentanaInterna bClienteEventHandler(ActionEvent event) {
+
+    public VentanaInterna bClienteEventHandler(ActionEvent event) {
         BorderPane ClienteBuscar = new BorderPane();
         Label titulo = new Label("Buscar Cliente");
         titulo.setFont(Font.font("Berlin Sans FB Demi", 20));
@@ -500,11 +510,10 @@ public class FormMenuPrincipal extends Application {
         bcliente.makeFocusable();
         bcliente.setCloseButton(cerrar);
         return bcliente;
-    
-     }
-    
-//        listadoClientes
 
+    }
+
+//        listadoClientes
     public VentanaInterna lstClienteEventHandler(ActionEvent event) {
         BorderPane listadoClientes = new BorderPane();
         Label titulo = new Label("Nuevo Cliente");
@@ -715,7 +724,8 @@ public class FormMenuPrincipal extends Application {
         return eliProductos;
     }
 //        buscarProducto
-    public VentanaInterna bsaProductoEventHandler (ActionEvent event){
+
+    public VentanaInterna bsaProductoEventHandler(ActionEvent event) {
         BorderPane busquedaProductos = new BorderPane();
         Label titulo = new Label("Nueva Categoria");
         titulo.setFont(Font.font("Berlin Sans FB Demi", 20));
@@ -794,7 +804,8 @@ public class FormMenuPrincipal extends Application {
     }
 //        modificarCategoria
 //        eliminarCategoria
-     public VentanaInterna eCategEventHandler(ActionEvent event) {
+
+    public VentanaInterna eCategEventHandler(ActionEvent event) {
         BorderPane eliCategorias = new BorderPane();
         Label titulo = new Label("Nueva Categoria");
         titulo.setFont(Font.font("Berlin Sans FB Demi", 20));
@@ -819,8 +830,33 @@ public class FormMenuPrincipal extends Application {
         return elimCategorias;
     }
 //        buscarCategoria
-//        listadoCategoria
 
+    public VentanaInterna bCategEventHandler(ActionEvent event) {
+        BorderPane buscarCategorias = new BorderPane();
+        Label titulo = new Label("Nueva Categoria");
+        titulo.setFont(Font.font("Berlin Sans FB Demi", 20));
+        titulo.setTextFill(Color.AZURE);
+        Button cerrar = new Button("X");
+        cerrar.setFont(Font.font("Arial Black", 18));
+        cerrar.setTextFill(Color.CYAN);
+        //Barra de Titulo subVentana
+        BarraDeTitulo bTitulo = new BarraDeTitulo(titulo, cerrar);
+        buscarCategorias.setTop(bTitulo.getBarra());
+        //Interior de la subVentana
+        FormBCategorias categoriaBuscar = new FormBCategorias();
+        buscarCategorias.setCenter(categoriaBuscar.getPntPrincipal());
+        //Creacion de Ventana interna
+        VentanaInterna bscCategorias = new VentanaInterna();
+        bscCategorias.setRoot(buscarCategorias);
+        bscCategorias.makeDragable(bTitulo.getBarra());
+        bscCategorias.makeDragable(titulo);
+        bscCategorias.makeResizable(20);
+        bscCategorias.makeFocusable();
+        bscCategorias.setCloseButton(cerrar);
+        return bscCategorias;
+    }
+
+//        listadoCategoria
     public VentanaInterna lstCategEventHandler(ActionEvent event) {
         BorderPane listadoCategorias = new BorderPane();
         Label titulo = new Label("Nueva Categoria");
@@ -845,9 +881,9 @@ public class FormMenuPrincipal extends Application {
         lstCategorias.setCloseButton(cerrar);
         return lstCategorias;
     }
+
 //       Menu Venta
 //        nuevoVenta
-
     public VentanaInterna nVentaEventHandler(ActionEvent event) {
         BorderPane ventaNueva = new BorderPane();
         Label titulo = new Label("Nueva Categoria");
