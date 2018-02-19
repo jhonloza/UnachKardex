@@ -51,8 +51,8 @@ public class FormBCliente {
     private HBox pnlBotones;
     private VBox pntPrincipal;
 
-
-    public void start(Stage primaryStage) throws Exception {
+    public FormBCliente() {
+    
         pFondo = new Image("file:src\\unachkardex\\multimedia\\FondoSubVentanas.jpg");
         fondo = new BackgroundImage(pFondo, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         //LABELS DE LOS CAMPOS A USAR
@@ -163,14 +163,7 @@ public class FormBCliente {
         pntPrincipal.setPadding(new Insets(10));
         pntPrincipal.setBackground(new Background(fondo));
         pntPrincipal.setStyle("-fx-padding: 10; -fx-border-color: mediumblue; -fx-border-width: 2px");
-        Scene scene = new Scene(pntPrincipal, 640, 480);
-        primaryStage.setTitle("Eliminar Proveedor");
-        primaryStage.setScene(scene);
-        primaryStage.setMaxHeight(480);
-        primaryStage.setMinHeight(480);
-        primaryStage.setMaxWidth(640);
-        primaryStage.setMaxWidth(640);
-        primaryStage.show();
+        
 
     }    
         
@@ -192,7 +185,7 @@ public class FormBCliente {
         }
     }
 
-     public VBox getPntPrincipal() {
+     public Node getPntPrincipalP() {
         return pntPrincipal;
     }
 }

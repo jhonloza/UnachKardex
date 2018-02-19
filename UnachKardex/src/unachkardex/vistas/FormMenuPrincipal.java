@@ -449,7 +449,7 @@ public class FormMenuPrincipal extends Application {
         ClienteBuscar.setTop(bTitulo.getBarra());
         //Interior de la subVentana
         FormBCliente Buscarcli = new FormBCliente();
-        ClienteBuscar.setCenter(Buscarcli.getPntPrincipal());
+        ClienteBuscar.setCenter(Buscarcli.getPntPrincipalP());
         //Creacion de Ventana interna
         VentanaInterna bcliente = new VentanaInterna();
         bcliente.setRoot(ClienteBuscar);
