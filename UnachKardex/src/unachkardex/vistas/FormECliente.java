@@ -9,6 +9,7 @@ import javafx.scene.text.*;
 import javafx.scene.paint.*;
 import java.lang.reflect.*;
 import java.text.*;
+import static javafx.application.Application.launch;
 import javafx.beans.*;
 import javafx.collections.*;
 import javafx.geometry.*;
@@ -20,7 +21,7 @@ import unachkardex.negocio.entidades.*;
 import unachkardex.negocio.impl.*;
 import unachkardex.accesodatos.*;
 
-public class FormECliente extends Application{
+public class FormECliente extends Application {
 
     private Label txtCedula;
     private Label txtNombres;
@@ -29,10 +30,12 @@ public class FormECliente extends Application{
     private Label txtDireccion;
     private Label txtTelefono;
     private Label txtEmail;
+    /////////////////
     private Image pFondo;
     private BackgroundImage fondo;
     private Image logo;
     private ImageView visorlogo;
+    //////////////////////////
     private TextField cedula;
     private Label nombres;
     private Label apellidos;
@@ -40,6 +43,7 @@ public class FormECliente extends Application{
     private Label direccion;
     private Label telefono;
     private Label email;
+    
     private Button btnEliminar;
     private Button btnLimpiar;
     private Button btnBuscar;
@@ -49,8 +53,8 @@ public class FormECliente extends Application{
     private GridPane pnlcontacto;
     private HBox pnlBotones;
     private VBox pntPrincipal;
-
-   
+    
+    private Cliente clien;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -188,35 +192,57 @@ public class FormECliente extends Application{
     }
 
     public void btnEliminarEventHandler(ActionEvent event) {
-        int filas = 0;
-        Cliente ncliente = new Cliente();
-        ICliente clienteDao = new ImplCliente();
+        ICliente cliDao = new ImplCliente();
         try {
-            filas = clienteDao.eliminar(ncliente);
-            System.out.println("se elimino: " + filas + " Cliente");
+            Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmacion.setTitle("INFORMACION DEL SISTEMA");
+            confirmacion.setHeaderText(null);
+            confirmacion.setContentText("Desea Eliminar este Producto?");
+            confirmacion.showAndWait();
+            if (confirmacion.getResult() == ButtonType.OK) {
+                System.out.println("BBJUB");
+                if (cliDao.eliminar(clien) > 0) { 
+                    confirmacion.setTitle("INFORMACION DEL SISTEMA");
+                    confirmacion.setHeaderText(null);
+                    confirmacion.setContentText("Se a Eliminado Correctamente!!");
+                    confirmacion.showAndWait();
+                } else {
+                    confirmacion.setTitle("INFORMACION DEL SISTEMA");
+                    confirmacion.setHeaderText(null);
+                    confirmacion.setContentText("No se pudo Eliminar!!");
+                    confirmacion.showAndWait();
+                }
+            }
         } catch (Exception e) {
-            System.out.println("Error de eliminacion: " + e.getMessage());
+            Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("INFORMACION DEL SISTEMA");
+            alerta.setHeaderText(null);
+            alerta.setContentText("No se pudo Eliminar: " + e.getMessage());
+            alerta.showAndWait();
         }
 
     }
 
     public void btnBuscarEventHandler(ActionEvent event) {
         ICliente clienteDao = new ImplCliente();
-        Cliente cli = new Cliente();
+        clien = new Cliente();
         try {
-            cli = clienteDao.obtener(cedula.getText());
-            nombres.setText(cli.getNombre());
-            apellidos.setText(cli.getApellido());
-            direccion.setText(cli.getDireccion());
-            telefono.setText(cli.getTelefono());
-            email.setText(cli.geteMail());
-            fechaNacimiento.setText(String.valueOf(cli.getFechaNac()));
+            clien = clienteDao.obtener(cedula.getText());
+            nombres.setText(clien.getNombre());
+            apellidos.setText(clien.getApellido());
+            direccion.setText(clien.getDireccion());
+            telefono.setText(clien.getTelefono());
+            email.setText(clien.geteMail());
+            fechaNacimiento.setText(String.valueOf(clien.getFechaNac()));
         } catch (Exception e) {
-
+            Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("INFORMACION DEL SISTEMA");
+            alerta.setHeaderText(null);
+            alerta.setContentText("No se encuentra el Producto " + cedula.getText());
+            alerta.showAndWait();
         }
     }
 
-    
     public static void main(String[] args) {
         launch(args);
     }
