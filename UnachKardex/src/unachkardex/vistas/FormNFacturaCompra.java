@@ -1,5 +1,6 @@
 package unachkardex.vistas;
 
+import com.sun.javafx.collections.ElementObservableListDecorator;
 import javafx.application.*;
 import javafx.event.*;
 import javafx.scene.*;
@@ -57,7 +58,7 @@ public class FormNFacturaCompra {
     private VBox nom;
     private ComboBox<Producto> cbxProd;
     private ArrayList<Producto> listaProdF;
-    private ArrayList<ComboBox<Producto>> cbxProducto;
+    private ObservableList<ComboBox<Producto>> cbxProducto = FXCollections.observableArrayList();
     private ObservableList<Producto> listaProductos = FXCollections.observableArrayList();
     private ArrayList<Producto> listProducto;
     private VBox cant;
@@ -116,9 +117,9 @@ public class FormNFacturaCompra {
     private ArrayList<Kardex> listadoKardex;
 
     public FormNFacturaCompra() {
-        totalA=0;
-        totalF=0;
-        tipoTransaccion="V";
+        totalA = 0;
+        totalF = 0;
+        tipoTransaccion = "C";
         //PANEL SUPERIOR CLIENTE
         pFondo = new Image("file:src\\unachkardex\\multimedia\\FondoSubVentanas.jpg");
         fondo = new BackgroundImage(pFondo, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
@@ -134,6 +135,7 @@ public class FormNFacturaCompra {
         txtemail = new Label("Correo: ");
         txtemail.setFont(Font.font("Berlin Sans FB Demi", 15));
         cargarProducto();
+        listaProdF = new ArrayList<Producto>();
         //cajas de texto
         cedula = new TextField("0000000000001");
         cedula.setMaxSize(100, 25);
@@ -188,7 +190,7 @@ public class FormNFacturaCompra {
         tituloFac.setMaxSize(100, 25);
         tituloFac.setMaxSize(100, 25);
         txtCodFactura.setFont(Font.font("Berlin Sans FB Demi", 15));
-        tfCodFactura = new TextField(String.valueOf(cargarFactura()+1));
+        tfCodFactura = new TextField(String.valueOf(cargarFactura() + 1));
         tfCodFactura.setMaxSize(100, 25);
         tfCodFactura.setMinSize(100, 25);
         txtFechaFact = new Label("Fecha de Emision: ");
@@ -261,9 +263,9 @@ public class FormNFacturaCompra {
         items.setStyle("-fx-border-color: white; -fx-border-width: 2px");
         items.setMaxWidth(714);
         items.setMinWidth(714);
-        vItems=new VBox();
+        vItems = new VBox();
         vItems.getChildren().add(items);
-        barrita=new ScrollPane(vItems);
+        barrita = new ScrollPane(vItems);
         barrita.setMaxSize(718, 200);
         barrita.setMinSize(718, 200);
         barrita.setVmax(5000);
@@ -301,11 +303,11 @@ public class FormNFacturaCompra {
         pnlFin3 = new HBox(5);
         pnlFin3.getChildren().addAll(txtTotalFinal, totalFinal);
         pnlFin3.setAlignment(Pos.CENTER_RIGHT);
-        btnlimpiar=new Button("Limpiar");
+        btnlimpiar = new Button("Limpiar");
         btnlimpiar.setFont(Font.font("Berlin Sans FB Demi", 15));
-        btnvender=new Button("Vender");
+        btnvender = new Button("Vender");
         btnvender.setFont(Font.font("Berlin Sans FB Demi", 15));
-        pnlbotones=new HBox(10);
+        pnlbotones = new HBox(10);
         pnlbotones.getChildren().addAll(btnlimpiar, btnvender);
         pnlbotones.setAlignment(Pos.CENTER_RIGHT);
         pnlFinal = new VBox(15);
@@ -325,13 +327,13 @@ public class FormNFacturaCompra {
         btnAccion.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                insertarVentaPEventHandler(event);
+                insertarCompraPEventHandler(event);
             }
         });
         btnvender.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                btnVenderEventHandler(event);
+                btnComprarEventHandler(event);
             }
         });
         btnlimpiar.setOnAction(new EventHandler<ActionEvent>() {
@@ -340,7 +342,13 @@ public class FormNFacturaCompra {
                 btnLimpiarEventHandler(event);
             }
         });
-        
+        btnBuscar.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                 btnBuscarEventHandler(event);
+            }
+        });
+
     }
 
     public Node getPantallaP() {
@@ -384,15 +392,16 @@ public class FormNFacturaCompra {
         tfCodigo.setMaxSize(100, 25);
         tfCodigo.setMinSize(100, 25);
         tfCodigo.setStyle("-fx-border-color: mediumblue; -fx-border-width: 2px");
+        tfCodigo.setEditable(false);
         lstCodigo.add(tfCodigo);
         cod = new VBox();
         cod.getChildren().addAll(lstCodigo);
         //nombre
         listaProductos.addAll(listProducto);
-        cbxProducto=new ArrayList<ComboBox<Producto>>();
-        cbxProducto.add(new ComboBox<Producto>(listaProductos));
+        cbxProd = new ComboBox<Producto>(listaProductos);
+        cbxProducto.add(cbxProd);
         nom = new VBox();
-        nom.getChildren().addAll(cbxProd =new ComboBox<Producto>(listaProductos));
+        nom.getChildren().addAll(cbxProducto);
         //cantidad
         tfCantidad = new TextField();
         tfCantidad.setMaxSize(100, 25);
@@ -437,7 +446,7 @@ public class FormNFacturaCompra {
         });
     }
 
-    public void llenarProducto(ActionEvent event) {
+    public void llenarProducto(Event event) {
         try {
             tfCodigo.setText(String.valueOf(cbxProd.getValue().getCodProducto()));
             tfPrecioU.setText(String.valueOf(cbxProd.getValue().getPrecio()));
@@ -445,31 +454,47 @@ public class FormNFacturaCompra {
         }
     }
 
-    public void insertarVentaPEventHandler(ActionEvent event) {
-        listaCodigo.add(Integer.parseInt(tfCodigo.getText()));
-        listaProdF.add(cbxProd.getValue());
-        listaCantidad.add(Integer.parseInt(tfCantidad.getText()));
-        listaPrecioU.add(Double.parseDouble(tfPrecioU.getText()));
-        listaPrecioT.add(Double.parseDouble(tfprecioT.getText()));
-        ivaUsado=Double.parseDouble(iva.getText())/100;
-        totalA=totalA+Double.parseDouble(tfprecioT.getText());
-        TotalAntes.setText(String.valueOf(totalA));
-        totalF=totalA+(ivaUsado*totalA);
-        totalFinal.setText(String.valueOf(totalF));
-//    for(int e:listaCodigo){
-//        System.out.println("codigo:  "+e);
-//    }
-        generarFilaVenta();
-        vItems.getChildren().add(items);
+    public void insertarCompraPEventHandler(ActionEvent event) {
+        IProducto prodDao = new ImplProducto();
+        Producto produc = null;
+        try {
+            produc = new Producto();
+
+            listaCodigo.add(Integer.parseInt(tfCodigo.getText()));
+            System.out.println("Codigo Seleccionado: " + tfCodigo.getText());
+            produc = prodDao.obtener(Integer.parseInt(tfCodigo.getText()));
+            System.out.println("Producto Seleccionado: " + produc.getNombre());
+            listaProdF.add(produc);
+            System.out.println("Cantidad Seleccionado: " + tfCantidad.getText());
+            listaCantidad.add(Integer.parseInt(tfCantidad.getText()));
+            System.out.println("Cantidad Seleccionado: " + tfCantidad.getText());
+            listaPrecioU.add(Double.parseDouble(tfPrecioU.getText()));
+            System.out.println("Precio unitario Seleccionado: " + tfPrecioU.getText());
+            listaPrecioT.add(Double.parseDouble(tfprecioT.getText()));
+            System.out.println("Precio Total Seleccionado: " + tfprecioT.getText());
+            ivaUsado = Double.parseDouble(iva.getText()) / 100;
+            totalA = totalA + Double.parseDouble(tfprecioT.getText());
+            TotalAntes.setText(String.valueOf(totalA));
+            totalF = totalA + (ivaUsado * totalA);
+            totalFinal.setText(String.valueOf(totalF));
+            for (int e : listaCodigo) {
+                System.out.println("codigo:  " + e);
+            }
+            generarFilaVenta();
+            vItems.getChildren().add(items);
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+
     }
-    
+
     private int cargarFactura() {
         int numCateg = 0;
         listaFacturas = new ArrayList<>();
         IFacturaVenta factDao = new ImplFacturaVenta();
         try {
             listaFacturas = factDao.obtener();
-            numCateg=listaFacturas.size();
+            numCateg = listaFacturas.size();
         } catch (Exception e) {
             Alert alerta = new Alert(Alert.AlertType.ERROR);
             alerta.setTitle("INFORMACION DEL SISTEMA");
@@ -486,7 +511,7 @@ public class FormNFacturaCompra {
         IDetalleVenta ventaDao = new ImplDetalleVenta();
         try {
             listaVentas = ventaDao.obtener();
-            numCateg=listaFacturas.size();
+            numCateg = listaFacturas.size();
         } catch (Exception e) {
             Alert alerta = new Alert(Alert.AlertType.ERROR);
             alerta.setTitle("INFORMACION DEL SISTEMA");
@@ -496,86 +521,81 @@ public class FormNFacturaCompra {
         }
         return numCateg;
     }
-    
-    public void btnVenderEventHandler(ActionEvent event){
-        IKardex kardexDao=new ImplKardex();
-        Kardex nKardex=null;
-        ICliente clienteDao = new ImplCliente();
-        Cliente nCliente = new Cliente();
+
+    public void btnComprarEventHandler(ActionEvent event) {
+        IKardex kardexDao = new ImplKardex();
+        Kardex nKardex = null;
+        IProveedor proveedorDao = new ImplProveedor();
+        Proveedor nProveedor = new Proveedor();
         DateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
         try {
-            nCliente = clienteDao.obtener(cedula.getText());
+            nProveedor = proveedorDao.obtener(cedula.getText());
         } catch (Exception e) {
-            
         }
-        IFacturaVenta factDao=new ImplFacturaVenta();
-        FacturaVenta nFactura=new FacturaVenta();
-        IProducto producDao=new ImplProducto();
-        Producto productoTemp=new Producto();
-        IDetalleVenta ventaDao=new ImplDetalleVenta();
-        DetalleVenta nVenta=null;
+        IFacturaCompra factDao = new ImplFacturaCompra();
+        FacturaCompra nFactura = new FacturaCompra();
+        IProducto producDao = new ImplProducto();
+        Producto productoTemp = new Producto();
+        IDetalleCompra compraDao = new ImplDetalleCompra();
+        DetalleCompra nCompra = null;
         try {
-            nFactura.setCodFacturaVenta(Integer.parseInt(tfCodFactura.getText()));
+            nFactura.setCodFacturaCompra(Integer.parseInt(tfCodFactura.getText()));
             try {
                 nFactura.setFecha(formatoFecha.parse(tfFechaFact.getText()));
             } catch (Exception e) {
             }
-            nFactura.setCliente(nCliente);
-            if(factDao.insertar(nFactura)>0){
+            nFactura.setProveedor(nProveedor);
+            if (factDao.insertar(nFactura) > 0) {
                 System.out.println("Factura Nueva Creada");
-            }
-            else
-            {
+            } else {
                 System.out.println("Error de creacion de factura");
             }
-            for(int i=0; i<listaCodigo.size();i++){
-                productoTemp=producDao.obtener(listaCodigo.get(i));
-                nVenta=new DetalleVenta(cargarDetFact()+1+i, productoTemp, nFactura, listaCantidad.get(i), listaPrecioU.get(i));
-                if(ventaDao.ingresar(nVenta)>0){
+            for (int i = 0; i < listaCodigo.size(); i++) {
+                productoTemp = producDao.obtener(listaCodigo.get(i));
+                nCompra = new DetalleCompra(cargarDetFact() + 1 + i, productoTemp, nFactura, listaCantidad.get(i), listaPrecioU.get(i));
+                if (compraDao.ingresar(nCompra) > 0) {
                     System.out.println("Ingreso de Detalle V Correcto!");
-                }
-                else{
+                } else {
                     System.out.println("Ingreso de Detalle V Fallido!");
                 }
-                nKardex=new Kardex(cargarKardex()+1+i, productoTemp, nFactura.getFecha(), tipoTransaccion, listaCantidad.get(i)*(-1), listaPrecioT.get(i));
-                if(kardexDao.insertar(nKardex)>0){
+                nKardex = new Kardex(cargarKardex() + 1 + i, productoTemp, nFactura.getFecha(), tipoTransaccion, listaCantidad.get(i), listaPrecioT.get(i));
+                if (kardexDao.insertar(nKardex) > 0) {
                     System.out.println("Ingreso de Kardex Correcto!");
-                }
-                else
-                {
+                } else {
                     System.out.println("Ingreso de Kardex Fallido!");
                 }
             }
         } catch (Exception e) {
-            System.out.println("Error: "+e.getMessage());
+            System.out.println("Error: " + e.getMessage());
         }
     }
-    
-    public void btnLimpiarEventHandler(ActionEvent event){
-        detaVenta=new VBox();
-        consumidorFinal();
-        vItems=new VBox();
-        tfCodFactura.setText(String.valueOf(cargarFactura()+1));
+
+    public void btnLimpiarEventHandler(ActionEvent event) {
+        detaVenta = new VBox();
+        generarFilaVenta();
+        tfCodFactura.setText(String.valueOf(cargarFactura() + 1));
         tfFechaFact.setText("");
-        barrita=new ScrollPane(vItems);
+        vItems.getChildren().removeAll(items);
+        vItems.getChildren().add(items);
+        barrita = new ScrollPane();
         barrita.setMaxSize(718, 200);
         barrita.setMinSize(718, 200);
         barrita.setVmax(5000);
         barrita.setVmin(0);
-        vItems.getChildren().add(items);
+        barrita.setContent(vItems);
         detaVenta.getChildren().addAll(pnlItems, barrita);
         detaVenta.setAlignment(Pos.CENTER);
         detaVenta.setPadding(new Insets(10));
         pntPrincipal.setCenter(detaVenta);
     }
-    
+
     private int cargarKardex() {
         int numCateg = 0;
         listadoKardex = new ArrayList<>();
         IKardex kardexDao = new ImplKardex();
         try {
             listadoKardex = kardexDao.obtener();
-            numCateg=listaFacturas.size();
+            numCateg = listaFacturas.size();
         } catch (Exception e) {
             Alert alerta = new Alert(Alert.AlertType.ERROR);
             alerta.setTitle("INFORMACION DEL SISTEMA");
@@ -585,7 +605,7 @@ public class FormNFacturaCompra {
         }
         return numCateg;
     }
-    
+
     public void cargarProducto() {
         listProducto = new ArrayList<>();
         IProducto proDao = new ImplProducto();
@@ -597,5 +617,9 @@ public class FormNFacturaCompra {
             ptnError.getChildren().add(new Label("Error: " + e.getMessage()));
             Scene error = new Scene(ptnError, 0, 0);
         }
+    }
+    
+    public void btnBuscarEventHandler(ActionEvent event){
+        
     }
 }
