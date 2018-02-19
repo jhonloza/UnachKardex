@@ -110,11 +110,14 @@ public class FormNFacturaVenta {
     private double totalF;
     private double ivaUsado;
     private ArrayList<DetalleVenta> listaVentas;
+    private String tipoTransaccion;
     private BorderPane pntPrincipal;
+    private ArrayList<Kardex> listadoKardex;
 
     public FormNFacturaVenta() {
         totalA=0;
         totalF=0;
+        tipoTransaccion="V";
         //PANEL SUPERIOR CLIENTE
         pFondo = new Image("file:src\\unachkardex\\multimedia\\FondoSubVentanas.jpg");
         fondo = new BackgroundImage(pFondo, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
@@ -329,6 +332,12 @@ public class FormNFacturaVenta {
                 btnVenderEventHandler(event);
             }
         });
+        btnlimpiar.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                btnLimpiarEventHandler(event);
+            }
+        });
     }
 
     public Node getPantallaP() {
@@ -492,6 +501,8 @@ public class FormNFacturaVenta {
     }
     
     public void btnVenderEventHandler(ActionEvent event){
+        IKardex kardexDao=new ImplKardex();
+        Kardex nKardex=null;
         ICliente clienteDao = new ImplCliente();
         Cliente nCliente = new Cliente();
         DateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
@@ -524,14 +535,57 @@ public class FormNFacturaVenta {
                 productoTemp=producDao.obtener(listaCodigo.get(i));
                 nVenta=new DetalleVenta(cargarDetFact()+1+i, productoTemp, nFactura, listaCantidad.get(i), listaPrecioU.get(i));
                 if(ventaDao.ingresar(nVenta)>0){
-                    System.out.println("Ingreso Correcto!");
+                    System.out.println("Ingreso de Detalle V Correcto!");
                 }
                 else{
-                    System.out.println("Ingreso Fallido!");
+                    System.out.println("Ingreso de Detalle V Fallido!");
+                }
+                nKardex=new Kardex(cargarKardex()+1+i, productoTemp, nFactura.getFecha(), tipoTransaccion, listaCantidad.get(i)*(-1), listaPrecioT.get(i));
+                if(kardexDao.insertar(nKardex)>0){
+                    System.out.println("Ingreso de Kardex Correcto!");
+                }
+                else
+                {
+                    System.out.println("Ingreso de Kardex Fallido!");
                 }
             }
         } catch (Exception e) {
             System.out.println("Error: "+e.getMessage());
         }
+    }
+    
+    public void btnLimpiarEventHandler(ActionEvent event){
+        detaVenta=new VBox();
+        consumidorFinal();
+        vItems=new VBox();
+        tfCodFactura.setText(String.valueOf(cargarFactura()+1));
+        tfFechaFact.setText("");
+        barrita=new ScrollPane(vItems);
+        barrita.setMaxSize(718, 200);
+        barrita.setMinSize(718, 200);
+        barrita.setVmax(5000);
+        barrita.setVmin(0);
+        vItems.getChildren().add(items);
+        detaVenta.getChildren().addAll(pnlItems, barrita);
+        detaVenta.setAlignment(Pos.CENTER);
+        detaVenta.setPadding(new Insets(10));
+        pntPrincipal.setCenter(detaVenta);
+    }
+    
+    private int cargarKardex() {
+        int numCateg = 0;
+        listadoKardex = new ArrayList<>();
+        IKardex kardexDao = new ImplKardex();
+        try {
+            listadoKardex = kardexDao.obtener();
+            numCateg=listaFacturas.size();
+        } catch (Exception e) {
+            Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("INFORMACION DEL SISTEMA");
+            alerta.setHeaderText(null);
+            alerta.setContentText("Error: " + e.getMessage());
+            alerta.showAndWait();
+        }
+        return numCateg;
     }
 }

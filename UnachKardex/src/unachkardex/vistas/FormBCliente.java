@@ -21,7 +21,7 @@ import unachkardex.negocio.entidades.*;
 import unachkardex.negocio.impl.*;
 import unachkardex.accesodatos.*;
 
-public class FormBCliente extends Application {
+public class FormBCliente {
 
     private Label txtCedula;
     private Label txtNombres;
@@ -51,7 +51,7 @@ public class FormBCliente extends Application {
     private HBox pnlBotones;
     private VBox pntPrincipal;
 
-    @Override
+
     public void start(Stage primaryStage) throws Exception {
         pFondo = new Image("file:src\\unachkardex\\multimedia\\FondoSubVentanas.jpg");
         fondo = new BackgroundImage(pFondo, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
@@ -192,7 +192,7 @@ public class FormBCliente extends Application {
         }
     }
 
-    public static void main(String[] args) {
-        launch(args);
+     public VBox getPntPrincipal() {
+        return pntPrincipal;
     }
 }
