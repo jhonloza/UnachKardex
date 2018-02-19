@@ -332,6 +332,12 @@ public class FormNFacturaVenta {
                 btnVenderEventHandler(event);
             }
         });
+        btnlimpiar.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                btnLimpiarEventHandler(event);
+            }
+        });
     }
 
     public Node getPantallaP() {
@@ -546,6 +552,24 @@ public class FormNFacturaVenta {
         } catch (Exception e) {
             System.out.println("Error: "+e.getMessage());
         }
+    }
+    
+    public void btnLimpiarEventHandler(ActionEvent event){
+        detaVenta=new VBox();
+        consumidorFinal();
+        vItems=new VBox();
+        tfCodFactura.setText(String.valueOf(cargarFactura()+1));
+        tfFechaFact.setText("");
+        barrita=new ScrollPane(vItems);
+        barrita.setMaxSize(718, 200);
+        barrita.setMinSize(718, 200);
+        barrita.setVmax(5000);
+        barrita.setVmin(0);
+        vItems.getChildren().add(items);
+        detaVenta.getChildren().addAll(pnlItems, barrita);
+        detaVenta.setAlignment(Pos.CENTER);
+        detaVenta.setPadding(new Insets(10));
+        pntPrincipal.setCenter(detaVenta);
     }
     
     private int cargarKardex() {
