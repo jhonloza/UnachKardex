@@ -806,7 +806,7 @@ public class FormMenuPrincipal extends Application {
         BarraDeTitulo bTitulo = new BarraDeTitulo(titulo, cerrar);
         eliCategorias.setTop(bTitulo.getBarra());
         //Interior de la subVentana
-        FormECategoria categoriaEliminar = new FormECategoria();
+        FormECategorias categoriaEliminar = new FormECategorias();
         eliCategorias.setCenter(categoriaEliminar.getPntPrincipal());
         //Creacion de Ventana interna
         VentanaInterna elimCategorias = new VentanaInterna();

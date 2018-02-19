@@ -20,7 +20,7 @@ import unachkardex.negocio.entidades.*;
 import unachkardex.negocio.impl.*;
 import unachkardex.accesodatos.*;
 
-public class FormEcategoria {
+public class FormECategorias { 
 
     //Presentacion
     private Image pFondo;
@@ -53,7 +53,7 @@ public class FormEcategoria {
 
     private Categoria cate;
 
-    public FormEcategoria() {
+    public FormECategorias() {
 
         pFondo = new Image("file:src\\unachkardex\\multimedia\\FondoSubVentanas.jpg");
         fondo = new BackgroundImage(pFondo, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
@@ -76,7 +76,7 @@ public class FormEcategoria {
         txtDescripcion = new Label("Descripcion: ");
         txtDescripcion.setFont(Font.font("Berlin Sans FB Demi", 20));
         codigo = new TextField();
-        //codigo.setText(String.valueOf(cargarCateg()+1));
+        //codigo.setText(String.valueOf(cargarCateg()1));
         nombre = new TextField();
         descripcion = new TextField();
         pnlC1 = new HBox(5);
