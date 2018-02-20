@@ -19,26 +19,26 @@ public class TestProducto {
         
 //TEST INSERTAR
 
-//        int filas = 0;
-//        Categoria ncategoria = new Categoria(1, "ABC", "Cuadernoss");
-//        Producto produc = new Producto(1,ncategoria,  "Academico", 1.75);
-//        try {
-//            filas = productoDao.insertar(produc);
-//            System.out.println("filas Insertadas:" + filas);
-//        } catch (Exception e) {
-//        }
-//        assertTrue(filas > 0);
+        int filas = 0;
+        Categoria ncategoria = new Categoria(1, "ABC", "Cuadernoss");
+        Producto produc = new Producto(74,ncategoria,  "Academico", 1.75);
+        try {
+            filas = productoDao.insertar(produc);
+            System.out.println("filas Insertadas:" + filas);
+        } catch (Exception e) {
+        }
+        assertTrue(filas > 0);
         //TEST ELIMINAR
-        int filas=0;
-        Categoria ncategoria = new Categoria(9, "Cuaderno", "Material de uso para toma de notas o apuntes");
-        Producto produc = new Producto(74,ncategoria,  "Cuadreno ", 1.00);
-         try {
-             filas=productoDao.eliminar(produc);
-             System.out.println("se elimino: "+filas+" productos");
-         } catch (Exception e) {
-             System.out.println("Error de eliminacion: "+e.getMessage());
-         }
-         assertTrue(filas>0);
+//        int filas=0;
+//        Categoria ncategoria = new Categoria(9, "Cuaderno", "Material de uso para toma de notas o apuntes");
+//        Producto produc = new Producto(74,ncategoria,  "Cuadreno ", 1.00);
+//         try {
+//             filas=productoDao.eliminar(produc);
+//             System.out.println("se elimino: "+filas+" productos");
+//         } catch (Exception e) {
+//             System.out.println("Error de eliminacion: "+e.getMessage());
+//         }
+//         assertTrue(filas>0);
         //TEST MODIFICAR
 //        int filas=0;
 //        Categoria ncategoria = new Categoria(1, "ABC", "Cuadernoss");

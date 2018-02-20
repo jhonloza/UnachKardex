@@ -41,7 +41,7 @@ public class FormNFacturaCompra {
     private HBox pnlC2;
     private HBox pnlC3;
     private HBox pnlC4;
-    private ArrayList<FacturaVenta> listaFacturas;
+    private ArrayList<FacturaCompra> listaFacturas;
     private Proveedor prove;
     //DETALLE VENTA
     private Group pnlMedio;
@@ -112,7 +112,7 @@ public class FormNFacturaCompra {
     private double totalA;
     private double totalF;
     private double ivaUsado;
-    private ArrayList<DetalleVenta> listaVentas;
+    private ArrayList<DetalleCompra> listaVentas;
     private String tipoTransaccion;
     private BorderPane pntPrincipal;
     private ArrayList<Kardex> listadoKardex;
@@ -138,7 +138,7 @@ public class FormNFacturaCompra {
         cargarProducto();
         listaProdF = new ArrayList<Producto>();
         //cajas de texto
-        cedula = new TextField("0000000000001");
+        cedula = new TextField("");
         cedula.setMaxSize(100, 25);
         cedula.setMinSize(100, 25);
         nombres = new Label("");
@@ -171,7 +171,6 @@ public class FormNFacturaCompra {
         pnlC4.setAlignment(Pos.CENTER);
         pnlCliente = new VBox(5);
         pnlCliente.getChildren().addAll(pnlC1, pnlC2, pnlC3, pnlC4);
-        consumidorFinal();
         ///////////Logo///////////
         logo = new Image("file:src\\unachkardex\\multimedia\\logo.jpg");
         mostrarLogo = new ImageView(logo);
@@ -355,18 +354,6 @@ public class FormNFacturaCompra {
         return pntPrincipal;
     }
 
-    public void consumidorFinal() {
-        ICliente clienteDao = new ImplCliente();
-        Cliente nCliente = new Cliente();
-        try {
-            nCliente = clienteDao.obtener(cedula.getText());
-            nombres.setText(nCliente.getNombre() + " " + nCliente.getApellido());
-            direccion.setText(nCliente.getDireccion());
-            telefono.setText(nCliente.getTelefono());
-            email.setText(nCliente.geteMail());
-        } catch (Exception e) {
-        }
-    }
 
     public void calcular(ActionEvent event) {
         double v1 = Double.parseDouble(tfCantidad.getText());
@@ -459,31 +446,35 @@ public class FormNFacturaCompra {
         Producto produc = null;
         try {
             produc = new Producto();
-
-            listaCodigo.add(Integer.parseInt(tfCodigo.getText()));
-            System.out.println("Codigo Seleccionado: " + tfCodigo.getText());
+            if(tfCodigo.getText()!=null && tfCantidad.getText()!=null && tfPrecioU.getText()!=null && tfprecioT.getText()!=null){
+                listaCodigo.add(Integer.parseInt(tfCodigo.getText()));
             produc = prodDao.obtener(Integer.parseInt(tfCodigo.getText()));
-            System.out.println("Producto Seleccionado: " + produc.getNombre());
-            listaProdF.add(produc);
-            System.out.println("Cantidad Seleccionado: " + tfCantidad.getText());
+            listaProdF.add(produc);;
             listaCantidad.add(Integer.parseInt(tfCantidad.getText()));
-            System.out.println("Cantidad Seleccionado: " + tfCantidad.getText());
             listaPrecioU.add(Double.parseDouble(tfPrecioU.getText()));
-            System.out.println("Precio unitario Seleccionado: " + tfPrecioU.getText());
             listaPrecioT.add(Double.parseDouble(tfprecioT.getText()));
-            System.out.println("Precio Total Seleccionado: " + tfprecioT.getText());
             ivaUsado = Double.parseDouble(iva.getText()) / 100;
             totalA = totalA + Double.parseDouble(tfprecioT.getText());
             TotalAntes.setText(String.valueOf(totalA));
             totalF = totalA + (ivaUsado * totalA);
             totalFinal.setText(String.valueOf(totalF));
-            for (int e : listaCodigo) {
-                System.out.println("codigo:  " + e);
-            }
             generarFilaVenta();
             vItems.getChildren().add(items);
+            }
+            else{
+                Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("INFORMACION DEL SISTEMA");
+            alerta.setHeaderText(null);
+            alerta.setContentText("Error campos Vacios en factura! ");
+            alerta.showAndWait();
+            }
+            
         } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
+            Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("INFORMACION DEL SISTEMA");
+            alerta.setHeaderText(null);
+            alerta.setContentText("Error: " + e.getMessage());
+            alerta.showAndWait();
         }
 
     }
@@ -491,7 +482,7 @@ public class FormNFacturaCompra {
     private int cargarFactura() {
         int numCateg = 0;
         listaFacturas = new ArrayList<>();
-        IFacturaVenta factDao = new ImplFacturaVenta();
+        IFacturaCompra factDao = new ImplFacturaCompra();
         try {
             listaFacturas = factDao.obtener();
             numCateg = listaFacturas.size();
@@ -508,7 +499,7 @@ public class FormNFacturaCompra {
     private int cargarDetFact() {
         int numCateg = 0;
         listaVentas = new ArrayList<>();
-        IDetalleVenta ventaDao = new ImplDetalleVenta();
+        IDetalleCompra ventaDao = new ImplDetalleCompra();
         try {
             listaVentas = ventaDao.obtener();
             numCateg = listaFacturas.size();
@@ -558,7 +549,19 @@ public class FormNFacturaCompra {
                 } else {
                     System.out.println("Ingreso de Detalle V Fallido!");
                 }
-                nKardex = new Kardex(cargarKardex() + 1 + i, productoTemp, nFactura.getFecha(), tipoTransaccion, listaCantidad.get(i), listaPrecioT.get(i));
+                ArrayList<Kardex> kardexBuscado=new ArrayList<>();
+                kardexBuscado=kardexDao.obtenerkardexProducto(productoTemp.getCodProducto());
+                Kardex kardexTemp=null;
+                if(kardexBuscado.isEmpty()){
+                    kardexTemp=new Kardex(1, productoTemp, nFactura.getFecha(), tipoTransaccion, 0, 0, totalA);
+                }
+                else
+                {
+                    int posFinal=kardexBuscado.size();
+                kardexTemp=new Kardex();
+                kardexTemp=kardexBuscado.get(posFinal);
+                }
+                nKardex = new Kardex(cargarKardex() + 1 + i, productoTemp, nFactura.getFecha(), tipoTransaccion, kardexTemp.getExistencias()+listaCantidad.get(i), listaCantidad.get(i), listaPrecioT.get(i));
                 if (kardexDao.insertar(nKardex) > 0) {
                     System.out.println("Ingreso de Kardex Correcto!");
                 } else {
@@ -566,7 +569,11 @@ public class FormNFacturaCompra {
                 }
             }
         } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
+            Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("INFORMACION DEL SISTEMA");
+            alerta.setHeaderText(null);
+            alerta.setContentText("Error: " + e.getMessage());
+            alerta.showAndWait();
         }
     }
 

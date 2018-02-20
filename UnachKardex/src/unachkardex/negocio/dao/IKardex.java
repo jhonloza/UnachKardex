@@ -14,4 +14,6 @@ public interface IKardex {
     public Kardex obtener(int codKardex, int codProducto) throws Exception;
 
     public ArrayList<Kardex> obtener() throws Exception;
+    
+    public ArrayList<Kardex> obtenerkardexProducto(int producto) throws Exception;
 }

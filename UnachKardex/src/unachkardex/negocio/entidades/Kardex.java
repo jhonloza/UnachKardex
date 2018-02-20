@@ -6,19 +6,23 @@ public class Kardex {
     private Date fechaEmision;
     private String tipoTransaccion;
     private int existencias;
+    private int cantEditable;
     private double valorTotal;
 
     public Kardex() {
     }
 
-    public Kardex(int codKardex, Producto producto, Date fechaEmision, String tipoTransaccion, int existencias, double valorTotal) {
+    public Kardex(int codKardex, Producto producto, Date fechaEmision, String tipoTransaccion, int existencias, int cantEditable, double valorTotal) {
         this.codKardex = codKardex;
         this.producto = producto;
         this.fechaEmision = fechaEmision;
         this.tipoTransaccion = tipoTransaccion;
         this.existencias = existencias;
+        this.cantEditable = cantEditable;
         this.valorTotal = valorTotal;
     }
+
+    
 
     public int getCodKardex() {
         return codKardex;
@@ -67,5 +71,15 @@ public class Kardex {
     public void setValorTotal(double valorTotal) {
         this.valorTotal = valorTotal;
     }
+
+    public int getCantEditable() {
+        return cantEditable;
+    }
+
+    public void setCantEditable(int cantEditable) {
+        this.cantEditable = cantEditable;
+    }
+    
+    
     
 }

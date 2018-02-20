@@ -12,7 +12,7 @@ public class ImplKardex implements IKardex {
     @Override
     public int insertar(Kardex kardex) throws Exception {
         int numFilas = 0;
-        String sqlC = "INSERT INTO Kardex (codKardex, codProducto, fechaEmision, tipoTransaccion, existencia, valorTotal) VALUES (?,?,?,?,?,?)";
+        String sqlC = "INSERT INTO Kardex (codKardex, codProducto, fechaEmision, tipoTransaccion, existencia, valorTotal, cantEditable) VALUES (?,?,?,?,?,?,?)";
         ArrayList<Parametro> lisParametros = new ArrayList<>();
         lisParametros.add(new Parametro(1, kardex.getCodKardex()));
         lisParametros.add(new Parametro(2, kardex.getProducto().getCodProducto()));
@@ -25,6 +25,7 @@ public class ImplKardex implements IKardex {
         lisParametros.add(new Parametro(4, kardex.getTipoTransaccion()));
         lisParametros.add(new Parametro(5, kardex.getExistencias()));
         lisParametros.add(new Parametro(6, kardex.getValorTotal()));
+        lisParametros.add(new Parametro(7, kardex.getCantEditable()));
         Conexion con = null;
         try {
             con = new Conexion();
@@ -43,7 +44,7 @@ public class ImplKardex implements IKardex {
     @Override
     public int modificar(Kardex kardex) throws Exception {
         int numFilas = 0;
-        String sqlC = "UPDATE kardex SET codKardex=?, codProducto=?, fechaEmision=?, tipoTransaccion=?, existencia=?, valorTotal=? WHERE codKardex=? and codProducto=?";
+        String sqlC = "UPDATE kardex SET codKardex=?, codProducto=?, fechaEmision=?, tipoTransaccion=?, existencia=?, valorTotal=?, cantEditable=? WHERE codKardex=? and codProducto=?";
         ArrayList<Parametro> lisParametros = new ArrayList<>();
         lisParametros.add(new Parametro(1, kardex.getCodKardex()));
         lisParametros.add(new Parametro(2, kardex.getProducto().getCodProducto()));
@@ -56,8 +57,9 @@ public class ImplKardex implements IKardex {
         lisParametros.add(new Parametro(4, kardex.getTipoTransaccion()));
         lisParametros.add(new Parametro(5, kardex.getExistencias()));
         lisParametros.add(new Parametro(6, kardex.getValorTotal()));
-        lisParametros.add(new Parametro(7, kardex.getCodKardex()));
-        lisParametros.add(new Parametro(8, kardex.getProducto().getCodProducto()));
+        lisParametros.add(new Parametro(7, kardex.getCantEditable()));
+        lisParametros.add(new Parametro(8, kardex.getCodKardex()));
+        lisParametros.add(new Parametro(9, kardex.getProducto().getCodProducto()));
         Conexion con = null;
         try {
             con = new Conexion();
@@ -98,7 +100,7 @@ public class ImplKardex implements IKardex {
     @Override
     public Kardex obtener(int codKardex, int codProducto) throws Exception {
         Kardex nKardex = null;
-        String sqlC = "SELECT codKardex, codProducto, fechaEmision, tipoTransaccion, existencia, valorTotal FROM Kardex WHERE codKardex=? and codProducto=?";
+        String sqlC = "SELECT codKardex, codProducto, fechaEmision, tipoTransaccion, existencia, valorTotal, cantEditable FROM Kardex WHERE codKardex=? and codProducto=?";
         ArrayList<Parametro> lisParametros = new ArrayList<>();
         lisParametros.add(new Parametro(1, codKardex));
         lisParametros.add(new Parametro(2, codProducto));
@@ -116,8 +118,10 @@ public class ImplKardex implements IKardex {
                 nKardex.setCodKardex(rst.getInt(1));
                 nProd=prodDao.obtener(rst.getInt(2));
                 nKardex.setFechaEmision(rst.getDate(3));
-                nKardex.setExistencias(rst.getInt(4));
-                nKardex.setValorTotal(rst.getDouble(5));
+                nKardex.setTipoTransaccion(rst.getString(4));
+                nKardex.setExistencias(rst.getInt(5));
+                nKardex.setValorTotal(rst.getDouble(6));
+                nKardex.setCantEditable(rst.getInt(7));
             }
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
@@ -132,7 +136,7 @@ public class ImplKardex implements IKardex {
     @Override
     public ArrayList<Kardex> obtener() throws Exception {
         ArrayList<Kardex> listKardex = new ArrayList<>();
-        String sqlC = "SELECT codKardex, codProducto, fechaEmision, tipoTransaccion, existencia, valorTotal FROM Kardex";
+        String sqlC = "SELECT codKardex, codProducto, fechaEmision, tipoTransaccion, existencia, valorTotal, cantEditable FROM Kardex";
         Conexion con = null;
         IProducto prodDao = new ImplProducto();
         Producto nProd = null;
@@ -148,8 +152,46 @@ public class ImplKardex implements IKardex {
                 nKardex.setCodKardex(rst.getInt(1));
                 nProd=prodDao.obtener(rst.getInt(2));
                 nKardex.setFechaEmision(rst.getDate(3));
-                nKardex.setExistencias(rst.getInt(4));
-                nKardex.setValorTotal(rst.getDouble(5));
+                nKardex.setTipoTransaccion(rst.getString(4));
+                nKardex.setExistencias(rst.getInt(5));
+                nKardex.setValorTotal(rst.getDouble(6));
+                nKardex.setCantEditable(rst.getInt(7));
+                listKardex.add(nKardex);
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        } finally {
+            if (con != null) {
+                con.desconectar();
+            }
+        }
+        return listKardex;
+    }
+
+    @Override
+    public ArrayList<Kardex> obtenerkardexProducto(int producto) throws Exception {
+        ArrayList<Kardex> listKardex = new ArrayList<>();
+        String sqlC = "SELECT codKardex, codProducto, fechaEmision, tipoTransaccion, existencia, valorTotal, cantEditable FROM Kardex Where codProducto=?";
+        ArrayList<Parametro> listParametros=new ArrayList<>();
+        listParametros.add(new Parametro(1, producto));
+        Conexion con = null;
+        IProducto prodDao = new ImplProducto();
+        Producto nProd = null;
+        Kardex nKardex=null;
+        try {
+            con = new Conexion();
+            con.conectar();
+            ResultSet rst = con.ejecutarQuery(sqlC, listParametros);
+            while (rst.next()) {
+                nProd = new Producto();
+                nKardex = new Kardex();
+                nKardex.setCodKardex(rst.getInt(1));
+                nProd=prodDao.obtener(rst.getInt(2));
+                nKardex.setFechaEmision(rst.getDate(3));
+                nKardex.setTipoTransaccion(rst.getString(4));
+                nKardex.setExistencias(rst.getInt(5));
+                nKardex.setValorTotal(rst.getDouble(6));
+                nKardex.setCantEditable(rst.getInt(7));
                 listKardex.add(nKardex);
             }
         } catch (Exception e) {
