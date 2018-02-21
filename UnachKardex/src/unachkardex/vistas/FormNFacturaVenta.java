@@ -562,14 +562,13 @@ public class FormNFacturaVenta {
                 kardexBuscado = kardexDao.obtenerkardexProducto(productoTemp.getCodProducto());
                 Kardex kardexTemp = null;
                 if (kardexBuscado.size() > 0) {
-                    int posFinal = kardexBuscado.size();
-                    System.out.println("posicion final del Kardex"+posFinal);
-                    kardexTemp = new Kardex();
-                    kardexTemp = kardexBuscado.get(posFinal-1);
-                    System.out.println("Kardex Usado: "+kardexTemp.getCodKardex()+"  "+kardexTemp.getProducto().getNombre()+"  "+kardexTemp.getTipoTransaccion()+"  "+kardexTemp.getFechaEmision()+"  "+kardexTemp.getExistencias()+"  "+kardexTemp.getCantEditable()+"  "+kardexTemp.getValorTotal()+"  ");
-                    //kardexTemp=new Kardex(1, productoTemp, nFactura.getFecha(), tipoTransaccion, 0, 0, totalA);
+                    int posFinal=kardexBuscado.size();
+                    int codKarTemp=kardexBuscado.get(posFinal).getCodKardex();
+                    int codProdTemp=kardexBuscado.get(posFinal).getProducto().getCodProducto();
+                    System.out.println("cod Kardex: "+codKarTemp+"     Codigo Producto tempo: "+codProdTemp);
+//kardexTemp=new Kardex(1, productoTemp, nFactura.getFecha(), tipoTransaccion, 0, 0, totalA);
                 } else {
-                    kardexTemp=new Kardex(1, productoTemp, nFactura.getFecha(), tipoTransaccion, 0, 0, totalA);
+                    kardexTemp = new Kardex(1, productoTemp, nFactura.getFecha(), tipoTransaccion, 0, 0, totalA);
                 }
                 nKardex = new Kardex(cargarKardex() + 1 + i, productoTemp, nFactura.getFecha(), tipoTransaccion, kardexTemp.getExistencias() + (listaCantidad.get(i) * (-1)), listaCantidad.get(i), listaPrecioT.get(i));
                 if (kardexDao.insertar(nKardex) > 0) {
