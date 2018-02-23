@@ -10,33 +10,44 @@ import unachkardex.negocio.dao.*;
 import unachkardex.negocio.entidades.*;
 import java.util.*;
 import java.sql.*;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
+
 public class ImplConsultaKProducto implements IConsultaKProducto {
-   @Override
-   public ArrayList<Integer > obtener(int codProducto) throws Exception{
-       ArrayList<Integer > lista=new ArrayList<>();
-        String sql= "select existencia from Kardex where codProducto=?";
-        ArrayList<Parametro> lstparametros=new ArrayList<>();
-        lstparametros.add(new Parametro(1, codProducto));
-        Conexion con = null;
+
+    @Override
+    public ArrayList<Kardex> listadoKardexProducto(int codProducto) throws Exception {
+        ArrayList<Kardex> lista = new ArrayList<>();
+        String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+        String url = "jdbc:sqlserver://localhost:1433;databaseName=Proyecto";
+        String usuario = "kardex2018";
+        String conraseña = "kardex2018";
+        Connection conexion = null;
+        ResultSet res = null;
+        Kardex nKardex=null;
+        String comandoSQL = "Slect * From Kardex Where codProducto=?";
+        ArrayList<Parametro> listaParametro = new ArrayList<>();
+        Producto prod=null;
+        IProducto prodDao=new ImplProducto();
+        listaParametro.add(new Parametro(1, codProducto));
         try {
-            con = new Conexion();
-            con.conectar();
-            ResultSet rst = con.ejecutarQuery(sql, lstparametros);            
-            while (rst.next()) {
-              int var=rst.getInt(1);
-              lista.add(var);
+            Class.forName(driver);
+            conexion = DriverManager.getConnection(url, usuario, conraseña);
+            PreparedStatement prstd=conexion.prepareStatement(comandoSQL, codProducto);
+            res=prstd.executeQuery(comandoSQL);
+            while(res.next()){
+                nKardex= new Kardex();
+                prod=new Producto();
+                nKardex.setCodKardex(res.getInt(1));
+                prod=prodDao.obtener(res.getInt(2));
+                nKardex.setProducto(prod);
+                nKardex.setFechaEmision(res.getDate(3));
+                nKardex.setTipoTransaccion(res.getString(4));
+                nKardex.setExistencias(res.getInt(5));
+                nKardex.setValorTotal(res.getDouble(6));
             }
         } catch (Exception e) {
-            throw e;
-        } finally {
-            if(con!=null)
-            con.desconectar();
+            System.out.println("Error: "+e.getMessage());
         }
         return lista;
     }
-       
-   }
 
+}
