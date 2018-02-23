@@ -23,7 +23,7 @@ public class ImplConsultaKProducto implements IConsultaKProducto {
         Connection conexion = null;
         ResultSet res = null;
         Kardex nKardex=null;
-        String comandoSQL = "Slect * From Kardex Where codProducto=?";
+        String comandoSQL = "Select codKardex, codProducto,  From Kardex Where codProducto=?";
         ArrayList<Parametro> listaParametro = new ArrayList<>();
         Producto prod=null;
         IProducto prodDao=new ImplProducto();
@@ -31,6 +31,7 @@ public class ImplConsultaKProducto implements IConsultaKProducto {
         try {
             Class.forName(driver);
             conexion = DriverManager.getConnection(url, usuario, conraseña);
+            System.out.println("Conexion Establecida");
             PreparedStatement prstd=conexion.prepareStatement(comandoSQL, codProducto);
             res=prstd.executeQuery(comandoSQL);
             while(res.next()){

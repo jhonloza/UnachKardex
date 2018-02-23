@@ -25,7 +25,9 @@ public class KProductoTest {
                 System.out.println("Kardex: "+nKardex.getCodKardex()+"  "+nKardex.getProducto().getNombre()+"  "+nKardex.getFechaEmision()+"  "+nKardex.getTipoTransaccion()+"  "+nKardex.getExistencias()+"  "+nKardex.getValorTotal());
             }
         } catch (Exception e) {
+            System.out.println("Error: "+e.getMessage());
         }
+        assertTrue(listaKardexProd.size()>0);
     }
 
 }

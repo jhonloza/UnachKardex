@@ -32,17 +32,17 @@ public class TestCliente {
 //        }
 //        assertTrue(filas > 0);
         //ELIMINAR 
-        
-        int filas=0;
-        Cliente ncliente = new Cliente("1750000000001", "Sebastian", "Salgado","AV 10 DE AGOSTO","0983665471","",new java.util.Date());
-          ICliente clienteDao=new ImplCliente();
-         try {
-             filas=clienteDao.eliminar(ncliente);
-             System.out.println("se elimino: "+filas+" Cliente");
-         } catch (Exception e) {
-             System.out.println("Error de eliminacion: "+e.getMessage());
-         }
-         assertTrue(filas>0);
+//        
+//        int filas=0;
+//        Cliente ncliente = new Cliente("1750000000001", "Sebastian", "Salgado","AV 10 DE AGOSTO","0983665471","",new java.util.Date());
+//          ICliente clienteDao=new ImplCliente();
+//         try {
+//             filas=clienteDao.eliminar(ncliente);
+//             System.out.println("se elimino: "+filas+" Cliente");
+//         } catch (Exception e) {
+//             System.out.println("Error de eliminacion: "+e.getMessage());
+//         }
+//         assertTrue(filas>0);
         
         ////TEST OBTENER CODIGO
 //        Cliente cli = new Cliente();
@@ -57,16 +57,16 @@ public class TestCliente {
 //        
         //////// TEST LISTADO 
 //        
-//        ArrayList<Cliente> clientess = new ArrayList<>();
-//        try {
-//            clientess = clDao.obtener();
-//            for (Cliente clientes : clientess) {
-//                System.out.println("CEDULA      " + "  NOMBRE "+ "   APELLIDO"+"DIRECCION"+"TELEFONO"+"EMAIL"+"FECHA NACIEMIENTO");
-//                System.out.println(clientes.getCedula() + "" + clientes.getNombre() + "" + clientes.getApellido() + "" + clientes.getDireccion() + "" + clientes.getTelefono() + "" + clientes.geteMail() + " "+ clientes.getFechaNac());
-//            }
-//        } catch (Exception e) {
-//        }
-//       assertTrue(clientess.size() > 0);
+        ArrayList<Cliente> clientess = new ArrayList<>();
+        try {
+            clientess = clDao.obtener();
+            for (Cliente clientes : clientess) {
+                System.out.println("CEDULA      " + "  NOMBRE "+ "   APELLIDO"+"DIRECCION"+"TELEFONO"+"EMAIL"+"FECHA NACIEMIENTO");
+                System.out.println(clientes.getCedula() + "" + clientes.getNombre() + "" + clientes.getApellido() + "" + clientes.getDireccion() + "" + clientes.getTelefono() + "" + clientes.geteMail() + " "+ clientes.getFechaNac());
+            }
+        } catch (Exception e) {
+        }
+       assertTrue(clientess.size() > 0);
 //    }
 
 }
