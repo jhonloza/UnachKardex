@@ -23,7 +23,7 @@ public class ImplConsultaKProducto implements IConsultaKProducto {
         Connection conexion = null;
         ResultSet res = null;
         Kardex nKardex=null;
-        String comandoSQL = "Select codKardex, codProducto,  From Kardex Where codProducto=?";
+        String comandoSQL = "Select codKardex, codProducto, fechaEmision, tipoTransaccion, existencia, valorTotal, cantEditable From Kardex Where codProducto="+String.valueOf(codProducto);
         ArrayList<Parametro> listaParametro = new ArrayList<>();
         Producto prod=null;
         IProducto prodDao=new ImplProducto();
@@ -32,7 +32,7 @@ public class ImplConsultaKProducto implements IConsultaKProducto {
             Class.forName(driver);
             conexion = DriverManager.getConnection(url, usuario, conraseña);
             System.out.println("Conexion Establecida");
-            PreparedStatement prstd=conexion.prepareStatement(comandoSQL, codProducto);
+            Statement prstd=conexion.createStatement();
             res=prstd.executeQuery(comandoSQL);
             while(res.next()){
                 nKardex= new Kardex();
@@ -44,6 +44,8 @@ public class ImplConsultaKProducto implements IConsultaKProducto {
                 nKardex.setTipoTransaccion(res.getString(4));
                 nKardex.setExistencias(res.getInt(5));
                 nKardex.setValorTotal(res.getDouble(6));
+                nKardex.setCantEditable(res.getInt(7));
+                lista.add(nKardex);
             }
         } catch (Exception e) {
             System.out.println("Error: "+e.getMessage());

@@ -537,6 +537,7 @@ public class FormNFacturaVenta {
         IProducto producDao = new ImplProducto();
         Producto productoTemp = new Producto();
         IDetalleVenta ventaDao = new ImplDetalleVenta();
+        IConsultaKProducto consultaKDao=new ImplConsultaKProducto();
         DetalleVenta nVenta = null;
         try {
             nFactura.setCodFacturaVenta(Integer.parseInt(tfCodFactura.getText()));
@@ -559,14 +560,14 @@ public class FormNFacturaVenta {
                     System.out.println("Ingreso de Detalle V Fallido!");
                 }
                 ArrayList<Kardex> kardexBuscado = new ArrayList<>();
-                kardexBuscado = kardexDao.obtenerkardexProducto(productoTemp.getCodProducto());
+                kardexBuscado = consultaKDao.listadoKardexProducto(productoTemp.getCodProducto());
                 Kardex kardexTemp = null;
                 if (kardexBuscado.size() > 0) {
-                    int posFinal=kardexBuscado.size();
-                    int codKarTemp=kardexBuscado.get(posFinal).getCodKardex();
-                    int codProdTemp=kardexBuscado.get(posFinal).getProducto().getCodProducto();
-                    System.out.println("cod Kardex: "+codKarTemp+"     Codigo Producto tempo: "+codProdTemp);
-//kardexTemp=new Kardex(1, productoTemp, nFactura.getFecha(), tipoTransaccion, 0, 0, totalA);
+                    Kardex ktemp=new Kardex();
+                    ktemp=kardexBuscado.get(kardexBuscado.size()-1);
+                    System.out.println("Kardex final: "+ktemp.getCodKardex()+ ktemp.getProducto().getNombre());
+                    kardexTemp=new Kardex();
+                    kardexTemp=ktemp;
                 } else {
                     kardexTemp = new Kardex(1, productoTemp, nFactura.getFecha(), tipoTransaccion, 0, 0, totalA);
                 }
