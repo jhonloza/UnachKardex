@@ -9,6 +9,8 @@ import unachkardex.negocio.dao.*;
 import unachkardex.negocio.entidades.*;
 import java.util.*;
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 /**
  *
  * @author Wen
@@ -24,6 +26,7 @@ public class ImplKardexM implements IKardexM{
         Connection conexion = null;
         ResultSet res = null;
         Kardex nKardex=null;
+      DateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
        String comandoSQL = "Select * From Kardex Where codProducto>" +String.valueOf(codProducto)+ "and codProducto<"+String.valueOf(codProducto)+"and fechaEmision between"+String.valueOf(fechaini)+"and"+String.valueOf(fechafin);
         ArrayList<Parametro> listaParametro = new ArrayList<>();
          Producto prod=null;
@@ -43,8 +46,8 @@ public class ImplKardexM implements IKardexM{
                 nKardex.setCodKardex(res.getInt(1));
                 prod=prodDao.obtener(res.getInt(2));
                 nKardex.setProducto(prod);
-                nKardex.setfechaini(res.getDate(3));
-                   nKardex.setfechafin(res.getDate(4));
+//                nKardex.setfechaini(res.getDate(3));
+//                   nKardex.setfechafin(res.getDate(4));
                 
                 lista.add(nKardex);
             }
