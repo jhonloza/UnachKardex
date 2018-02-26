@@ -6,8 +6,8 @@
 package unachkardex.negocio.dao;
 
 import java.util.ArrayList;
-import unachkardex.rnegocio.entidades.*;
-import unachkardex.rnegocio.impl.*;
+import unachkardex.negocio.entidades.*;
+import unachkardex.negocio.impl.*;
 import java.util.*;
 
 /**
