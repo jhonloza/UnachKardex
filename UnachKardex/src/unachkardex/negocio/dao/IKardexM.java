@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package unachkardex.rnegocio.dao;
+package unachkardex.negocio.dao;
 
 import java.util.ArrayList;
 import unachkardex.rnegocio.entidades.*;
@@ -15,6 +15,7 @@ import java.util.*;
  * @author Wen
  */
 public interface IKardexM {
-    public ArrayList<Kardex> listadoKardexFecha(int codProducto) throws Exception;
+    public ArrayList<Kardex> listadoKardexFecha(int codProducto,Date fechaini,Date fechafin) throws Exception;
+              
 }
 
