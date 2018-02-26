@@ -22,7 +22,7 @@ import unachkardex.negocio.entidades.*;
 import unachkardex.negocio.impl.*;
 import unachkardex.accesodatos.*;
 
-public class FormListKardex extends Region {
+public class FormListKardex extends Region{
     private boolean RESIZE_BOTTOM;
     private boolean RESIZE_RIGHT;
 

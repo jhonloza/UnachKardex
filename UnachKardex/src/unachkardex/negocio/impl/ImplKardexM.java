@@ -16,7 +16,8 @@ import java.text.SimpleDateFormat;
  * @author Wen
  */
 public class ImplKardexM implements IKardexM{
-@Override
+    
+     @Override
     public ArrayList<Kardex> listadoKardexProducto(int codProducto,java.util.Date fechaini,java.util.Date fechafin) throws Exception {
         ArrayList<Kardex> lista = new ArrayList<>();
         String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
@@ -58,5 +59,5 @@ public class ImplKardexM implements IKardexM{
     }
 
 }
-   }
+   
 
