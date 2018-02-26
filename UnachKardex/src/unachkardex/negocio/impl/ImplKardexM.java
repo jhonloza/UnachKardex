@@ -13,8 +13,8 @@ import java.sql.*;
  *
  * @author Wen
  */
-public class ImplKardexM implements IKardexM{
-@Override
+//public class ImplKardexM implements IKardexM{
+//@Override
 //    public ArrayList<Kardex> listadoKardexProducto(int codProducto,Date fechaini,Date fechafin) throws Exception {
 //        ArrayList<Kardex> lista = new ArrayList<>();
 //        String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
@@ -24,11 +24,13 @@ public class ImplKardexM implements IKardexM{
 //        Connection conexion = null;
 //        ResultSet res = null;
 //        Kardex nKardex=null;
-//       String comandoSQL = "Select * From Kardex Where codProducto>"+String.valueOf(codProducto)+"and codProducto<"+String.valueOf(codProducto)+"and fechaEmision between"+String.valueOf(fechaini)+"and"+String.valueOf(fechafin);
+//       String comandoSQL = "Select * From Kardex Where codProducto>" +String.valueOf(codProducto)+ "and codProducto<"+String.valueOf(codProducto)+"and fechaEmision between"+String.valueOf(fechaini)+"and"+String.valueOf(fechafin);
 //        ArrayList<Parametro> listaParametro = new ArrayList<>();
-//        FacturaCompra facompra=null;
-//        IFacturaCompra compraDao=new ImplFacturaCompra();
-//        listaParametro.add(new Parametro(1, fecha));
+//         Producto prod=null;
+//        IProducto prodDao=new ImplProducto();
+//        listaParametro.add(new Parametro(1, codProducto));
+//           listaParametro.add(new Parametro(2, fechaini));
+//             listaParametro.add(new Parametro(3, fechafin));
 //        try {
 //            Class.forName(driver);
 //            conexion = DriverManager.getConnection(url, usuario, conraseña);
@@ -37,11 +39,13 @@ public class ImplKardexM implements IKardexM{
 //            res=prstd.executeQuery(comandoSQL);
 //            while(res.next()){
 //                nKardex= new Kardex();
-//                facompra=new FacturaCompra();
-//                nKardex.setcodigoFacturaCompra(res.getInt(1));
-//                facompra=compraDao.obtener(res.getInt(2));
-//                nKardex.setProvedor(facompra);
-//                nKardex.setFechaEmision(res.getDate(3));
+//                prod=new Producto();
+//                nKardex.setCodKardex(res.getInt(1));
+//                prod=prodDao.obtener(res.getInt(2));
+//                nKardex.setProducto(prod);
+//                nKardex.setfechaini(res.getDate(3));
+//                   nKardex.setfechafin(res.getDate(4));
+//                
 //                lista.add(nKardex);
 //            }
 //        } catch (Exception e) {
