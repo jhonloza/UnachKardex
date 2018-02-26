@@ -13,9 +13,9 @@ import java.sql.*;
  *
  * @author Wen
  */
-//public class ImplKardexM implements IKardexM{
-//    @Override
-//    public ArrayList<Kardex> listadoKardexFecha(int codFacturaCompra) throws Exception {
+public class ImplKardexM implements IKardexM{
+@Override
+//    public ArrayList<Kardex> listadoKardexProducto(int codProducto,Date fechaini,Date fechafin) throws Exception {
 //        ArrayList<Kardex> lista = new ArrayList<>();
 //        String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 //        String url = "jdbc:sqlserver://localhost:1433;databaseName=Proyecto";
@@ -24,7 +24,7 @@ import java.sql.*;
 //        Connection conexion = null;
 //        ResultSet res = null;
 //        Kardex nKardex=null;
-//       String comandoSQL = "Select * From Kardex Where codProducto>"+String.valueOf(codProducto)+"and codProducto<"+String.valueOf(codProducto)+"and fechaEmision between"+String.valueOf(fechaEmision)+"and"+String.valueOf(fechaEmision);
+//       String comandoSQL = "Select * From Kardex Where codProducto>"+String.valueOf(codProducto)+"and codProducto<"+String.valueOf(codProducto)+"and fechaEmision between"+String.valueOf(fechaini)+"and"+String.valueOf(fechafin);
 //        ArrayList<Parametro> listaParametro = new ArrayList<>();
 //        FacturaCompra facompra=null;
 //        IFacturaCompra compraDao=new ImplFacturaCompra();
@@ -51,6 +51,5 @@ import java.sql.*;
 //    }
 
 //}
-//    }
-    
+//   }
 
