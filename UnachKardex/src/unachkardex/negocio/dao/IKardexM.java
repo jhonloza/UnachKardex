@@ -12,5 +12,5 @@ import java.util.ArrayList;
  * @author Wen
  */
 public interface IKardexM {
-    //public ArrayList<Kardex> listadoKardexFecha(int codigoFacturaCompra) throws Exception;
+    public ArrayList<Kardex> listadoKardexFecha(int codigoFacturaCompra) throws Exception;
 }
