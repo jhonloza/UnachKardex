@@ -3,9 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package g3_subversion2.rnegocio.dao;
+package unachkardex.rnegocio.dao;
 
 import java.util.ArrayList;
+import unachkardex.rnegocio.entidades.*;
+import unachkardex.rnegocio.impl.*;
+import java.util.*;
 
 /**
  *
@@ -14,3 +17,4 @@ import java.util.ArrayList;
 public interface IKardexM {
     public ArrayList<Kardex> listadoKardexFecha(int codigoFacturaCompra) throws Exception;
 }
+
