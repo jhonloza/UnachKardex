@@ -24,7 +24,7 @@ import java.sql.*;
 //        Connection conexion = null;
 //        ResultSet res = null;
 //        Kardex nKardex=null;
-//        String comandoSQL = "Select codigoFacturaCompra,fecha , proveedor From FacturaCoompra Where codigoFacturaCompra="+String.valueOf(codigoFacturaCompra);
+//       String comandoSQL = "Select * From Kardex Where codProducto>"+String.valueOf(codProducto)+"and codProducto<"+String.valueOf(codProducto)+"and fechaEmision between"+String.valueOf(fechaEmision)+"and"+String.valueOf(fechaEmision);
 //        ArrayList<Parametro> listaParametro = new ArrayList<>();
 //        FacturaCompra facompra=null;
 //        IFacturaCompra compraDao=new ImplFacturaCompra();
