@@ -21,7 +21,7 @@ import unachkardex.negocio.entidades.*;
 import unachkardex.negocio.impl.*;
 import unachkardex.accesodatos.*;
 
-public class FormMProducto extends Application {
+public class FormMProducto{
 
     private Image pFondo;
     private BackgroundImage fondo;
@@ -50,8 +50,6 @@ public class FormMProducto extends Application {
     private GridPane pntPrincipal;
 
     private Producto produc;
-
-    @Override
 
     public void start(Stage primaryStage) throws Exception {
         pFondo = new Image("file:src\\unachkardex\\multimedia\\FondoSubVentanas.jpg");
@@ -214,9 +212,6 @@ public class FormMProducto extends Application {
             alerta.showAndWait();
 
         }
-    }
-    public static void main(String[] args) {
-        launch(args);
     }
     
     public void cargarCategorias() {

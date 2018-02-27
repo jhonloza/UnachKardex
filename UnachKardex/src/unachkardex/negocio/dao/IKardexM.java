@@ -9,13 +9,14 @@ import java.util.ArrayList;
 import unachkardex.negocio.entidades.*;
 import unachkardex.negocio.impl.*;
 import java.util.*;
-
+import java.text.*;
 /**
  *
  * @author Wen
  */
 public interface IKardexM {
-    public ArrayList<Kardex> listadoKardexFecha(int codProducto,Date fechaini,Date fechafin) throws Exception;
+    DateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+    public ArrayList<Kardex> listadoKardexFecha(int codProducto,String fechaini,String fechafin) throws Exception;
               
 }
 

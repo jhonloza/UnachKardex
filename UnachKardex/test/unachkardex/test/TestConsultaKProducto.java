@@ -21,7 +21,7 @@ public class TestConsultaKProducto {
         
         ArrayList<Kardex> conslpro = new ArrayList<>();
         try {
-            conslpro = ConsultaKProdDao.obtener(1);
+            conslpro = ConsultaKProdDao.listadoKardexProducto(1);
             for (Kardex kar : conslpro) {
                 System.out.println(kar.getCodKardex()+"   "+kar.getProducto().getNombre()+"   "+kar.getFechaEmision()+"   "+kar.getTipoTransaccion()+"   "+kar.getExistencias()+"   "+kar.getValorTotal()+"   "+kar.getCantEditable());
             }

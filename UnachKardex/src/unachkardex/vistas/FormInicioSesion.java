@@ -14,21 +14,17 @@ import javafx.beans.*;
 import javafx.collections.*;
 import javafx.geometry.*;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.*;
 import javafx.stage.*;
-import javafx.scene.image.*;
 import unachkardex.negocio.dao.*;
 import unachkardex.negocio.entidades.*;
 import unachkardex.negocio.impl.*;
 import unachkardex.accesodatos.*;
+import javafx.scene.image.*;
 
-public class FormListKardex extends Application{
-
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        
+public class FormInicioSesion {
+    private String [] IniciosSesionU={"administrador","sebas","wendy","andres","david"};
+    private String [] IniciosSesionP={"userpassword","sebas1","wendy1","andres1","david1"};
+     public FormInicioSesion() {
     }
-    public static void main(String[] args) {
-        launch(args);
-    }
+    
 }
