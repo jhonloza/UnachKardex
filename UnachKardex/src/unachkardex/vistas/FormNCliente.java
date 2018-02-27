@@ -94,6 +94,12 @@ public class FormNCliente{
         });
         btnLimpiar = new Button("Limpiar");
         btnLimpiar.setFont(Font.font("Berlin Sans FB Demi", 20));
+        btnLimpiar.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                btnLimpiarEventHandler(event);
+            }
+        });
         //INGRESO EN PANELES
         //SUPERIOR
         pnlced = new HBox(20);
@@ -139,8 +145,15 @@ public class FormNCliente{
         pntPrincipal.setBackground(new Background(fondo));
         pntPrincipal.setStyle("-fx-padding: 10; -fx-border-color: mediumblue; -fx-border-width: 2px");
     }
-    
-    
+    public void btnLimpiarEventHandler(ActionEvent event){
+      cedula.setText("");
+      nombres.setText("");
+      apellidos.setText("");
+      fechaNacimiento.setText("");
+      direccion.setText("");
+      telefono.setText("");
+      email.setText("");
+    }
     public void btnIngresarEventHandler(ActionEvent event){
         ICliente clienteDao=new ImplCliente();
         try {
