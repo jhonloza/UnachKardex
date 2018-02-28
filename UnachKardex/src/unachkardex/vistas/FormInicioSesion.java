@@ -20,7 +20,7 @@ import unachkardex.negocio.impl.*;
 import unachkardex.accesodatos.*;
 import javafx.scene.image.*;
 
-public class FormInicioSesion extends Application {
+public class FormInicioSesion  {
 
     //Presentacion
     private Image pFondo;
@@ -52,7 +52,8 @@ public class FormInicioSesion extends Application {
     private String[] IniciosSesionU = {"administrador", "sebas", "wendy", "andres", "david"};
     private String[] IniciosSesionP = {"userpassword", "sebas1", "wendy1", "andres1", "david1"};
 
-    public void start(Stage primaryStage) {
+    public FormInicioSesion() {
+    
         pFondo = new Image("file:src\\unachkardex\\multimedia\\FondoSubVentanas.jpg");
         fondo = new BackgroundImage(pFondo, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         //Presentacion
@@ -107,15 +108,7 @@ public class FormInicioSesion extends Application {
         pntPrincipal.setPadding(new Insets(10));
         pntPrincipal.setBackground(new Background(fondo));
         pntPrincipal.setStyle("-fx-padding: 10; -fx-border-color: mediumblue; -fx-border-width: 2px");
-        Scene scene = new Scene(pntPrincipal, 640, 480);
-        primaryStage.setTitle("INICIO DE SESION");
-        primaryStage.setScene(scene);
-        primaryStage.setMaxHeight(480);
-        primaryStage.setMinHeight(480);
-        primaryStage.setMaxWidth(640);
-        primaryStage.setMaxWidth(640);
-        primaryStage.show();
-
+    
         //Acciones Botones
 //        btnAccion.setOnAction(new EventHandler<ActionEvent>() {
 //            @Override
@@ -131,8 +124,9 @@ public class FormInicioSesion extends Application {
 //        });
     }
 
-    public static void main(String[] args) {
-        launch(args);
+    public Node getPntPrincipal() {
+        return pntPrincipal;
     }
+
 
 }

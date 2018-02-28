@@ -143,7 +143,17 @@ public class FormMenuPrincipal extends Application {
         });
         //Acciones
 //       Menu Inicio
+        iniciarSesion.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Pane usuario = new Pane();
+                usuario.getChildren().add(nInicioEventHandler(event));
+                usuario.setPadding(new Insets(5));
+                escritorio.getChildren().add(usuario);
+            }
+        });
 //        iniciarSesion
+
 //        salir
         salir.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -420,7 +430,32 @@ public class FormMenuPrincipal extends Application {
     //Metodos de las Acciones
 //       Menu Inicio
 //        iniciarSesion
+    public VentanaInterna nInicioEventHandler(ActionEvent event) {
+        BorderPane NuevoI = new BorderPane();
+        Label titulo = new Label("INICIO DE SESION");
+        titulo.setFont(Font.font("Berlin Sans FB Demi", 20));
+        titulo.setTextFill(Color.AZURE);
+        Button cerrar = new Button("X");
+        cerrar.setFont(Font.font("Arial Black", 18));
+        cerrar.setTextFill(Color.CYAN);
+        //Barra de Titulo subVentana
+        BarraDeTitulo bTitulo = new BarraDeTitulo(titulo, cerrar);
+        NuevoI.setTop(bTitulo.getBarra());
+        //Interior de la subVentana
+        FormInicioSesion clienteN = new FormInicioSesion();
+        NuevoI.setCenter(clienteN.getPntPrincipal());
+        //Creacion de Ventana interna
+        VentanaInterna ni = new VentanaInterna();
+        ni.setRoot(NuevoI);
+        ni.makeDragable(bTitulo.getBarra());
+        ni.makeDragable(titulo);
+        ni.makeResizable(20);
+        ni.makeFocusable();
+        ni.setCloseButton(cerrar);
+        return ni;
+    }
 //        salir
+
     public void salirEventHandler(ActionEvent event) {
         System.exit(0);
     }
@@ -976,10 +1011,6 @@ public class FormMenuPrincipal extends Application {
         nFacturaV.setCloseButton(cerrar);
         return nFacturaV;
     }
-//        modificarVenta
-//        eliminarVenta
-//        buscarVenta
-//        listadoVenta
 
     public VentanaInterna lstVentaEventHandler(ActionEvent event) {
         BorderPane listadoVentas = new BorderPane();
@@ -1032,10 +1063,6 @@ public class FormMenuPrincipal extends Application {
         nfacturaC.setCloseButton(cerrar);
         return nfacturaC;
     }
-//        modificarCompra
-//        eliminarCompra
-//        buscarCompra
-//        listadoCompra
 
     public VentanaInterna lstCompraEventHandler(ActionEvent event) {
         BorderPane lstCompras = new BorderPane();
