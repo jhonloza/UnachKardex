@@ -19,7 +19,7 @@ import java.text.*;
 public class ImplKardexM implements IKardexM {
 
     @Override
-    public ArrayList<Kardex> listadoKardexFecha(int codProducto, String fechaini, String fechafin) throws Exception {
+    public ArrayList<Kardex> listadoKardexFecha(int codProducto, String mes, String anio) throws Exception {
         ArrayList<Kardex> lista = new ArrayList<>();
         String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
         String url = "jdbc:sqlserver://localhost:1433;databaseName=Proyecto";
@@ -28,7 +28,7 @@ public class ImplKardexM implements IKardexM {
         Connection conexion = null;
         ResultSet res = null;
         Kardex nKardex = null;
-        String comandoSQL = "SELECT * FROM Kardex where codProducto = " + codProducto + " and (fechaEmision between '" + fechaini + "' and '" + fechafin + "')";
+        String comandoSQL = "select * from Kardex where codProducto=1 and (MONTH(fechaEmision)="+mes+" and YEAR(fechaEmision)="+anio+")";
         Producto prod = null;
         IProducto prodDao = new ImplProducto();
         try {

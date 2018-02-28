@@ -19,7 +19,7 @@ public class TestKardexFecha {
         IKardexM kardexDao=new ImplKardexM();
         ArrayList<Kardex> lista=new ArrayList<>();
         try {
-            lista=kardexDao.listadoKardexFecha(1, "2016-08-01", "2016-08-30");
+            lista=kardexDao.listadoKardexFecha(1, "08", "2016");
             for (Kardex k: lista){
                 System.out.println(k.getCodKardex()+"  "+k.getProducto().getNombre()+"  "+k.getFechaEmision()+"  "+k.getTipoTransaccion()+"  "+k.getExistencias()+"  "+k.getValorTotal()+"  "+k.getCantEditable()+"  ");
             }

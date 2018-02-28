@@ -16,7 +16,7 @@ import java.text.*;
  */
 public interface IKardexM {
     DateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
-    public ArrayList<Kardex> listadoKardexFecha(int codProducto,String fechaini,String fechafin) throws Exception;
+    public ArrayList<Kardex> listadoKardexFecha(int codProducto,String mes,String anio) throws Exception;
               
 }
 

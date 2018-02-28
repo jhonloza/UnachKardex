@@ -449,7 +449,7 @@ public class FormNFacturaCompra {
             if (tfCodigo.getText() != null && tfCantidad.getText() != null && tfPrecioU.getText() != null && tfprecioT.getText() != null) {
                 listaCodigo.add(Integer.parseInt(tfCodigo.getText()));
                 produc = prodDao.obtener(Integer.parseInt(tfCodigo.getText()));
-                listaProdF.add(produc);;
+                listaProdF.add(produc);
                 listaCantidad.add(Integer.parseInt(tfCantidad.getText()));
                 listaPrecioU.add(Double.parseDouble(tfPrecioU.getText()));
                 listaPrecioT.add(Double.parseDouble(tfprecioT.getText()));
@@ -517,11 +517,6 @@ public class FormNFacturaCompra {
         Kardex nKardex = null;
         IProveedor proveedorDao = new ImplProveedor();
         Proveedor nProveedor = new Proveedor();
-        DateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            nProveedor = proveedorDao.obtener(cedula.getText());
-        } catch (Exception e) {
-        }
         IFacturaCompra factDao = new ImplFacturaCompra();
         FacturaCompra nFactura = new FacturaCompra();
         IProducto producDao = new ImplProducto();
@@ -529,6 +524,12 @@ public class FormNFacturaCompra {
         IDetalleCompra compraDao = new ImplDetalleCompra();
         IConsultaKProducto consultaKDao = new ImplConsultaKProducto();
         DetalleCompra nCompra = null;
+        DateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            nProveedor = proveedorDao.obtener(cedula.getText());
+        } catch (Exception e) {
+        }
+        
         try {
             nFactura.setCodFacturaCompra(Integer.parseInt(tfCodFactura.getText()));
             try {

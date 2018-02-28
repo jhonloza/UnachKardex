@@ -462,7 +462,7 @@ public class FormNFacturaVenta {
             if (tfCodigo.getText() != null && tfCantidad.getText() != null && tfPrecioU.getText() != null && tfprecioT.getText() != null) {
                 listaCodigo.add(Integer.parseInt(tfCodigo.getText()));
                 produc = prodDao.obtener(Integer.parseInt(tfCodigo.getText()));
-                listaProdF.add(produc);;
+                listaProdF.add(produc);
                 listaCantidad.add(Integer.parseInt(tfCantidad.getText()));
                 listaPrecioU.add(Double.parseDouble(tfPrecioU.getText()));
                 listaPrecioT.add(Double.parseDouble(tfprecioT.getText()));
@@ -480,7 +480,6 @@ public class FormNFacturaVenta {
                 alerta.setContentText("Error campos Vacios en factura! ");
                 alerta.showAndWait();
             }
-            vItems.getChildren().add(items);
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
@@ -526,11 +525,6 @@ public class FormNFacturaVenta {
         Kardex nKardex = null;
         ICliente clientedorDao = new ImplCliente();
         Cliente nCliente = new Cliente();
-        DateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            nCliente = clientedorDao.obtener(cedula.getText());
-        } catch (Exception e) {
-        }
         IFacturaVenta factDao = new ImplFacturaVenta();
         FacturaVenta nFactura = new FacturaVenta();
         IProducto producDao = new ImplProducto();
@@ -538,6 +532,12 @@ public class FormNFacturaVenta {
         IDetalleVenta ventaDao = new ImplDetalleVenta();
         IConsultaKProducto consultaKDao = new ImplConsultaKProducto();
         DetalleVenta nVenta = null;
+        DateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            nCliente = clientedorDao.obtener(cedula.getText());
+        } catch (Exception e) {
+        }
+        
         try {
             nFactura.setCodFacturaVenta(Integer.parseInt(tfCodFactura.getText()));
             try {
@@ -552,7 +552,7 @@ public class FormNFacturaVenta {
             }
             for (int i = 0; i < listaCodigo.size(); i++) {
                 productoTemp = producDao.obtener(listaCodigo.get(i));
-                nVenta = new DetalleVenta((cargarDetFact() + 1 + i), productoTemp, nFactura, listaCantidad.get(i), listaPrecioT.get(i));
+                nVenta = new DetalleVenta((cargarDetFact() + 2 + i), productoTemp, nFactura, listaCantidad.get(i), listaPrecioT.get(i));
                 if (ventaDao.ingresar(nVenta) > 0) {
                     System.out.println("Ingreso de Detalle V Correcto!");
                 } else {
@@ -562,16 +562,16 @@ public class FormNFacturaVenta {
                 kardexBuscado = consultaKDao.listadoKardexProducto(productoTemp.getCodProducto());
                 System.out.println("tamaño de kardex por producto: "+kardexBuscado.size());
                 Kardex kardexTemp = null;
-                if (!kardexBuscado.isEmpty()) {
+                if (kardexBuscado.isEmpty()) {
+                    nKardex = new Kardex(1, productoTemp, nFactura.getFecha(), tipoTransaccion, listaCantidad.get(i), listaCantidad.get(i), listaPrecioT.get(i));
+                } else {
                     Kardex ktemp = new Kardex();
                     ktemp = kardexBuscado.get(kardexBuscado.size() - 1);
                     System.out.println("Kardex final: " + ktemp.getCodKardex() + ktemp.getProducto().getNombre());
                     kardexTemp = new Kardex();
                     kardexTemp = ktemp;
-                    nKardex = new Kardex((ktemp.getCodKardex() + 1), productoTemp, nFactura.getFecha(), tipoTransaccion, kardexTemp.getExistencias()+(listaCantidad.get(i) * (-1)), listaCantidad.get(i)*-1, (-1*listaPrecioT.get(i)));
-                } else {
-                    kardexTemp = new Kardex(1, productoTemp, nFactura.getFecha(), tipoTransaccion, 0, 0, totalA);
-                }
+                    nKardex = new Kardex((ktemp.getCodKardex() + 1), productoTemp, nFactura.getFecha(), tipoTransaccion, kardexTemp.getExistencias() +(listaCantidad.get(i)), listaCantidad.get(i), (listaPrecioT.get(i)));
+                    }
                 if (kardexDao.insertar(nKardex) > 0) {
                     System.out.println("Ingreso de Kardex Correcto!");
                 } else {
@@ -590,6 +590,7 @@ public class FormNFacturaVenta {
             alerta.setContentText("Error: " + e.getMessage());
             alerta.showAndWait();
         }
+
     }
 
     public void btnLimpiarEventHandler(ActionEvent event) {
