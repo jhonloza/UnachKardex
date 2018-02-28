@@ -265,6 +265,15 @@ public class FormMenuPrincipal extends Application {
             }
         });
 //        modificarProducto
+        modificarProducto.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Pane modificarProducto = new Pane();
+                modificarProducto.getChildren().add(mProductoEventHandler(event));
+                modificarProducto.setPadding(new Insets(5));
+                escritorio.getChildren().add(modificarProducto);
+            }
+        });
 //        eliminarProducto
         eliminarProducto.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -311,7 +320,7 @@ public class FormMenuPrincipal extends Application {
         modificarCategoria.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-           Pane modificarCategorias = new Pane();
+                Pane modificarCategorias = new Pane();
                 modificarCategorias.getChildren().add(mCategEventHandler(event));
                 modificarCategorias.setPadding(new Insets(5));
                 escritorio.getChildren().add(modificarCategorias);
@@ -420,7 +429,7 @@ public class FormMenuPrincipal extends Application {
 
     public VentanaInterna nClienteEventHandler(ActionEvent event) {
         BorderPane clienteNuevo = new BorderPane();
-        Label titulo = new Label("Nuevo Cliente");
+        Label titulo = new Label("NUEVO CLIENTE");
         titulo.setFont(Font.font("Berlin Sans FB Demi", 20));
         titulo.setTextFill(Color.AZURE);
         Button cerrar = new Button("X");
@@ -446,7 +455,7 @@ public class FormMenuPrincipal extends Application {
 
     public VentanaInterna mClienteEventHandler(ActionEvent event) {
         BorderPane ClienteModificar = new BorderPane();
-        Label titulo = new Label("Modificar Cliente");
+        Label titulo = new Label("MODIFICAR CLIENTE");
         titulo.setFont(Font.font("Berlin Sans FB Demi", 20));
         titulo.setTextFill(Color.AZURE);
         Button cerrar = new Button("X");
@@ -472,7 +481,7 @@ public class FormMenuPrincipal extends Application {
 
     public VentanaInterna eClienteEventHandler(ActionEvent event) {
         BorderPane ClienteEliminar = new BorderPane();
-        Label titulo = new Label("Eliminar Cliente");
+        Label titulo = new Label("ELIMINAR CLIENTE");
         titulo.setFont(Font.font("Berlin Sans FB Demi", 20));
         titulo.setTextFill(Color.AZURE);
         Button cerrar = new Button("X");
@@ -498,7 +507,7 @@ public class FormMenuPrincipal extends Application {
 
     public VentanaInterna bClienteEventHandler(ActionEvent event) {
         BorderPane ClienteBuscar = new BorderPane();
-        Label titulo = new Label("Buscar Cliente");
+        Label titulo = new Label("BUSCAR CLIENTE");
         titulo.setFont(Font.font("Berlin Sans FB Demi", 20));
         titulo.setTextFill(Color.AZURE);
         Button cerrar = new Button("X");
@@ -525,7 +534,7 @@ public class FormMenuPrincipal extends Application {
 //        listadoClientes
     public VentanaInterna lstClienteEventHandler(ActionEvent event) {
         BorderPane listadoClientes = new BorderPane();
-        Label titulo = new Label("Nuevo Cliente");
+        Label titulo = new Label("LISTA CLIENTES");
         titulo.setFont(Font.font("Berlin Sans FB Demi", 20));
         titulo.setTextFill(Color.AZURE);
         Button cerrar = new Button("X");
@@ -552,7 +561,7 @@ public class FormMenuPrincipal extends Application {
 
     public VentanaInterna nProveedorEventHandler(ActionEvent event) {
         BorderPane ProveedorNuevo = new BorderPane();
-        Label titulo = new Label("Nuevo Proveedor");
+        Label titulo = new Label("NUEVO PROVEEDOR");
         titulo.setFont(Font.font("Berlin Sans FB Demi", 20));
         titulo.setTextFill(Color.AZURE);
         Button cerrar = new Button("X");
@@ -578,7 +587,7 @@ public class FormMenuPrincipal extends Application {
 
     public VentanaInterna mProveedorEventHandler(ActionEvent event) {
         BorderPane ProveedorModificar = new BorderPane();
-        Label titulo = new Label("Modifica Proveedor");
+        Label titulo = new Label("MODIFICAR PROVEEDOR");
         titulo.setFont(Font.font("Berlin Sans FB Demi", 20));
         titulo.setTextFill(Color.AZURE);
         Button cerrar = new Button("X");
@@ -604,7 +613,7 @@ public class FormMenuPrincipal extends Application {
 
     public VentanaInterna eProveedorEventHandler(ActionEvent event) {
         BorderPane ProveedorEliminar = new BorderPane();
-        Label titulo = new Label("Eliminar Proveedor");
+        Label titulo = new Label("ELIMINAR PROVEEDOR");
         titulo.setFont(Font.font("Berlin Sans FB Demi", 20));
         titulo.setTextFill(Color.AZURE);
         Button cerrar = new Button("X");
@@ -630,7 +639,7 @@ public class FormMenuPrincipal extends Application {
 
     public VentanaInterna bProveedorEventHandler(ActionEvent event) {
         BorderPane ProveedorBuscar = new BorderPane();
-        Label titulo = new Label("Buscar Proveedor");
+        Label titulo = new Label("BUSCAR PROVEEDOR");
         titulo.setFont(Font.font("Berlin Sans FB Demi", 20));
         titulo.setTextFill(Color.AZURE);
         Button cerrar = new Button("X");
@@ -656,7 +665,7 @@ public class FormMenuPrincipal extends Application {
 
     public VentanaInterna lstProveedorEventHandler(ActionEvent event) {
         BorderPane listadoProveedores = new BorderPane();
-        Label titulo = new Label("Nueva Categoria");
+        Label titulo = new Label("LISTA PROVEEDORES");
         titulo.setFont(Font.font("Berlin Sans FB Demi", 20));
         titulo.setTextFill(Color.AZURE);
         Button cerrar = new Button("X");
@@ -683,7 +692,7 @@ public class FormMenuPrincipal extends Application {
 
     public VentanaInterna nProductoEventHandler(ActionEvent event) {
         BorderPane productoNuevo = new BorderPane();
-        Label titulo = new Label("Nuevo Producto ");
+        Label titulo = new Label("NUEVO PRODUCTO");
         titulo.setFont(Font.font("Berlin Sans FB Demi", 20));
         titulo.setTextFill(Color.AZURE);
         Button cerrar = new Button("X");
@@ -706,11 +715,36 @@ public class FormMenuPrincipal extends Application {
         return nProducto;
     }
 //        modificarProducto
+
+    public VentanaInterna mProductoEventHandler(ActionEvent event) {
+        BorderPane modProductos = new BorderPane();
+        Label titulo = new Label("MODIFICAR PRODUCTO");
+        titulo.setFont(Font.font("Berlin Sans FB Demi", 20));
+        titulo.setTextFill(Color.AZURE);
+        Button cerrar = new Button("X");
+        cerrar.setFont(Font.font("Arial Black", 18));
+        cerrar.setTextFill(Color.CYAN);
+        //Barra de Titulo subVentana
+        BarraDeTitulo bTitulo = new BarraDeTitulo(titulo, cerrar);
+        modProductos.setTop(bTitulo.getBarra());
+        //Interior de la subVentana
+        FormMProducto productosM = new FormMProducto();
+        modProductos.setCenter(productosM.getPntPrincipal());
+        //Creacion de Ventana interna
+        VentanaInterna MDProductos = new VentanaInterna();
+        MDProductos.setRoot(modProductos);
+        MDProductos.makeDragable(bTitulo.getBarra());
+        MDProductos.makeDragable(titulo);
+        MDProductos.makeResizable(20);
+        MDProductos.makeFocusable();
+        MDProductos.setCloseButton(cerrar);
+        return MDProductos;
+    }
 //        eliminarProducto
 
     public VentanaInterna eliProductoEventHandler(ActionEvent event) {
         BorderPane elimProductos = new BorderPane();
-        Label titulo = new Label("Eliminar Categoria");
+        Label titulo = new Label("ELIMINAR PRODUCTO");
         titulo.setFont(Font.font("Berlin Sans FB Demi", 20));
         titulo.setTextFill(Color.AZURE);
         Button cerrar = new Button("X");
@@ -736,7 +770,7 @@ public class FormMenuPrincipal extends Application {
 
     public VentanaInterna bsaProductoEventHandler(ActionEvent event) {
         BorderPane busquedaProductos = new BorderPane();
-        Label titulo = new Label("Nueva Producto");
+        Label titulo = new Label("NUEVO PRODUCTO");
         titulo.setFont(Font.font("Berlin Sans FB Demi", 20));
         titulo.setTextFill(Color.AZURE);
         Button cerrar = new Button("X");
@@ -762,7 +796,7 @@ public class FormMenuPrincipal extends Application {
 
     public VentanaInterna lstProductoEventHandler(ActionEvent event) {
         BorderPane listadoProductos = new BorderPane();
-        Label titulo = new Label("Lista de Producto");
+        Label titulo = new Label("LISTA DE PRODUCTOS");
         titulo.setFont(Font.font("Berlin Sans FB Demi", 20));
         titulo.setTextFill(Color.AZURE);
         Button cerrar = new Button("X");
@@ -789,7 +823,7 @@ public class FormMenuPrincipal extends Application {
 
     public VentanaInterna nCategEventHandler(ActionEvent event) {
         BorderPane categNueva = new BorderPane();
-        Label titulo = new Label("Nueva Categoria");
+        Label titulo = new Label("NUEVA CATEGORIA");
         titulo.setFont(Font.font("Berlin Sans FB Demi", 20));
         titulo.setTextFill(Color.AZURE);
         Button cerrar = new Button("X");
@@ -812,9 +846,10 @@ public class FormMenuPrincipal extends Application {
         return nCateg;
     }
 //        modificarCategoria
+
     public VentanaInterna mCategEventHandler(ActionEvent event) {
         BorderPane modiCategorias = new BorderPane();
-        Label titulo = new Label("Modificar Categoria");
+        Label titulo = new Label("MODIFICAR CATEGORIA");
         titulo.setFont(Font.font("Berlin Sans FB Demi", 20));
         titulo.setTextFill(Color.AZURE);
         Button cerrar = new Button("X");
@@ -840,7 +875,7 @@ public class FormMenuPrincipal extends Application {
 
     public VentanaInterna eCategEventHandler(ActionEvent event) {
         BorderPane eliCategorias = new BorderPane();
-        Label titulo = new Label("Eliminar Categoria");
+        Label titulo = new Label("ELIMINAR CATEGORIA");
         titulo.setFont(Font.font("Berlin Sans FB Demi", 20));
         titulo.setTextFill(Color.AZURE);
         Button cerrar = new Button("X");
@@ -866,7 +901,7 @@ public class FormMenuPrincipal extends Application {
 
     public VentanaInterna bCategEventHandler(ActionEvent event) {
         BorderPane buscarCategorias = new BorderPane();
-        Label titulo = new Label("Buscar Categoria");
+        Label titulo = new Label("BUSCAR CATEGORIA");
         titulo.setFont(Font.font("Berlin Sans FB Demi", 20));
         titulo.setTextFill(Color.AZURE);
         Button cerrar = new Button("X");
@@ -892,7 +927,7 @@ public class FormMenuPrincipal extends Application {
 //        listadoCategoria
     public VentanaInterna lstCategEventHandler(ActionEvent event) {
         BorderPane listadoCategorias = new BorderPane();
-        Label titulo = new Label("Listar Categoria");
+        Label titulo = new Label("LLISTA CATEGORIA");
         titulo.setFont(Font.font("Berlin Sans FB Demi", 20));
         titulo.setTextFill(Color.AZURE);
         Button cerrar = new Button("X");
@@ -919,7 +954,7 @@ public class FormMenuPrincipal extends Application {
 //        nuevoVenta
     public VentanaInterna nVentaEventHandler(ActionEvent event) {
         BorderPane ventaNueva = new BorderPane();
-        Label titulo = new Label("Nueva Venta");
+        Label titulo = new Label("NUEVA VENTA");
         titulo.setFont(Font.font("Berlin Sans FB Demi", 20));
         titulo.setTextFill(Color.AZURE);
         Button cerrar = new Button("X");
@@ -948,7 +983,7 @@ public class FormMenuPrincipal extends Application {
 
     public VentanaInterna lstVentaEventHandler(ActionEvent event) {
         BorderPane listadoVentas = new BorderPane();
-        Label titulo = new Label("Nueva Categoria");
+        Label titulo = new Label("LISTA CATEGORIA");
         titulo.setFont(Font.font("Berlin Sans FB Demi", 20));
         titulo.setTextFill(Color.AZURE);
         Button cerrar = new Button("X");
@@ -975,7 +1010,7 @@ public class FormMenuPrincipal extends Application {
 
     public VentanaInterna nCompraEventHandler(ActionEvent event) {
         BorderPane compraNueva = new BorderPane();
-        Label titulo = new Label("Nueva Compra");
+        Label titulo = new Label("NUEVA COMPRA");
         titulo.setFont(Font.font("Berlin Sans FB Demi", 20));
         titulo.setTextFill(Color.AZURE);
         Button cerrar = new Button("X");
@@ -1004,7 +1039,7 @@ public class FormMenuPrincipal extends Application {
 
     public VentanaInterna lstCompraEventHandler(ActionEvent event) {
         BorderPane lstCompras = new BorderPane();
-        Label titulo = new Label("Listar Compra");
+        Label titulo = new Label("LISTA COMPRAS");
         titulo.setFont(Font.font("Berlin Sans FB Demi", 20));
         titulo.setTextFill(Color.AZURE);
         Button cerrar = new Button("X");

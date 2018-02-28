@@ -21,7 +21,7 @@ import unachkardex.negocio.entidades.*;
 import unachkardex.negocio.impl.*;
 import unachkardex.accesodatos.*;
 
-public class FormMProducto{
+public class FormMProducto {
 
     private Image pFondo;
     private BackgroundImage fondo;
@@ -40,7 +40,7 @@ public class FormMProducto{
     private ObservableList<Categoria> items = FXCollections.observableArrayList();
     private ArrayList<Categoria> listCategorias;
     private Button btnModificar;
-    private Button btnBuscar;    
+    private Button btnBuscar;
     private Button btnLimpiar;
     private VBox pnlbuscar;
     private VBox pnlProducto;
@@ -51,14 +51,13 @@ public class FormMProducto{
 
     private Producto produc;
 
-    public void start(Stage primaryStage) throws Exception {
+    public FormMProducto() {
         pFondo = new Image("file:src\\unachkardex\\multimedia\\FondoSubVentanas.jpg");
         fondo = new BackgroundImage(pFondo, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         txtCodigo = new Label("Codigo");
         txtCodigo.setFont(Font.font("Berlin Sans FB Demi", 20));
         codigo = new TextField("");
         codigo = new TextField();
-//        codigo.setText(String.valueOf(cargarProd() + 1));
         txtNombre = new Label("Nombre");
         txtNombre.setFont(Font.font("Berlin Sans FB Demi", 20));
         nombre = new TextField("");
@@ -83,7 +82,7 @@ public class FormMProducto{
         descrCategoria.setFont(Font.font("Berlin Sans FB Demi", 14));
         descrCategoria.setTextFill(Color.AZURE);
         descrCategoria.setStyle("-fx-border-color: mediumblue; -fx-border-width: 2px");
-        btnModificar = new Button("Aceptar");
+        btnModificar = new Button("Modificar");
         btnModificar.setFont(Font.font("Berlin Sans FB Demi", 20));
         btnModificar.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -142,21 +141,11 @@ public class FormMProducto{
         pntPrincipal.setBackground(new Background(fondo));
         pntPrincipal.setStyle("-fx-padding: 10; -fx-border-color: mediumblue; -fx-border-width: 2px");
 
-        Scene scene = new Scene(pntPrincipal, 640, 480);
-        primaryStage.setTitle("Eliminar Proveedor");
-        primaryStage.setScene(scene);
-        primaryStage.setMaxHeight(480);
-        primaryStage.setMinHeight(480);
-        primaryStage.setMaxWidth(640);
-        primaryStage.setMaxWidth(640);
-        primaryStage.show();
+
 
     }
 
-//    public Node getPantallaP() {
-//        return pntPrincipal;
-//    }
-
+    
     private void btnLimpiarEventHandler(ActionEvent event) {
 //        codigo.setText(String.valueOf(cargarProd() + 1));
 //        nombre.setText("");
@@ -198,12 +187,12 @@ public class FormMProducto{
 
     public void btnBuscarEventHandler(ActionEvent event) {
         IProducto proDao = new ImplProducto();
-        Producto prove = new Producto();
+        produc = new Producto();
         try {
-            prove = proDao.obtener(Integer.parseInt(codigo.getText()));
-            descrCategoria.setText(String.valueOf(prove.getCategoria()));
-            nombre.setText(prove.getNombre());
-            precio.setText(String.valueOf(prove.getPrecio()));
+            produc = proDao.obtener(Integer.parseInt(codigo.getText()));
+            cbxCategoria.setValue(produc.getCategoria()); 
+            nombre.setText(produc.getNombre());
+            precio.setText(String.valueOf(produc.getPrecio()));
         } catch (Exception e) {
             Alert alerta = new Alert(Alert.AlertType.ERROR);
             alerta.setTitle("ERROR");
@@ -213,7 +202,7 @@ public class FormMProducto{
 
         }
     }
-    
+
     public void cargarCategorias() {
         listCategorias = new ArrayList<>();
         ICategoria categDao = new ImplCategoria();
@@ -229,7 +218,11 @@ public class FormMProducto{
             alerta.setContentText("Error al cargar Categorias: " + e.getMessage());
             alerta.showAndWait();
         }
-        
+
     }
 
+    public Node getPntPrincipal() {
+        return pntPrincipal;
+    }
+    
 }
