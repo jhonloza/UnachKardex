@@ -17,7 +17,7 @@ public class ImplConsultaKProducto implements IConsultaKProducto {
     public ArrayList<Kardex> listadoKardexProducto(int codProducto) throws Exception {
         ArrayList<Kardex> lista = new ArrayList<>();
         String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-        String url = "jdbc:sqlserver://192.168.100.17:1433;databaseName=Proyecto";
+        String url = "jdbc:sqlserver://192.168.10.5:1433;databaseName=Proyecto";
         String usuario = "kardex2018";
         String conraseña = "123";
         Connection conexion = null;

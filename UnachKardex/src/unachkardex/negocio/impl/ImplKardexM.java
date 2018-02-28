@@ -22,13 +22,13 @@ public class ImplKardexM implements IKardexM {
     public ArrayList<Kardex> listadoKardexFecha(int codProducto, String mes, String anio) throws Exception {
         ArrayList<Kardex> lista = new ArrayList<>();
         String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-        String url = "jdbc:sqlserver://localhost:1433;databaseName=Proyecto";
+        String url = "jdbc:sqlserver://192.168.10.5:1433;databaseName=Proyecto";
         String usuario = "kardex2018";
         String conraseña = "123";
         Connection conexion = null;
         ResultSet res = null;
         Kardex nKardex = null;
-        String comandoSQL = "select * from Kardex where codProducto=1 and (MONTH(fechaEmision)="+mes+" and YEAR(fechaEmision)="+anio+")";
+        String comandoSQL = "select * from Kardex where codProducto="+codProducto+" and (MONTH(fechaEmision)="+mes+" and YEAR(fechaEmision)="+anio+")";
         Producto prod = null;
         IProducto prodDao = new ImplProducto();
         try {
