@@ -5,9 +5,9 @@ import java.util.*;
 
 public class Conexion {
     String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-    String url = "jdbc:sqlserver://192.168.100.15:1433;databaseName=Proyecto";
+    String url = "jdbc:sqlserver://localhost:1433;databaseName=Proyecto";
     String usuario = "kardex2018";
-    String conraseña = "kardex2018";
+    String conraseña = "123";
     Connection conexion = null;
 
     public void conectar() {

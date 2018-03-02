@@ -22,7 +22,7 @@ public class ImplKardexM implements IKardexM {
     public ArrayList<Kardex> listadoKardexFecha(int codProducto, String mes, String anio) throws Exception {
         ArrayList<Kardex> lista = new ArrayList<>();
         String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-        String url = "jdbc:sqlserver://192.168.10.5:1433;databaseName=Proyecto";
+        String url = "jdbc:sqlserver://localhost:1433;databaseName=Proyecto";
         String usuario = "kardex2018";
         String conraseña = "123";
         Connection conexion = null;
