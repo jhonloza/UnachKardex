@@ -417,6 +417,15 @@ public class FormMenuPrincipal extends Application {
         });
 //       Menu kardex
 //        kardexMensual
+    kardexMensual.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Pane kardex = new Pane();
+                kardex.getChildren().add(kardexEventHandler(event));
+                kardex.setPadding(new Insets(5));
+                escritorio.getChildren().add(kardex);
+            }
+        });
 //        kardexAnual
     }
 
@@ -1091,5 +1100,29 @@ public class FormMenuPrincipal extends Application {
     }
 //       Menu kardex
 //        kardexMensual
+    public VentanaInterna kardexEventHandler(ActionEvent event){
+        BorderPane kardex = new BorderPane();
+        Label titulo = new Label("KARDEX MENSUAL");
+        titulo.setFont(Font.font("Berlin Sans FB Demi", 20));
+        titulo.setTextFill(Color.AZURE);
+        Button cerrar = new Button("X");
+        cerrar.setFont(Font.font("Arial Black", 18));
+        cerrar.setTextFill(Color.CYAN);
+        //Barra de Titulo subVentana
+        BarraDeTitulo bTitulo = new BarraDeTitulo(titulo, cerrar);
+        kardex.setTop(bTitulo.getBarra());
+        //Interior de la subVentana
+        FormListKardex KardexM = new FormListKardex();
+        kardex.setCenter(KardexM.getPnlPrincipal());
+        //Creacion de Ventana interna
+        VentanaInterna lstFactCompras = new VentanaInterna();
+        lstFactCompras.setRoot(kardex);
+        lstFactCompras.makeDragable(bTitulo.getBarra());
+        lstFactCompras.makeDragable(titulo);
+        lstFactCompras.makeResizable(20);
+        lstFactCompras.makeFocusable();
+        lstFactCompras.setCloseButton(cerrar);
+        return lstFactCompras;
+    }
 //        kardexAnual
 }

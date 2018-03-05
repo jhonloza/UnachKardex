@@ -1,4 +1,3 @@
-
 package unachkardex.vistas;
 
 import javafx.application.*;
@@ -23,10 +22,11 @@ import unachkardex.negocio.entidades.*;
 import unachkardex.negocio.impl.*;
 import unachkardex.accesodatos.*;
 
-public class FormListKardex extends Application{
-private Label lblProducto;
-private Label lblCodigo;
-private Label codigo;
+public class FormListKardex{
+
+    private Label lblProducto;
+    private Label lblCodigo;
+    private Label codigo;
     private Label lblFechaI;
     private Label lblAnio;
     private Label lblMes;
@@ -55,19 +55,8 @@ private Label codigo;
     private ArrayList<String> listaMes;
     private Button btnCalcular;
     private TableView<Kardex> tblKardex;
-    private TableColumn<Kardex, String> columFecha;
-    private TableColumn<Kardex, String> columTipoTrans;
-    private TableColumn<Kardex, Integer> columSCant;
-    private TableColumn<Kardex, Double> columSVU;
-    private TableColumn<Kardex, Double> columSVT;
-    private TableColumn<Kardex, Integer> columECant;
-    private TableColumn<Kardex, Double> columEVU;
-    private TableColumn<Kardex, Double> columEVT;
-    private TableColumn<Kardex, Integer> columExCant;
-    private TableColumn<Kardex, Double> columExVU;
-    private TableColumn<Kardex, Double> columExVT;
     private ArrayList<Kardex> listaKardexMensual;
-    private VBox pnlc1,pnlc2,pnlc3,pnlc4;
+    private VBox pnlc1, pnlc2, pnlc3, pnlc4;
     private HBox pnlcabecera;
     private HBox pnlEPropiedades;
     private HBox pnlSPropiedades;
@@ -81,8 +70,8 @@ private Label codigo;
     private VBox pnlIntKardex;
     private BorderPane pnlPrincipal;
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
+    
+    public FormListKardex(){
         cargarProducto();
         itemsA.addAll("2016", "2017", "2018", "2019", "2020");
         itemsM.addAll("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
@@ -91,15 +80,15 @@ private Label codigo;
         lblProducto.setMinSize(100, 25);
         lblProducto.setAlignment(Pos.CENTER_RIGHT);
         lblProducto.setFont(Font.font("News701 BT", 15));
-        lblCodigo=new Label("Codigo: ");
+        lblCodigo = new Label("Codigo: ");
         lblCodigo.setAlignment(Pos.CENTER_RIGHT);
         lblCodigo.setMaxSize(100, 25);
         lblCodigo.setMinSize(100, 25);
         lblCodigo.setFont(Font.font("News701 BT", 15));
-        codigo=new Label("");
+        codigo = new Label("");
         codigo.setMaxSize(265, 25);
         codigo.setMinSize(265, 25);
-        codigo.setStyle("-fx-border-color: blue; -fx-border-width: 2px");
+        codigo.setStyle("-fx-background-color: #E9FBFB; -fx-border-color: white; -fx-border-width: 2px");
         lblFechaI = new Label("Fecha:");
         lblFechaI.setFont(Font.font("News701 BT", 15));
         lblAnio = new Label("Año: ");
@@ -113,26 +102,32 @@ private Label codigo;
         lblMes.setAlignment(Pos.CENTER_RIGHT);
         lblMes.setFont(Font.font("News701 BT", 15));
         combProducto = new ComboBox<Producto>(itemsP);
+        combProducto.setOnHiding(new EventHandler<Event>() {
+            @Override
+            public void handle(Event event) {
+                codigo.setText(String.valueOf(combProducto.getSelectionModel().getSelectedItem().getCodProducto()));
+            }
+        });
         combAnio = new ComboBox<>(itemsA);
         combMes = new ComboBox<>(itemsM);
-        btnCalcular=new Button("Mostrar kardex");
+        btnCalcular = new Button("Mostrar kardex");
         btnCalcular.setFont(Font.font("News701 BT", 15));
         btnCalcular.setAlignment(Pos.CENTER);
-        pnlc1=new VBox(2);
+        pnlc1 = new VBox(2);
         pnlc1.getChildren().addAll(lblProducto, lblCodigo);
         pnlc1.setAlignment(Pos.CENTER_LEFT);
-        pnlc2=new VBox(2);
+        pnlc2 = new VBox(2);
         pnlc2.getChildren().addAll(combProducto, codigo);
         pnlc2.setAlignment(Pos.CENTER);
-        pnlc3=new VBox(2);
+        pnlc3 = new VBox(2);
         pnlc3.getChildren().addAll(lblAnio, lblMes);
         pnlc3.setAlignment(Pos.CENTER);
-        pnlc4=new VBox(2);
+        pnlc4 = new VBox(2);
         pnlc4.getChildren().addAll(combAnio, combMes);
         pnlc4.setAlignment(Pos.CENTER_LEFT);
-        pnlcabecera=new HBox(10);
-        
-        pnlcabecera.getChildren().addAll(pnlc1,pnlc2,pnlc3,pnlc4, btnCalcular);
+        pnlcabecera = new HBox(10);
+
+        pnlcabecera.getChildren().addAll(pnlc1, pnlc2, pnlc3, pnlc4, btnCalcular);
         pnlcabecera.setPadding(new Insets(15));
         pnlcabecera.setMaxSize(900, 60);
         pnlcabecera.setMinSize(900, 60);
@@ -143,13 +138,13 @@ private Label codigo;
         lblFecha.setMaxSize(100, 55);
         lblFecha.setMinSize(100, 55);
         lblFecha.setAlignment(Pos.CENTER);
-        lblFecha.setStyle("-fx-border-color: blue; -fx-border-width: 2px");
+        lblFecha.setStyle("-fx-border-color: white; -fx-border-width: 2px");
         lblDetalle = new Label("Detalle");
         lblDetalle.setFont(Font.font("News701 BT", 18));
         lblDetalle.setMaxSize(250, 55);
         lblDetalle.setMinSize(250, 55);
         lblDetalle.setAlignment(Pos.CENTER);
-        lblDetalle.setStyle("-fx-border-color: blue; -fx-border-width: 2px");
+        lblDetalle.setStyle("-fx-border-color: white; -fx-border-width: 2px");
         lblEntrada = new Label("Entrada");
         lblEntrada.setFont(Font.font("News701 BT", 18));
         lblEntrada.setAlignment(Pos.CENTER);
@@ -197,67 +192,34 @@ private Label codigo;
         pnlExPropiedades.setAlignment(Pos.TOP_CENTER);
         pnlEntrada = new VBox(5);
         pnlEntrada.getChildren().addAll(lblEntrada, pnlEPropiedades);
-        pnlEntrada.setStyle("-fx-border-color: blue; -fx-border-width: 2px");
+        pnlEntrada.setStyle("-fx-border-color: white; -fx-border-width: 2px");
         pnlEntrada.setAlignment(Pos.TOP_CENTER);
         pnlEntrada.setMaxSize(175, 55);
         pnlEntrada.setMinSize(175, 55);
         pnlSalida = new VBox(5);
         pnlSalida.getChildren().addAll(lblSalida, pnlSPropiedades);
-        pnlSalida.setStyle("-fx-border-color: blue; -fx-border-width: 2px");
+        pnlSalida.setStyle("-fx-border-color: white; -fx-border-width: 2px");
         pnlSalida.setAlignment(Pos.TOP_CENTER);
         pnlSalida.setMaxSize(175, 55);
         pnlSalida.setMinSize(175, 55);
         pnlExistencia = new VBox(5);
         pnlExistencia.getChildren().addAll(lblExistencia, pnlExPropiedades);
-        pnlExistencia.setStyle("-fx-border-color: blue; -fx-border-width: 2px");
+        pnlExistencia.setStyle("-fx-border-color: white; -fx-border-width: 2px");
         pnlExistencia.setAlignment(Pos.TOP_CENTER);
         pnlExistencia.setMaxSize(175, 55);
         pnlExistencia.setMinSize(175, 55);
         pnlCabKardex = new HBox(5);
         pnlCabKardex.getChildren().addAll(lblDetalle, lblFecha, pnlSalida, pnlEntrada, pnlExistencia);
         pnlCabKardex.setAlignment(Pos.CENTER);
-        //////////////////////////
-        tblKardex = new TableView();
-        columFecha = new TableColumn<>("Fecha");
-        columFecha.setMaxWidth(100);
-        columFecha.setMinWidth(100);
-        columTipoTrans = new TableColumn<>("Tipo Transaccion");
-        columTipoTrans.setMaxWidth(250);
-        columTipoTrans.setMinWidth(250);
-        columSCant = new TableColumn<>("S Cant");
-        columSCant.setMaxWidth(60);
-        columSCant.setMinWidth(60);
-        columSVU = new TableColumn<>("S VU");
-        columSVU.setMaxWidth(60);
-        columSVU.setMinWidth(60);
-        columSVT = new TableColumn<>("S VT");
-        columSVT.setMaxWidth(60);
-        columSVT.setMinWidth(60);
-        columECant = new TableColumn<>("E Cant");
-        columECant.setMaxWidth(60);
-        columECant.setMinWidth(60);
-        columEVU = new TableColumn<>("E VU");
-        columEVU.setMaxWidth(60);
-        columEVU.setMinWidth(60);
-        columEVT = new TableColumn<>("E VT");
-        columEVT.setMaxWidth(60);
-        columEVT.setMinWidth(60);
-        columExCant = new TableColumn<>("Ex Cant");
-        columExCant.setMaxWidth(60);
-        columExCant.setMinWidth(60);
-        columExVU = new TableColumn<>("Ex VU");
-        columExVU.setMaxWidth(60);
-        columExVU.setMinWidth(60);
-        columExVT = new TableColumn<>("Ex VT");
-        columExVT.setMaxWidth(60);
-        columExVT.setMinWidth(60);
-        tblKardex.getColumns().addAll(columTipoTrans, columFecha, columSCant, columSVU, columSVT, columECant, columEVU, columEVT, columExCant, columExVU, columExVT);
+        ////////////////////////
         pnlIntKardex = new VBox();
-        pnlIntKardex.getChildren().add(tblKardex);
 ///////////////////////////////
         pnlKardexInt = new ScrollPane(pnlIntKardex);
         pnlKardexInt.setMaxSize(900, 200);
+        pnlKardexInt.setMinSize(900, 200);
         pnlKardexInt.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        pnlKardexInt.setVmax(9000);
+        pnlKardexInt.setVmin(100);
         pnlKardex = new VBox();
         pnlKardex.getChildren().addAll(pnlCabKardex, pnlKardexInt);
         pnlKardex.setAlignment(Pos.TOP_CENTER);
@@ -268,11 +230,7 @@ private Label codigo;
         pnlPrincipal.setPadding(new Insets(5));
         pnlPrincipal.setRight(null);
         pnlPrincipal.setLeft(null);
-        Scene scene = new Scene(pnlPrincipal, 950, 520);
-        primaryStage.setResizable(true);
-        primaryStage.setTitle("EMPRESA");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        pnlPrincipal.setBackground(new Background(new BackgroundImage(new Image("file:src\\unachkardex\\multimedia\\FondoSubVentanas.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
         btnCalcular.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -280,11 +238,7 @@ private Label codigo;
             }
         });
     }
-
-    public static void main(String[] args) {
-        launch(args);
-    }
-
+    
     public void cargarProducto() {
         listaProducto = new ArrayList<>();
         IProducto productoDao = new ImplProducto();
@@ -297,24 +251,241 @@ private Label codigo;
 
         }
     }
-    
-    public void bCalcularEventHandler(ActionEvent event){
-        IKardexM kardexMDao=new ImplKardexM();
-        listaKardexMensual=new ArrayList<>();
+
+    public void bCalcularEventHandler(ActionEvent event) {
+        IKardexM kardexMDao = new ImplKardexM();
+        listaKardexMensual = new ArrayList<>();
+        double ValorTotal = 0;
         try {
-            listaKardexMensual=kardexMDao.listadoKardexFecha(combProducto.getSelectionModel().getSelectedIndex()+1, String.valueOf(combMes.getSelectionModel().getSelectedIndex()+1), combAnio.getValue());
-            for(Kardex k:listaKardexMensual){
-                
-                if(k.getTipoTransaccion().equals("C")){
-                    System.out.println("Compra: "+k.getProducto().getNombre()+"  "+k.getCodKardex()+"  "+"[   ]  [   ]  [   ]"+"  "+k.getCantEditable()+"  "+(k.getValorTotal()/k.getCantEditable())+"  "+k.getValorTotal()+"  "+k.getExistencias()+"  "+(k.getValorTotal()/k.getExistencias())+"  "+k.getValorTotal());
-                    TableCell nuevaCelda = new TableCell();
-                    nuevaCelda.setText(String.valueOf(k.getFechaEmision()));
-                    columFecha.cellFactoryProperty().setValue((Callback<TableColumn<Kardex, String>, TableCell<Kardex, String>>) nuevaCelda);
+            listaKardexMensual = kardexMDao.listadoKardexFecha(combProducto.getSelectionModel().getSelectedIndex() + 1, String.valueOf(combMes.getSelectionModel().getSelectedIndex() + 1), combAnio.getValue());
+            Kardex temporalKardex = new Kardex();
+            temporalKardex = listaKardexMensual.get(0);
+            Label columTipoTrans = new Label(String.valueOf(temporalKardex.getTipoTransaccion() + "ompra  " + combProducto.getSelectionModel().getSelectedItem().getNombre()));
+            columTipoTrans.setStyle("-fx-background-color: #E9FBFB; -fx-border-color: blue; -fx-border-width: 2px");
+            columTipoTrans.setFont(Font.font("Berlin Sans FB Demi", 15));
+            columTipoTrans.setAlignment(Pos.CENTER);
+            columTipoTrans.setMaxSize(250, 25);
+            columTipoTrans.setMinSize(250, 25);
+            Label columFecha = new Label(String.valueOf(temporalKardex.getFechaEmision()));
+            columFecha.setStyle("-fx-background-color: #E9FBFB; -fx-border-color: blue; -fx-border-width: 2px");
+            columFecha.setFont(Font.font("Berlin Sans FB Demi", 15));
+            columFecha.setAlignment(Pos.CENTER);
+            columFecha.setMaxSize(100, 25);
+            columFecha.setMinSize(100, 25);
+            Label columSCant = new Label("");
+            columSCant.setStyle("-fx-background-color: #E9FBFB; -fx-border-color: blue; -fx-border-width: 2px");
+            columSCant.setFont(Font.font("Berlin Sans FB Demi", 15));
+            columSCant.setAlignment(Pos.CENTER);
+            columSCant.setMaxSize(55, 25);
+            columSCant.setMinSize(55, 25);
+            Label columSVU = new Label("");
+            columSVU.setStyle("-fx-background-color: #E9FBFB; -fx-border-color: blue; -fx-border-width: 2px");
+            columSVU.setFont(Font.font("Berlin Sans FB Demi", 15));
+            columSVU.setAlignment(Pos.CENTER);
+            columSVU.setMaxSize(55, 25);
+            columSVU.setMinSize(55, 25);
+            Label columSVT = new Label("");
+            columSVT.setStyle("-fx-background-color: #E9FBFB; -fx-border-color: blue; -fx-border-width: 2px");
+            columSVT.setFont(Font.font("Berlin Sans FB Demi", 15));
+            columSVT.setAlignment(Pos.CENTER);
+            columSVT.setMaxSize(55, 25);
+            columSVT.setMinSize(55, 25);
+            Label columECant = new Label(String.valueOf(temporalKardex.getExistencias()));
+            columECant.setStyle("-fx-background-color: #E9FBFB; -fx-border-color: blue; -fx-border-width: 2px");
+            columECant.setFont(Font.font("Berlin Sans FB Demi", 15));
+            columECant.setAlignment(Pos.CENTER);
+            columECant.setMaxSize(55, 25);
+            columECant.setMinSize(55, 25);
+            Label columEVU = new Label(String.valueOf(temporalKardex.getValorTotal() / temporalKardex.getCantEditable()));
+            columEVU.setStyle("-fx-background-color: #E9FBFB; -fx-border-color: blue; -fx-border-width: 2px");
+            columEVU.setFont(Font.font("Berlin Sans FB Demi", 15));
+            columEVU.setAlignment(Pos.CENTER);
+            columEVU.setMaxSize(55, 25);
+            columEVU.setMinSize(55, 25);
+            Label columEVT = new Label(String.valueOf(temporalKardex.getValorTotal()));
+            columEVT.setStyle("-fx-background-color: #E9FBFB; -fx-border-color: blue; -fx-border-width: 2px");
+            columEVT.setFont(Font.font("Berlin Sans FB Demi", 15));
+            columEVT.setAlignment(Pos.CENTER);
+            columEVT.setMaxSize(55, 25);
+            columEVT.setMinSize(55, 25);
+            Label columExCant = new Label(String.valueOf(temporalKardex.getExistencias()));
+            columExCant.setStyle("-fx-background-color: #E9FBFB; -fx-border-color: blue; -fx-border-width: 2px");
+            columExCant.setFont(Font.font("Berlin Sans FB Demi", 15));
+            columExCant.setAlignment(Pos.CENTER);
+            columExCant.setMaxSize(55, 25);
+            columExCant.setMinSize(55, 25);
+            Label columExVU = new Label(String.valueOf((ValorTotal + temporalKardex.getValorTotal()) / temporalKardex.getExistencias()));
+            columExVU.setStyle("-fx-background-color: #E9FBFB; -fx-border-color: blue; -fx-border-width: 2px");
+            columExVU.setFont(Font.font("Berlin Sans FB Demi", 15));
+            columExVU.setAlignment(Pos.CENTER);
+            columExVU.setMaxSize(55, 25);
+            columExVU.setMinSize(55, 25);
+            Label columExVT = new Label(String.valueOf(ValorTotal + temporalKardex.getValorTotal()));
+            columExVT.setStyle("-fx-background-color: #E9FBFB; -fx-border-color: blue; -fx-border-width: 2px");
+            columExVT.setFont(Font.font("Berlin Sans FB Demi", 15));
+            columExVT.setAlignment(Pos.CENTER);
+            columExVT.setMaxSize(55, 25);
+            columExVT.setMinSize(55, 25);
+            HBox itemKardex = new HBox(5);
+            itemKardex.getChildren().addAll(columTipoTrans, columFecha, columSCant, columSVU, columSVT, columECant, columEVU, columEVT, columExCant, columExVU, columExVT);
+            itemKardex.setPadding(new Insets(2));
+            pnlIntKardex.getChildren().add(itemKardex);
+            ValorTotal=ValorTotal + temporalKardex.getValorTotal();
+            for (int i = 1; i < listaKardexMensual.size(); i++) {
+                if (listaKardexMensual.get(i).getTipoTransaccion().equals("C")) {
+                    columTipoTrans = new Label(String.valueOf(listaKardexMensual.get(i).getTipoTransaccion() + "ompra  " + combProducto.getSelectionModel().getSelectedItem().getNombre()));
+                    columTipoTrans.setStyle("-fx-background-color: #E9FBFB; -fx-border-color: blue; -fx-border-width: 2px");
+                    columTipoTrans.setFont(Font.font("Berlin Sans FB Demi", 15));
+                    columTipoTrans.setAlignment(Pos.CENTER);
+                    columTipoTrans.setMaxSize(250, 25);
+                    columTipoTrans.setMinSize(250, 25);
+                    columFecha = new Label(String.valueOf(listaKardexMensual.get(i).getFechaEmision()));
+                    columFecha.setStyle("-fx-background-color: #E9FBFB; -fx-border-color: blue; -fx-border-width: 2px");
+                    columFecha.setFont(Font.font("Berlin Sans FB Demi", 15));
+                    columFecha.setAlignment(Pos.CENTER);
+                    columFecha.setMaxSize(100, 25);
+                    columFecha.setMinSize(100, 25);
+                    columSCant = new Label("");
+                    columSCant.setStyle("-fx-background-color: #E9FBFB; -fx-border-color: blue; -fx-border-width: 2px");
+                    columSCant.setFont(Font.font("Berlin Sans FB Demi", 15));
+                    columSCant.setAlignment(Pos.CENTER);
+                    columSCant.setMaxSize(55, 25);
+                    columSCant.setMinSize(55, 25);
+                    columSVU = new Label("");
+                    columSVU.setStyle("-fx-background-color: #E9FBFB; -fx-border-color: blue; -fx-border-width: 2px");
+                    columSVU.setFont(Font.font("Berlin Sans FB Demi", 15));
+                    columSVU.setAlignment(Pos.CENTER);
+                    columSVU.setMaxSize(55, 25);
+                    columSVU.setMinSize(55, 25);
+                    columSVT = new Label("");
+                    columSVT.setStyle("-fx-background-color: #E9FBFB; -fx-border-color: blue; -fx-border-width: 2px");
+                    columSVT.setFont(Font.font("Berlin Sans FB Demi", 15));
+                    columSVT.setAlignment(Pos.CENTER);
+                    columSVT.setMaxSize(55, 25);
+                    columSVT.setMinSize(55, 25);
+                    columECant = new Label(String.valueOf(listaKardexMensual.get(i).getExistencias()));
+                    columECant.setStyle("-fx-background-color: #E9FBFB; -fx-border-color: blue; -fx-border-width: 2px");
+                    columECant.setFont(Font.font("Berlin Sans FB Demi", 15));
+                    columECant.setAlignment(Pos.CENTER);
+                    columECant.setMaxSize(55, 25);
+                    columECant.setMinSize(55, 25);
+                    columEVU = new Label(String.valueOf(listaKardexMensual.get(i).getValorTotal() / temporalKardex.getCantEditable()));
+                    columEVU.setStyle("-fx-background-color: #E9FBFB; -fx-border-color: blue; -fx-border-width: 2px");
+                    columEVU.setFont(Font.font("Berlin Sans FB Demi", 15));
+                    columEVU.setAlignment(Pos.CENTER);
+                    columEVU.setMaxSize(55, 25);
+                    columEVU.setMinSize(55, 25);
+                    columEVT = new Label(String.valueOf(listaKardexMensual.get(i).getValorTotal()));
+                    columEVT.setStyle("-fx-background-color: #E9FBFB; -fx-border-color: blue; -fx-border-width: 2px");
+                    columEVT.setFont(Font.font("Berlin Sans FB Demi", 15));
+                    columEVT.setAlignment(Pos.CENTER);
+                    columEVT.setMaxSize(55, 25);
+                    columEVT.setMinSize(55, 25);
+                    columExCant = new Label(String.valueOf(listaKardexMensual.get(i).getExistencias()));
+                    columExCant.setStyle("-fx-background-color: #E9FBFB; -fx-border-color: blue; -fx-border-width: 2px");
+                    columExCant.setFont(Font.font("Berlin Sans FB Demi", 15));
+                    columExCant.setAlignment(Pos.CENTER);
+                    columExCant.setMaxSize(55, 25);
+                    columExCant.setMinSize(55, 25);
+                    columExVU = new Label(String.valueOf((ValorTotal + listaKardexMensual.get(i).getValorTotal()) / temporalKardex.getExistencias()));
+                    columExVU.setStyle("-fx-background-color: #E9FBFB; -fx-border-color: blue; -fx-border-width: 2px");
+                    columExVU.setFont(Font.font("Berlin Sans FB Demi", 15));
+                    columExVU.setAlignment(Pos.CENTER);
+                    columExVU.setMaxSize(55, 25);
+                    columExVU.setMinSize(55, 25);
+                    columExVT = new Label(String.valueOf(ValorTotal + listaKardexMensual.get(i).getValorTotal()));
+                    columExVT.setStyle("-fx-background-color: #E9FBFB; -fx-border-color: blue; -fx-border-width: 2px");
+                    columExVT.setFont(Font.font("Berlin Sans FB Demi", 15));
+                    columExVT.setAlignment(Pos.CENTER);
+                    columExVT.setMaxSize(55, 25);
+                    columExVT.setMinSize(55, 25);
+                    itemKardex = new HBox(5);
+                    itemKardex.getChildren().addAll(columTipoTrans, columFecha, columSCant, columSVU, columSVT, columECant, columEVU, columEVT, columExCant, columExVU, columExVT);
+                    itemKardex.setPadding(new Insets(2));
+                    pnlIntKardex.getChildren().add(itemKardex);
+                    temporalKardex=listaKardexMensual.get(i);
+                    ValorTotal=ValorTotal + temporalKardex.getValorTotal();
                 }
                 else{
+                    columTipoTrans = new Label(String.valueOf(listaKardexMensual.get(i).getTipoTransaccion() + "ompra  " + combProducto.getSelectionModel().getSelectedItem().getNombre()));
+                    columTipoTrans.setStyle("-fx-background-color: #E9FBFB; -fx-border-color: blue; -fx-border-width: 2px");
+                    columTipoTrans.setFont(Font.font("Berlin Sans FB Demi", 15));
+                    columTipoTrans.setAlignment(Pos.CENTER);
+                    columTipoTrans.setMaxSize(250, 25);
+                    columTipoTrans.setMinSize(250, 25);
+                    columFecha = new Label(String.valueOf(listaKardexMensual.get(i).getFechaEmision()));
+                    columFecha.setStyle("-fx-background-color: #E9FBFB; -fx-border-color: blue; -fx-border-width: 2px");
+                    columFecha.setFont(Font.font("Berlin Sans FB Demi", 15));
+                    columFecha.setAlignment(Pos.CENTER);
+                    columFecha.setMaxSize(100, 25);
+                    columFecha.setMinSize(100, 25);
+                    columSCant = new Label(String.valueOf(listaKardexMensual.get(i).getCantEditable()*-1));
+                    columSCant.setStyle("-fx-background-color: #E9FBFB; -fx-border-color: blue; -fx-border-width: 2px");
+                    columSCant.setFont(Font.font("Berlin Sans FB Demi", 15));
+                    columSCant.setAlignment(Pos.CENTER);
+                    columSCant.setMaxSize(55, 25);
+                    columSCant.setMinSize(55, 25);
+                    columSVU = new Label(String.valueOf((listaKardexMensual.get(i).getValorTotal()*-1) / temporalKardex.getCantEditable()));
+                    columSVU.setStyle("-fx-background-color: #E9FBFB; -fx-border-color: blue; -fx-border-width: 2px");
+                    columSVU.setFont(Font.font("Berlin Sans FB Demi", 15));
+                    columSVU.setAlignment(Pos.CENTER);
+                    columSVU.setMaxSize(55, 25);
+                    columSVU.setMinSize(55, 25);
+                    columSVT = new Label(String.valueOf(listaKardexMensual.get(i).getValorTotal()*-1));
+                    columSVT.setStyle("-fx-background-color: #E9FBFB; -fx-border-color: blue; -fx-border-width: 2px");
+                    columSVT.setFont(Font.font("Berlin Sans FB Demi", 15));
+                    columSVT.setAlignment(Pos.CENTER);
+                    columSVT.setMaxSize(55, 25);
+                    columSVT.setMinSize(55, 25);
+                    columECant = new Label("");
+                    columECant.setStyle("-fx-background-color: #E9FBFB; -fx-border-color: blue; -fx-border-width: 2px");
+                    columECant.setFont(Font.font("Berlin Sans FB Demi", 15));
+                    columECant.setAlignment(Pos.CENTER);
+                    columECant.setMaxSize(55, 25);
+                    columECant.setMinSize(55, 25);
+                    columEVU = new Label("");
+                    columEVU.setStyle("-fx-background-color: #E9FBFB; -fx-border-color: blue; -fx-border-width: 2px");
+                    columEVU.setFont(Font.font("Berlin Sans FB Demi", 15));
+                    columEVU.setAlignment(Pos.CENTER);
+                    columEVU.setMaxSize(55, 25);
+                    columEVU.setMinSize(55, 25);
+                    columEVT = new Label("");
+                    columEVT.setStyle("-fx-background-color: #E9FBFB; -fx-border-color: blue; -fx-border-width: 2px");
+                    columEVT.setFont(Font.font("Berlin Sans FB Demi", 15));
+                    columEVT.setAlignment(Pos.CENTER);
+                    columEVT.setMaxSize(55, 25);
+                    columEVT.setMinSize(55, 25);
+                    columExCant = new Label(String.valueOf(listaKardexMensual.get(i).getExistencias()));
+                    columExCant.setStyle("-fx-background-color: #E9FBFB; -fx-border-color: blue; -fx-border-width: 2px");
+                    columExCant.setFont(Font.font("Berlin Sans FB Demi", 15));
+                    columExCant.setAlignment(Pos.CENTER);
+                    columExCant.setMaxSize(55, 25);
+                    columExCant.setMinSize(55, 25);
+                    columExVU = new Label(String.valueOf((ValorTotal + listaKardexMensual.get(i).getValorTotal()) / temporalKardex.getExistencias()));
+                    columExVU.setStyle("-fx-background-color: #E9FBFB; -fx-border-color: blue; -fx-border-width: 2px");
+                    columExVU.setFont(Font.font("Berlin Sans FB Demi", 15));
+                    columExVU.setAlignment(Pos.CENTER);
+                    columExVU.setMaxSize(55, 25);
+                    columExVU.setMinSize(55, 25);
+                    columExVT = new Label(String.valueOf(ValorTotal + listaKardexMensual.get(i).getValorTotal()));
+                    columExVT.setStyle("-fx-background-color: #E9FBFB; -fx-border-color: blue; -fx-border-width: 2px");
+                    columExVT.setFont(Font.font("Berlin Sans FB Demi", 15));
+                    columExVT.setAlignment(Pos.CENTER);
+                    columExVT.setMaxSize(55, 25);
+                    columExVT.setMinSize(55, 25);
+                    itemKardex = new HBox(5);
+                    itemKardex.getChildren().addAll(columTipoTrans, columFecha, columSCant, columSVU, columSVT, columECant, columEVU, columEVT, columExCant, columExVU, columExVT);
+                    itemKardex.setPadding(new Insets(2));
+                    pnlIntKardex.getChildren().add(itemKardex);
+                    temporalKardex=listaKardexMensual.get(i);
+                    ValorTotal=ValorTotal + temporalKardex.getValorTotal();
                 }
             }
         } catch (Exception e) {
         }
+    }
+
+    public Node getPnlPrincipal() {
+        return pnlPrincipal;
     }
 }
